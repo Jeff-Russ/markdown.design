@@ -1,10 +1,16 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.4'
+gem 'rails' ,"4.2.5"
+
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', group: [:development, :test]
+# Use postgresql as the database for production
+group :production do
+    gem 'pg'
+    gem 'rails_12factor'
+end
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -40,8 +46,27 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
 
+
+# Use bootstrap library for styles
+gem 'bootstrap-sass'
+# Use font awesome library for icons
+gem 'font-awesome-sass'
+# Use devise for user auth
+gem 'devise'
+# Use figaro to hide secret keys
+# gem 'figaro'
+# Use paperclip for image uploads
+gem 'paperclip'
+# For Amazon's S3 service
+gem 'aws-sdk-v1' # If using paperclip <= v4.3.1
+
+# for markdown support
+gem 'redcarpet', '~> 2.1.1'
+gem 'coderay', '~> 1.0.7'
+
+# equivalent for secrets.yml of that Figaro
+# gem 'heroku_secrets', github: 'alexpeattie/heroku_secrets'  # rake heroku:secrets RAILS_ENV=production
