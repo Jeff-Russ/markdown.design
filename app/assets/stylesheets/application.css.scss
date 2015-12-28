@@ -92,27 +92,29 @@
 .border-green  { outline: 1px solid #20f030; }
 
 
-li > pre  {  @extend.mono; @extend.greenbox2; margin-left: 5px; max-width: 97%; margin-right: auto ;} // code box
-pre > code {  @extend.codeblock; margin-right: auto; color-background:#fff;} // code in box
+
+li > pre  {  @extend.mono1; @extend.greenbox2; margin-left: 5px; max-width: 600px; margin-right: auto; max-width: 97%; background-color: grey;} // code box
+pre > code {  @extend.codeblock; margin-right: auto; color-background:#fff; max-width: 600px; } // code in box
 .markdown > h1 { color: #ffffd0; font-size: 58px; font-weight: 900; }
 .markdown > h2 { color: #cdb; font-size: 37px;   font-weight: 300; margin-left: 2%;}
 .markdown > h3 { color: #cdb; font-size: 28px;   font-weight: 100; margin-left: 3% }
-li > p         { max-width: 600px; margin-right: auto;}//b0bfaa
-.markdown > p { color: #b0bfaa; font-weight: 300; margin-left: 5%;  max-width: 600px; margin-right: auto;}//b0bfaa
+li > p         { max-width: 600px; margin-right: auto;text-align: justify; text-justify: auto;}//b0bfaa
+.markdown > p { color: #b0bfaa; font-weight: 300; margin-left: 5%;  max-width: 630px; margin-right: auto; }//b0bfaa
 .markdown > p > strong { color:#cdb; font-weight: 900;}
 .markdown > ol, .markdown > ul { margin-left: 6%; }
 
 // For markdown rendered to HTML 
 // .markdown > p    { margin-left: 50px;  max-width: 55em; margin-right: auto ;}
-p > code, li > code { @extend.mono;  } // usually in-paragraph code insertion
-.markdown > pre {  @extend.mono; @extend.greenbox2; margin-left: 7%; max-width: 94%; margin-right: auto; }
+p > code, li > code { @extend.mono2;  background-color:white;} // usually in-paragraph code insertion
+.markdown > pre {  @extend.mono1; @extend.greenbox2; margin-left: 7%; max-width: 97%; margin-right: auto; }
 
 
 // sidebar toc achors:
-a#toc-active   { color:#eff; font-weight: 900; font-style: italic; } // nice warm yellowish
-ul>li>a#toc-inactive             { color:#ffffd0; font-size: 12px; font-weight: 600; }  // h1
-ul>li>ul>li>a#toc-inactive       { color:#cdb;    font-size: 11px; font-weight: 300;}  // h2 was #b0bf33
-ul>li>ul>li>ul>li>a#toc-inactive { color:#cdb;    font-size: 10px; font-weight: 200;}  // h3
+a#toc-active   { @extend.greenbox2; color:#cff; font-weight: 900; font-style: italic; } // nice warm yellowish
+ul>li>a#toc-inactive             { color:#ffffd0; font-size: 12px; font-weight: 300; }  // h1
+#toc>li>a#toc-inactive           { color:#ffffd0; font-size: 12px; font-weight: 300;}  // h1
+ul>li>ul>li>a#toc-inactive       { color:#cdb;    font-size: 11px; font-weight: 250;}  // h2 was #b0bf33
+ul>li>ul>li>ul>li>a#toc-inactive { color:#cdb;    font-size: 10px; font-weight:250;}  // h3
 // #ffffd0  #8FBC8F
 
 // HTML anchors
@@ -128,7 +130,7 @@ a:hover:not(#toc-active, #toc-inactive)  { text-decoration: none; color:#e6ffd6!
 // usually markdown
 #content      { margin-left: 3%; margin-right:25em; width:65%;position:relative;} // the left pane
 
-xmp { @extend.mono; @extend.greenbox;
+xmp { @extend.mono1; @extend.greenbox;
     text-align: left; border-radius:7px; max-width: 60em; margin-right: auto ;}
 
 // sidebar
@@ -169,9 +171,12 @@ hr       { margin-left: 0; max-width:60%; }
 
 
 // PARENT CLASSES:
-.mono { font-family: Monaco, Courier New, monospace; font-weight:50;
+.mono1 { font-family: Monaco, Courier New, monospace; font-weight:50;
         font-size: 80%; color: #cff; background-color: #444; tab-size: 3; 
         display: inline-block; white-space: pre;overflow-x: scroll; overflow-y: scroll 
+}
+.mono2 { font-family: Monaco, Courier New, monospace; font-weight:50;
+        font-size: 80%; color: #cff; background-color: #444; tab-size: 3; 
 }
 .codeblock{
     display: inline-block; white-space: pre; 

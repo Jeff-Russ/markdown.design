@@ -24,6 +24,7 @@ $( document ).ready(function() {
 	
 	// initialize: 
 	var $links = $('#toc').find('a');          // we'll need this a lot
+	$links.attr('id', 'toc-inactive')
 	$(document).on("scroll", onScroll);        // add scroll listener on content
 	$('a[href^="#"]').on('click', onTocClick); // add click listener on toc
 	var $home = $('a[href^="#toc_0"]');
@@ -107,7 +108,7 @@ $( document ).ready(function() {
 		var activePos = activeElement.offsetTop;
 		var sidebarHeight = document.getElementById('sidebar').offsetHeight;
 		var correction = -(activePos - sidebarHeight * 0.2)
-		if (activePos > sidebarHeight * 0.9)
+		if (activePos > sidebarHeight * .95)
 			$( "#toc" ).css('margin-top', correction);
 		else 
 			$( "#toc" ).css('margin-top', 0);
