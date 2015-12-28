@@ -10,14 +10,39 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ * for syntax highlighter
+ * require syntax-highlighter-rails/shCore
+ * require syntax-highlighter-rails/shThemeDefault
+ *
  *= require_tree .
  *= require_self
  */
+ 
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+
+
+@media print {                         // format page for printing	
+    @page { margin: 0; }
+    body  { margin-left: 1.6cm;  margin-right: 1.6cm; margin-top: -0.5cm;
+        a[href]:after { content: none!important; }
+        #footer       { display: none;           }
+    }
+}
+#banner {  // for titles (alternative to bootstrap well and jumbotron)
+    position: relative; border-style: outset;  border-radius: 10px; border-width: 2px; 
+    margin-bottom: 50px; height: 104px; 
+    border-color: #44c19b #45b0a1; color: #ffffd0; background-color: #444!important;
+    &:hover { background-color: #444949!important; }
+    
+    img{margin-left: -30px;border-top-left-radius: 10px;border-bottom-left-radius:10px;} 
+    p  {margin-left: 25%; &:hover { color:#e6ffd6; }
+        font-size: 150%; font-weight: 900; text-align: center; line-height: 90%;
+    }
+}
 
 // BOOTSTRAP CLASS OVERRIDES
 .well { color: #ffffd0 !important; background-color: #444 !important; border-color:#94ba65; 
@@ -50,7 +75,7 @@
 // CUSTOM CLASSES
 .jr-green-bg   { background-color: #606F60;  }
 .dark-bg-g     { background-color: #404347;  }
-.jr-dark-body  { color: #ffffd0; background-color: #404040; } //  color: #ffffd0; jr.com
+.jr-dark-body  { color: #b0bfaa; background-color: #404040; } //  color: #ffffd0; jr.com
 .jr-dark-bg    { background-color: #404040; } //  color: #ffffd0; jr.com
 .jr-green      { color: #94ba65; }
 .bluish        { color: #bbddee; }
@@ -62,65 +87,64 @@
 .nav-spacer-xl { padding-top: 100px; }
 .spacer        { margin-top: 40px; background-color: #404040; }
 .invisible     { display: none; } 
-.center
 .border-orange { outline: 1px solid orange;  }
 .border-red    { outline: 1px solid red;     }
 .border-green  { outline: 1px solid #20f030; }
 
 
-// sidebar:
-#position     { position:fixed; }
-#sidebar      { position:fixed; right:0.8em; padding-bottom:8em;  overflow-y: scroll;overflow-x: scroll; 
-    width:25%; height: 87%; white-space: nowrap; z-index: 999; 
-    border:2px solid#999!important; border-radius: 10px!important; border-color:#94ba65!important;
-}
-#toc { 
-    // top:-300px;
-    height:600px;
-    position:relative;
-    display: inline-block;
-}
-// .sidebar-scroll { 
-//     position:fixed;
-//     height:auto; 
-//     max-height:200%;
-//     // overflow:auto; 
-// }
-// #page-wrap { 
-//   position: relative; 
-// }
-#active { color: #ddd; }
-#inactive{color:#8FBC8F;}
+li > pre  {  @extend.mono; @extend.greenbox2; margin-left: 5px; max-width: 97%; margin-right: auto ;} // code box
+pre > code {  @extend.codeblock; margin-right: auto; color-background:#fff;} // code in box
+.markdown > h1 { color: #ffffd0; font-size: 58px; font-weight: 900; }
+.markdown > h2 { color: #cdb; font-size: 37px;   font-weight: 300; margin-left: 2%;}
+.markdown > h3 { color: #cdb; font-size: 28px;   font-weight: 100; margin-left: 3% }
+li > p         { max-width: 600px; margin-right: auto;}//b0bfaa
+.markdown > p { color: #b0bfaa; font-weight: 300; margin-left: 5%;  max-width: 600px; margin-right: auto;}//b0bfaa
+.markdown > p > strong { color:#cdb; font-weight: 900;}
+.markdown > ol, .markdown > ul { margin-left: 6%; }
 
-// a[state="active"] { color: #ddd; }
-// a[state="inactive"] { color: #8FBC8F; }
+// For markdown rendered to HTML 
+// .markdown > p    { margin-left: 50px;  max-width: 55em; margin-right: auto ;}
+p > code, li > code { @extend.mono;  } // usually in-paragraph code insertion
+.markdown > pre {  @extend.mono; @extend.greenbox2; margin-left: 7%; max-width: 94%; margin-right: auto; }
 
 
-// END sidebar:
+// sidebar toc achors:
+a#toc-active   { color:#eff; font-weight: 900; font-style: italic; } // nice warm yellowish
+ul>li>a#toc-inactive             { color:#ffffd0; font-size: 12px; font-weight: 600; }  // h1
+ul>li>ul>li>a#toc-inactive       { color:#cdb;    font-size: 11px; font-weight: 300;}  // h2 was #b0bf33
+ul>li>ul>li>ul>li>a#toc-inactive { color:#cdb;    font-size: 10px; font-weight: 200;}  // h3
+// #ffffd0  #8FBC8F
 
+// HTML anchors
+a:focus:not(#toc-active, #toc-inactive),
+a:active:not(#toc-active, #toc-inactive),
+a:link:not(#toc-active, #toc-inactive),
+a:visited:not(#toc-active, #toc-inactive){ text-decoration: none;color:#8FBC8F; }
 
-@media print {                         // format page for printing	
-    @page { margin: 0; }
-    body  { margin-left: 1.6cm;  margin-right: 1.6cm; margin-top: -0.5cm;
-        a[href]:after { content: none!important; }
-        #footer       { display: none;           }
-    }
-}
-#banner { 
-    position: relative; border-style: outset;  border-radius: 10px; border-width: 2px; 
-    margin-bottom: 50px; height: 104px; 
-    border-color: #44c19b #45b0a1; color: #ffffd0; background-color: #444!important;
-    &:hover { background-color: #444949!important; }
-    
-    img{margin-left: -30px;border-top-left-radius: 10px;border-bottom-left-radius:10px;} 
-    p  {margin-left: 25%; &:hover { color:#e6ffd6; }
-        font-size: 150%; font-weight: 900; text-align: center; line-height: 90%;
-    }
-}
+a:hover:not(#toc-active, #toc-inactive)  { text-decoration: none; color:#e6ffd6!important;}
 
-// for syntax highlighter
-//*= require syntax-highlighter-rails/shCore
-//*= require syntax-highlighter-rails/shThemeDefault
+// SECTIONS:
+
+// usually markdown
+#content      { margin-left: 3%; margin-right:25em; width:65%;position:relative;} // the left pane
+
+xmp { @extend.mono; @extend.greenbox;
+    text-align: left; border-radius:7px; max-width: 60em; margin-right: auto ;}
+
+// sidebar
+#sidebar      { position:fixed; right:4%; padding-bottom:8em;  overflow-y: scroll;overflow-x: scroll; 
+    width:25%;  height: 87%; white-space: nowrap; z-index: 999; 
+    border:2px solid#999!important; border-radius: 10px!important; border-color:#94ba65!important; }
+
+// the contents of sidebar
+#toc > ul { padding-left: 0; }
+
+// each content of sidebar:
+#toc > u * { padding-left: 0.5em;  counter-reset: item; list-style-type: none; 
+    font-weight: 400; max-height:600px; }
+
+#toc {  height:600px; position:relative; display: inline-block; font-size: 85% }// top:-300px;}
+.toc * { padding-left: 0.5em; counter-reset: item; list-style-type: none; font-weight: 400;  }
 
 // overwriting default behaviour of Modal Popup in Bootstrap:
 .modal-dialog { 
@@ -133,49 +157,27 @@
 
 // modal toc
 .modal.bottom-right { right:-90%; top:30%; }
-.toc * { padding-left: 0.5em; counter-reset: item; list-style-type: none; font-weight: 400;  }
-#modal-toc h4 { color:#ffffd0; padding-left: 1.6em;
-    max-height:600px;
-}
+#modal-toc h4 { color:#ffffd0; padding-left: 1.6em; max-height:600px; }
 // #modal-toc h4 { color:#ffffd0!important; padding-left: 1.6em;}
 
 
-#sidebar * { padding-left: 0.5em;  counter-reset: item; list-style-type: none; font-weight: 400;  
-    max-height:600px; 
-}
+
+// html overrides
+hr       { margin-left: 0; max-width:60%; }
+[class*="span"] { float: left; margin-left: 20px;}
 
 
-xmp { @extend.mono; @extend.greenbox;
-    text-align: left; border-radius:7px; max-width: 60em; margin-right: auto ;
-	   }
 
-// HTML OVERRIDES
-a:focus:not(.active),a:active:not(.active),a:link:not(.active),a:visited:not(.active){text-decoration: none;color:#8FBC8F;}
-a:hover  { color:#e6ffd6!important;}
-hr       { border-color:#455 }
-[class*="span"] {
-    float: left;
-    margin-left: 20px;
-}
-// For markdown rendered to HTML 
-.markdown      { margin-left: 0.8em; margin-right:25em; width:70%;position:relative;} // the left pane
-.markdown > h1 { color: #dee; }
-.markdown > h2 { color: #cdb; }
-.markdown > h3 { color: #94ca65;  margin-left: 20px; }
-// h4, h5, h6 { color: #849a75; margin-left: 35px;  }
-.markdown > p    { margin-left: 50px;  max-width: 55em; margin-right: auto ;}
-.markdown > ol, .markdown > ul { margin-left: 40px; }
-code      { @extend.mono; font-weight: bold; } // usually in-paragraph code insertion
-
-.markdown > pre {  @extend.mono; @extend.greenbox; margin-left: 100px; max-width: 60em; margin-right: auto ;}
-
-li > pre  {  @extend.mono; @extend.greenbox; margin-left: 10px;  max-width: 60em; margin-right: auto ;} //CONFLICT!!!
-	
 // PARENT CLASSES:
-.mono { font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu 
-        Sans Mono, Bitstream Vera Sans Mono,Courier New, monospace; 
-        font-size: 85%; color: #cff; background-color: #444; tab-size: 3; }
-.greenbox { border:1px solid#999; border-color:#94ba65;}
+.mono { font-family: Monaco, Courier New, monospace; font-weight:50;
+        font-size: 80%; color: #cff; background-color: #444; tab-size: 3; 
+        display: inline-block; white-space: pre;overflow-x: scroll; overflow-y: scroll 
+}
+.codeblock{
+    display: inline-block; white-space: pre; 
+}
+.greenbox  { border:1px solid#999; border-color:#94ba65;}
+.greenbox2 { border:1px solid#999; border-color:#670;}
 
 .trans-250ms { // CSS Transition 
     -webkit-transition: background .25 ease-in-out, border .25 ease-in-out;

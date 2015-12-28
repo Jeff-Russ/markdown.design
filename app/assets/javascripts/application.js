@@ -26,23 +26,23 @@ $( document ).ready(function() {
 	var $links = $('#toc').find('a');          // we'll need this a lot
 	$(document).on("scroll", onScroll);        // add scroll listener on content
 	$('a[href^="#"]').on('click', onTocClick); // add click listener on toc
-	var $home = $('a[href^="toc_0"]');
+	var $home = $('a[href^="#toc_0"]');
 	var $prevActive
 	
-	
-	if(window.location.hash) {
+	// initil load from url hash:
+	if(window.location.hash) { 
 		var hash = window.location.hash;
-		$links.attr('id', 'inactive');
+		$links.attr('id', 'toc-inactive');
 		$links.each(function () { 
 			var $currentLink = $(this)
 			// var $prevActive = $links.find('#active');
 			var refElement = $currentLink.attr("href"); // get value of href attr
-			// $currentLink.attr('id', 'inactive');
+			// $currentLink.attr('id', 'toc-inactive');
 			// check position of <a> in <nav>
 			if (refElement === hash) { 
 				
-				$links.attr('id', 'inactive');
-				$currentLink.attr('id', 'active');        //  and add active to match
+				$links.attr('id', 'toc-inactive');
+				$currentLink.attr('id', 'toc-active');        //  and add active to match
 				$prevActive = $currentLink;
 				tocScroller() // reposition table of contents
 				
@@ -50,24 +50,24 @@ $( document ).ready(function() {
 				// $('#position').text($currentLink.attr("href"));
 			}
 		});
+	// intial load without url hash:
 	} else {
-		$home.attr('id', 'active');
+		$home.attr('id', 'toc-active');
 		$prevActive = $home
-		$(document.body).prepend($home.attr('id'));
 	}
 
 	// click listener for toc
 	function onTocClick (e) {   // e == object that raised the event
 		e.preventDefault();           // bypass clicked <a>'s native bahavior 
 		$(document).off("scroll");    // remove event handler on scroll
-		$links.attr('id', 'inactive');
+		$links.attr('id', 'toc-inactive');
 		
-		$(this).attr('id', 'active');   // add our own active status to clicked <a> 
+		$(this).attr('id', 'toc-active');   // add our own active status to clicked <a> 
 		
 		var target = this.hash;
 		var $target = $(target);
 		$('html, body').stop().animate({
-			'scrollTop': $target.offset().top+2
+			'scrollTop': $target.offset().top - 60
 		}, 500, 'swing', function () {
 			window.location.hash = target;
 			$(document).on("scroll", onScroll);
@@ -88,8 +88,8 @@ $( document ).ready(function() {
 			if ($refElement.position().top + -50 // OFFSET 50 for navbar height + more 
 				<= scrollPosition && $refElement.position().top - 50 + 
 				$refElement.height() > scrollPosition) { // if it is near top of page:
-				$links.attr('id', 'inactive');
-				$currentLink.attr('id', 'active');        //  and add active to match
+				$links.attr('id', 'toc-inactive');
+				$currentLink.attr('id', 'toc-active');        //  and add active to match
 				$prevActive = $currentLink;
 				tocScroller() // reposition table of contents
 				
@@ -103,7 +103,7 @@ $( document ).ready(function() {
 	// update scrolling of toc by position in text:
 	function tocScroller() {
 		var toc = document.getElementById("toc");
-		var activeElement = document.getElementById("active");
+		var activeElement = document.getElementById("toc-active");
 		var activePos = activeElement.offsetTop;
 		var sidebarHeight = document.getElementById('sidebar').offsetHeight;
 		var correction = -(activePos - sidebarHeight * 0.2)
