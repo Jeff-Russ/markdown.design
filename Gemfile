@@ -23,7 +23,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+#gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -56,7 +56,7 @@ gem 'bootstrap-sass'
 # Use font awesome library for icons
 gem 'font-awesome-sass'
 # Use devise for user auth
-gem 'devise'
+#gem 'devise'
 # Use figaro to hide secret keys
 # gem 'figaro'
 # Use paperclip for image uploads
@@ -67,6 +67,10 @@ gem 'aws-sdk-v1' # If using paperclip <= v4.3.1
 # for markdown support
 gem 'redcarpet', '~> 2.1.1'
 gem 'coderay', '~> 1.0.7'
+#gem 'reverse_markdown'
 
 # equivalent for secrets.yml of that Figaro
 # gem 'heroku_secrets', github: 'alexpeattie/heroku_secrets'  # rake heroku:secrets RAILS_ENV=production
+
+
+# gem 'sprockets-rails', '2.3.3'

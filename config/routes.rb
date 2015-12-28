@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  
+  get 'outlined/index'
+  get 'outlined/show'
+  get 'outlined/new'
+  get 'outlined/edit'
+  get 'outlined/create'
+  get 'outlined/update'
+  get 'outlined/destroy'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
