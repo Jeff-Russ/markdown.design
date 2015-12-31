@@ -105,13 +105,16 @@
 .border-red    { outline: 1px solid red;     }
 .border-green  { outline: 1px solid #20f030; }
 
+.github-only   { display: none; }
 
 
 li > pre  {  @extend.mono1; @extend.greenbox2; margin-left: 5px; max-width: 600px; margin-right: auto; max-width: 97%; background-color: grey;} // code box
 pre > code {  @extend.codeblock; margin-right: auto; color-background:#fff; max-width: 600px; } // code in box
 .markdown > h1 { color: #ffffd0; font-size: 58px; font-weight: 900; }
 .markdown > h2 { color: #cdb; font-size: 37px;   font-weight: 300; margin-left: 2%;}
-.markdown > h3 { color: #cdb; font-size: 28px;   font-weight: 100; margin-left: 3% }
+.markdown > h3 { color: #cdb; font-size: 30px;   font-weight: 100; margin-left: 3% }
+.markdown > h4 { color: #cdb; font-size: 24px;   font-weight: 100; margin-left: 4% }
+.markdown > h5 { color: #cdb; font-size: 20px;   font-weight: 100; margin-left: 5% }
 li > p         { max-width: 600px; margin-right: auto;text-align: justify; text-justify: auto;}//b0bfaa
 .markdown > p { color: #b0bfaa; font-weight: 300; margin-left: 5%;  max-width: 630px; margin-right: auto; }//b0bfaa
 .markdown > p > strong { color:#cdb; font-weight: 900;}
@@ -124,13 +127,16 @@ pre {  @extend.mono1; @extend.greenbox2; margin-left: 7%; max-width: 97%; margin
 
 
 // sidebar toc achors:
-a#toc-active   { @extend.greenbox2; color:#cff!important;; font-weight: 900; font-style: italic; } // nice warm yellowish
+div.toc > ul:first-child > li:first-child {margin-top:20%;line-height: 240%; }
+a#toc-active   { @extend.greenbox2; color:#cff!important;font-size: 13px; font-weight: 900; font-style: italic; } // nice warm yellowish
 a#toc-inactive:hover { color:#fff!important;}
-ul>li>a#toc-inactive             { color:#ffffd0!important;; font-size: 12px; font-weight: 300; }  // h1
-#toc>li>a#toc-inactive           { color:#ffffd0!important;; font-size: 12px; font-weight: 300;}  // h1
-ul>li>ul>li>a#toc-inactive       { color:#cdb!important;;    font-size: 11px; font-weight: 250;}  // h2 was #b0bf33
-ul>li>ul>li>ul>li>a#toc-inactive { color:#cdb!important;;    font-size: 10px; font-weight:250;}  // h3
-ul>li>ul>li>ul>li>ul>lia#toc-inactive { color:#cdb!important;;    font-size: 10px; font-weight:100;}  // h3
+ul>li>a#toc-inactive             { color:#ffffd0!important;; font-size: 14px; font-weight: 300; }  // h1
+#toc>li>a#toc-inactive           { color:#ffffd0!important;; font-size: 13px; font-weight: 300;}  // h1
+ul>li>ul>li>a#toc-inactive       { color:#cdb!important;;    font-size: 12px; font-weight: 250;}  // h2 was #b0bf33
+ul>li>ul>li>ul>li>a#toc-inactive { color:#cdb!important;;    font-size: 12px; font-weight:250;}  // h3
+ul>li>ul>li>ul>li>ul>lia#toc-inactive { color:#cdb!important;;    font-size: 12px; font-weight:1750;}  // h4
+ul>li>ul>li>ul>li>ul>>li>ul>lia#toc-inactive { color:#cdb!important;;    font-size: 12px; font-weight:100;}  // h5
+
 
 // #ffffd0  #8FBC8F
 
@@ -212,3 +218,4 @@ div.jump { z-index: 99 !important; padding-top : 40px; }
          -o-transition: background .25 ease-in-out, border .25 ease-in-out;
             transition: background .25 ease-in-out, border .25 ease-in-out;
 }
+
