@@ -9,7 +9,7 @@ $( document ).ready(function(){
 	var pageMenu = $('#page-menu');
 	var root = location.protocol + '//' + location.host;
 	
-    var homeUrl = $( "#home" ).comments().html();// get subject from markdown comment
+    var homeUrl = $('#home-url').comments().html();// get home url from markdown comment
 	pageMenu.append("\
 		<div class='col-xs-4 centered-div'>\
 			<a class='dismiss btn btn-xlarge btn-block btn-warning \
