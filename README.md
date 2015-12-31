@@ -1,6 +1,17 @@
+<div id="page"      style="display: none;"><!-- LivePage-md --></div>
+<div id='home-url'  style="display: none;"><!-- https://github.com/Jeff-Russ/LivePage-md --></div>
+<div id='logo-url'  style="display: none;"><!-- https://s3.amazonaws.com/shared-img-res/JR%20logo/JR_20px_wide.png --></div>
+
+<div class="page-menu" id='Boostrap' style="display: none;"><!--http://www.howto.jeffruss.com/md/show?aws=bootstrap.md--></div>
+<div class="page-menu" id='Rails'    style="display: none;"><!--http://www.howto.jeffruss.com/md/show?aws=rails.md--></div>
+
+<div class="section" id='Wecome'></div> 
+
 # LivePage-md
 
-### a real-time web page generator
+## a real-time web page generator
+
+### description
 
 LivePage-md take pre-existing links to markdown documents and renders them into 
 full attractive web pages, complete with a generated table of contents, a modal 

@@ -56,8 +56,9 @@
 .thin-text {  font-weight: 90!important; }
 .navbar-btn:hover      { color:#94ca55!important; background-color: #444949!important; }
 .navbar-brand { padding-top: 0px;padding-right: 0px;border-right: 0px;margin-right: 0px;}
-.navbar-prev  { color: #94ba65; font-size:15px; padding-right: 10px; padding-left: 12px; } 
-.navbar-next  { color: #94ba65; font-size:15px; padding-left:  10px;}
+.navbar-prev  { color: #94ba65; font-size:15px; margin-top: 6px!important; padding-right: 0px; padding-left: 12px; } 
+.navbar-next  { color: #94ba65; font-size:15px; margin-top: 6px!important; padding-left:  0px;}
+
 .nav-button   { color: #94ba65; background-color: #3e423e; border-color:#94ba65;} // needed?
 .navbar-left  { margin-left: 2%!important;} // jr.com has  margin-top: 0px;        
 .navbar-right { float: right!important; margin-right: 4%!important;} // jr.com has  margin-top: 0px;        
@@ -74,6 +75,15 @@
 .btn-ghosty{@extend.trans-250ms; background-color: #444!important;color:#ffffd0!important; 
               &:hover { background-color: #444949!important; } }
 
+.nav-button.btn:focus, .nav-button.btn:active {  // get rid of the blue glow on previously clicked buttons
+   outline: none !important;
+   color:#94ba65;
+}
+
+.navbar-center {  
+    position:fixed; display: inline-block; margin-left:auto;margin-right:auto;text-align: center;
+}
+
 // CUSTOM CLASSES
 .jr-green-bg   { background-color: #606F60;  } 
 .dark-bg-g     { background-color: #404347;  }
@@ -89,6 +99,7 @@
 .nav-spacer-xl { padding-top: 100px; }
 .spacer        { margin-top: 40px; background-color: #404040; }
 .invisible     { display: none; } 
+.centered-div  { margin-left:auto!important; margin-right:auto!important; }
 .thin-text     { font-weight: 200!important; }
 .border-orange { outline: 1px solid orange;  }
 .border-red    { outline: 1px solid red;     }
@@ -109,7 +120,7 @@ li > p         { max-width: 600px; margin-right: auto;text-align: justify; text-
 // For markdown rendered to HTML 
 // .markdown > p    { margin-left: 50px;  max-width: 55em; margin-right: auto ;}
 p > code, li > code { @extend.mono2;  background-color:white;} // usually in-paragraph code insertion
-.markdown > pre {  @extend.mono1; @extend.greenbox2; margin-left: 7%; max-width: 97%; margin-right: auto; }
+pre {  @extend.mono1; @extend.greenbox2; margin-left: 7%; max-width: 97%; margin-right: auto; }
 
 
 // sidebar toc achors:
@@ -119,22 +130,24 @@ ul>li>a#toc-inactive             { color:#ffffd0!important;; font-size: 12px; fo
 #toc>li>a#toc-inactive           { color:#ffffd0!important;; font-size: 12px; font-weight: 300;}  // h1
 ul>li>ul>li>a#toc-inactive       { color:#cdb!important;;    font-size: 11px; font-weight: 250;}  // h2 was #b0bf33
 ul>li>ul>li>ul>li>a#toc-inactive { color:#cdb!important;;    font-size: 10px; font-weight:250;}  // h3
+ul>li>ul>li>ul>li>ul>lia#toc-inactive { color:#cdb!important;;    font-size: 10px; font-weight:100;}  // h3
+
 // #ffffd0  #8FBC8F
 
 // HTML anchors
 a:focus,
 a:active,
 a:link,
-a:visited{ text-decoration: none;color: #b0bfaa!important; }
+a:visited{ text-decoration: none;color: #b0cfaa!important; }
 
 a:hover { text-decoration: none; color:#e6ffd6!important;}
 
 // SECTIONS:
 
 // usually markdown
-#content      { margin-left: 3%; margin-right:25em; width:65%;position:relative;} // the left pane
+#content      { margin-left: 3%; margin-right:25em; width:65%!important;position:relative;} // the left pane
 
-xmp { @extend.mono1; @extend.greenbox;
+xmp { @extend.mono2; @extend.greenbox;
     text-align: left; border-radius:7px; max-width: 60em; margin-right: auto ;}
 
 // sidebar
@@ -163,17 +176,18 @@ hr.topic { border-top: 20em; }
     .close:hover { margin-left:95%; color: #94fa55;  opacity: 1; }
 }
 
+div.jump { z-index: 99 !important; padding-top : 40px; }
+
 // modal toc
 .modal.bottom-right { right:-90%; top:30%; }
 #modal-toc h4 { color:#ffffd0; padding-left: 1.6em; max-height:600px; }
 // #modal-toc h4 { color:#ffffd0!important; padding-left: 1.6em;}
 
-
+.center-text { position:relative!important; text-align:center!important;} // both in modal and directory page
 
 // html overrides
-hr       { margin-left: 0; max-width:60%; }
+// hr       { margin-left: 0; max-width:60%; }
 [class*="span"] { float: left; margin-left: 20px;}
-
 
 
 // PARENT CLASSES:
@@ -183,6 +197,7 @@ hr       { margin-left: 0; max-width:60%; }
 }
 .mono2 { font-family: Monaco, Courier New, monospace; font-weight:50;
         font-size: 80%; color: #cff; background-color: #444; tab-size: 3; 
+        overflow: scroll;
 }
 .codeblock{
     display: inline-block; white-space: pre; 

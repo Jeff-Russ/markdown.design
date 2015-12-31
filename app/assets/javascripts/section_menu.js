@@ -9,7 +9,7 @@ $( document ).ready(function(){
 	 
 	var sectionMenu = $('#section-menu')
 
-    var homeUrl = $( "#home" ).comments().html();// get subject from markdown comment
+    var homeUrl = $('#home-url').comments().html();// get subject from markdown comment
 	sectionMenu.append("\
 		<div class='col-xs-4 centered-div'>\
 			<a class='dismiss btn btn-xlarge btn-block btn-warning \

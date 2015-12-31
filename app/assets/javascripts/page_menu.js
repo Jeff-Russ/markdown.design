@@ -37,7 +37,7 @@ $( document ).ready(function(){
 				<div class='col-xs-4 centered-div'>\
 					<a class='dismiss btn btn-xlarge btn-block btn-" + btnColors[i] + " \
 					   btn-ghost modal-link' \
-						href='" + root + $(this).comments().html() +"'>" + $(this).attr('id') + "\
+						href='"+ $(this).comments().html() +"'>" + $(this).attr('id') + "\
 						</a>\
 				</div>")	
 			i = ++i % 5;

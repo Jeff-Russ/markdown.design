@@ -18,6 +18,12 @@
 
 
 $( document ).ready(function() {
+	
+	var homeUrl    = $('#home-url').comments().html();
+	var logoUrl    = $('#logo-url').comments().html();
+	
+	$('.home-url').attr('href', homeUrl)
+	$('.logo-url').attr('src', logoUrl)
 
 	// google analytics:
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -28,18 +34,5 @@ $( document ).ready(function() {
 	ga('create', 'UA-71741017-1', 'auto');
 	ga('send', 'pageview');
 	// END google analytics
-	
-	      //$("#modal-ajax").on('click',"a[data-window='external']", function() {
-       //     window.open($(this).attr('href')); 
-       //     return false; 
-       // });
-        
-	
-	// var $modals = $('.modal');
-	// var $modalLinkBtns = $modals.find('a');
-	
-	// $modalLinkBtns.click(function() {
-	//     $modals.modal('hide');
-	// });
 
 });// END document.ready
