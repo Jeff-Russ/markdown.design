@@ -15,9 +15,6 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
-setTimeout(function(){
-    $(dialog).close();
-}, 10000);
 
 
 $( document ).ready(function() {
