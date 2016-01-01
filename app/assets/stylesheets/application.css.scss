@@ -108,21 +108,21 @@
 .github-only   { display: none; }
 
 
-li > pre  {  @extend.mono1; @extend.greenbox2; margin-left: 5px; max-width: 600px; margin-right: auto; max-width: 97%; background-color: grey;} // code box
-pre > code {  @extend.codeblock; margin-right: auto; color-background:#fff; max-width: 600px; } // code in box
+li > pre   {  @extend.mono1; @extend.greenbox2; margin-left: 5px; max-width: 600px; margin-right: auto; max-width: 97%; background-color: grey;} // code box
+pre > code {  @extend.codeblock; margin-right: auto; color-background:#fff; max-width: 590px; } // code in box
 .markdown > h1 { color: #ffffd0; font-size: 58px; font-weight: 900; margin-left: 1%;}
 .markdown > h2 { color: #cdb; font-size: 37px;   font-weight: 300; margin-left: 2%;}
 .markdown > h3 { color: #cdb; font-size: 30px;   font-weight: 100; margin-left: 3% }
 .markdown > h4 { color: #cdb; font-size: 24px;   font-weight: 100; margin-left: 4% }
 .markdown > h5 { color: #cdb; font-size: 20px;   font-weight: 100; margin-left: 5% }
 li > p         { max-width: 600px; margin-right: auto;text-align: justify; text-justify: auto;}//b0bfaa
-.markdown > p { color: #b0bfaa; font-weight: 300; margin-left: 5%;  max-width: 630px; margin-right: auto; }//b0bfaa
+.markdown > p { color: #b0bfaa; font-weight: 300; margin-left: 5%;  ; margin-right: auto; }//b0bfaa
 .markdown > p > strong { color:#cdb; font-weight: 900;}
-.markdown > ol, .markdown > ul { margin-left: 6%; }
+.markdown > ol, .markdown > ul { margin-left: 2%; }
 
 // For markdown rendered to HTML 
 // .markdown > p    { margin-left: 50px;  max-width: 55em; margin-right: auto ;}
-p > code, li > code { @extend.mono2;  background-color:white;} // usually in-paragraph code insertion
+p > code, li > code { @extend.mono2;  background-color:white; margin-right: auto;} // usually in-paragraph code insertion
 pre {  @extend.mono1; @extend.greenbox2; margin-left: 7%; max-width: 97%; margin-right: auto; }
 
 
@@ -137,6 +137,11 @@ ul>li>ul>li>ul>li>a#toc-inactive { color:#b0bfaa!important;font-size: 12px;font-
 ul>li>ul>li>ul>li>ul>lia#toc-inactive { color:#b0bfaa!important;       font-size: 12px; font-weight:1750;line-height: 180%;}  // h4
 ul>li>ul>li>ul>li>ul>>li>ul>lia#toc-inactive { color:#b0bfaa!important;font-size: 12px; font-weight:100; line-height: 170%;}  // h5
 
+.cling-left {
+   padding-left: 0 !important;
+   margin-left: 0 !important;
+   border-left: 0 !important;
+}
 
 // #ffffd0  #8FBC8F
 
@@ -157,8 +162,8 @@ xmp { @extend.mono2; @extend.greenbox;
     text-align: left; border-radius:7px; max-width: 60em; margin-right: auto ;}
 
 // sidebar
-#sidebar      { position:fixed; right:4%; padding-bottom:8em;  overflow-y: scroll;overflow-x: scroll; 
-    width:25%;  height: 87%; white-space: nowrap; z-index: 999;  
+#sidebar      { position:fixed; right:3%;  left:68%; padding-bottom:8em;  overflow: scroll; 
+    width:30%;  height: 87%; white-space: nowrap; z-index: 999;  
     border:2px solid#999!important; border-radius: 10px!important; border-color:#94ba65!important; }
 
 // the contents of sidebar
@@ -197,17 +202,19 @@ div.jump { z-index: 99 !important; padding-top : 40px; }
 
 
 // PARENT CLASSES:
-.mono1 { font-family: Monaco, Courier New, monospace; font-weight:50;
-        font-size: 80%; color: #cff; background-color: #444; tab-size: 3; 
-        display: inline-block; white-space: pre;overflow-x: scroll; overflow-y: scroll 
+.codeblock{ @extend.mono; display: inline-block;}
+
+.mono1 { @extend.mono; color: #cff; background-color: #444;
+         font-weight:50;font-size: 80%; tab-size: 3; display: inline-block;  
 }
-.mono2 { font-family: Monaco, Courier New, monospace; font-weight:50;
-        font-size: 80%; color: #cff; background-color: #444; tab-size: 3; 
-        overflow: scroll;
+.mono2 { @extend.mono; color: #cff; background-color: #444; 
+         font-weight:50;font-size: 80%; tab-size: 3; 
 }
-.codeblock{
-    display: inline-block; white-space: pre; 
+.mono { font-family: Monaco, Courier New, monospace; font-weight:50;
+        overflow: scroll; white-space: pre;
 }
+
+
 .greenbox  { border:1px solid#999; border-color:#94ba65;}
 .greenbox2 { border:1px solid#999; border-color:#670;}
 

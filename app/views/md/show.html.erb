@@ -1,5 +1,3 @@
-<% provide(:topic, "Rails") %>
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -15,19 +13,20 @@
 		<%= render partial: 'layouts/navbar' 
 		%>
 		
-		<div class="nav-spacer">  <!--nav-space prevents obscuring under navbar-->
+		<div class="container-small nav-spacer ">  <!--nav-space prevents obscuring under navbar-->
 				
 			<!-- BEGIN PAGE CONTENTS -->
-			<div class="row-fluid" id='page-wrap'>
-				<div class="span8 markdown" id='content' >
+			<div class="row cling-left" id='reader' style="">
+				<div class="span8 pull-left cling-left markdown" id='content' >
 					<%= @html %> 
 				</div>
-				<div  id="sidebar">
+				<div id="sidebar"style=";">
 					<!--<button class="btn btn-info btn-ghost" id='position'>-->
 					
 					<!--</button>-->
 					<div class="toc" id="toc">	
-						<%= @toc %>
+						<%= 
+						@toc %>
 					</div>
 				</div>  
 			</div>   

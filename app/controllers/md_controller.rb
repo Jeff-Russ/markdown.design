@@ -1,8 +1,5 @@
-# call this project pagify-md pagefly docdown docploy livedoc livepage livepage-md
-
-class OutlinedController < ApplicationController
-  
-  include OutlinedHelper
+class MdController < ApplicationController
+  include MdHelper
 
   def show
     if params[:toc].present?

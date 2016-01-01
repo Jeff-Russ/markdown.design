@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   
-  root 'outlined#show'
+  root 'md#show'
+
+  # root 'outlined#show'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
