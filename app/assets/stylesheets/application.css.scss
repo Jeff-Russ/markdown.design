@@ -138,8 +138,8 @@ ul>li>ul>li>ul>li>ul>lia#toc-inactive { color:#b0bfaa!important;       font-size
 ul>li>ul>li>ul>li>ul>>li>ul>lia#toc-inactive { color:#b0bfaa!important;font-size: 12px; font-weight:100; line-height: 170%;}  // h5
 
 .cling-left {
-   padding-left: 0.1em !important;
-   margin-left: 0.3em !important;
+   padding-left: 0 !important;
+   margin-left: 0 !important;
    border-left: 0 !important;
 }
 
@@ -204,14 +204,14 @@ div.jump { z-index: 99 !important; padding-top : 40px; }
 // PARENT CLASSES:
 .codeblock{ @extend.mono; display: inline-block;}
 
-.mono1 { @extend.mono; color: #cff; background-color: #444;
+.mono1 { @extend.mono; color: #cff; background-color: #444; white-space: pre;
          font-weight:50;font-size: 80%; tab-size: 3; display: inline-block;  
 }
 .mono2 { @extend.mono; color: #cff; background-color: #444; 
          font-weight:50;font-size: 80%; tab-size: 3; 
 }
 .mono { font-family: Monaco, Courier New, monospace; font-weight:50;
-        overflow: scroll; white-space: pre;
+        overflow: scroll; 
 }
 
 
