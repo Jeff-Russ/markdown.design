@@ -108,8 +108,8 @@
 .github-only   { display: none; }
 
 
-li > pre   {  @extend.mono1; @extend.greenbox2; margin-left: 5px; max-width: 600px; margin-right: auto; max-width: 97%; background-color: grey;} // code box
-pre > code {  @extend.codeblock; margin-right: auto; color-background:#fff; max-width: 590px; } // code in box
+li > pre   {  @extend.mono1; @extend.greenbox2; margin-left: 5px; ; margin-right: auto; max-width: 97%; background-color: grey;}//max-width: 600px} // code box
+pre > code {  @extend.codeblock; margin-right: auto; color-background:#fff;}// max-width: 590px; } // code in box
 .markdown > h1 { color: #ffffd0; font-size: 58px; font-weight: 900; margin-left: 1%;}
 .markdown > h2 { color: #cdb; font-size: 37px;   font-weight: 300; margin-left: 2%;}
 .markdown > h3 { color: #cdb; font-size: 30px;   font-weight: 100; margin-left: 3% }
