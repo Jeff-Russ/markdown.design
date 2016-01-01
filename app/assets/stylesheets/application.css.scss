@@ -43,6 +43,7 @@
         font-size: 150%; font-weight: 900; text-align: center; line-height: 90%;
     }
 }
+* { word-break: keep-all !important; }
 
 // BOOTSTRAP CLASS OVERRIDES
 .well { color: #ffffd0 !important; background-color: #444 !important; border-color:#94ba65; 
@@ -158,7 +159,7 @@ a:hover { text-decoration: none; color:#e6ffd6!important;}
 // usually markdown
 #content      { margin-left: 3%; margin-right:25em; width:65%!important;position:relative;} // the left pane
 
-xmp { @extend.mono2; @extend.greenbox;
+xmp { @extend.mono1; @extend.greenbox;
     text-align: left; border-radius:7px; max-width: 60em; margin-right: auto ;}
 
 // sidebar
@@ -204,19 +205,17 @@ div.jump { z-index: 99 !important; padding-top : 40px; }
 // PARENT CLASSES:
 .codeblock{ @extend.mono; display: inline-block;}
 
-.mono1 { @extend.mono; color: #cff; background-color: #444; white-space: pre;
-         font-weight:50;font-size: 80%; tab-size: 3; display: inline-block;  
+.mono1 { @extend.mono; color:#cff; background-color: #444; white-space: pre-wrap; overflow: scroll; 
+         font-weight:50;font-size: 12px; tab-size: 3; display: inline-block; // for code boxes 
 }
-.mono2 { @extend.mono; color: #cff; background-color: #444; 
-         font-weight:50;font-size: 80%; tab-size: 3; 
+.mono2 { @extend.mono; color: #cff; background-color: #444;  // for in-text code
+         font-weight:50;font-size: 12px; tab-size: 3; 
 }
-.mono { font-family: Monaco, Courier New, monospace; font-weight:50;
-        overflow: scroll; 
-}
+.mono { font-family: Monaco, Courier New, monospace; font-weight:50;}
 
 
-.greenbox  { border:1px solid#999; border-color:#94ba65;}
-.greenbox2 { border:1px solid#999; border-color:#670;}
+.greenbox  { border:1px solid#999; border-color:#94ba65;white-space: pre-wrap; overflow: scroll; }
+.greenbox2 { border:1px solid#999; border-color:#670;white-space: pre-wrap; overflow: scroll; }
 
 .trans-250ms { // CSS Transition 
     -webkit-transition: background .25 ease-in-out, border .25 ease-in-out;
