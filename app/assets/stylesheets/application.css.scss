@@ -163,9 +163,11 @@ xmp { @extend.mono1; @extend.greenbox;
     text-align: left; border-radius:7px; max-width: 60em; margin-right: auto ;}
 
 // sidebar
-#sidebar      { position:fixed; right:3%;  left:68%; padding-bottom:8em;  overflow: scroll; 
-    width:30%;  height: 87%; white-space: nowrap; z-index: 999;  
+#sidebar       { position:fixed; right:3%;  left:68%; padding-bottom:8em;  overflow: scroll; 
+    width:30%;  height: 87%; white-space: nowrap; z-index: 400;  
     border:2px solid#999!important; border-radius: 10px!important; border-color:#94ba65!important; }
+
+#toc-follow-btn{ display: inline-block; z-index: 600; position:fixed; right:3%;  left:68%; margin-top:70px; }
 
 // the contents of sidebar
 #toc > ul { padding-left: 0; }
