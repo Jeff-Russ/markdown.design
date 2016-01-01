@@ -55,12 +55,9 @@
 .list-group-item       { margin-left: 0%!important; }
 #topbar                { max-height:28px!important; margin-bottom: 27px;} 
 .thin-text {  font-weight: 90!important; }
-.navbar-btn:hover      { color:#94ca55!important; background-color: #444949!important; }
 .navbar-brand { padding-top: 0px; margin-top:-3px;padding-right: 0px;border-right: 0px;margin-right: 0px;}
 .navbar-prev  { color: #94ba65; font-size:15px; margin-top: 6px!important; padding-right: 0px; padding-left: 12px; } 
 .navbar-next  { color: #94ba65; font-size:15px; margin-top: 6px!important; padding-left:  0px;}
-
-.nav-button   { color: #94ba65; background-color: #3e423e; border-color:#94ba65;} // needed?
 .navbar-left  { margin-left: 2%!important;} // jr.com has  margin-top: 0px;        
 .navbar-right { float: right!important; margin-right: 4%!important;} // jr.com has  margin-top: 0px;        
     /* disable navbar collapse */
@@ -76,7 +73,9 @@
 .btn-ghosty{@extend.trans-250ms; background-color: #444!important;color:#ffffd0!important; 
               &:hover { background-color: #444949!important; } }
 
-.nav-button.btn:focus, .nav-button.btn:active {  // get rid of the blue glow on previously clicked buttons
+
+
+btn:focus, .btn:active {  // get rid of the blue glow on previously clicked buttons
    outline: none !important;
    color:#94ba65;
 }
@@ -84,6 +83,9 @@
 .navbar-center {  
     position:fixed; display: inline-block; margin-left:auto;margin-right:auto;text-align: center;
 }
+.btn-ghost-grn       { color:#94ba65; background-color:#3e423e; border-color:#94ba65; }
+.btn-ghost-grn:hover { color:#94ca55; background-color:#444949; border-color:#94ca55; }
+
 
 // CUSTOM CLASSES
 .jr-green-bg   { background-color: #606F60;  } 
@@ -157,17 +159,20 @@ a:hover { text-decoration: none; color:#e6ffd6!important;}
 // SECTIONS:
 
 // usually markdown
-#content      { margin-left: 3%; margin-right:25em; width:65%!important;position:relative;} // the left pane
+#content      { left: 2%; margin-right:25em; width:65%!important;position:relative;} // the left pane
 
 xmp { @extend.mono1; @extend.greenbox;
     text-align: left; border-radius:7px; max-width: 60em; margin-right: auto ;}
 
 // sidebar
-#sidebar       { position:fixed; right:3%;  left:68%; padding-bottom:8em;  overflow: scroll; 
-    width:30%;  height: 87%; white-space: nowrap; z-index: 400;  
+#sidebar       { position:fixed; overflow: scroll; left:68%; right:2%;//margin-right:5%;  padding-bottom:8em;  // left:68%; left:68%;width:30%; 
+    height: 87%; white-space: nowrap; //transform: translateX(10px); // z-index: 400;  
     border:2px solid#999!important; border-radius: 10px!important; border-color:#94ba65!important; }
-
-#toc-follow-btn{ display: inline-block; z-index: 600; position:fixed; right:3%;  left:68%; margin-top:70px; }
+// about ^ and v http://stackoverflow.com/questions/6794000/fixed-position-but-relative-to-container
+#toc-follow-btn{ background: transparent!important; //transform: translate(-50%, -50%);
+     position:fixed; right: 2.1%; margin-top:-1px;//right:70%; top:0; 
+    border-radius: 5px!important;
+}
 
 // the contents of sidebar
 #toc > ul { padding-left: 0; }
@@ -176,7 +181,7 @@ xmp { @extend.mono1; @extend.greenbox;
 #toc > u * { padding-left: 0.5em;  counter-reset: item; list-style-type: none; 
     font-weight: 400; max-height:600px; }
 
-#toc {  height:600px; position:relative; display: inline-block; font-size: 85% }// top:-300px;}
+#toc {  left:3%; height:600px; position:relative; display: inline-block; font-size: 85% }// top:-300px;}
 .toc * { padding-left: 0.5em; counter-reset: item; list-style-type: none; font-weight: 400;  }
 
 hr.topic { border-top: 20em; }
