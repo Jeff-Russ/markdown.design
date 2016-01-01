@@ -45,7 +45,7 @@ view this very same README.md with it's rendering.
 
 The base URL you will use for your pagest is http://livepage-md.herokuapp.com/.
 Or you can feel free to re-deploy from the source to a new location. For instruction 
-on that, refer to my [Ruby on Rails How-To](http://www.howto.jeffruss.com/md/show?aws=rails.md)
+on that, refer to my [Ruby on Rails How-To](http://www.howto.jeffruss.com/?aws=jeffruss/rails)
 , which is created using LivePage-md!
 
 For each page you will append a parameter to the URL in one of the formats:  
