@@ -53,13 +53,13 @@
 .form-control     { color: #ffe; background-color: #555; } // invert color for forms
 .carousel-caption > h3 { color:#dee!important; }
 .list-group-item       { margin-left: 0%!important; }
-#topbar                { max-height:28px!important; margin-bottom: 27px;} 
+#topbar                { position:fixed; height:10%; margin-bottom: 27px; width:68%;} 
 .thin-text {  font-weight: 90!important; }
 .navbar-brand { padding-top: 0px; margin-top:-3px;padding-right: 0px;border-right: 0px;margin-right: 0px;}
 .navbar-prev  { color: #94ba65; font-size:15px; margin-top: 6px!important; padding-right: 0px; padding-left: 12px; } 
 .navbar-next  { color: #94ba65; font-size:15px; margin-top: 6px!important; padding-left:  0px;}
 .navbar-left  { margin-left: 2%!important;} // jr.com has  margin-top: 0px;        
-.navbar-right { float: right!important; margin-right: 3%!important;} // jr.com has  margin-top: 0px;        
+.navbar-right { float: right!important; height: 100%;margin-right: 1%!important;} // jr.com has  margin-top: 0px;        
     /* disable navbar collapse */
 .navbar-collapse.collapse           { display: block!important;      }
 .navbar-nav>li, .navbar-nav         { float: left!important;         }
@@ -73,7 +73,13 @@
 .btn-ghosty{@extend.trans-250ms; background-color: #444!important;color:#ffffd0!important; 
               &:hover { background-color: #444949!important; } }
 
-btn:focus, .btn:active {  // get rid of the blue glow on previously clicked buttons
+.navbar-btn { height: 79%; width: 18%; text-align:center!important;}
+
+.btn:focus, 
+.btn:active, 
+.navbar-btn:focus,
+.navbar-btn:active
+{  // get rid of the blue glow on previously clicked buttons
    outline:none!important;
    color:#94ba65;
 }
@@ -92,13 +98,13 @@ btn:focus, .btn:active {  // get rid of the blue glow on previously clicked butt
 .jr-green      { color: #94ba65; }
 .bluish        { color: #bbddee; }
 .black-text    { color: #444; }
-.blacknav      { color: #ffffd0!important; background-color:#333333!important; }
+.blacknav      { color: #ffffd0!important; background-color:#333333!important; border:2px solid#999!important; border-radius: 10px!important; border-color:#94ba65!important;}
 .greenwell     { color: #94ba65!important; background-color:#3e423e!important; border-color:#94ba65 }
 .nonwell       { color: #94ba65 !important; background: transparent !important;   } // needed?
-.nav-spacer    { padding-top: 60px; }
+.nav-spacer    { padding-top: 90px; }
 .nav-spacer-xl { padding-top: 100px; }
 .spacer        { margin-top: 40px; background-color: #404040; }
-.invisible     { display: none; } 
+.hide          { display: none; } 
 .centered-div  { margin-left:auto!important; margin-right:auto!important; }
 .thin-text     { font-weight: 200!important; }
 .border-orange { outline: 1px solid orange;  }
@@ -107,22 +113,24 @@ btn:focus, .btn:active {  // get rid of the blue glow on previously clicked butt
 
 .github-only   { display: none; }
 
-li > pre   {  @extend.mono1; @extend.greenbox2; margin-left: 5px; ; margin-right: auto; max-width: 97%; background-color: grey;}//max-width: 600px} // code box
-pre > code {  @extend.codeblock; margin-right: auto; color-background:#fff;}// max-width: 590px; } // code in box
+li > pre   {  @extend.codeblock; @extend.greenbox2; margin-left: 5px;  background-color: grey;}//max-width: 600px} // code box
+pre > code { @extend.codeblock; color-background:#fff;}// max-width: 590px; } // code in box
 .markdown > h1 { color: #ffffd0; font-size: 58px; font-weight: 900; margin-left: 1%;}
 .markdown > h2 { color: #cdb; font-size: 37px;   font-weight: 300; margin-left: 2%;}
 .markdown > h3 { color: #cdb; font-size: 30px;   font-weight: 100; margin-left: 3% }
 .markdown > h4 { color: #cdb; font-size: 24px;   font-weight: 100; margin-left: 4% }
 .markdown > h5 { color: #cdb; font-size: 20px;   font-weight: 100; margin-left: 5% }
-li > p         { max-width: 600px; margin-right: auto;text-align: justify; text-justify: auto;}//b0bfaa
-.markdown > p { color: #b0bfaa; font-weight: 300; margin-left: 5%;  ; margin-right: auto; }//b0bfaa
+li > p         {  margin-right: auto;text-align: justify; text-justify: auto;}//b0bfaa
+.markdown > p { color: #b0bfaa; margin-left: 5%;  ; margin-right: auto; }//b0bfaa
 .markdown > p > strong { color:#cdb; font-weight: 900;}
 .markdown > ol, .markdown > ul { margin-left: 2%; }
+.markdown { font-size:16px; }
+
 
 // For markdown rendered to HTML 
 // .markdown > p    { margin-left: 50px;  max-width: 55em; margin-right: auto ;}
-p > code, li > code { @extend.mono2;  background-color:white; margin-right: auto;} // usually in-paragraph code insertion
-pre {  @extend.mono1; @extend.greenbox2; margin-left: 7%; max-width: 97%; margin-right: auto; }
+p > code, li > code { @extend.in-p-code;  background-color:white; margin-right: auto;} // usually in-paragraph code insertion
+pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; margin-right: auto; }
 
 // sidebar toc achors:
 div.toc  {margin-top:20%; }
@@ -154,22 +162,16 @@ a:hover { text-decoration: none; color:#e6ffd6!important;}
 // SECTIONS:
 
 // usually markdown
-#content      { left: 2%; margin-right:25em; width:65%!important;position:relative;} // the left pane
+#reader      { left: 2%; position:absolute;} // the left pane
 
-xmp { @extend.mono1; @extend.greenbox;
+xmp { @extend.codeblock; @extend.greenbox;
     text-align: left; border-radius:7px; max-width: 60em; margin-right: auto ;}
 
 // sidebar
-#sidebar       { position:fixed; overflow: scroll; left:68%; right:2%;
-    height: 87%; white-space: nowrap;   
+#sidebar       { position:fixed; overflow: scroll; left:68%; right:1%;
+    height: 100%; white-space: nowrap;    background-color:#333!important;
     border:2px solid#999!important; border-radius: 10px!important; border-color:#94ba65!important; 
 }
-#toc-follow-btn { color:#94ba65;  border-color:#4A5D32; background-color:#3e323e;  z-index: 99;
-     position:fixed;  margin:2px; outline: none !important;
-     right: 2%; margin-top:0px;  border-radius: 8px!important; // cuz it worked
-} 
-#toc-follow-txt { color:#A7C36B; }
-#toc-follow-img, #toc-follow-txt { opacity: 0.9;}
 
 #toc > ul { padding-left: 0; } // the contents of sidebar
 
@@ -204,15 +206,14 @@ div.jump { z-index: 99 !important; padding-top : 40px; }
 
 
 // PARENT CLASSES:
-.codeblock{ @extend.mono; display: inline-block;}
 
-.mono1 { @extend.mono; color:#cff; background-color: #444; white-space: pre-wrap; overflow: scroll; 
-         font-weight:50;font-size: 12px; tab-size: 3; display: inline-block; // for code boxes 
+.codeblock { @extend.mono; color:#cff; background-color: #444; white-space: pre; overflow: scroll; 
+          font-size:14px; tab-size: 3; display: inline-block; // for code boxes 
 }
-.mono2 { @extend.mono; color: #cff; background-color: #444;  // for in-text code
-         font-weight:50;font-size: 12px; tab-size: 3; 
+.in-p-code { @extend.mono; color: #cff; background-color: #444;  // for in-text code
+          tab-size: 3;  
 }
-.mono { font-family: Monaco, Courier New, monospace; font-weight:50;}
+.mono { font-family: Monaco, Courier New, monospace; }
 
 
 .greenbox  { border:1px solid#999; border-color:#94ba65;white-space: pre-wrap; overflow: scroll; }
@@ -225,4 +226,3 @@ div.jump { z-index: 99 !important; padding-top : 40px; }
          -o-transition: background .25 ease-in-out, border .25 ease-in-out;
             transition: background .25 ease-in-out, border .25 ease-in-out;
 }
-

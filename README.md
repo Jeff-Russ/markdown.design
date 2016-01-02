@@ -150,4 +150,8 @@ Sublime Text to edit them. When I hit save, the live site is automatically updat
 
 ~~1. If the screen is adjusted to be very narrow, the autoscroll button no longer works.~~
 ~~2. If the screen adapts to hide the toc, the right side of content is cut off.~~
-3. Code in blocks is still wrapping rather than being horizontalally scrollable.
+~~3. Code in blocks is still wrapping rather than being horizontalally scrollable.~~
+4. Give TOC adaptive top margin depending on height of contents.
+~~5. Redo icons for prev and next~~
+~~6. previously clicked buttons still have blue glow~~
+7. left and right buttons don't work

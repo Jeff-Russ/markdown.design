@@ -58,23 +58,22 @@ var isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/
 
 /*  function Defs  ***********************************************************/
 
-
-
-
 function showTOC(boolean) 
 {
 	if ( boolean ) {
-		$('#reader').css('width', '100%').removeClass('span12').addClass('span8');
+		$('#reader').css('width', '64%').css('padding-right', '2%');
 		$('#sidebar').css('display', 'inline-block');
 		$('.mono').css('white-space','pre').css('overflow','scroll');
 		$('#toc-btn').addClass('on')
+		$('#topbar').css('width', '68%')
 		
 		// $('#debugger').text('on');
 	} else {
-		$('#reader').css('width', '145%').removeClass('span8').addClass('span12');
+		$('#reader').css('width', '96%');
 		$('#sidebar').css('display', 'none')
 		$('.mono').css('white-space','pre-wrap').css('overflow','initial')
 		$('#toc-btn').removeClass('on')
+		$('#topbar').css('width', '100%')
 		
 		// $('#debugger').text('off');
 	}

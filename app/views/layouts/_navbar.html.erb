@@ -1,110 +1,58 @@
 <!-- BEGIN NAVBAR (non-collapsing)-->
-<div class="container">
-	<nav id='topbar' class="navbar navbar-inverse navbar-fixed-top blacknav" role="navigation" id='topbar'>
+	<nav id='topbar' class="navbar navbar-inverse navbar-static-top blacknav" role="navigation" id='topbar'>
 	
-			<div class="navbar-left">
-				<a href='' class="navbar-brand home-url">
-					<button class="btn navbar-btn btn-greenwell">
-						<img style="max-width:50px;" class='logo-url'
-							src="">
-					</button>
-				</a>
-			</div>
+		
+		<button class="btn navbar-btn btn-greenwell" style="margin-left:4%;">
+			<a href='' class="home-url">
+				<img style="max-width:50px;" class='logo-url'src=""/>
+			</a>
+		</button>
+		
+
+		<!-- modal 1 - select a page (group of pages - controller )-->
+		<button type='button' data-toggle='modal'  
+				class='btn navbar-btn btn-greenwell ' data-target='#modal-page-menu'>
+			<p style="margin:1px"id='page-btn' >page</p>
+		</button>
 			
-			<div class="navbar-center" id='debugger'>
-				<!--to be implemented-->
-			</div> 
+		<!-- < prevous section button-->
+		<button type='button' class="btn navbar-btn btn-greenwell hide">
+			<img style="margin: 0px" src="https://shared-img-res.s3.amazonaws.com/icons/left_icon_grn.png"/>
+		</button>
+		
+		<!--modal 2 - select a topic (jump to id on page)-->
+		<button type='button' data-toggle='modal'  
+				class="btn navbar-btn btn-greenwell " data-target='#modal-section-menu'>
+			<p style="margin:1px"id='section-btn' > section</p>
+		</button>
+		
+		<!-- > next section button-->
+		<button type='button' class="btn navbar-btn btn-greenwell hide" >
+			<img style="margin:0px" src="https://shared-img-res.s3.amazonaws.com/icons/right_icon_grn.png"/>
+		</button>
+		
+		<button type='button' id='toc-btn' 
+				class='btn navbar-btn btn-greenwell '>
+			<img style="margin:1px" src="https://shared-img-res.s3.amazonaws.com/livepage_heroku/toc_icon_h20.png">
+			</img>
+		</button>
+		
+		<button type='button' class="btn navbar-btn btn-greenwell" id='toc-follow-btn'>
+			<img id='toc-follow-img' style="height:25px; margin:-3px;"
+				src="https://shared-img-res.s3.amazonaws.com/livepage_heroku/auto-y_icon_33_grn.png">
+			</img>
+		</button>
 			
-			<div class="navbar-right"> 
-				
-				<!-- modal 1 - select a page (group of pages - controller )-->
-				<button type='button' data-toggle='modal' id='page-btn' 
-						class='btn navbar-btn btn-greenwell ' data-target='#modal-page-menu'>
-					page
-				</button>
-				
-				<!-- < prevous section button-->
-				<a href='' id='prev-btn'>
-					<span class="glyphicon glyphicon-chevron-left navbar-prev"></span>
-					prev
-				</a>
-				
-				<!-- modal 2 - select a topic (jump to id on page)-->
-				<button type='button' data-toggle='modal' id='section-btn' 
-						class="btn navbar-btn btn-greenwell " data-target='#modal-section-menu'>
-					section
-				</button>
-				
-				<!-- > next section button-->
-				<a  href='' id='next-btn'>next	
-					<span class="glyphicon glyphicon-chevron-right navbar-next"></span>
-				</a>
-				
-				<button type='button' id='toc-btn' 
-						class='btn navbar-btn btn-greenwell '>
-					<img src="https://shared-img-res.s3.amazonaws.com/livepage_heroku/toc_icon_h20.png">
-					</img>
-				</button>
-				
-			</div> <!-- end navbar right -->
+
 	</nav> <!--END NAVBAR-->
-	
-	<!-- CONTENTS OF THREE MODAL WINDOWS -->
-	
-	<!-- modal 1 - select a page -->
-	<div class="modal" id="modal-page-menu" tabindex='-1' role='dialog'>
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header jr-dark-bg">
-					<button type="button" class="close" data-dismiss='modal'>
-						&times;
-					</button><br>
-				</div>
-				<div class="modal-body">
-					
-					<div class="jr-dark-bg">
-						<div class="row center-text">
-							<h3>Pick a Page</h3>
-						</div>
-						<div class="row spacer center-text">
-							<%= #render :file => 'layouts/home_menu' 
-							%>
-							<div id="page-menu">
-								
-							</div>
-						</div>
-						<div class="modal-footer"></div>
-					</div>
-				</div>
-			</div>
-		</div>
+
+<div id="sidebar">
+	<div class="toc" id="toc">	
+		<%= @toc %>
 	</div>
-	<!-- modal 2 - select a section -->
-	<div class="modal" id="modal-section-menu" tabindex='-1' role='dialog'>
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header jr-dark-bg">
-					<button type="button" class="close" data-dismiss='modal'>
-						&times;
-					</button><br>
-				</div>
-				<div class="modal-body">
-					
-					<div class="jr-dark-bg">
-						<div class="row center-text">
-							<h3>Pick a Section</h3>
-						</div>
-						<div class="row spacer center-text">
-							<%= #render :file => 'layouts/home_menu' 
-							%>
-							<div id="section-menu"> 
-								<!--populated by javscript-->
-							</div>
-						</div>
-						<div class="modal-footer"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+</div> 
+
+
+<!-- CONTENTS OF THREE MODAL WINDOWS -->
+<%= render partial: 'layouts/modals' 
+%>
