@@ -46,6 +46,9 @@ $( document ).ready(function() {
 	// make all toc <a> id='inactive'
 	$links.attr('id', 'toc-inactive')
 	
+	tocFollow = false;
+	$('#toc-follow-img, #toc-follow-txt').css('opacity','.4');
+	
 	// add handlers:
 	$(document).on("scroll", findNewPosition);         // add scroll listener on content
 	$('a[href^="#"]').on('click', onTocClick);  // add click listener on toc
