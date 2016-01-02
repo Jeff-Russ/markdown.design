@@ -59,7 +59,7 @@
 .navbar-prev  { color: #94ba65; font-size:15px; margin-top: 6px!important; padding-right: 0px; padding-left: 12px; } 
 .navbar-next  { color: #94ba65; font-size:15px; margin-top: 6px!important; padding-left:  0px;}
 .navbar-left  { margin-left: 2%!important;} // jr.com has  margin-top: 0px;        
-.navbar-right { float: right!important; margin-right: 4%!important;} // jr.com has  margin-top: 0px;        
+.navbar-right { float: right!important; margin-right: 3%!important;} // jr.com has  margin-top: 0px;        
     /* disable navbar collapse */
 .navbar-collapse.collapse           { display: block!important;      }
 .navbar-nav>li, .navbar-nav         { float: left!important;         }
@@ -83,8 +83,8 @@ btn:focus, .btn:active {  // get rid of the blue glow on previously clicked butt
 .navbar-center {  
     position:fixed; display: inline-block; margin-left:auto;margin-right:auto;text-align: center;
 }
-.btn-ghost-grn       { color:#94ba65; background-color:#3e423e; border-color:#94ba65; }
-.btn-ghost-grn:hover { color:#94ca55; background-color:#444949; border-color:#94ca55; }
+.btn-greenwell       { color:#94ba65; background-color:#3e423e!important; border-color:#94ba65; }
+.btn-greenwell:hover { color:#94ca55; background-color:#444949!important; border-color:#94ca55; }
 
 
 // CUSTOM CLASSES
@@ -165,14 +165,17 @@ xmp { @extend.mono1; @extend.greenbox;
     text-align: left; border-radius:7px; max-width: 60em; margin-right: auto ;}
 
 // sidebar
-#sidebar       { position:fixed; overflow: scroll; left:68%; right:2%;//margin-right:5%;  padding-bottom:8em;  // left:68%; left:68%;width:30%; 
-    height: 87%; white-space: nowrap; //transform: translateX(10px); // z-index: 400;  
+#sidebar       { position:fixed; overflow: scroll; left:68%; right:2%;
+    height: 87%; white-space: nowrap;   
     border:2px solid#999!important; border-radius: 10px!important; border-color:#94ba65!important; }
-// about ^ and v http://stackoverflow.com/questions/6794000/fixed-position-but-relative-to-container
-#toc-follow-btn{ background: transparent!important; //transform: translate(-50%, -50%);
-     position:fixed; right: 2.1%; margin-top:-1px;//right:70%; top:0; 
-    border-radius: 5px!important;
-}
+
+#toc-follow-btn {   color:#94ba65;  border-color:#4A5D32; background-color:#3e323e;
+     position:fixed;  margin:2px; outline: none !important;
+     right: 2%; margin-top:0px;  border-radius: 8px!important; // cuz it worked
+} 
+// #toc-follow-btn:hover { opacity: 0.6;}
+#toc-follow-txt { color:#A7C36B; }
+#toc-follow-img, #toc-follow-txt { opacity: 0.9;}
 
 // the contents of sidebar
 #toc > ul { padding-left: 0; }

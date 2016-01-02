@@ -21,6 +21,8 @@ var topSection;   // the first element in toc which points to top of page
 
 var $prevActive;
 
+var tocFollow;
+
 window.onhashchange = function() {
     setTimeout(pageLoadFromFromHash(), 400);
 }
@@ -41,6 +43,7 @@ $( document ).ready(function() {
 	$sectionBtn = $('#section-btn');
 	$sections   = $('.section');
 	topSection  = $sections.first().attr('id');
+	$('#toc-follow-btn').addClass('on');
 	
 	// make all toc <a> id='inactive'
 	$links.attr('id', 'toc-inactive')
@@ -50,6 +53,19 @@ $( document ).ready(function() {
 	$('a[href^="#"]').on('click', onTocClick);  // add click listener on toc
 	
 	pageLoadFromFromHash() 
+	
+	$('#toc-follow-btn').on('click', function(){
+		$(this).toggleClass('on');
+		if ($(this).hasClass('on')) {
+			tocFollow = true;
+			$('#toc-follow-img, #toc-follow-txt').css('opacity','.9');
+			findNewPosition()
+		} else {
+			tocFollow = false;
+			$('#toc-follow-img, #toc-follow-txt').css('opacity','.4');
+			tocScroller() 
+		}
+	});
 	
 	
 });// END document.ready
@@ -95,29 +111,8 @@ function pageLoadFromFromHash ()
 		$prevActive = $toc_0
 		commitNewPosition(pageName, topSection);
 	}
-}	
+}
 
-/******************************************************************************/
-
-// update scrolling of toc by position in text:
-function tocScroller() 
-{
-	var activeElement = document.getElementById("toc-active");
-	var activePos     = activeElement.offsetTop;
-	var sidebarHeight = document.getElementById('sidebar').offsetHeight;
-	var offset        = activePos - sidebarHeight * 0.2
-	var maxOffset     = tocHeight - sidebarHeight;
-	
-	if (offset > maxOffset) { offset = maxOffset; }
-	else                    { offset = offset;    }
-	
-	var correction = -offset;
-	
-	if (activePos > sidebarHeight * .95)
-		$tocElem.animate({ marginTop: correction }, 300);
-	else 
-		$tocElem.css('margin-top', 0);
-	}
 
 /******************************************************************************/
 
@@ -187,4 +182,31 @@ function commitNewPosition (page, section)
 	$sectionBtn.text(section);
 }
 
+/******************************************************************************/
+
+// update scrolling of toc by position in text:
+function tocScroller() 
+{
+	
+	if ($('#toc-follow-btn').hasClass('on')) 
+	{
+		var activeElement = document.getElementById("toc-active");
+		var activePos     = activeElement.offsetTop;
+		var sidebarHeight = document.getElementById('sidebar').offsetHeight;
+		var offset        = activePos - sidebarHeight * 0.2
+		var maxOffset     = tocHeight - sidebarHeight;
+		
+		if (offset > maxOffset) { offset = maxOffset; }
+		else                    { offset = offset;    }
+		
+		var correction = -offset;
+		
+		if (activePos > sidebarHeight * .95)
+			$tocElem.animate({ marginTop: correction }, 300);
+		else 
+			$tocElem.css('margin-top', 0);
+	} else {
+		$tocElem.css('margin-top','0');
+	}
+}
 /******************************************************************************/

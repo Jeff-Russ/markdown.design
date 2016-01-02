@@ -30,7 +30,6 @@ var isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/
 			showTOC(true); 
 		} else { 
 			showTOC(false);
-			
 		}
 	});
 	
