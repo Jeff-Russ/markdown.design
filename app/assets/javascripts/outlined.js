@@ -23,9 +23,7 @@ var $prevActive;
 
 var tocFollow;
 
-window.onhashchange = function() {
-    setTimeout(pageLoadFromFromHash(), 400);
-}
+window.onhashchange = function() {  setTimeout(pageLoadFromFromHash(), 400); }
 
 /******************************************************************************/
 
