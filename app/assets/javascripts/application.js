@@ -71,7 +71,7 @@ function showTOC(boolean)
 		
 		// $('#debugger').text('on');
 	} else {
-		$('#reader').css('width', '150%').removeClass('span8').addClass('span12');
+		$('#reader').css('width', '145%').removeClass('span8').addClass('span12');
 		$('#sidebar').css('display', 'none')
 		$('.mono').css('white-space','pre-wrap').css('overflow','initial')
 		$('#toc-btn').removeClass('on')
