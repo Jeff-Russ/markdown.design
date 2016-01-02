@@ -145,3 +145,8 @@ changing after the file was modified, but if you are not planning on tweaking
 things often that might not be an issue. My prefered setup is a bucket with AWS, 
 a Mac with Cyberduck FTP and browsing the files in the bucket, opening them in 
 Sublime Text to edit them. When I hit save, the live site is automatically updated. 
+
+### Known Issues
+
+1. If the screen is adjusted to be very narrow, the autoscroll button no longer works.
+2. If the screen adapts to hide the toc, the right side of content is cut off.
