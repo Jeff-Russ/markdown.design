@@ -50,10 +50,14 @@ on that, refer to my [Ruby on Rails How-To](http://www.howto.jeffruss.com/?aws=j
 
 For each page you will append a parameter to the URL in one of the formats:  
     
-`?aws=AMAZONAWS-BUCKET-NAME.FILENAME`  
+`?aws=AMAZONAWS-BUCKET-NAME.FILENAME`
+`?github=USERNAME/PROJECTNAME/BRANCH/FILENAME`
 `?https=ADDRESS-EXCLUDING-HTTPS://`  
 `?http=ADDRESS-EXCLUDING-HTTP://`  
 `?url=FULL-ADDRESS`  
+
+The `aws` parameter prepends `https://s3.amazonaws.com/`  
+The `github` parameter prepends `https://raw.githubusercontent.com/`
 
 For example, if you have a bucket called `bucket` with a file in it called `sample.md` 
 your custome address for this is:  
@@ -63,8 +67,9 @@ your custome address for this is:
 If you have the file in a folder within the bucket, your custom address would 
 reflect this.  
   
-Using the other formats would look like these:
+Using the other formats would provide you with addresses like these:
 
+`http://livepage-md.herokuapp.com/?github=Jeff-Russ/LivePage-md/master/README.md
 `http://livepage-md.herokuapp.com/?https=/www.example/sample.md`  
 `http://livepage-md.herokuapp.com/?http=/www.example/sample.md`  
 `http://livepage-md.herokuapp.com/?url=https://www.example/sample.md` 
@@ -146,11 +151,33 @@ things often that might not be an issue. My prefered setup is a bucket with AWS,
 a Mac with Cyberduck FTP and browsing the files in the bucket, opening them in 
 Sublime Text to edit them. When I hit save, the live site is automatically updated. 
 
+### Recomendations
+
+The way LivePage-md shares a common url makes it easy for the authors identities 
+to get muddled up, which could be a good wiki-like quality or it could be a bad. 
+I recommend putting all of your md files in a folder/bucket with your name so it 
+appears in the web address. Another more obvious option is to place your name 
+promenently in the page content. This is a very open format so do as you wish.  
+
+I also do not recommend doing your editing on the active page's primary address's
+corresponding md file. I make a duplicate file for each public one with an 
+underscore starting the file name. I keep them both public and in the some location 
+so I can flip back and forth but adding and deleting the underscore in the URL 
+bar. 
+
+I have a browser open with the underscored version open, cyberduck open and 
+connected to Amazon AWS. I edit the underscored file directly on the server and 
+have the browser auto-refresh the page every 15 seconds with a Chrome Extension.
+Everytime I save in my editor I'll see the change within 15 seconds. 
+
+When I am ready I'll copy all of the _file.md to file.md and save it. Done.
+
 ### Known Issues
 
-
 1. Give TOC adaptive top margin depending on height of contents.
-2. left and right buttons don't work
-3. li > pre > code cut off in no-toc mode
-4. pre > code has grey bar
-5. autoscroll setting is backwards and just bad. I disabled it for now
+2. Give topbar adaptive height depending on device.
+3. left and right buttons don't work
+4. li > pre > code cut off in no-toc mode
+5. pre > code has grey bar
+6. autoscroll setting is backwards and just bad. I disabled it for now
+~~7. add query string parameter for github~~

@@ -1,18 +1,4 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
- *
- * for syntax highlighter
- * require syntax-highlighter-rails/shCore
- * require syntax-highlighter-rails/shThemeDefault
  *
  *= require_tree .
  *= require_self
@@ -32,17 +18,14 @@
         #footer       { display: none;           }
     }
 }
-#banner {  // for titles (alternative to bootstrap well and jumbotron)
-    position: relative; border-style: outset;  border-radius: 10px; border-width: 2px; 
-    margin-bottom: 50px; height: 104px; 
-    border-color: #44c19b #45b0a1; color: #ffffd0; background-color: #444!important;
-    &:hover { background-color: #444949!important; }
-    
-    img{margin-left: -30px;border-top-left-radius: 10px;border-bottom-left-radius:10px;} 
-    p  {margin-left: 25%; &:hover { color:#e6ffd6; }
-        font-size: 150%; font-weight: 900; text-align: center; line-height: 90%;
-    }
-}
+
+
+// should be inline:
+
+
+
+
+// 
 * { word-break: keep-all !important; }
 
 // BOOTSTRAP CLASS OVERRIDES
@@ -51,65 +34,52 @@
 .jumbotron        { color: #ffffd0 !important; background-color: #505F50 !important; }
 .alert-notice     { color: #8a6d3b;	background-color: #fcf8e3; border-color: #faebcc; }
 .form-control     { color: #ffe; background-color: #555; } // invert color for forms
-.carousel-caption > h3 { color:#dee!important; }
-.list-group-item       { margin-left: 0%!important; }
+.carousel-caption > h3 { color:#dee!important; } // now inline
+.navbar-btn { height: 79%; width: 18%; text-align:center!important;}
+.btn:focus, .btn:active, .navbar-btn:focus, .navbar-btn:active {  
+   outline:none!important; // get rid of the blue glow on previously clicked buttons
+   color:#94ba65; }
+
+
+
 #topbar                { position:fixed; height:10%; margin-bottom: 27px; width:68%;} 
-.thin-text {  font-weight: 90!important; }
-.navbar-brand { padding-top: 0px; margin-top:-3px;padding-right: 0px;border-right: 0px;margin-right: 0px;}
-.navbar-prev  { color: #94ba65; font-size:15px; margin-top: 6px!important; padding-right: 0px; padding-left: 12px; } 
-.navbar-next  { color: #94ba65; font-size:15px; margin-top: 6px!important; padding-left:  0px;}
-.navbar-left  { margin-left: 2%!important;} // jr.com has  margin-top: 0px;        
-.navbar-right { float: right!important; height: 100%;margin-right: 1%!important;} // jr.com has  margin-top: 0px;        
-    /* disable navbar collapse */
-.navbar-collapse.collapse           { display: block!important;      }
-.navbar-nav>li, .navbar-nav         { float: left!important;         }
-// .navbar-nav.navbar-right:last-child { padding-right: 100px!important; }
+
 
 // BOOTSTRAP ADD-ON CLASSES
-.btn-xlarge{@extend.trans-250ms;padding: 18px 28px;font-size: 14px;line-height: normal; margin-bottom: 30px;}
 .btn-large {@extend.trans-250ms;padding: 18px 28px;font-size: 12px;line-height: normal; margin-bottom: 30px;}
+.btn-xlarge{@extend.trans-250ms;padding: 18px 28px;font-size: 14px;line-height: normal; margin-bottom: 30px;}
 .btn-ghost {@extend.trans-250ms;background: transparent!important;color:#ffffd0!important; 
               &:hover { background-color: #444949!important; } }
 .btn-ghosty{@extend.trans-250ms; background-color: #444!important;color:#ffffd0!important; 
               &:hover { background-color: #444949!important; } }
 
-.navbar-btn { height: 79%; width: 18%; text-align:center!important;}
 
-.btn:focus, 
-.btn:active, 
-.navbar-btn:focus,
-.navbar-btn:active
-{  // get rid of the blue glow on previously clicked buttons
-   outline:none!important;
-   color:#94ba65;
-}
 
-.navbar-center {  
-    position:fixed; display: inline-block; margin-left:auto;margin-right:auto;text-align: center;
-}
+
+
 .btn-greenwell       { color:#94ba65; background-color:#3e423e!important; border-color:#94ba65; }
 .btn-greenwell:hover { color:#94ca55; background-color:#444949!important; border-color:#94ca55; }
 
 // CUSTOM CLASSES
-.jr-green-bg   { background-color: #606F60;  } 
-.dark-bg-g     { background-color: #404347;  }
-.jr-dark-body  { color: #b0bfaa; background-color: #404040; } //  color: #ffffd0; jr.com
+.jr-green-bg   { background-color: #606F60;  }  // not used
+.dark-bg-g     { background-color: #404347;  } // not used
+.jr-dark-body  { color: #b0bfaa; background-color: #404040; } 
 .jr-dark-bg    { background-color: #404040; } //  color: #ffffd0; jr.com
-.jr-green      { color: #94ba65; }
-.bluish        { color: #bbddee; }
-.black-text    { color: #444; }
+// .jr-green      { color: #94ba65; }
+// .bluish        { color: #bbddee; }
+.black-text    { color: #444; } // used in boostrap howto md
 .blacknav      { color: #ffffd0!important; background-color:#333333!important; border:2px solid#999!important; border-radius: 10px!important; border-color:#94ba65!important;}
 .greenwell     { color: #94ba65!important; background-color:#3e423e!important; border-color:#94ba65 }
-.nonwell       { color: #94ba65 !important; background: transparent !important;   } // needed?
+// .nonwell       { color: #94ba65 !important; background: transparent !important;   } 
 .nav-spacer    { padding-top: 90px; }
-.nav-spacer-xl { padding-top: 100px; }
+.nav-spacer-xl { padding-top: 100px; } // todo: replace
 .spacer        { margin-top: 40px; background-color: #404040; }
 .hide          { display: none; } 
-.centered-div  { margin-left:auto!important; margin-right:auto!important; }
+// .centered-div  { margin-left:auto!important; margin-right:auto!important; }
 .thin-text     { font-weight: 200!important; }
-.border-orange { outline: 1px solid orange;  }
-.border-red    { outline: 1px solid red;     }
-.border-green  { outline: 1px solid #20f030; }
+.border-orange { outline: 1px solid orange;  } // not used but useful
+.border-red    { outline: 1px solid red;     } // not used but useful
+.border-green  { outline: 1px solid #20f030; } // not used but useful
 
 .github-only   { display: none; }
 
@@ -148,8 +118,6 @@ ul>li>ul>li>ul>li>ul>>li>ul>lia#toc-inactive { color:#b0bfaa!important;font-size
    margin-left: 0 !important;
    border-left: 0 !important;
 }
-
-// #ffffd0  #8FBC8F
 
 // HTML anchors
 a:focus,
@@ -226,3 +194,34 @@ div.jump { z-index: 99 !important; padding-top : 40px; }
          -o-transition: background .25 ease-in-out, border .25 ease-in-out;
             transition: background .25 ease-in-out, border .25 ease-in-out;
 }
+
+/*
+ * for syntax highlighter
+ * require syntax-highlighter-rails/shCore
+ * require syntax-highlighter-rails/shThemeDefault
+
+#banner {  // for titles (alternative to bootstrap well and jumbotron)
+    position: relative; border-style: outset;  border-radius: 10px; border-width: 2px; 
+    margin-bottom: 50px; height: 104px; 
+    border-color: #44c19b #45b0a1; color: #ffffd0; background-color: #444!important;
+    &:hover { background-color: #444949!important; }
+    
+    img{margin-left: -30px;border-top-left-radius: 10px;border-bottom-left-radius:10px;} 
+    p  {margin-left: 25%; &:hover { color:#e6ffd6; }
+        font-size: 150%; font-weight: 900; text-align: center; line-height: 90%;
+    }
+}
+
+// BOOTSTRAP CLASS OVERRIDES
+.list-group-item       { margin-left: 0%!important; }
+.navbar-brand { padding-top: 0px; margin-top:-3px;padding-right: 0px;border-right: 0px;margin-right: 0px;}
+.navbar-left  { margin-left: 2%!important;} // jr.com has  margin-top: 0px;        
+.navbar-center {  
+    position:fixed; display: inline-block; margin-left:auto;margin-right:auto;text-align: center;
+}
+.navbar-right { float: right!important; height: 100%;margin-right: 1%!important;} // jr.com has  margin-top: 0px;        
+// disable navbar collapse 
+.navbar-collapse.collapse           { display: block!important;      }
+.navbar-nav>li, .navbar-nav         { float: left!important;         }
+
+*/

@@ -12,6 +12,10 @@ class MdController < ApplicationController
       url = "https://s3.amazonaws.com/" << params.fetch(:aws) 
       render_url url
       
+    elsif params[:github].present? 
+      url = "https://raw.githubusercontent.com/" << params.fetch(:url) 
+      render_url url
+      
     elsif params[:https].present?
       url = "https://" << params.fetch(:https) 
       render_url url
