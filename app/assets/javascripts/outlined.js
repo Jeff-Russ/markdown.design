@@ -46,8 +46,6 @@ $( document ).ready(function() {
 	// make all toc <a> id='inactive'
 	$links.attr('id', 'toc-inactive')
 	
-	tocFollow = false;
-	$('#toc-follow-img, #toc-follow-txt').css('opacity','.4');
 	
 	// add handlers:
 	$(document).on("scroll", findNewPosition);         // add scroll listener on content
@@ -55,18 +53,19 @@ $( document ).ready(function() {
 	
 	pageLoadFromFromHash() 
 	
-	$('#toc-follow-btn').on('click', function(){
-		$(this).toggleClass('on');
-		if ($(this).hasClass('on')) {
-			tocFollow = true;
-			$('#toc-follow-img, #toc-follow-txt').css('opacity','.9');
-			findNewPosition()
-		} else {
+	// this seems to be inverted. i disabled it. FIX IT:
+	// $('#toc-follow-btn').on('click', function(){
+	// 	$(this).toggleClass('on');
+	// 	if ($(this).hasClass('on')) {
+	// 		tocFollow = true;
+	// 		$('#toc-follow-img, #toc-follow-txt').css('opacity','.9');
+	// 		findNewPosition()
+	// 	} else {
 			tocFollow = false;
 			$('#toc-follow-img, #toc-follow-txt').css('opacity','.4');
-			tocScroller() 
-		}
-	});
+	// 		tocScroller() 
+	// 	}
+	// });
 	
 	
 });// END document.ready
@@ -189,7 +188,7 @@ function commitNewPosition (page, section)
 function tocScroller() 
 {
 	
-	if ($('#toc-follow-btn').hasClass('on')) 
+	if (tocFollow)  // disabled for now
 	{
 		var activeElement = document.getElementById("toc-active");
 		var activePos     = activeElement.offsetTop;
@@ -207,7 +206,7 @@ function tocScroller()
 		else 
 			$tocElem.css('margin-top', 0);
 	} else {
-		$tocElem.css('margin-top','0');
+		// $tocElem.css('margin-top','0');  // disabled for now
 	}
 }
 /******************************************************************************/

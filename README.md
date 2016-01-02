@@ -153,4 +153,4 @@ Sublime Text to edit them. When I hit save, the live site is automatically updat
 2. left and right buttons don't work
 3. li > pre > code cut off in no-toc mode
 4. pre > code has grey bar
-5. autoscroll needs to be re-calibrated
+5. autoscroll setting is backwards and just bad. I disabled it for now
