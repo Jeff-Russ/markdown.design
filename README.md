@@ -172,12 +172,23 @@ Everytime I save in my editor I'll see the change within 15 seconds.
 
 When I am ready I'll copy all of the _file.md to file.md and save it. Done.
 
-### Known Issues
+### Known Issues & General Updates
 
-1. Give TOC adaptive top margin depending on height of contents.
-2. Give topbar adaptive height depending on device.
-3. left and right buttons don't work
-4. li > pre > code cut off in no-toc mode
-5. pre > code has grey bar
-6. autoscroll setting is backwards and just bad. I disabled it for now
-~~7. add query string parameter for github~~
+**Current Issues**
+
+1. Autoscroll setting is backwards and just bad. I disabled it for now
+2. Topbar buttons and text are too big on non-mobile
+
+**Fixed/Added in this most recent commit** 
+
+1. li > pre > code cut off in no-toc mode FIXED
+2. add query string parameter for github DONE
+3. add new layout options and created short url's for them that use query strings DONE
+
+**To Do**
+
+~~1. add html and erb support~~ PLANS CANCELLED FOR NOW
+2. implement left and right buttons
+3. remove grey bar in code blocks
+4. give TOC adaptive top margin depending on height of contents.
+5. give topbar adaptive height depending on device.

@@ -1,6 +1,5 @@
 <!-- BEGIN NAVBAR (non-collapsing)-->
 	<nav id='topbar' class="navbar navbar-inverse navbar-static-top blacknav" role="navigation" id='topbar'>
-	
 		
 		<button class="btn navbar-btn btn-greenwell" style="margin-left:4%;">
 			<a href='' class="home-url">
@@ -8,7 +7,6 @@
 			</a>
 		</button>
 		
-
 		<!-- modal 1 - select a page (group of pages - controller )-->
 		<button type='button' data-toggle='modal'  
 				class='btn navbar-btn btn-greenwell ' data-target='#modal-page-menu'>
@@ -42,15 +40,18 @@
 				src="https://shared-img-res.s3.amazonaws.com/livepage_heroku/auto-y_icon_33_grn.png">
 			</img>
 		</button>
-			
-
+	
 	</nav> <!--END NAVBAR-->
-
+	
+<% if @livedocs[:toc] != nil %>
 <div id="sidebar">
 	<div class="toc" id="toc">	
-		<%= @toc %>
+		<%= @livedocs[:toc] %>
 	</div>
 </div> 
+<% else %>
+<div id="hide-toc"style="display: none;"><!-- true --></div>
+<% end %>
 
 
 <!-- CONTENTS OF THREE MODAL WINDOWS -->

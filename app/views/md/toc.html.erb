@@ -1,0 +1,130 @@
+<%= render partial: 'header' %>
+<!--</head>  -->
+
+<!-- BEGIN NAVBAR (non-collapsing)-->
+<nav id='topbar' class="navbar navbar-inverse navbar-static-top blacknav" role="navigation" id='topbar'>
+	
+	<button class="btn navbar-btn btn-greenwell" style="margin-left:4%;">
+		<a href='' class="home-url">
+			<img style="max-width:50px;" class='logo-url'src=""/>
+		</a>
+	</button>
+	
+	<!-- modal 1 - select a page (group of pages - controller )-->
+	<button type='button' data-toggle='modal'  
+			class='btn navbar-btn btn-greenwell ' data-target='#modal-page-menu'>
+		<p style="margin:1px"id='page-btn' >page</p>
+	</button>
+		
+	<!-- < prevous section button-->
+	<button type='button' class="btn navbar-btn btn-greenwell hide">
+		<img style="margin: 0px" src="https://shared-img-res.s3.amazonaws.com/icons/left_icon_grn.png"/>
+	</button>
+	
+	<!--modal 2 - select a topic (jump to id on page)-->
+	<button type='button' data-toggle='modal'  
+			class="btn navbar-btn btn-greenwell " data-target='#modal-section-menu'>
+		<p style="margin:1px"id='section-btn' > section</p>
+	</button>
+	
+	<!-- > next section button-->
+	<button type='button' class="btn navbar-btn btn-greenwell hide" >
+		<img style="margin:0px" src="https://shared-img-res.s3.amazonaws.com/icons/right_icon_grn.png"/>
+	</button>
+	
+	<button type='button' id='toc-btn' 
+			class='btn navbar-btn btn-greenwell '>
+		<img style="margin:1px" src="https://shared-img-res.s3.amazonaws.com/livepage_heroku/toc_icon_h20.png">
+		</img>
+	</button>
+	
+	<button type='button' class="btn navbar-btn btn-greenwell" id='toc-follow-btn'>
+		<img id='toc-follow-img' style="height:25px; margin:-3px;"
+			src="https://shared-img-res.s3.amazonaws.com/livepage_heroku/auto-y_icon_33_grn.png">
+		</img>
+	</button>
+
+</nav> 
+<!--END NAVBAR-->
+
+<!-- BEGIN MODALS -->
+
+<!-- MODAL 1 - select a page -->
+<div class="modal" id="modal-page-menu" tabindex='-1' role='dialog'>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header jr-dark-bg">
+				<button type="button" class="close" data-dismiss='modal'>
+					&times;
+				</button><br>
+			</div>
+			<div class="modal-body">
+				
+				<div class="jr-dark-bg">
+					<div class="row center-text">
+						<h3>Pick a Page</h3>
+					</div>
+					<div class="row spacer center-text">
+						<div id="page-menu">
+							<!--inserted by js-->
+						</div>
+					</div>
+					<div class="modal-footer"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- MODAL 2 - select a section -->
+<div class="modal" id="modal-section-menu" tabindex='-1' role='dialog'>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header jr-dark-bg">
+				<button type="button" class="close" data-dismiss='modal'>
+					&times;
+				</button><br>
+			</div>
+			<div class="modal-body">
+				
+				<div class="jr-dark-bg">
+					<div class="row center-text">
+						<h3>Pick a Section</h3>
+					</div>
+					<div class="row spacer center-text">
+						<%= #render :file => 'layouts/home_menu' 
+						%>
+						<div id="section-menu"> 
+							<!--populated by javscript-->
+						</div>
+					</div>
+					<div class="modal-footer"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END MODALS -->
+
+<body class="jr-dark-body ">
+	
+	<div id="sidebar">
+		<div class="toc" id="toc">	
+			<%= @livedocs[:toc] %> 
+		</div>
+	</div> 
+		
+	<div class="container-small nav-spacer ">  <!--nav-space prevents obscuring under navbar-->
+	
+		<!-- BEGIN PAGE CONTENTS -->
+		<div id='reader' style="">
+			<div class="markdown" id='content' >
+				<%= @livedocs[:content] %> 
+			</div>
+		</div>   
+	 
+	</div><!-- END nav-spacer -->
+	
+</body>
+
+<%= render partial: 'footer' %>

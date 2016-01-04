@@ -1,40 +1,61 @@
-/*
- *
- *= require_tree .
- *= require_self
- */
- 
-
+//= require_tree .
+//= require_self
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
 
+
+/////   GENERAL TARGETS   //////////////////////////////////////////////////////
+
+// TARGETING NATIVE HTML TAGS for general use 
+
+* { word-break: keep-all !important; } // global word-break setting
 @media print {                         // format page for printing	
-    @page { margin: 0; }
-    body  { margin-left: 1.6cm;  margin-right: 1.6cm; margin-top: -0.5cm;
-        a[href]:after { content: none!important; }
-        #footer       { display: none;           }
-    }
+   @page { margin: 0; }
+   body  { margin-left: 1.6cm;  margin-right: 1.6cm; margin-top: -0.5cm;
+      a[href]:after { content: none!important; }
+      #footer       { display: none;           }
+   }
 }
 
+a:focus, a:active, a:link, // HTML anchors
+a:visited { text-decoration: none;color:#b0cfaa!important; }
+a:hover   { text-decoration: none;color:#e6ffd6!important; }
 
-// should be inline:
+li>p     {  margin-right:auto;text-align: justify; text-justify: auto;}
+li>pre   { margin-left: 5px;  background-color: grey; @extend.codeblock; @extend.greenbox2; }
+pre>code {                     color-background:#fff; @extend.codeblock; } // COLOR-BACKGROUND???
+
+[class*="span"] { float: left; margin-left: 20px;} // used in _footer and home_layout
+
+// For markdown rendered to HTML 
+p>code, li>code { @extend.in-p-code;  background-color:white; margin-right: auto;} 
+pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; margin-right: auto; }
+
+// CUSTOM CLASSES for general use 
+
+.jr-dark-body { color: #b0bfaa; background-color: #404040; } 
+.jr-dark-bg   { background-color: #404040; } 
+.black-text   { color: #444; } // used in boostrap howto md
+.blacknav     { color: #ffffd0!important; background-color:#333333!important; 
+                border:2px solid#999!important; border-radius: 10px!important; 
+                border-color:#94ba65!important;}
+.greenwell    { color: #94ba65!important; background-color:#3e423e!important; 
+                border-color:#94ba65 }
+.spacer       { margin-top: 40px; background-color: #404040; }
+.hide         { display: none; } 
+.github-only  { display: none; }
+.center-text  { position:relative!important;  // both in modal 
+                text-align:center!important;} // and directory page
+.nav-spacer   { padding-top: 90px;  } // todo: replace
+.nav-spacer-xl{ padding-top: 100px; } // todo: replace
 
 
 
+// BUTTONS for general use 
 
-// 
-* { word-break: keep-all !important; }
-
-// BOOTSTRAP CLASS OVERRIDES
-.well { color: #ffffd0 !important; background-color: #444 !important; border-color:#94ba65; 
-    margin-left: auto ; margin-right: auto ; max-width: 60em; }
-.jumbotron        { color: #ffffd0 !important; background-color: #505F50 !important; }
-.alert-notice     { color: #8a6d3b;	background-color: #fcf8e3; border-color: #faebcc; }
-.form-control     { color: #ffe; background-color: #555; } // invert color for forms
-.carousel-caption > h3 { color:#dee!important; } // now inline
 .navbar-btn { height: 79%; width: 18%; text-align:center!important;}
 .btn:focus, .btn:active, .navbar-btn:focus, .navbar-btn:active {  
    outline:none!important; // get rid of the blue glow on previously clicked buttons
@@ -42,174 +63,199 @@
 
 
 
+//  BOOTSTRAP CLASS OVERRIDES for general use
+
+.well { color: #ffffd0 !important; background-color: #444 !important; border-color:#94ba65; 
+   margin-left: auto ; margin-right: auto ; max-width: 60em; }
+.jumbotron        { color: #ffffd0 !important; background-color: #505F50 !important; }
+.alert-notice     { color: #8a6d3b;	background-color: #fcf8e3; border-color: #faebcc; }
+.form-control     { color: #ffe; background-color: #555; } // invert color for forms
+.carousel-caption>h3 { color:#dee!important; } // now inline
+
+// overwriting default behaviour of Modal Popup in Bootstrap:
+.modal-dialog { 
+   border:2px solid#999!important; border-radius: 10px!important; border-color:#94ba65!important;
+   // recolor the horizontal lines inside the modal window and more of background:
+   .modal-footer, .modal-body, .modal-header { background-color: #404040; border-color:#94ba65!important;}
+   .close       { margin-left:95%; color: #8FBC8F;  opacity: 1; }
+   .close:hover { margin-left:95%; color: #94fa55;  opacity: 1; }
+}
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+/////  SPECIFIC TARGETS  ///////////////////////////////////////////////////////
+
+
+// TOPBAR
+  
 #topbar                { position:fixed; height:10%; margin-bottom: 27px; width:68%;} 
-
-
-// BOOTSTRAP ADD-ON CLASSES
-.btn-large {@extend.trans-250ms;padding: 18px 28px;font-size: 12px;line-height: normal; margin-bottom: 30px;}
-.btn-xlarge{@extend.trans-250ms;padding: 18px 28px;font-size: 14px;line-height: normal; margin-bottom: 30px;}
-.btn-ghost {@extend.trans-250ms;background: transparent!important;color:#ffffd0!important; 
-              &:hover { background-color: #444949!important; } }
-.btn-ghosty{@extend.trans-250ms; background-color: #444!important;color:#ffffd0!important; 
-              &:hover { background-color: #444949!important; } }
-
-
-
-
 
 .btn-greenwell       { color:#94ba65; background-color:#3e423e!important; border-color:#94ba65; }
 .btn-greenwell:hover { color:#94ca55; background-color:#444949!important; border-color:#94ca55; }
 
-// CUSTOM CLASSES
-.jr-green-bg   { background-color: #606F60;  }  // not used
-.dark-bg-g     { background-color: #404347;  } // not used
-.jr-dark-body  { color: #b0bfaa; background-color: #404040; } 
-.jr-dark-bg    { background-color: #404040; } //  color: #ffffd0; jr.com
-// .jr-green      { color: #94ba65; }
-// .bluish        { color: #bbddee; }
-.black-text    { color: #444; } // used in boostrap howto md
-.blacknav      { color: #ffffd0!important; background-color:#333333!important; border:2px solid#999!important; border-radius: 10px!important; border-color:#94ba65!important;}
-.greenwell     { color: #94ba65!important; background-color:#3e423e!important; border-color:#94ba65 }
-// .nonwell       { color: #94ba65 !important; background: transparent !important;   } 
-.nav-spacer    { padding-top: 90px; }
-.nav-spacer-xl { padding-top: 100px; } // todo: replace
-.spacer        { margin-top: 40px; background-color: #404040; }
-.hide          { display: none; } 
-// .centered-div  { margin-left:auto!important; margin-right:auto!important; }
-.thin-text     { font-weight: 200!important; }
-.border-orange { outline: 1px solid orange;  } // not used but useful
-.border-red    { outline: 1px solid red;     } // not used but useful
-.border-green  { outline: 1px solid #20f030; } // not used but useful
-
-.github-only   { display: none; }
-
-li > pre   {  @extend.codeblock; @extend.greenbox2; margin-left: 5px;  background-color: grey;}//max-width: 600px} // code box
-pre > code { @extend.codeblock; color-background:#fff;}// max-width: 590px; } // code in box
-.markdown > h1 { color: #ffffd0; font-size: 58px; font-weight: 900; margin-left: 1%;}
-.markdown > h2 { color: #cdb; font-size: 37px;   font-weight: 300; margin-left: 2%;}
-.markdown > h3 { color: #cdb; font-size: 30px;   font-weight: 100; margin-left: 3% }
-.markdown > h4 { color: #cdb; font-size: 24px;   font-weight: 100; margin-left: 4% }
-.markdown > h5 { color: #cdb; font-size: 20px;   font-weight: 100; margin-left: 5% }
-li > p         {  margin-right: auto;text-align: justify; text-justify: auto;}//b0bfaa
-.markdown > p { color: #b0bfaa; margin-left: 5%;  ; margin-right: auto; }//b0bfaa
-.markdown > p > strong { color:#cdb; font-weight: 900;}
-.markdown > ol, .markdown > ul { margin-left: 2%; }
-.markdown { font-size:16px; }
-
-
-// For markdown rendered to HTML 
-// .markdown > p    { margin-left: 50px;  max-width: 55em; margin-right: auto ;}
-p > code, li > code { @extend.in-p-code;  background-color:white; margin-right: auto;} // usually in-paragraph code insertion
-pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; margin-right: auto; }
-
-// sidebar toc achors:
-div.toc  {margin-top:20%; }
-a#toc-active   { @extend.greenbox2; color:#cff!important;font-size: 13px; font-weight: 900; font-style: italic; } // nice warm yellowish
-a#toc-inactive:hover { color:#fff!important;}
-ul>li>a#toc-inactive             { color:#ffffd0!important;font-size: 14px;font-weight: 300;line-height: 220%; }  // h1
-#toc>li>a#toc-inactive           { color:#ffffd0!important;font-size: 13px;font-weight: 300;line-height: 215%;}  // h1
-ul>li>ul>li>a#toc-inactive       { color:#d0dfaa!important;font-size: 12px;font-weight: 250;line-height: 210%;}  // h2 was #b0bf33
-ul>li>ul>li>ul>li>a#toc-inactive { color:#b0bfaa!important;font-size: 12px;font-weight: 250;line-height: 190%;}  // h3
-ul>li>ul>li>ul>li>ul>lia#toc-inactive { color:#b0bfaa!important;       font-size: 12px; font-weight:1750;line-height: 180%;}  // h4
-ul>li>ul>li>ul>li>ul>>li>ul>lia#toc-inactive { color:#b0bfaa!important;font-size: 12px; font-weight:100; line-height: 170%;}  // h5
-
-.cling-left {
-   padding-left: 0 !important;
-   margin-left: 0 !important;
-   border-left: 0 !important;
-}
-
-// HTML anchors
-a:focus,
-a:active,
-a:link,
-a:visited{ text-decoration: none;color: #b0cfaa!important; }
-
-a:hover { text-decoration: none; color:#e6ffd6!important;}
-
-// SECTIONS:
+.markdown    {font-size: 16px; }
+.markdown>h1 {font-size: 58px;font-weight: 900;color:#ffffd0;margin-left: 1%;}
+.markdown>h2 {font-size: 37px;font-weight: 300;color:#cdb;   margin-left: 2%;}
+.markdown>h3 {font-size: 30px;font-weight: 100;color:#cdb;   margin-left: 3%;}
+.markdown>h4 {font-size: 24px;font-weight: 100;color:#cdb;   margin-left: 4%;}
+.markdown>h5 {font-size: 20px;font-weight: 100;color:#cdb;   margin-left: 5%;}
+.markdown>p  {              margin-right: auto;color:#b0bfaa;margin-left: 5%;}
+.markdown>p>strong         {  font-weight: 900;color:#cdb;                   }
+.markdown>ol, .markdown>ul {                                 margin-left: 2%;}
 
 // usually markdown
 #reader      { left: 2%; position:absolute;} // the left pane
-
 xmp { @extend.codeblock; @extend.greenbox;
-    text-align: left; border-radius:7px; max-width: 60em; margin-right: auto ;}
+   text-align: left; border-radius:7px; max-width: 60em; margin-right: auto ;}
 
-// sidebar
-#sidebar       { position:fixed; overflow: scroll; left:68%; right:1%;
-    height: 100%; white-space: nowrap;    background-color:#333!important;
-    border:2px solid#999!important; border-radius: 10px!important; border-color:#94ba65!important; 
+
+
+//  SIDEBAR (container for #toc
+
+#sidebar { position: fixed; overflow: scroll; 
+   left: 68%; right: 1%; height: 100%; white-space: nowrap;
+   border: 2px solid #999 !important; border-radius: 10px !important;
+   border-color: #94ba65 !important; background-color: #333 !important;
 }
 
-#toc > ul { padding-left: 0; } // the contents of sidebar
 
+//  TOC (contents of #sidebar)
+
+// note: why have both .toc and #toc?
+div.toc { margin-top: 20%; }
+.toc * { 
+   padding-left: 0.5em; 
+   counter-reset: item; 
+   list-style-type: none; 
+   font-weight: 400;
+}
+#toc {
+   left: 3%; 
+   height:600px; 
+   position:relative; 
+   display: inline-block; 
+   font-size: 85% 
+}
 // each content of sidebar:
-#toc > u * { padding-left: 0.5em;  counter-reset: item; list-style-type: none; 
-    font-weight: 400; max-height:600px; }
-
-#toc {  left:3%; height:600px; position:relative; display: inline-block; font-size: 85% }// top:-300px;}
-.toc * { padding-left: 0.5em; counter-reset: item; list-style-type: none; font-weight: 400;  }
-
-hr.topic { border-top: 20em; }
-
-// overwriting default behaviour of Modal Popup in Bootstrap:
-.modal-dialog { 
-    border:2px solid#999!important; border-radius: 10px!important; border-color:#94ba65!important;
-    // recolor the horizontal lines inside the modal window and more of background:
-    .modal-footer, .modal-body, .modal-header { background-color: #404040; border-color:#94ba65!important;}
-    .close       { margin-left:95%; color: #8FBC8F;  opacity: 1; }
-    .close:hover { margin-left:95%; color: #94fa55;  opacity: 1; }
+#toc>u * { // u ... IS THIS A TYPO???
+   padding-left: 0.5em;  
+   counter-reset: item; 
+   list-style-type: none; 
+   font-weight: 400; 
+   max-height:600px; 
 }
 
-div.jump { z-index: 99 !important; padding-top : 40px; }
+// sidebar toc achors: TODO CHANGE TOGGLE CLASS .toc-on 
+a#toc-active { @extend.greenbox2; font-style: italic; 
+   color:#cff !important;   font-size: 13px; font-weight: 900; }
+a#toc-inactive:hover {
+   color:#fff !important; }
 
-// modal toc
-.modal.bottom-right { right:-90%; top:30%; }
+// the following is to deal with nasty nestin of auto generated toc
+// A better solution might be to assign classes via js and apply style that way.
+#toc>ul { padding-left: 0; }                  // everything below is in this ul
+ul>li>a#toc-inactive {                        // h1
+   color:#ffffd0 !important; font-size: 14px; font-weight: 300; line-height: 220%;
+}
+#toc>li>a#toc-inactive {                      // h1
+   color:#ffffd0 !important; font-size: 13px; font-weight: 300; line-height: 215%;
+}
+ul>li>ul>li>a#toc-inactive {                  // h2 
+   color:#d0dfaa !important; font-size: 12px; font-weight: 250; line-height: 210%;
+}
+ul>li>ul>li>ul>li>a#toc-inactive {            // h3
+   color:#b0bfaa !important; font-size: 12px; font-weight: 250; line-height: 190%;
+}
+ul>li>ul>li>ul>li>ul>lia#toc-inactive {       // h4 MMMAAAAJOR TYPO
+   color:#b0bfaa !important; font-size: 12px; font-weight: 1750;line-height: 180%;
+}
+ul>li>ul>li>ul>li>ul>>li>ul>lia#toc-inactive { // h5 MMMAAAAJOR TYPO
+   color:#b0bfaa !important; font-size: 12px; font-weight: 100; line-height: 170%;
+}
 
-.center-text { position:relative!important; text-align:center!important;} // both in modal and directory page
-
-// html overrides
-// hr       { margin-left: 0; max-width:60%; }
-[class*="span"] { float: left; margin-left: 20px;}
 
 
-// PARENT CLASSES:
+
+/////  PARENT CLASSES  /////////////////////////////////////////////////////////
 
 .codeblock { @extend.mono; color:#cff; background-color: #444; white-space: pre; overflow: scroll; 
-          font-size:14px; tab-size: 3; display: inline-block; // for code boxes 
+        font-size:14px; tab-size: 3; display: inline-block; // for code boxes 
 }
 .in-p-code { @extend.mono; color: #cff; background-color: #444;  // for in-text code
-          tab-size: 3;  
+        tab-size: 3;  
 }
 .mono { font-family: Monaco, Courier New, monospace; }
-
 
 .greenbox  { border:1px solid#999; border-color:#94ba65;white-space: pre-wrap; overflow: scroll; }
 .greenbox2 { border:1px solid#999; border-color:#670;white-space: pre-wrap; overflow: scroll; }
 
-.trans-250ms { // CSS Transition 
-    -webkit-transition: background .25 ease-in-out, border .25 ease-in-out;
-       -moz-transition: background .25 ease-in-out, border .25 ease-in-out;
-        -ms-transition: background .25 ease-in-out, border .25 ease-in-out;
-         -o-transition: background .25 ease-in-out, border .25 ease-in-out;
-            transition: background .25 ease-in-out, border .25 ease-in-out;
+
+
+
+// OF LITTLE CONCERN ///////////////////////////////////////////////////////////
+
+//  UNUSED CUSTOM CLASSES W/ POTENTIAL
+
+.jr-green-bg   { background-color: #606F60;  }
+.dark-bg-g     { background-color: #404347;  }
+
+hr.topic       { border-top: 20em; } 
+div.jump       { padding-top: 40px; z-index: 99 !important; }
+
+.thin-text     { font-weight: 200!important; }
+.border-orange { outline: 1px solid orange;  }
+.border-red    { outline: 1px solid red;     }
+.border-green  { outline: 1px solid #20f030; }
+
+
+
+//  SLATED FOR DELETION
+
+// BOOTSTRAP ADD-ON CLASSES
+.btn-large { @extend.trans-250ms; padding: 18px 28px; margin-bottom: 30px;
+             font-size: 12px; line-height: normal; 
+}
+.btn-xlarge { @extend.trans-250ms; padding: 18px 28px; margin-bottom: 30px;
+             font-size: 14px; line-height: normal; 
+}
+.btn-ghost { @extend.trans-250ms; 
+             background: transparent!important; color: #ffffd0 !important; 
+   &:hover { background-color: #444949 !important; } 
+}
+.btn-ghosty{ @extend.trans-250ms; 
+             background-color: #444 !important; color: #ffffd0!important; 
+   &:hover { background-color: #444949!important; } 
+   
+}
+.trans-250ms { // CSS Transition (only used as parent class. see above)
+   -webkit-transition: background .25 ease-in-out, border .25 ease-in-out;
+      -moz-transition: background .25 ease-in-out, border .25 ease-in-out;
+      -ms-transition: background .25 ease-in-out, border .25 ease-in-out;
+       -o-transition: background .25 ease-in-out, border .25 ease-in-out;
+         transition: background .25 ease-in-out, border .25 ease-in-out;
 }
 
+
+
+/////  THE GRAVEYARD  //////////////////////////////////////////////////////////
 /*
- * for syntax highlighter
- * require syntax-highlighter-rails/shCore
- * require syntax-highlighter-rails/shThemeDefault
+
+//for syntax highlighter:
+require syntax-highlighter-rails/shCore
+require syntax-highlighter-rails/shThemeDefault
 
 #banner {  // for titles (alternative to bootstrap well and jumbotron)
-    position: relative; border-style: outset;  border-radius: 10px; border-width: 2px; 
-    margin-bottom: 50px; height: 104px; 
-    border-color: #44c19b #45b0a1; color: #ffffd0; background-color: #444!important;
-    &:hover { background-color: #444949!important; }
-    
-    img{margin-left: -30px;border-top-left-radius: 10px;border-bottom-left-radius:10px;} 
-    p  {margin-left: 25%; &:hover { color:#e6ffd6; }
-        font-size: 150%; font-weight: 900; text-align: center; line-height: 90%;
-    }
+   position: relative; border-style: outset;  border-radius: 10px; border-width: 2px; 
+   margin-bottom: 50px; height: 104px; 
+   border-color: #44c19b #45b0a1; color: #ffffd0; background-color: #444!important;
+   &:hover { background-color: #444949!important; }
+   
+   img{margin-left: -30px;border-top-left-radius: 10px;border-bottom-left-radius:10px;} 
+   p  {margin-left: 25%; &:hover { color:#e6ffd6; }
+      font-size: 150%; font-weight: 900; text-align: center; line-height: 90%;
+   }
 }
 
 // BOOTSTRAP CLASS OVERRIDES
@@ -217,11 +263,26 @@ div.jump { z-index: 99 !important; padding-top : 40px; }
 .navbar-brand { padding-top: 0px; margin-top:-3px;padding-right: 0px;border-right: 0px;margin-right: 0px;}
 .navbar-left  { margin-left: 2%!important;} // jr.com has  margin-top: 0px;        
 .navbar-center {  
-    position:fixed; display: inline-block; margin-left:auto;margin-right:auto;text-align: center;
+   position:fixed; display: inline-block; margin-left:auto;margin-right:auto;text-align: center;
 }
 .navbar-right { float: right!important; height: 100%;margin-right: 1%!important;} // jr.com has  margin-top: 0px;        
 // disable navbar collapse 
 .navbar-collapse.collapse           { display: block!important;      }
 .navbar-nav>li, .navbar-nav         { float: left!important;         }
+
+modal toc
+.modal.bottom-right { right:-90%; top:30%; } 
+
+.nonwell       { color: #94ba65 !important; background: transparent !important;   } 
+.jr-green      { color: #94ba65; }
+.bluish        { color: #bbddee; }
+
+.centered-div  { margin-left:auto!important; margin-right:auto!important; }
+
+.cling-left {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+  border-left: 0 !important;
+}
 
 */

@@ -1,7 +1,23 @@
 Rails.application.routes.draw do
-  
-  root 'md#show'
 
+  root 'md#route'  
+  get 'md/full'
+  get 'md/side'
+  get 'md/toc'
+  get 'md/top'
+
+  
+  get '/stories', to: redirect('/posts')
+  
+  get 'pages/home'
+  get 'pages/about'
+  get 'pages/resume'
+  get 'pages/portfolio'
+  get 'pages/admin'
+  get 'pages/display'
+  get 'pages/welcome'
+  get 'pages/render_erb'
+  
   # root 'outlined#show'
   
   # The priority is based upon order of creation: first created -> highest priority.

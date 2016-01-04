@@ -71,6 +71,7 @@ $( document ).ready(function() {
 });// END document.ready
 
 /******************************************************************************/
+// TODO CHANGE TO TOGGLECLASS .toc-on 
 
 function pageLoadFromFromHash () 
 {
