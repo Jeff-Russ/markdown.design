@@ -7,6 +7,7 @@ class MdController < ApplicationController
     elsif request.params.key? :side then render "side"
     elsif request.params.key? :top  then render "full"
     elsif request.params.key? :toc  then render "toc"
+    else  render "toc"
     end
   end
   

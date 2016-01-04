@@ -7,11 +7,11 @@ require 'nokogiri'
 require 'open-uri'
 require "erb"
 require 'ostruct'
-  
+=end
 module DocHelper
 
   def render_doc params
-    
+=begin    
     # check the five different input types strings prepend the domain names:
     if params.key? :file
       path = params[:file]
@@ -105,7 +105,6 @@ module DocHelper
     end
     
   return livedocs
+=end
   end
 end
-
-=end
