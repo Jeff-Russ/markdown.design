@@ -207,6 +207,10 @@ function commitNewPosition (page, section)
 	var nextSection = $(currentSectionId).nextAll('.section').attr('id');
 
 	$sectionBtn.text(section);
+	
+	$("#prev-btn").attr('href', "#"+prevSection)
+	$("#next-btn").attr('href', "#"+nextSection)
+	$debugL.text($("#prev-btn").attr('href'))
 }
 
 /******************************************************************************/
