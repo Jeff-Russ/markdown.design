@@ -71,8 +71,6 @@ $( document ).ready(function() {
 	$(window).on("scroll", findNewPosition);  // add scroll listener on content
 	// $(window).scrollEnd(tocScroller(), 1000);
 	$('a[href^="#"]').on('click', onTocClick);  // add click listener on toc
-	$('#prev-btn').on('click', gotoPrev());
-	$('#next-btn').on('click', gotoNext());
 	
 	$(window).scroll(function() {
 	    clearTimeout($.data(this, 'scrollTimer'));
@@ -102,20 +100,6 @@ $( document ).ready(function() {
 });// END document.ready
 
 /******************************************************************************/
-function gotoPrev()
-{
-	var $active = $("#toc-active");
-	var id = $active.prev('a').attr("href");
-	window.location.hash = id
-	$debugL.text(id)
-}
-function gotoNext()
-{
-	var $active = $("#toc-active");
-	var id = $active.next('a').attr("href");
-	window.location.hash = id
-	$debugL.text(id)
-}
 
 // TODO CHANGE TO TOGGLECLASS .toc-on 
 
@@ -148,9 +132,6 @@ function pageLoadFromFromHash ()
 		var $notNextSection = $currentSection.nextAll('.section')
 		var $nextSection    = $notNextSection.nextAll('.section')
 		var nextHash = '#'  + $nextSection.attr('id')
-		
-		$('#prev-btn').attr('href', prevHash)
-		$('#next-btn').attr('href', nextHash)
 		
 	// intial load without url hash:
 	} else {
@@ -224,9 +205,7 @@ function commitNewPosition (page, section)
 	var prevSection = $(currentSectionId).prevAll('.section').attr('id');
 	if (prevSection == undefined) { prevSection =  'toc_0'; };
 	var nextSection = $(currentSectionId).nextAll('.section').attr('id');
-	
-	$('#prev-btn').attr('href','#'+prevSection);//.text(prevSection);
-	$('#next-btn').attr('href','#'+nextSection);//.text(nextSection);
+
 	$sectionBtn.text(section);
 }
 
@@ -236,7 +215,7 @@ var currentScroll;
 function tocScroller() 
 {
 	
-	if (tocFollow)  
+	if (tocFollow)  // disabled for now
 	{
 		
 		var activeElement = document.getElementById("toc-active");
@@ -258,8 +237,10 @@ function tocScroller()
 		
 			$('#sidebar').animate({ scrollTop: offset}, 300);
 			currentScroll = offset
+			// $debugR.text(currentScroll + ' '  + activePos + " / " + sidebarHeight ).delay(1000)
 		} 
 		else 
+			// $debugR.text(currentScroll + ' '  + activePos + " / " + sidebarHeight ).delay(1000)
 			$tocElem.css('margin-top', 0);
 			currentScroll = offset
 	} else {
