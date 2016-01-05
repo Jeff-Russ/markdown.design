@@ -7,8 +7,10 @@
 /******************************************************************************/
 
 // global vars: 
-var $tocElem		// the able of contents element
+var $tocElem		// the table of contents element
 var $links;			// links in table of contents sidebar to headers
+var $debugL 
+var $debugR 
 var $toc_0; 		// highest <a> in toc
 var topOffset;		// height of navbar on top of page
 var pageName;	   // get page name from markdown comment 
@@ -21,9 +23,26 @@ var topSection;   // the first element in toc which points to top of page
 
 var $prevActive;
 
-var tocFollow;
+var activeElement
+var activePos 
+var sidebarHeight
+var maxOffset
+
+var tocFollow = true;
 
 window.onhashchange = function() {  setTimeout(pageLoadFromFromHash(), 400); }
+
+// jQuery extension call "callback" after scrolling stops for "timout" ms.
+$.fn.scrollEnd = function(callback, timeout) {          
+  $(this).scroll(function(){
+    var $this = $(this);
+    if ($this.data('scrollTimeout')) {
+      clearTimeout($this.data('scrollTimeout'));
+    }
+    $this.data('scrollTimeout', setTimeout(callback,timeout));
+  });
+};
+
 
 /******************************************************************************/
 
@@ -31,6 +50,8 @@ $( document ).ready(function() {
 	
 	// initialize global vars:
 	$tocElem    = $('#toc');
+    $debugL     = $('#debug-l');
+    $debugR     = $('#debug-r');
 	$links      = $tocElem.find('a');
 	$toc_0      = $('a[href^="#toc_0"]'); 
 	topOffset   = $('#topbar').outerHeight(false);
@@ -46,31 +67,56 @@ $( document ).ready(function() {
 	// make all toc <a> id='inactive'
 	$links.attr('id', 'toc-inactive')
 	
-	
 	// add handlers:
-	$(document).on("scroll", findNewPosition);         // add scroll listener on content
+	$(window).on("scroll", findNewPosition);  // add scroll listener on content
+	// $(window).scrollEnd(tocScroller(), 1000);
 	$('a[href^="#"]').on('click', onTocClick);  // add click listener on toc
+	$('#prev-btn').on('click', gotoPrev());
+	$('#next-btn').on('click', gotoNext());
 	
-	pageLoadFromFromHash() 
+	$(window).scroll(function() {
+	    clearTimeout($.data(this, 'scrollTimer'));
+	    $.data(this, 'scrollTimer', setTimeout(function() {
+	        // do something
+	        
+	        tocScroller();
+	    }, 500));
+	});
 	
-	// this seems to be inverted. i disabled it. FIX IT:
-	// $('#toc-follow-btn').on('click', function(){
-	// 	$(this).toggleClass('on');
-	// 	if ($(this).hasClass('on')) {
-	// 		tocFollow = true;
-	// 		$('#toc-follow-img, #toc-follow-txt').css('opacity','.9');
-	// 		findNewPosition()
-	// 	} else {
+	$('#toc-follow-btn').on('click', function(){
+		$(this).toggleClass('on');
+		if ($(this).hasClass('on')) {
+			tocFollow = true;
+			$('#toc-follow-img, #toc-follow-txt').css('opacity','.9');
+			findNewPosition()
+		} else {
 			tocFollow = false;
 			$('#toc-follow-img, #toc-follow-txt').css('opacity','.4');
-	// 		tocScroller() 
-	// 	}
-	// });
+			tocScroller() 
+		}
+	});
+	
+	pageLoadFromFromHash() 
 	
 	
 });// END document.ready
 
 /******************************************************************************/
+function gotoPrev()
+{
+	var $active = $("#toc-active");
+	var id = $active.prev('a').attr("href");
+	window.location.hash = id
+	$debugL.text(id)
+}
+function gotoNext()
+{
+	var $active = $("#toc-active");
+	var id = $active.next('a').attr("href");
+	window.location.hash = id
+	$debugL.text(id)
+}
+
 // TODO CHANGE TO TOGGLECLASS .toc-on 
 
 function pageLoadFromFromHash () 
@@ -144,7 +190,7 @@ function onTocClick (e)          // e == object that raised the event
 function findNewPosition() {
 	var scrollPosition = $(document).scrollTop(); // distace from top
 	// var scrollPosition =  $('#body').offset().top;
-	
+	// $debugL.text("looking...")
 	// Iterate all <a> descendant of <nav> (the links to locations)
 	$links.each(function () { 
 		var $currentLink = $(this)
@@ -156,13 +202,14 @@ function findNewPosition() {
 			$links.attr('id', 'toc-inactive');
 			$currentLink.attr('id', 'toc-active');        //  and add active to match
 			$prevActive = $currentLink;
-			tocScroller() // reposition table of contents
+			// tocScroller() // reposition table of contents
 			
 			// set topbar buttons:
 			var hash = $currentLink.attr('href')
 			var $currentSection = $(hash).prevAll('.section')
 			var currentTopic = $currentSection.attr('id')
 			commitNewPosition(pageName, currentTopic);
+			$debugL.text("found match.")
 		}
 	});
 }
@@ -184,30 +231,41 @@ function commitNewPosition (page, section)
 }
 
 /******************************************************************************/
-
+var currentScroll;
 // update scrolling of toc by position in text:
 function tocScroller() 
 {
 	
-	if (tocFollow)  // disabled for now
+	if (tocFollow)  
 	{
+		
 		var activeElement = document.getElementById("toc-active");
 		var activePos     = activeElement.offsetTop;
 		var sidebarHeight = document.getElementById('sidebar').offsetHeight;
-		var offset        = activePos - sidebarHeight * 0.2
+		var sidebarUpper  = sidebarHeight * 0.4;
+		var offset        = activePos - sidebarUpper;
 		var maxOffset     = tocHeight - sidebarHeight;
+
+		$debugR.text(currentScroll + ' ' + activePos + " / " + sidebarHeight )
 		
 		if (offset > maxOffset) { offset = maxOffset; }
 		else                    { offset = offset;    }
 		
 		var correction = -offset;
 		
-		if (activePos > sidebarHeight * .95)
-			$tocElem.animate({ marginTop: correction }, 300);
+		if ((activePos > sidebarHeight * .95) || 
+		    (currentScroll < activePos + sidebarUpper) ) {
+		
+			$('#sidebar').animate({ scrollTop: offset}, 300);
+			currentScroll = offset
+		} 
 		else 
 			$tocElem.css('margin-top', 0);
+			currentScroll = offset
 	} else {
-		// $tocElem.css('margin-top','0');  // disabled for now
+		$tocElem.height("0px")
+		currentScroll = 0
 	}
 }
+
 /******************************************************************************/

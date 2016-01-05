@@ -2,43 +2,49 @@
 <!--</head>  -->
 
 <!-- BEGIN NAVBAR (non-collapsing)-->
+
 <nav id='topbar' class="navbar navbar-inverse navbar-static-top blacknav" role="navigation" id='topbar'>
 	
-	<button class="btn navbar-btn btn-greenwell" style="margin-left:4%;">
+	<button class="btn navbar-btn btn-greenwell" style="margin-left:4%; width: 12%">
 		<a href='' class="home-url">
 			<img style="max-width:50px;" class='logo-url'src=""/>
 		</a>
 	</button>
 	
 	<!-- modal 1 - select a page (group of pages - controller )-->
-	<button type='button' data-toggle='modal'  
-			class='btn navbar-btn btn-greenwell ' data-target='#modal-page-menu'>
+	<button type='button' data-toggle='modal' data-target='#modal-page-menu'
+			class='btn navbar-btn btn-greenwell ' style="width: 12%">
 		<p style="margin:1px"id='page-btn' >page</p>
 	</button>
 		
 	<!-- < prevous section button-->
-	<button type='button' class="btn navbar-btn btn-greenwell hide">
+	<button type='button' class="btn navbar-btn btn-greenwell" style="width: 12%">
+		<a href='' id='prev-btn'>
 		<img style="margin: 0px" src="https://shared-img-res.s3.amazonaws.com/icons/left_icon_grn.png"/>
+		</a>
 	</button>
 	
 	<!--modal 2 - select a topic (jump to id on page)-->
-	<button type='button' data-toggle='modal'  
-			class="btn navbar-btn btn-greenwell " data-target='#modal-section-menu'>
+	<button type='button' data-toggle='modal' data-target='#modal-section-menu'
+			class="btn navbar-btn btn-greenwell "  style="width: 12%">
 		<p style="margin:1px"id='section-btn' > section</p>
 	</button>
 	
 	<!-- > next section button-->
-	<button type='button' class="btn navbar-btn btn-greenwell hide" >
+	<button type='button' class="btn navbar-btn btn-greenwell" style="width: 12%" >
+		<a href='' id='prev-btn'>
 		<img style="margin:0px" src="https://shared-img-res.s3.amazonaws.com/icons/right_icon_grn.png"/>
+		<a>
 	</button>
 	
 	<button type='button' id='toc-btn' 
-			class='btn navbar-btn btn-greenwell '>
+			class='btn navbar-btn btn-greenwell' style="width: 12%">
 		<img style="margin:1px" src="https://shared-img-res.s3.amazonaws.com/livepage_heroku/toc_icon_h20.png">
 		</img>
 	</button>
 	
-	<button type='button' class="btn navbar-btn btn-greenwell" id='toc-follow-btn'>
+	<button type='button' id='toc-follow-btn'
+			class="btn navbar-btn btn-greenwell" style="width: 12%">
 		<img id='toc-follow-img' style="height:25px; margin:-3px;"
 			src="https://shared-img-res.s3.amazonaws.com/livepage_heroku/auto-y_icon_33_grn.png">
 		</img>
@@ -106,10 +112,14 @@
 </div>
 <!-- END MODALS -->
 
+
 <body class="jr-dark-body ">
 	
+<div class="border-orange" id="debug-l" style='position:fixed; margin-top:4%; margin-left:70%; z-index:999' ></div>
+<div class="border-red" id="debug-r" style='position:fixed; margin-top:4%; margin-left:80%; z-index:999 '></div>
+	
 	<div id="sidebar">
-		<div class="toc" id="toc">	
+		<div class="toc" id="toc">
 			<%= @livedocs[:toc] %> 
 		</div>
 	</div> 
