@@ -221,7 +221,7 @@ function tocScroller()
 		var activeElement = document.getElementById("toc-active");
 		var activePos     = activeElement.offsetTop;
 		var sidebarHeight = document.getElementById('sidebar').offsetHeight;
-		var sidebarUpper  = sidebarHeight * 0.4;
+		var sidebarUpper  = sidebarHeight * 0.3;
 		var offset        = activePos - sidebarUpper;
 		var maxOffset     = tocHeight - sidebarHeight;
 
@@ -239,13 +239,13 @@ function tocScroller()
 			currentScroll = offset
 			// $debugR.text(currentScroll + ' '  + activePos + " / " + sidebarHeight ).delay(1000)
 		} 
-		else 
-			// $debugR.text(currentScroll + ' '  + activePos + " / " + sidebarHeight ).delay(1000)
-			$tocElem.css('margin-top', 0);
-			currentScroll = offset
-	} else {
-		$tocElem.height("0px")
-		currentScroll = 0
+	// 	else 
+	// 		// $debugR.text(currentScroll + ' '  + activePos + " / " + sidebarHeight ).delay(1000)
+	// 		$tocElem.css('margin-top', 0);
+	// 		currentScroll = offset
+	// } else {
+	// 	$tocElem.height("0px")
+	// 	currentScroll = 0
 	}
 }
 

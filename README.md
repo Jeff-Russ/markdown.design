@@ -34,8 +34,10 @@ It's eeeeeeeeeeasy!
 <img class='github-only' 
 src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/LivePage-md_preview.png'>
 
-Interested? Here is it's [home](http://livepage-md.herokuapp.com/) where you can
+Interested? Here is it's [home](https://private-jeff-russ.c9users.io/?file=README) where you can
 view this very same README.md with it's rendering.
+
+LivePage-md is possible because of the RedCarpet Gem.
 
 ### Instructions
 
@@ -50,8 +52,8 @@ on that, refer to my [Ruby on Rails How-To](http://www.howto.jeffruss.com/?aws=j
 
 For each page you will append a parameter to the URL in one of the formats:  
     
-`?aws=AMAZONAWS-BUCKET-NAME.FILENAME`
-`?github=USERNAME/PROJECTNAME/BRANCH/FILENAME`
+`?aws=AMAZONAWS-BUCKET-NAME.FILENAME`  
+`?github=USERNAME/PROJECTNAME/BRANCH/FILENAME`  
 `?https=ADDRESS-EXCLUDING-HTTPS://`  
 `?http=ADDRESS-EXCLUDING-HTTP://`  
 `?url=FULL-ADDRESS`  
@@ -69,7 +71,7 @@ reflect this.
   
 Using the other formats would provide you with addresses like these:
 
-`http://livepage-md.herokuapp.com/?github=Jeff-Russ/LivePage-md/master/README.md
+`http://livepage-md.herokuapp.com/?github=Jeff-Russ/LivePage-md/master/README.md`
 `http://livepage-md.herokuapp.com/?https=/www.example/sample.md`  
 `http://livepage-md.herokuapp.com/?http=/www.example/sample.md`  
 `http://livepage-md.herokuapp.com/?url=https://www.example/sample.md` 
@@ -175,20 +177,20 @@ When I am ready I'll copy all of the _file.md to file.md and save it. Done.
 ### Known Issues & General Updates
 
 **Current Issues**
-
-1. Autoscroll setting is backwards and just bad. I disabled it for now
-2. Topbar buttons and text are too big on non-mobile
+1. strange grey bar in code blocks appears on Android
 
 **Fixed/Added in this most recent commit** 
 
-1. li > pre > code cut off in no-toc mode FIXED
-2. add query string parameter for github DONE
-3. add new layout options and created short url's for them that use query strings DONE
+~~1. Autoscroll setting is backwards and just bad. I disabled it for now~~ FIXED
+~~2. li > pre > code cut off in no-toc mode~~ FIXED
+~~3. add query string parameter for github~~ DONE
+~~4. add new layout options and created short url's for them that use query strings~~ DONE
+~~5. Topbar buttons and text are too big on non-mobile~~
+~~2. implement left and right buttons~~ DONE
 
 **To Do**
 
 ~~1. add html and erb support~~ PLANS CANCELLED FOR NOW
-2. implement left and right buttons
-3. remove grey bar in code blocks
-4. give TOC adaptive top margin depending on height of contents.
-5. give topbar adaptive height depending on device.
+2. remove grey bar in code blocks
+3. give TOC adaptive top margin depending on height of contents.
+4. give topbar adaptive height depending on device.  -- might not be needed

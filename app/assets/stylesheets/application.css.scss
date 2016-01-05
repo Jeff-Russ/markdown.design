@@ -124,7 +124,7 @@ xmp { @extend.codeblock; @extend.greenbox;
 //  TOC (contents of #sidebar)
 
 // note: why have both .toc and #toc?
-div.toc { margin-top: 20%; }
+div.toc { margin-top: 15%; }
 .toc * { 
    padding-left: 0.5em; 
    counter-reset: item; 

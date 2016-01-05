@@ -6,17 +6,7 @@ Rails.application.routes.draw do
   get 'md/toc'
   get 'md/top'
 
-  
-  get '/stories', to: redirect('/posts')
-  
-  get 'pages/home'
-  get 'pages/about'
-  get 'pages/resume'
-  get 'pages/portfolio'
-  get 'pages/admin'
-  get 'pages/display'
-  get 'pages/welcome'
-  get 'pages/render_erb'
+
   
   # root 'outlined#show'
   
