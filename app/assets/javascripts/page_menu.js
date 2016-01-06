@@ -2,14 +2,15 @@
 //= require jquery_ujs
 //= comments.js 
 
-
-$( document ).ready(function(){
+$( document ).ready(function()
+{
     setTimeout(page_menu, 200);
     
 	var pageMenu = $('#page-menu');
 	var root = location.protocol + '//' + location.host;
 	
-    var homeUrl = $('#home-url').comments().html();// get home url from markdown comment
+	// get home url from markdown comment:
+    var homeUrl = $('#home-url').comments().html();
 	pageMenu.append("\
 		<div class='col-xs-4 centered-div'>\
 			<a class='dismiss btn btn-xlarge btn-block btn-warning \
@@ -18,7 +19,6 @@ $( document ).ready(function(){
 				</a>\
 		</div>");
 		
-
 	function page_menu() {
 		var $pages = $('.page-menu');
 		var numOfPages = $pages.size();
@@ -27,31 +27,19 @@ $( document ).ready(function(){
 		    pageMenu.prepend("<div class='col-xs-4'>");
 		} else if (numOfPages == 1 ) {
 			pageMenu.prepend("<div class='col-xs-2'>");
-		}  else { 
+		} else { 
 		}
-		
 		var btnColors = ["info","success","warning","primary","danger"];
 		var i = 0;
 		$pages.each(function () { 
 			pageMenu.append("\
 				<div class='col-xs-4 centered-div'>\
-					<a class='dismiss btn btn-xlarge btn-block btn-" + btnColors[i] + " \
+					<a class='dismiss btn btn-xlarge btn-block btn-"+btnColors[i]+" \
 					   btn-ghost modal-link' \
-						href='"+ $(this).comments().html() +"'>" + $(this).attr('id') + "\
+						href='"+ $(this).comments().html()+"'>"+ $(this).attr('id')+"\
 						</a>\
 				</div>")	
 			i = ++i % 5;
 		})
 	}
-	
 });// END document.ready
-
-
-
-
-
-
-
-
-
-

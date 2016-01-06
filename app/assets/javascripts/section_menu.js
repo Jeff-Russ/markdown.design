@@ -2,9 +2,9 @@
 //= require jquery_ujs
 //= comments.js 
 
-
-$( document ).ready(function(){
-    setTimeout(section_menu, 1000);
+$( document ).ready(function()
+{   
+	setTimeout(section_menu, 1000);
     setTimeout(close_modal, 100);
 	 
 	var sectionMenu = $('#section-menu')
@@ -26,7 +26,7 @@ $( document ).ready(function(){
 		    sectionMenu.prepend("<div class='col-xs-4'>");
 		} else if (numOfSections == 1 ) {
 			sectionMenu.prepend("<div class='col-xs-2'>");
-		}  else {
+		} else {
 			
 		}
 		var btnColors = ["info","success","primary","warning","danger"];
@@ -34,29 +34,17 @@ $( document ).ready(function(){
 		$sections.each(function () { 
 			sectionMenu.append("\
 				<div class='col-xs-4'>\
-					<a class='dismiss btn btn-xlarge btn-block btn-" + btnColors[i] + " \
+					<a class='dismiss btn btn-xlarge btn-block btn-"+btnColors[i]+" \
 					   btn-ghost modal-link' \
-						href='#" + $(this).attr('id') + "'>" + $(this).attr('id') + "\
+						href='#"+$(this).attr('id')+"'>"+ $(this).attr('id')+"\
 						</a>\
 				</div>")	
 			i = ++i % 5;
 		})
 		$('.dismiss').on('click', close_modal);
 	}
-	
-	
 	function close_modal() { 
 		$( "button[data-dismiss='modal']").trigger("click")
 	}
     
 });// END document.ready
-
-
-
-
-
-
-
-
-
-

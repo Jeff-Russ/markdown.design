@@ -20,7 +20,7 @@
 $( document ).ready(function() 
 {
 	
-var isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/);
+	var isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/);
 
 	showTOC(!isMobile && $(window).width() >= 630)
 	
@@ -40,6 +40,14 @@ var isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/
 	
 	$('.home-url').attr('href', homeUrl)
 	$('.logo-url').attr('src', logoUrl)
+	
+/* font size *******************************************************************/
+
+	// if (isMobile) {
+	// 	$('.markdown').attr('font-size','23px!importan')
+	// } else { 
+	// 	$('.markdown').attr('font-size','30px!important')
+	// }
 
 
 /*  google analytics  *********************************************************/
@@ -75,8 +83,6 @@ function showTOC(boolean)
 		$('.topbar-btn-6-7').css('left', '49%');
 		$('.topbar-btn-7-7').css('left', '58%');
 		
-		
-		// $('#debugger').text('on');
 	} else {
 		$('#reader').css('width', '96%');
 		$('#sidebar').css('display', 'none')
@@ -91,37 +97,5 @@ function showTOC(boolean)
 		$('.topbar-btn-5-7').css('left', '56%');
 		$('.topbar-btn-6-7').css('left', '69%');
 		$('.topbar-btn-7-7').css('left', '82%');
-		
-		// $('#debugger').text('off');
-	}
+			}
 }
-		
-/*
-function resChangeEvt() 
-{
-	var width = screen.width,
-		height = screen.height;
-	setInterval(function () {
-		if (screen.width !== width || screen.height !== height) {
-			width = screen.width;
-			height = screen.height;
-			$(window).trigger('resolutionchange');
-		}
-	}, 50);
-}
-$(window).bind('resolutionchange', doSomething())
-*/
-/*
-function getPPI()
-{
-	var div = document.createElement("div");// create an empty element
-	div.style.width="1in";                  // append it to the body
-	var body = document.getElementsByTagName("body")[0];
-	body.appendChild(div);
-	
-	// read the computed width:
-	var ppi = document.defaultView.getComputedStyle(div, null).getPropertyValue('width');
-	body.removeChild(div);     // remove it again
-	return parseFloat(ppi);    // and return the value
-}
-*/
