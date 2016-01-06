@@ -36,7 +36,7 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
 
 // CUSTOM CLASSES for general use 
 
-.jr-dark-body { color: #b0bfaa; background-color: #404040; } 
+.jr-dark-body { color: #b0bfaa; background-color: #333232; } 
 .jr-dark-bg   { background-color: #404040; } 
 .black-text   { color: #444; } // used in boostrap howto md
 .blacknav     { color: #ffffd0!important; background-color:#333333!important; 
@@ -52,19 +52,6 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
 .nav-spacer   { padding-top: 90px;  } // todo: replace
 .nav-spacer-xl{ padding-top: 100px; } // todo: replace
 
-
-
-// BUTTONS for general use 
-
-.navbar-btn { height: 79%; margin-left: 1%; text-align:center!important; z-index: 600;}
-.btn:focus, .btn:active, .navbar-btn:focus, .navbar-btn:active {  
-   outline:none!important; // get rid of the blue glow on previously clicked buttons
-   color:#94ba65; }
-.text-overflow-center {
-    margin-left: -100%;
-    margin-right: -100%;
-    text-align: center;
-}
 
 
 //  BOOTSTRAP CLASS OVERRIDES for general use
@@ -95,20 +82,38 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
 // TOPBAR
   
 #topbar { position:fixed; z-index: 400;
-   height:10%; padding: 0.1%; margin-left: 0.5%; margin-right: 1%; width:67%;
+   height: 68px; padding: 0.1%; margin-left: 0.5%; margin-right: 1%; width:67%;
    color: #ffffd0!important;       background-color:#333333!important; 
-   border:2px solid#999!important; border-radius: 10px!important; 
-   border-color:#94ba65!important;
+   border:1px solid#999!important; border-radius: 10px!important; 
+   border-color:#670!important;
 }
-.btn-greenwell       { color:#94ba65; background-color:#3e423e!important; border-color:#94ba65; }
+
+// BUTTONS 
+
+.topbar-btn {position:fixed;  height: 50px; width: 8%; margin-top: 9px; 
+   text-align:center!important; font-size: 1.2vmax; z-index: 600;
+}
+.btn:focus, .btn:active, .topbar-btn:focus, .topbar-btn:active {  
+   outline:none!important; // get rid of the blue glow on previously clicked buttons
+   color:#94ba65; }
+.text-overflow-center {
+    margin-left: -100%;
+    margin-right: -100%;
+    text-align: center;
+}
+
+
+.btn-greenwell       { color:#94ba65; background-color:#3e423e!important; border-color:#94ba65;
+   border:1px solid#999!important; border-radius: 8px!important; 
+   border-color:#94ba65!important;}
 .btn-greenwell:hover { color:#94ca55; background-color:#444949!important; border-color:#94ca55; }
 
-.markdown    {font-size: 16px; }
-.markdown>h1 {font-size: 58px;font-weight: 900;color:#ffffd0;margin-left: 1%;}
-.markdown>h2 {font-size: 37px;font-weight: 300;color:#cdb;   margin-left: 2%;}
-.markdown>h3 {font-size: 30px;font-weight: 100;color:#cdb;   margin-left: 3%;}
-.markdown>h4 {font-size: 24px;font-weight: 100;color:#cdb;   margin-left: 4%;}
-.markdown>h5 {font-size: 20px;font-weight: 100;color:#cdb;   margin-left: 5%;}
+.markdown    {font-size: 2vmin; }
+.markdown>h1 {font-size: 6vmin;font-weight: 900;color:#ffffd0;margin-left: 1%;}
+.markdown>h2 {font-size: 6vmin;font-weight: 300;color:#cdb;   margin-left: 2%;}
+.markdown>h3 {font-size: 5vmin;font-weight: 100;color:#cdb;   margin-left: 3%;}
+.markdown>h4 {font-size: 4vmin;font-weight: 100;color:#cdb;   margin-left: 4%;}
+.markdown>h5 {font-size: 3vmin;font-weight: 100;color:#cdb;   margin-left: 5%;}
 .markdown>p  {              margin-right: auto;color:#b0bfaa;margin-left: 5%;}
 .markdown>p>strong         {  font-weight: 900;color:#cdb;                   }
 .markdown>ol, .markdown>ul {                                 margin-left: 2%;}
@@ -123,9 +128,9 @@ xmp { @extend.codeblock; @extend.greenbox;
 //  SIDEBAR (container for #toc
 
 #sidebar { position: fixed; overflow: scroll;
-   left: 69%; right: 1%; height: 98%; white-space: nowrap;
-   border: 2px solid #999 !important; border-radius: 10px !important;
-   border-color: #94ba65 !important; background-color: #333 !important;
+   left: 69%; right: 4%; height: 98%; white-space: nowrap;
+   border: 1px solid #999 !important; border-radius: 10px !important;
+   border-color: #670 !important; background-color: #3a3c3a !important;
 }
 
 
@@ -163,31 +168,34 @@ div.toc { margin-top: 15%; }
 }
 
 // sidebar toc achors: TODO CHANGE TOGGLE CLASS .toc-on 
-a#toc-active { @extend.greenbox2; font-style: italic; 
-   color:#cff !important;   font-size: 13px; font-weight: 900; }
+a#toc-active { border:1px solid#999; border-color:#670;border-radius: 10px!important;
+   font-style: italic; font-size: 1.6vmin; font-weight: 900; 
+   color:#7bb !important;
+   
+}
 a#toc-inactive:hover {
    color:#fff !important; }
 
 // the following is to deal with nasty nestin of auto generated toc
 // A better solution might be to assign classes via js and apply style that way.
-#toc>ul { padding-left: 0; }                  // everything below is in this ul
-ul>li>a#toc-inactive {                        // h1
-   color:#ffffd0 !important; font-size: 14px; font-weight: 300; line-height: 220%;
+#toc>ul { margin-left: 0.1%;}                  // everything below is in this ul
+#toc>ul>li>a#toc-inactive {                        // h1
+   color:#dfdfb0 !important; font-size: 1.9vmin; font-weight: 200; line-height: 190%;
 }
 #toc>li>a#toc-inactive {                      // h1
-   color:#ffffd0 !important; font-size: 13px; font-weight: 300; line-height: 215%;
+   color:#dfdfb0 !important; font-size: 1.8vmin; font-weight: 190; line-height: 180%;
 }
 ul>li>ul>li>a#toc-inactive {                  // h2 
-   color:#d0dfaa !important; font-size: 12px; font-weight: 250; line-height: 210%;
+   color:#a0ac8a !important; font-size: 1.7vmin; font-weight: 160; line-height: 170%;
 }
 ul>li>ul>li>ul>li>a#toc-inactive {            // h3
-   color:#b0bfaa !important; font-size: 12px; font-weight: 250; line-height: 190%;
+   color:#909c8a !important; font-size: 1.6vmin; font-weight: 145; line-height: 160%;
 }
-ul>li>ul>li>ul>li>ul>lia#toc-inactive {       // h4 MMMAAAAJOR TYPO
-   color:#b0bfaa !important; font-size: 12px; font-weight: 1750;line-height: 180%;
+ul>li>ul>li>ul>li>ul>li>a#toc-inactive {       // h4 MMMAAAAJOR TYPO
+   color:#909c8a !important; font-size: 1.55vmin; font-weight: 130;line-height: 150%;
 }
-ul>li>ul>li>ul>li>ul>>li>ul>lia#toc-inactive { // h5 MMMAAAAJOR TYPO
-   color:#b0bfaa !important; font-size: 12px; font-weight: 100; line-height: 170%;
+ul>li>ul>li>ul>li>ul>>li>ul>li>a#toc-inactive { // h5 MMMAAAAJOR TYPO
+   color:#909c8a !important; font-size: 1.5vmin; font-weight: 115; line-height: 140%;
 }
 
 
@@ -195,10 +203,10 @@ ul>li>ul>li>ul>li>ul>>li>ul>lia#toc-inactive { // h5 MMMAAAAJOR TYPO
 
 /////  PARENT CLASSES  /////////////////////////////////////////////////////////
 
-.codeblock { @extend.mono; color:#cff; background-color: #444; white-space: pre; overflow: scroll; 
-        font-size:14px; tab-size: 3; display: inline-block; // for code boxes 
+.codeblock { @extend.mono; color:#7bb; background-color: #393b3a; white-space: pre; overflow: scroll; 
+        font-size: 1.6vmin; tab-size: 3; display: inline-block; // for code boxes 
 }
-.in-p-code { @extend.mono; color: #cff; background-color: #444;  // for in-text code
+.in-p-code { @extend.mono; color: #7bb; background-color: #333333;  // for in-text code
         tab-size: 3;  
 }
 .mono { font-family: Monaco, Courier New, monospace; }

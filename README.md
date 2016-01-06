@@ -192,5 +192,5 @@ When I am ready I'll copy all of the _file.md to file.md and save it. Done.
 
 ~~1. add html and erb support~~ PLANS CANCELLED FOR NOW
 2. remove grey bar in code blocks
-3. give TOC adaptive top margin depending on height of contents.
-4. give topbar adaptive height depending on device.  -- might not be needed
+3. give TOC adaptive top margin depending on height of contents. 
+~~4. give topbar adaptive height depending on device.~~  -- might not be needed
