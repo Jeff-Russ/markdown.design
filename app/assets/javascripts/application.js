@@ -73,7 +73,7 @@ function showTOC(boolean)
 		$('#sidebar').css('display', 'none')
 		$('.mono').css('white-space','pre-wrap').css('overflow','initial')
 		$('#toc-btn').removeClass('on')
-		$('#topbar').css('width', '100%')
+		$('#topbar').css('width', '99%')
 		
 		// $('#debugger').text('off');
 	}
