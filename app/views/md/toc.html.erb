@@ -2,6 +2,9 @@
 <!--</head>  -->
 
 <!-- BEGIN NAVBAR (non-collapsing)-->
+
+<div class="debug"></div>
+
 <nav id='topbar' class=''>
 </nav>	
 	<button class="topbar-btn btn-greenwell topbar-btn-1-7" style="left:4%; ">
@@ -17,7 +20,7 @@
 	</button>
 		
 	<!-- < prevous section button-->
-	<a href='' id='prev-btn'>
+	<a href='' class='prev-btn'>
 	<button  class="topbar-btn btn-greenwell topbar-btn-3-7" style="left: 22%; ">
 		<img style="margin: 0px" src="https://shared-img-res.s3.amazonaws.com/icons/left_icon_grn.png"/>
 	</button>
@@ -30,7 +33,7 @@
 	</button>
 	
 	<!-- > next section button-->
-	<a href='' id='next-btn'>	
+	<a href='' class='next-btn'>	
 	<button  class="topbar-btn btn-greenwell topbar-btn-5-7" style="left: 40%; " >
 		<img style="margin:0px" src="https://shared-img-res.s3.amazonaws.com/icons/right_icon_grn.png"/>
 	</button>
@@ -38,7 +41,8 @@
 	
 	<button  id='toc-btn'  style="left: 49%; "
 			class='btn topbar-btn btn-greenwell  topbar-btn-6-7'>
-		<img style="margin:1px" src="https://shared-img-res.s3.amazonaws.com/livepage_heroku/toc_icon_h20.png">
+		<img id='toc-btn-img' style="margin:1px" 
+			src="https://shared-img-res.s3.amazonaws.com/livepage_heroku/toc_icon_h20.png">
 		</img>
 	</button>
 	
@@ -97,7 +101,7 @@
 					<div class="row spacer center-text">
 						<%= #render :file => 'layouts/home_menu' 
 						%>
-						<div id="section-menu"> 
+						<div id="section-menu">
 							<!--populated by javscript-->
 						</div>
 					</div>

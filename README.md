@@ -1,5 +1,6 @@
 
 
+
 <div id="page"      style="display: none;"><!-- LivePage-md --></div>
 <div id='home-url'  style="display: none;"><!-- https://github.com/Jeff-Russ/LivePage-md --></div>
 <div id='logo-url'  style="display: none;"><!-- https://s3.amazonaws.com/shared-img-res/JR%20logo/JR_20px_wide.png --></div>
@@ -176,21 +177,20 @@ When I am ready I'll copy all of the _file.md to file.md and save it. Done.
 
 ### Known Issues & General Updates
 
-**Current Issues**
-1. strange grey bar in code blocks appears on Android
+**Current Issues**  
+
+1. strange grey bar in code blocks appears on Android  
 
 **Fixed/Added in this most recent commit** 
 
-~~1. Autoscroll setting is backwards and just bad. I disabled it for now~~ FIXED
-~~2. li > pre > code cut off in no-toc mode~~ FIXED
-~~3. add query string parameter for github~~ DONE
-~~4. add new layout options and created short url's for them that use query strings~~ DONE
-~~5. Topbar buttons and text are too big on non-mobile~~
-~~2. implement left and right buttons~~ DONE
+1. massive overhaul of all javascript in preparation for other page formats
 
 **To Do**
 
-~~1. add html and erb support~~ PLANS CANCELLED FOR NOW
-2. remove grey bar in code blocks
+1. support other, non outlined page formats i.e. normal web page
+2. remove grey bar in code blocks  
+
+** canceled plans **
+1. add html and erb support  
+2. give topbar adaptive height depending on device.  
 3. give TOC adaptive top margin depending on height of contents. 
-~~4. give topbar adaptive height depending on device.~~  -- might not be needed

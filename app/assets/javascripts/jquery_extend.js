@@ -4,7 +4,7 @@
 //
 // NOTE: Comments are wrapped in DIV tags.
 
-jQuery.fn.comments = function( blnDeep ){
+$.fn.comments = function( blnDeep ){
 	var blnDeep = (blnDeep || false);
 	var jComments = $( [] );
 	// Loop over each node to search its children for
@@ -44,14 +44,32 @@ jQuery.fn.comments = function( blnDeep ){
 	return( jComments );
 };
 
-// THIS MAY NOT WORK (NOT BY ME):
-// jQuery extension call "callback" after scrolling stops for "timout" ms.
-// $.fn.scrollEnd = function(callback, timeout) {          
-// 	$(this).scroll(function(){
-// 		var $this = $(this);
-// 		if ($this.data('scrollTimeout')) {
-// 			clearTimeout($this.data('scrollTimeout'));
-// 		}
-// 		$this.data('scrollTimeout', setTimeout(callback,timeout));
-// 	});
-// };
+
+// call "callback" when scrolling has stopped for
+document.scrollTimeout = 500;
+// milliseconds. 
+
+$.fn.scrollEnd = function(callback) {          
+  $(this).scroll(function(){
+    var $this = $(this);
+    if ($this.data('scrollTimeout')) {
+      clearTimeout($this.data('scrollTimeout'));
+    }
+    $this.data('scrollTimeout', setTimeout(callback,document.scrollTimeout));
+  });
+};
+// TEST IT:
+// $(window).scrollEnd(function(){
+//     alert('stopped scrolling');
+	
+// });
+
+
+
+// function onReaderScroll() // UNUSED TIMEOUT FOR SCROLL LISTENER ________________
+// {
+//    clearTimeout($.data(this, 'scrollTimer'));
+//    $.data(this, 'scrollTimer', setTimeout( function() {
+//       findNewPosition();
+//    }, 500));
+// }
