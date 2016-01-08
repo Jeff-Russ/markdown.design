@@ -23,8 +23,13 @@ class MdController < ApplicationController
 			 	@livedocs[:file_path] = "http://#{params[:http]}.md"
 			 elsif params.key? :url
 			 	@livedocs[:file_path] = params[:@livedocs[:file_path] << ".md"]
+			 else
+			 	rootPath = true
+				text = File.read("README.md")
 			end
-			text = open(@livedocs[:file_path]) {|f| f.read }
+			unless 
+				rootPath then text = open(@livedocs[:file_path]) {|f| f.read }
+			end
 		end
 		
 		# LOCATE CONFIGURATION FILE AND SAVE IT TO A LOCAL VARIABLE  (conf) ######
