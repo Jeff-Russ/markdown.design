@@ -180,18 +180,15 @@ When I am ready I'll copy all of the _file.md to file.md and save it. Done.
 **Current Issues**  
 
 1. strange grey bar in code blocks appears on Android  
-2. modal will not automatically close when selection is made in "normal" md pages.
+2. ~~modal will not automatically close when selection is made in "normal" md pages.~~
 
 **Fixed/Added in this most recent commit** 
 
-1. Now un-html'ed .md docs are automatically analyzed to populate section menu, 
-   label window title, display current section and hide unused topbar buttons, 
-   thus fulfilling **To Do** numb. 1 seen below. YAY!
+1. modal now closes when selection is made.
 
 **To Do**
 
-1. ~~support other, non outlined page formats i.e. normal web page~~
-2. remove grey bar in code blocks  
+1. remove grey bar in code blocks  
 
 ** canceled plans **
 1. add html and erb support  

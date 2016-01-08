@@ -35,7 +35,6 @@ window.updateTopbar = function() {
    var sectionName;
    if (window.currHashName == undefined) {
    	var currLocInToc = window.$activeTocAnchor.text();
-   	window.debug(currLocInToc);
    	sectionName = window.tersify(currLocInToc);
    } else { sectionName = window.currHashName; }
 
@@ -130,6 +129,13 @@ window.populateModalMenus = function () {
 		$sectionMenu.append(chunk1 + window.HomeUrl + "'>" + 'Home' + "</a></div>");
 		populateBtnMenu( $sections, $sectionMenu, sectionMenuSrc );
 	}
+	
+	// Notice the .dismiss class we added above. 
+	// Below makes them also close the modal:
+	$('.dismiss').on('click', function() { 
+		$( "button[data-dismiss='modal']").trigger("click"); 
+	});
+
 	
 	function populateBtnMenu($source, $destination, menuSource) 
 	{
