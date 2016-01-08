@@ -1,7 +1,12 @@
 /* By Jeff Russ https://github.com/Jeff-Russ
-= require jquery
-= require jquery_ujs
+~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._*/
 
+//= require jquery
+//= require jquery_ujs
+//= require bootstrap-sprockets
+
+
+/*
 INTER-FILE INTERDEPENDENCIES:
     VARS SET:      window.$topViewElem      window.currHashName
                    window.prevHash          window.nextHash
@@ -151,7 +156,7 @@ window.determineSection = function() {
    window.nextHash = '#' + nextSectionName;
    
    var activeAnchorHash = '#' + activeTocId;
-   window.$activeTocAnchor = $('a[href="'+activeAnchorHash+'"]');
+   window.$activeTocAnchor = $('a[href="'+activeAnchorHash+'"]', '#toc');
 };
 
 
@@ -165,24 +170,60 @@ window.updateToc = function () {
    window.currScroll; // global only to retain value between calls (only used here)
    
    if (window.tocFollow)  
-   {
+   {  
 		var activeElement = document.getElementById("toc-active");
 		var activePos     = activeElement.offsetTop;
 		var sidebarHeight = document.getElementById('sidebar').offsetHeight;
 		var sidebarUpper  = sidebarHeight * 0.3;
 		var offset        = activePos - sidebarUpper;
 		var maxOffset     = tocHeight - sidebarHeight;
-        var tocElem       = document.getElementById("toc");
+      var tocElem       = document.getElementById("toc");
 		var tocHeight     = tocElem.height;
-
+      
 		if (offset > maxOffset) { offset = maxOffset; }
 		else                    { offset = offset;    }
 		
 		if ((activePos > sidebarHeight * .95) || 
 		    (window.currScroll < activePos + sidebarUpper) ) {
 		
-			$('#sidebar').animate({ scrollTop: offset}, 300);
+			$('#sidebar').animate( { scrollTop: offset}, 300);
 			window.currScroll = offset;
+		       
 		} 
    }
 };
+
+//  TOGGLE SIDEBAR ON AND OFF __________________________________________________
+window.toggleSidebar = function() 
+{
+	if ( window.showToc ) {
+		$('#reader').css('width', '64%').css('padding-right', '2%');
+		$('#sidebar').css('display', 'inline-block');
+		$('.mono').css('white-space','pre').css('overflow','scroll');
+		$('#toc-btn').addClass('on');
+		$('#topbar').css('width', '68%');
+		$('.topbar-btn').css('width', '8%');
+		$('.topbar-btn-1-7').css('left', '4%');
+		$('.topbar-btn-2-7').css('left', '13%');
+		$('.topbar-btn-3-7').css('left', '22%');
+		$('.topbar-btn-4-7').css('left', '31%');
+		$('.topbar-btn-5-7').css('left', '40%');
+		$('.topbar-btn-6-7').css('left', '49%');
+		$('.topbar-btn-7-7').css('left', '58%');
+		
+	} else {
+		$('#reader').css('width', '96%');
+		$('#sidebar').css('display', 'none');
+		$('.mono').css('white-space','pre-wrap').css('overflow','initial');
+		$('#toc-btn').removeClass('on');
+		$('#topbar').css('width', '99%');
+		$('.topbar-btn').css('width', '12%');
+		$('.topbar-btn-1-7').css('left', '4%');
+		$('.topbar-btn-2-7').css('left', '17%');
+		$('.topbar-btn-3-7').css('left', '30%');
+		$('.topbar-btn-4-7').css('left', '43%');
+		$('.topbar-btn-5-7').css('left', '56%');
+		$('.topbar-btn-6-7').css('left', '69%');
+		$('.topbar-btn-7-7').css('left', '82%');
+	}
+}

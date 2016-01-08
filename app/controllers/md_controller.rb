@@ -1,5 +1,6 @@
 class MdController < ApplicationController
 	include ConfHelper
+	include ApplicationHelper
 	
 	def route
 		
