@@ -16,8 +16,8 @@
 
 * { word-break: keep-all !important; } // global word-break setting
 @media print {                         // format page for printing
-   #printhide { display :  none;}
-   .printhide { display :  none;}
+   .printhide { display :  none!important;}
+   .printfmt { border: none !important; zoom: 1 } 
    @page { margin: 0; }
    body  { margin-left: 1.6cm;  margin-right: 1.6cm; margin-top: -2cm;
       a[href]:after { content: none!important; }
@@ -54,7 +54,8 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
 
 // CUSTOM CLASSES for general use 
 
-.jr-dark-body { color: #b0bfaa; background-color: #333232; } 
+.jr-dark-body  { color: #b0bfaa; background-color: #333232; } 
+.jr-darker-body { color: #b0bfaa; background-color: #2a2a2a; } 
 .jr-dark-bg   { background-color: #404040; } 
 .black-text   { color: #444; } // used in boostrap howto md
 .blacknav     { color: #ffffd0!important; background-color:#333333!important; 
@@ -76,6 +77,7 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
 
 //  BOOTSTRAP CLASS OVERRIDES for general use
 
+.btn { display: table; }
 .well { color: #ffffd0 !important; background-color: #444 !important; border-color:#94ba65; 
    max-width: 60em; }
 .jumbotron        { color: #ffffd0 !important; background-color: #505F50 !important; }
@@ -84,14 +86,31 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
 .carousel-caption>h3 { color:#dee!important; } // now inline
 
 // overwriting default behaviour of Modal Popup in Bootstrap:
-.modal-dialog { 
-   border:2px solid#999!important; border-radius: 10px!important; border-color:#94ba65!important;
+.modal-dialog { overflow:hidden; // because inner div had overflowing square corners
+    -moz-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px; 
+   border:2px solid#999!important;  border-color:#94ba65!important;
    // recolor the horizontal lines inside the modal window and more of background:
    .modal-footer, .modal-body, .modal-header { background-color: #404040; border-color:#94ba65!important;}
    .close       { margin-left:95%; color: #8FBC8F;  opacity: 1; }
    .close:hover { margin-left:95%; color: #94fa55;  opacity: 1; }
 }
 
+.subwindow { overflow:hidden; // because inner div had overflowing square corners
+   border:2px solid#999; border-color:#94ba65;
+    -moz-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px; 
+   background-color: #333232; padding-left:5%;padding-right:5%;padding-bottom:1%; margin:3%;
+   .subwindow-footer, .subwindow-body, .subwindow-header { 
+       -moz-border-radius: 10px 10px 0 0;
+       background-color: #404040!important;; border-color:#94ba65!important;
+       margin:0;padding:0;
+   }
+}
 
 
 
@@ -117,14 +136,19 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
 
 // BUTTONS ._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.
 // base class only:
-.topbtn-base { text-align:center!important; font-size: 1.2vmax; z-index: 600; }
+.topbtn-base { text-align:center!important; font-size: 1.3vmax; z-index: 600; }
+.topbtn-base:hover { font-size: 1.3vmax!important;  color:#94ca55!important;}
 
 // use this two as defaults in html but js will quickly override parts of them:
 .topbtn           { @extend.btn; @extend.topbtn-base;
                     margin-top: 9px; height: 44px; }
 .topbtn-greenwell { @extend.btn-greenwell; @extend.topbtn-base; 
                     top: 1%; height: 6%; }
-
+                    
+                    
+.topbar-btn { display:table!important; padding:0;
+    @extend.topbtn-greenwell; position:fixed; 
+}
 // topbtn's
 .LL-7-toc { width: 8%; left:  4%; }
 .LR-7-toc { width: 8%; left: 13%; }
@@ -152,6 +176,29 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
 .RC-9 { width: 8%;  left: 75%; } 
 .RR-9 { width: 8%;  left: 85%; }
 
+// SPECIAL CASE BUTTONS FOR HOME PAGE:
+
+.abso-w25 { position:absolute; width: 25%!important; }
+
+.tile9x9-row1 { @extend.abso-w25; top: 38%; }
+.tile9x9-row2 { @extend.abso-w25; top: 58%; }
+.tile9x9-row3 { @extend.abso-w25; top: 78%; }
+
+.tile9x9-col1 { left: 5%; }
+.tile9x9-col2 { left: 37%; }
+.tile9x9-col3 { left: 68%; }
+
+.tile9x9-text { width: 80%!important; }
+
+.tile9x9-btn-base {
+    @extend.btn; @extend.btn-xlarge; @extend.btn-block; @extend.btn-ghosty;
+    font-size:12px!important; padding:0!important;
+}
+.tile9x9-btn_txt1 { @extend.tile9x9-btn-base; line-height:400%!important; }
+.tile9x9-btn_txt2 { @extend.tile9x9-btn-base; line-height:140%!important; padding-top:8px!important; }
+.tile9x9-btn_txt3 { @extend.tile9x9-btn-base; line-height:120%!important; padding-top:4px!important;}
+
+
 // .prev-btn-img, .next-btn-img { width:1em; margin:0px;}
 .scroll-btn-img-css, toc-btn-img-css { width:2.2em; margin:-3px;}
 .menubar-img-css { width:3.4em; margin:-3px; }
@@ -165,11 +212,18 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
     text-align: center;
 }
 
+.round-img{
+    border:1px solid#888;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;  
+}
+
 
 .btn-greenwell       { @extend.btn; color:#94ba65; background-color:#3e423e!important; border-color:#94ba65;
    border:1px solid#999!important; border-radius: 8px!important; 
    border-color:#94ba65!important;}
-.btn-greenwell:hover { @extend.btn; color:#94ca55; background-color:#444949!important; border-color:#94ca55; }
+.btn-greenwell:hover { @extend.btn;  color:#94ca55; background-color:#444949!important; border-color:#94ca55; }
 
 .markdown    {font-size: 16px; }
 .markdown>h1 {font-size: 6vmin;font-weight: 900;color:#ffffd0;margin-left: 1%;}
@@ -304,15 +358,15 @@ hr.topic       { border-top: 20em; }
              font-size: 12px; line-height: normal; 
 }
 .btn-xlarge { @extend.trans-250ms; padding: 18px 28px; margin-bottom: 30px;
-             font-size:1.8vw; height: 4.3em; line-height: 1.8em;
-             border-radius: 10px; width: 85%;
+             font-size:1.2vw; height: 4.3em; line-height: 1.8em;
+             border-radius: 10px; width: 65%; font-weight: 200!important ;
 }
 .btn-ghost { @extend.trans-250ms; 
              background: transparent!important; color: #ffffd0 !important; 
    &:hover { background-color: #444949 !important; } 
 }
 .btn-ghosty{ @extend.trans-250ms; 
-             background-color: #414040 !important; color: #ffffd0!important; 
+             color:#94ba65!important; background-color:#3e423e!important;
    &:hover { background-color: #404040!important; } 
    
 }

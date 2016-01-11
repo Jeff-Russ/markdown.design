@@ -29,7 +29,6 @@ $( document ).ready( function()
        CONFIG TO DEVICE AND WINDOW */  
    // call once on load:
    onWindowResize();
-   initTopbarBtns();
 
 	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
        ADD HANDLERS */
@@ -44,7 +43,3 @@ $( document ).ready( function()
 	$('.home-url').attr('href', window.HomeUrl);
 
 }); 
-
-function initTopbarBtns(){
-   $('.topbar-btn').addClass('topbtn-greenwell fixed');
-}

@@ -9,48 +9,49 @@ class MdController < ApplicationController
 	include Helpers
 	include Helpers::ConfHelper
 	include Helpers::OpenUri
+	Helpers::global_debug true
 	
 ################################################################################
 	def route
 		
 		@livedocs = {}                            # hash that'll store everything 
-		s3 = 'https://s3.amazonaws.com/'          # for prepending to partial path
-		gh = 'https://raw.githubusercontent.com/' # same
-		@livedocs[:path] = ''                     # this will hold complete path
 		text = ''                                 # will hold raw content as string
 		
 ####_____ GET FILE PATH ____________________________________________________####
 
 # The following query string params are used to set the file path and desired
 # view option. If their value is empty they merely indicated desired view.
-
+		@livedocs[:path] = ''  # this will hold complete path
 		
-		if params.key? :pages then @livedocs[:view] = "top"
-			unless params[:pages].nil?
-				@livedocs[:path] = params[:pages]<< '.md' end 
-		
-		 elsif params.key? :docs then @livedocs[:view] = "toc"
-			unless params[:docs].nil?
-				@livedocs[:path] = params[:docs]<< '.md' end 
-				
-		 elsif params.key? :toc then @livedocs[:view] = "toc"
-			unless params[:toc].nil?
-				@livedocs[:path] = params[:toc]<< '.md' end
-			
-		 elsif params.key? :top then @livedocs[:view] = "top"
-			unless params[:top].nil?
-				@livedocs[:path] = params[:top]<< '.md' end 
-		
-		 elsif params.key? :full then @livedocs[:view] = "full"
-			unless params[:full].nil?
-				@livedocs[:path] = params[:full]<< '.md' end 
-			
-		 elsif params.key? :side then @livedocs[:view] = "side"
-			unless params[:side].nil?
-				@livedocs[:path] = params[:side]<< '.md' end 
-				
-		 else @livedocs[:view] = "toc" # default view is with table of contents
+		view_params = { 
+			pages: "top", top: "top",  
+			doc:   "toc", toc: "toc",  
+			full: "full", side: "side"
+		}
+		bar; log "Looking for views..."
+		view_params.each_with_index do | (key,view), index |
+			update "'#{key}'"
+			if params.key? key               # if we find this key in params
+				update "Found '#{key}' so the view will be '#{view}'"
+				@livedocs[:view] = view       # it determines what view to render
+				unless params[key].nil?       # if it has an actual value
+					update "Partial path found."
+					@livedocs[:path] = params[key] << '.md' # use as md file path
+					break
+				end
+			end
+			if index == view_params.size - 1  # if we didn't didn't find any key
+				log "No view found."
+				@livedocs[:view] = "toc"       # default view: w/ table of contents
+				update "Set to default view '#{@livedocs[:view]}'"
+			end
 		end
+		update "\n view = '#{@livedocs[:view]}'\n path = '#{@livedocs[:path]}'"
+		# strings for prepending to partial path:
+		s3    = 'https://s3.amazonaws.com/'          
+		gh    = 'https://raw.githubusercontent.com/' 
+		http  = 'http://';  https  = 'https://'
+		jeffruss = 'https://s3.amazonaws.com/jeffruss/' 
 		
 		if params.key? :file                    # GET FILE FROM LOCAL (THIS) SERVER 
 			@livedocs[:path] = params[:file] << ".md" 
@@ -60,102 +61,106 @@ class MdController < ApplicationController
 			@livedocs[:path] = params[:url] << '.md' # we can skip prepend
 			
 		 else	# DETERMINE DOMAIN OF PATH AND PREPEND TO PATH
-		 
-			if (params.key? :s3)
-				if @livedocs[:path] == '' # (unless we already found a path)
-					  @livedocs[:path] = s3 << params[:s3] << '.md'
-				else @livedocs[:path] = s3 << params[:path] end
-				
-			 elsif (params.key? :aws) 
-				if @livedocs[:path] == ''
-					  @livedocs[:path] = s3 << params[:aws] << '.md'
-				else @livedocs[:path] = s3 << params[:path] end
-					
-			 elsif (params.key? :gh) 
-				if @livedocs[:path] == ''
-					  @livedocs[:path] = gh << params[:gh] << '.md'
-				else @livedocs[:path] = gh << params[:path] end
-					
-			 elsif (params.key? :github) 
-				if @livedocs[:path] == ''
-					  @livedocs[:path] = gh << params[:github] << '.md'
-				else @livedocs[:path] = gh << params[:path] end
-				
-			 elsif (params.key? :http) 
-				if @livedocs[:path] == ''
-					  @livedocs[:path] = 'http://'<< params[:https]<< '.md}'
-				else @livedocs[:path] = 'http://'<< params[:path] end
-					
-			 elsif (params.key? :https) 
-				if @livedocs[:path] == ''
-					  @livedocs[:path] = 'https://'<< params[:https]<< '.md}'
-				else @livedocs[:path] = 'https://'<< params[:path] end
-					
-			 elsif (params.key? :jeffruss)           # selfish default!
-				if @livedocs[:path] == ''
-					  @livedocs[:path]= s3<< 'jeffruss/'<< params[:jeffruss]<< '.md'
-				else @livedocs[:path]= s3<< 'jeffruss/'<< params[:path]<< '.md' end
+			file_domain = { 
+				s3: s3,     aws: s3,  
+				gh: gh,     github: gh,  
+				http: http, https: https,
+				jeffruss: jeffruss
+			}
+			log "Looking for domain..."
+			file_domain.each_with_index do | (key, prepend), index |
+				update "'#{key}'"
+				if params.key? key
+					update "'#{key}' found."
+					if @livedocs[:path] == '' # unless we already found partial path
+						update "including a file path." 
+						@livedocs[:path] = prepend << params[key] << '.md' # set it
+					 else 						  # we had partial path so we can use this
+						@livedocs[:path] = prepend << params[:path] # to prepend domain
+					end
+					break
+				end
+				if index == file_domain.size - 1  
+					@livedocs[:path] = s3 << @livedocs[:path]
+					log "No domain found. AWS S3 will be assumed.\n path = '#{@livedocs[:path]}'"
+				end
 			end
+			update "\n path = '#{@livedocs[:path]}'"
 		end
 		
 # GET CONTENT AS STRING IF NON-LOCAL
+		
 		if text == '' # ( might be empty if we got if from internal file)
-			text = safe_open(@livedocs[:path]) # safe_open is from helper file
+			if (@livedocs[:path] == '') || (@livedocs[:path].ends_with? '/')
+				log "Insuffient path. Assuming jeffruss.com/ root"; bar;
+				@livedocs[:path] = s3 << "jeffruss/home.md"
+				@livedocs[:view] = 'top'
+				update "Fetching #{@livedocs[:path]}"; bar;
+				text = safe_open(@livedocs[:path]) # safe_open is from helper file
+			else
+				log "We have a full path. Calling safe_open() helper method"; hr;
+				text = safe_open(@livedocs[:path]) # safe_open is from helper file
+			end
 		end
 		
-####_____ GET RENDER OPTIONS _______________________________________________####
-
-# REDCARPET RENDER OPTIONS 
+####_____ GET ADDITIONAL PREFERENCES _______________________________________####
+		
+		prefs = {
+			r_opt: { # REDCARPET RENDER OPTIONS 
+				defaults: lambda do default_toc_r_opt() end, # defaults from helpers.rb
+				beg_flag: '#BEGIN_R_OPT',
+				end_flag: '#END_R_OPT'
+			},
+			p_ext: { # REDCARPET PARSER EXTENSIONS 
+				defaults: lambda do default_toc_p_ext() end, # defaults from helpers.rb
+				beg_flag: '#BEGIN_P_EXT',
+				end_flag: '#END_P_EXT'
+			},
+			toc_vars: {  # CUSTOM VARIABLES FOR VIEW WITH TOC
+				defaults: lambda do default_toc_vars() end, # defaults from helpers.rb
+				beg_flag: '#BEGIN_VARS',
+				end_flag: '#END_VARS'
+			}
+		}
+		
 		dir = @livedocs[:path].concat( @livedocs[:path].split('/')[-1] )
-		
-		unless params.key? :r_opt                   # no custom parser exten's
-			@livedocs[:r_opt] = default_toc_r_opt    # use defaults
-		else                                        # custom extensions requested
-			str = open(dir << params[:r_opt] << '.md') {|f| f.read } 
-			# process RedCarpet parser extensions and store:
-			hash = HashHelper.str_to_hash_between '#BEGIN_R_OPT', '#END_R_OPT', str
-			@livedocs[:r_opt] = hash
+		prefs.each do | key, hash |
+			hr; log "Looking for #{key.to_s} preference."
+			unless params.key? key 
+				update "Not found in query string paramter. Using defaults in helpers."
+				@livedocs[key] = hash[:defaults].call
+			else                                     # custom extensions requested
+			   update 'found in query string parameter.'
+				str = open(dir << params[key] << '.md') {|f| f.read } 
+				# process preferences and store:
+				hash = str_to_hash_between hash[:beg_flag], hash[:end_flag], str
+				@livedocs[key] = hash
+			end
+			update "\n #{key.to_s} = #{@livedocs[key]}"
 		end
 
-# REDCARPET PARSER EXTENSIONS 
-		unless params.key? :p_ext                   # no custom parser exten's
-			@livedocs[:p_ext] = default_toc_p_ext    # use defaults
-		else                                        # custom extensions requested
-			str = open(dir << params[:p_ext] << '.md') {|f| f.read } 
-			# process RedCarpet parser extensions and store:
-			hash = HashHelper.str_to_hash_between '#BEGIN_P_EXT', '#END_P_EXT', str
-			@livedocs[:p_ext] = hash
-		end
-
-# OTHER CUSTOM VARIABLES
-		unless params.key? :vars                   # no custom parser exten's
-			@livedocs[:vars] = default_toc_vars    # use defaults
-		else                                        # custom extensions requested
-			str = open(dir << params[:vars] << '.md') {|f| f.read } 
-			# process RedCarpet parser extensions and store:
-			hash = HashHelper.str_to_hash_between '#BEGIN_VARS', '#END_VARS', str
-			@livedocs[:vars] = hash
-		end
-	
 ####_____ GET RENDERED CONTENT _____________________________________________####
-	
-		# create rendering object:
+		
+		hr; log "creating rendering objects."
 		renderer = Redcarpet::Render::HTML.new(           @livedocs[:r_opt] )
 		markdown = Redcarpet::Markdown.new(     renderer, @livedocs[:p_ext] )
 		
-		# render content:
+		log "Rendering HTML from markdown"
 		@livedocs[:content] = markdown.render(text).html_safe
 		
-		# render table of contents if requested:
 		unless @livedocs[:view] == 'top'
+			log "Rendering table of contents"
 			html_toc = Redcarpet::Markdown.new(Redcarpet::Render::HTML_TOC)
 			@livedocs[:toc] = html_toc.render(text).html_safe
 		end
+		log "Calling #{@livedocs[:view]}.html.erb"; bar;
 		render @livedocs[:view]
+		
 	end
 	
 ################################################################################
 	def readme
+
 		text = File.read("README.md")
 		
 		@livedocs = {} # the hash that will store everything 

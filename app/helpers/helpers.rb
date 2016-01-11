@@ -6,11 +6,35 @@ require 'open-uri'
 require 'uri'
 
 module Helpers
+   
+   @@debug_on = false
+   
 #~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
    def javascript(*files) 
       content_for(:head)
       javascript_include_tag(*files) 
    end
+#~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+   def global_debug bool; unless bool.nil? then @@debug_on = bool end
+   end; module_function :global_debug
+
+   def log string; if @@debug_on then print "\n# #{string}" end
+   end; module_function :log
+   
+   def warn string; if @@debug_on then print "\n### warn: #{string}\n" end
+   end; module_function :warn
+   
+   def err string; if @@debug_on then print "\n#### err: #{string}\n" end
+   end; module_function :err
+
+   def update string; if @@debug_on then print " #{string}" end
+   end; module_function :update
+   
+   def hr; puts; 40.times do print "_" end; puts; end; module_function :hr
+   def bar; puts; puts;  40.times do print "#" end; puts; end; module_function :bar
+   def br;  puts       end; module_function :br
+   def br2; puts; puts end; module_function :br2
+   
 #~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
    def rm_last_exten string 
       return string.match(/(.*)\.[^.]+$/)[1] 
@@ -53,10 +77,11 @@ module Helpers
                str.capitalize, URI.encode(str)]
       output = false
       variations.each do |vari|
-          puts "####### attemping open uri with #{vari}"
+          log "Attemping open '#{vari}'"
           output = Helpers::open_uri_attempt(vari)
           break if output
       end
+      log "\nREQUESTED FILE FOUND. Saved as raw string."
       return output
     end; module_function :open
    end
@@ -97,7 +122,7 @@ module Helpers
      }
    
      # html (aka "content") rendering options from RedCarpet
-     def default_toc_r_opt; hash = @@r_opt_all
+     def default_toc_r_opt; hash = @@r_opt_all 
      return hash end
        
      def default_top_r_opt; hash = @@r_opt_all 
@@ -111,7 +136,6 @@ module Helpers
    
      # markdown parser extensions from RedCarpet
      def default_toc_p_ext; hash = @@p_ext_all
-       puts '###22222####'
        return hash end
        
      def default_top_p_ext; hash = @@p_ext_all 
@@ -151,7 +175,7 @@ module Helpers
           when SocketError         then return false
           else                          return false
          end
-         puts "####### exception found"
+         warn "exception found"
        rescue SystemCallError => e
          if e === Errno::ECONNRESET then return false
           else                           return false
