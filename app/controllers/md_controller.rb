@@ -25,7 +25,7 @@ class MdController < ApplicationController
 		
 		view_params = { 
 			pages: "top", top: "top",  
-			doc:   "toc", toc: "toc",  
+			docs:   "toc", toc: "toc",  
 			full: "full", side: "side"
 		}
 		bar; log "Looking for views..."
