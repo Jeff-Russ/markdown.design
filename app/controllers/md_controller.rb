@@ -1,163 +1,175 @@
+######--------------------------------------------######
+######  By Jeff Russ https://github.com/Jeff-Russ ######
+######--------------------------------------------######
+
+require 'open-uri'
+require 'uri'
+
 class MdController < ApplicationController
-	include ConfHelper
-	include ApplicationHelper
+	include Helpers
+	include Helpers::ConfHelper
+	include Helpers::OpenUri
 	
+################################################################################
 	def route
 		
-		@livedocs = {} # the hash that will store everything 
-	
-		# GET LOCATION OF CONTENT AND SAVE TO LOCAL VARIABLE (text) ##############
+		@livedocs = {}                            # hash that'll store everything 
+		s3 = 'https://s3.amazonaws.com/'          # for prepending to partial path
+		gh = 'https://raw.githubusercontent.com/' # same
+		@livedocs[:path] = ''                     # this will hold complete path
+		text = ''                                 # will hold raw content as string
 		
-		# get the document as raw text string:
-		if params.key? :file # NOTE params or params ???
-			@livedocs[:file_path] = params[:file] 
-			text = File.read(@livedocs[:file_path] << ".md")
-		else # we need to grab the doc from somewhere else:
-			if (params.key? :s3) || (params.key? :aws) || (params.key? :toc)
-				@livedocs[:file_path] = "https://s3.amazonaws.com/#{params[:aws]}.md"
-			 elsif (params.key? :gh) || (params.key? :github)
-				@livedocs[:file_path] = "https://raw.githubusercontent.com/#{params[:github]}.md"
-			 elsif params.key? :https
-				@livedocs[:file_path] = "https://#{params[:https]}.md" 
-			 elsif params.key? :http
-			 	@livedocs[:file_path] = "http://#{params[:http]}.md"
-			 elsif params.key? :url
-			 	@livedocs[:file_path] = params[:@livedocs[:file_path] << ".md"]
-			 else
-			 	rootPath = true
-				text = File.read("README.md")
-			end
-			unless 
-				rootPath then text = open(@livedocs[:file_path]) {|f| f.read }
-			end
-		end
+####_____ GET FILE PATH ____________________________________________________####
+
+# The following query string params are used to set the file path and desired
+# view option. If their value is empty they merely indicated desired view.
+
 		
-		# LOCATE CONFIGURATION FILE AND SAVE IT TO A LOCAL VARIABLE  (conf) ######
+		if params.key? :pages then @livedocs[:view] = "top"
+			unless params[:pages].nil?
+				@livedocs[:path] = params[:pages]<< '.md' end 
 		
-		# we may or may not need this directory but defining it here is quicker
-		dir = @livedocs[:file_path].concat( @livedocs[:file_path].split('/')[-1] )
-		
-		# params[:toc], params[:top], params[:full] and params[:side] indicate 
-	 	# indicated desired view by their presence. The value indicates path of 
-	 	# config file in other location. If the value is empty a default file 
-	 	# local to this server will be used instead.
-		
-		if params.key? :toc
-			@livedocs[:view] = "toc"
-			if params[:toc].nil?
-				@livedocs[:p_ext] = ConfHelper.toc_p_ext
-				@livedocs[:r_opt] = ConfHelper.toc_r_opt
-				@livedocs[:vars]  = ConfHelper.toc_vars
-			 else conf = open(dir << params[:toc] << '.md') {|f| f.read } 
-			end
-		 elsif params.key? :top
-			@livedocs[:view] = "top"
-			if params[:top].nil?
-				@livedocs[:p_ext] = ConfHelper.top_p_ext
-				@livedocs[:r_opt] = ConfHelper.top_r_opt
-				@livedocs[:vars]  = ConfHelper.top_vars
-			 else conf = open(dir << params[:top] << '.md') {|f| f.read } 
-			end
-		 elsif params.key? :full
-			@livedocs[:view] = "full"
-			if params[:full].nil?
-				@livedocs[:p_ext] = ConfHelper.full_p_ext
-				@livedocs[:r_opt] = ConfHelper.full_r_opt
-				@livedocs[:vars]  = ConfHelper.full_vars
-			 else conf = open(dir << params[:full] << '.md') {|f| f.read }
-			end
-		 elsif params.key? :side
-			@livedocs[:view] = "side"
-			if params[:side].nil?
-				@livedocs[:p_ext] = ConfHelper.side_p_ext
-				@livedocs[:r_opt] = ConfHelper.side_r_opt
-				@livedocs[:vars]  = ConfHelper.side_vars
-			 else conf = open(dir << params[:side] << '.md') {|f| f.read }
-			end
-		 else # default view is toc with on-server conf file
-			@livedocs[:view] = "toc"
-			if params[:toc].nil?
-				@livedocs[:p_ext] = ConfHelper.toc_p_ext
-				@livedocs[:r_opt] = ConfHelper.toc_r_opt
-				@livedocs[:vars]  = ConfHelper.toc_vars
-			 else conf = open(dir << params[:toc] << '.md') {|f| f.read } 
-			end
-		end
-		
-	# PROCESS AND STORE CONTENTS OF CONFIG FILE #################################
-		
-		unless conf.blank?
+		 elsif params.key? :docs then @livedocs[:view] = "toc"
+			unless params[:docs].nil?
+				@livedocs[:path] = params[:docs]<< '.md' end 
 				
+		 elsif params.key? :toc then @livedocs[:view] = "toc"
+			unless params[:toc].nil?
+				@livedocs[:path] = params[:toc]<< '.md' end
+			
+		 elsif params.key? :top then @livedocs[:view] = "top"
+			unless params[:top].nil?
+				@livedocs[:path] = params[:top]<< '.md' end 
+		
+		 elsif params.key? :full then @livedocs[:view] = "full"
+			unless params[:full].nil?
+				@livedocs[:path] = params[:full]<< '.md' end 
+			
+		 elsif params.key? :side then @livedocs[:view] = "side"
+			unless params[:side].nil?
+				@livedocs[:path] = params[:side]<< '.md' end 
+				
+		 else @livedocs[:view] = "toc" # default view is with table of contents
+		end
+		
+		if params.key? :file                    # GET FILE FROM LOCAL (THIS) SERVER 
+			@livedocs[:path] = params[:file] << ".md" 
+			text = File.read( @livedocs[:path] ) # we are done
+			
+		 elsif params.key? :url                 # GET FILE FROM FULL WEB URL 
+			@livedocs[:path] = params[:url] << '.md' # we can skip prepend
+			
+		 else	# DETERMINE DOMAIN OF PATH AND PREPEND TO PATH
+		 
+			if (params.key? :s3)
+				if @livedocs[:path] == '' # (unless we already found a path)
+					  @livedocs[:path] = s3 << params[:s3] << '.md'
+				else @livedocs[:path] = s3 << params[:path] end
+				
+			 elsif (params.key? :aws) 
+				if @livedocs[:path] == ''
+					  @livedocs[:path] = s3 << params[:aws] << '.md'
+				else @livedocs[:path] = s3 << params[:path] end
+					
+			 elsif (params.key? :gh) 
+				if @livedocs[:path] == ''
+					  @livedocs[:path] = gh << params[:gh] << '.md'
+				else @livedocs[:path] = gh << params[:path] end
+					
+			 elsif (params.key? :github) 
+				if @livedocs[:path] == ''
+					  @livedocs[:path] = gh << params[:github] << '.md'
+				else @livedocs[:path] = gh << params[:path] end
+				
+			 elsif (params.key? :http) 
+				if @livedocs[:path] == ''
+					  @livedocs[:path] = 'http://'<< params[:https]<< '.md}'
+				else @livedocs[:path] = 'http://'<< params[:path] end
+					
+			 elsif (params.key? :https) 
+				if @livedocs[:path] == ''
+					  @livedocs[:path] = 'https://'<< params[:https]<< '.md}'
+				else @livedocs[:path] = 'https://'<< params[:path] end
+					
+			 elsif (params.key? :jeffruss)           # selfish default!
+				if @livedocs[:path] == ''
+					  @livedocs[:path]= s3<< 'jeffruss/'<< params[:jeffruss]<< '.md'
+				else @livedocs[:path]= s3<< 'jeffruss/'<< params[:path]<< '.md' end
+			end
+		end
+		
+# GET CONTENT AS STRING IF NON-LOCAL
+		if text == '' # ( might be empty if we got if from internal file)
+			text = safe_open(@livedocs[:path]) # safe_open is from helper file
+		end
+		
+####_____ GET RENDER OPTIONS _______________________________________________####
+
+# REDCARPET RENDER OPTIONS 
+		dir = @livedocs[:path].concat( @livedocs[:path].split('/')[-1] )
+		
+		unless params.key? :r_opt                   # no custom parser exten's
+			@livedocs[:r_opt] = default_toc_r_opt    # use defaults
+		else                                        # custom extensions requested
+			str = open(dir << params[:r_opt] << '.md') {|f| f.read } 
 			# process RedCarpet parser extensions and store:
-			temp = conf.string_between_markers("begin_p_ext", "end_p_ext")
-			unless temp.blank?
-				@livedocs[:p_ext] = temp
-				str = params[:p_ext]   # save as a string for now
-				
-				 # remove all whitespace and split into array at delimiters
-				arr = str.gsub(/\s+/, '').split(/[=,:]/)  
-				hash = Hash[*arr.flatten]     # convert to hash
-				
-				# now we'll convert keys to symbols and values to booleans
-				hash.each do |k, v|    # convert strings to boolean
-					if   v =~ (/(true|t|yes|y|1|on|show)$/i) then v = true
-					 else v = false 
-					end
-					@livedocs[:p_ext[k.to_sym] = v] # convert keys to symbols
-				end
-			end
-			
-			# process RedCarpet renderer options and store:
-			temp = conf.string_between_markers("begin_r_opt", "end_r_opt")
-			unless temp.blank?
-				@livedocs[:r_opt] = temp
-				str = params[:r_opt]   # save as a string for now
-				
-				 # remove all whitespace and split into array at delimiters
-				arr = str.gsub(/\s+/, '').split(/[=,:]/)  
-				hash = Hash[*arr.flatten]     # convert to hash
-				
-				# now we'll convert keys to symbols and values to booleans
-				hash.each do |k, v|    # convert strings to boolean
-					if   v =~ (/(true|t|yes|y|1|on|show)$/i) then v = true
-					 else v = false 
-					end
-					@livedocs[:r_opt[k.to_sym] = v] # convert keys to symbols
-				end
-			end
-
-			# store other variables:
-			temp = conf.string_between_markers("begin_vars", "end_vars")
-			unless temp.blank?
-				@livedocs[:vars] = temp
-			end
+			hash = HashHelper.str_to_hash_between '#BEGIN_R_OPT', '#END_R_OPT', str
+			@livedocs[:r_opt] = hash
 		end
-			
-	# 	# If view is toc, you must have toc rendered, regardless of what conf says
-	# 	if @livedocs[:view] == "toc" then @livedocs[:p_ext][:with_toc_data] = true end
-			
-	# # PROCESS ANY PAGE VARIABLES FOUND IN conf FILE #############################
-	# 	renderer = Redcarpet::Render::HTML.new( @livedocs[:r_opt] )
-	# 	markdown = Redcarpet::Markdown.new( renderer, @livedocs[:p_ext].deep_dup ) 
-	# 	@livedocs[:content] = markdown.render(text).html_safe
-		
-	# 	# render table of contents
-	# 	if (@livedocs[:p_ext][:with_toc_data] == true)
-	# 		html_toc = Redcarpet::Markdown.new(Redcarpet::Render::HTML_TOC)
-	# 		@livedocs[:toc]     = html_toc.render(text).html_safe 
-	# 	end
-	
-	test = { strikethrough: true}
 
+# REDCARPET PARSER EXTENSIONS 
+		unless params.key? :p_ext                   # no custom parser exten's
+			@livedocs[:p_ext] = default_toc_p_ext    # use defaults
+		else                                        # custom extensions requested
+			str = open(dir << params[:p_ext] << '.md') {|f| f.read } 
+			# process RedCarpet parser extensions and store:
+			hash = HashHelper.str_to_hash_between '#BEGIN_P_EXT', '#END_P_EXT', str
+			@livedocs[:p_ext] = hash
+		end
+
+# OTHER CUSTOM VARIABLES
+		unless params.key? :vars                   # no custom parser exten's
+			@livedocs[:vars] = default_toc_vars    # use defaults
+		else                                        # custom extensions requested
+			str = open(dir << params[:vars] << '.md') {|f| f.read } 
+			# process RedCarpet parser extensions and store:
+			hash = HashHelper.str_to_hash_between '#BEGIN_VARS', '#END_VARS', str
+			@livedocs[:vars] = hash
+		end
+	
+####_____ GET RENDERED CONTENT _____________________________________________####
+	
+		# create rendering object:
+		renderer = Redcarpet::Render::HTML.new(           @livedocs[:r_opt] )
+		markdown = Redcarpet::Markdown.new(     renderer, @livedocs[:p_ext] )
+		
+		# render content:
+		@livedocs[:content] = markdown.render(text).html_safe
+		
+		# render table of contents if requested:
+		unless @livedocs[:view] == 'top'
+			html_toc = Redcarpet::Markdown.new(Redcarpet::Render::HTML_TOC)
+			@livedocs[:toc] = html_toc.render(text).html_safe
+		end
+		render @livedocs[:view]
+	end
+	
+################################################################################
+	def readme
+		text = File.read("README.md")
+		
+		@livedocs = {} # the hash that will store everything 
+		
+		@livedocs[:p_ext] = default_toc_p_ext
+		@livedocs[:r_opt] = default_toc_r_opt
+		
 		renderer = Redcarpet::Render::HTML.new( @livedocs[:r_opt] )
 		markdown = Redcarpet::Markdown.new(renderer, @livedocs[:p_ext])
 		@livedocs[:content] = markdown.render(text).html_safe
 		html_toc = Redcarpet::Markdown.new(Redcarpet::Render::HTML_TOC)
 		@livedocs[:toc] = html_toc.render(text).html_safe
-
 		
-		render @livedocs[:view]
-		
+		render "toc"
 	end
 	
 end

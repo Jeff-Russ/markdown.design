@@ -1,3 +1,4 @@
+
 /* By Jeff Russ https://github.com/Jeff-Russ
 ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._*/
 
@@ -21,17 +22,18 @@ window.tocFollowBtn;
 window.homeURl;
 window.addEventListener("hashchange", function() { scrollBy(0, -45) });
 
+
 $( document ).ready( function() 
 {
 	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
        INITIALIZE GLOBAL VARIABLES */
    window.$tocAnchors   = $('#toc').find('a[href^="#"]'); // sidebar <a>-> headers
-   window.topOffset     = $('#topbar').height() * 0.8;    // height of topbar 
+   window.topOffset     = $('#topbar').height();    // height of topbar 
    window.$tocFollowBtn = $('#toc-follow-btn');
    window.tocFollow     = true;  window.$tocFollowBtn.addClass("on");
    window.$tocBtn       = $('#toc-btn');
    window.showToc       = true;  window.$tocFollowBtn.addClass("on");
-	
+	window.topOffsetInit();
 	if (!window.HomeUrl) window.HomeUrl = "http://www.jeffruss.com/";
 	
 	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
@@ -48,7 +50,7 @@ $( document ).ready( function()
    if(window.location.hash) {   // initial load from url hash
       if (window.location.hash == "#undefined") {
          window.location.hash = '';
-         location.reload()
+         location.reload();
       }
       else  window.$topViewElem = $(window.location.hash);
    } else {                     // initial load without url hash
@@ -73,12 +75,11 @@ $( document ).ready( function()
    } 
 
 	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-       CONFIG TO DEVICE  */    
-	var isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/);
-	if (!isMobile && $(window).width() >= 630 && window.hasToc )window.showToc = true;
-	else window.showToc = false;
-	
-	window.toggleSidebar();
+       CONFIG TO DEVICE AND WINDOW */  
+   // call once on load:
+   onWindowResize();
+   // and add handler for resizing of window:
+   $( window ).resize(onWindowResize());
    
 	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
        ADD HANDLERS */
@@ -93,3 +94,13 @@ $( document ).ready( function()
    window.populateModalMenus();
 
 }); 
+
+/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.
+       CONFIG TO DEVICE AND WINDOW SIZE*/   
+function onWindowResize(){
+	if (!window.isMobile && $(window).width() >= 630  && window.hasToc)
+	   window.showToc = true;
+	else
+	   window.showToc = false;
+	   window.toggleSidebar();
+}

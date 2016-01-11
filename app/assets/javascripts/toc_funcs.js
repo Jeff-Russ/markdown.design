@@ -1,3 +1,4 @@
+
 /* By Jeff Russ https://github.com/Jeff-Russ
 ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._*/
 
@@ -18,7 +19,7 @@ INTER-FILE INTERDEPENDENCIES:
     FUNCS DEFINED: Just look down there
 */
 
-//  CLICK LISTENER FOR TOC _____________________________________________________
+//  CLICK LISTENER FOR TOC ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
 window.onTocClick = function(e) {   
    // e == object that raised the event
    e.preventDefault();       // bypass clicked <a>'s native bahavior 
@@ -39,15 +40,14 @@ window.onTocClick = function(e) {
    window.updateToc();
 };
 
-
-//  TOC SHOW/HIDE BUTTONS LISTENER  ____________________________________________
+//  TOC SHOW/HIDE BUTTONS LISTENER  ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.
 window.onTocShowBtnClick = function(){
 	window.$tocBtn.toggleClass('on');
 	if (window.$tocBtn.hasClass('on')) { 
 		window.showToc = true;
 		$('#toc-btn-img').css('opacity','.9');
 		window.toggleSidebar(); 
-        tocFollowBtnRestoreState()
+        tocFollowBtnRestoreState();
 	} else { 
 		window.showToc = false;
 		$('#toc-btn-img').css('opacity','.4');
@@ -57,8 +57,7 @@ window.onTocShowBtnClick = function(){
 	}
 };
 
-
-//  TOC FOLLOW BUTTONS LISTENER  _______________________________________________
+//  TOC FOLLOW BUTTONS LISTENER  ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.
 window.onTocFollowBtnClick = function() {
    $(this).toggleClass('on');
     tocFollowBtnRestoreState();
@@ -75,9 +74,7 @@ function tocFollowBtnRestoreState() {
    }
 }
 
-
-
-//  FIND NEW POSITION IN READER ________________________________________________
+//  FIND NEW POSITION IN READER ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
 window.findNewPosition = function() {
    var scrollPosition = $(document).scrollTop(); // distace from top
 
@@ -101,8 +98,7 @@ window.findNewPosition = function() {
    });
 };
 
-
-//  DETERMINE SECTION __________________________________________________________
+//  DETERMINE SECTION ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
 window.determineSection = function() {  
    // needs window.$topViewElem
    // and sets the following globals for use elsewhere:
@@ -159,8 +155,7 @@ window.determineSection = function() {
    window.$activeTocAnchor = $('a[href="'+activeAnchorHash+'"]', '#toc');
 };
 
-
-//  ACTIVE LINK AND AUTO SCROLL OF TOC _________________________________________
+//  ACTIVE LINK AND AUTO SCROLL OF TOC ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~_
 window.updateToc = function () {  
    // needs window.$tocAnchors and $activeTocAnchor
    // and sets the following for use elsewhere:
@@ -168,7 +163,7 @@ window.updateToc = function () {
    window.$activeTocAnchor.attr('id', 'toc-active');
    
    window.currScroll; // global only to retain value between calls (only used here)
-   
+
    if (window.tocFollow)  
    {  
 		var activeElement = document.getElementById("toc-active");
@@ -179,7 +174,7 @@ window.updateToc = function () {
 		var maxOffset     = tocHeight - sidebarHeight;
       var tocElem       = document.getElementById("toc");
 		var tocHeight     = tocElem.height;
-      
+
 		if (offset > maxOffset) { offset = maxOffset; }
 		else                    { offset = offset;    }
 		
@@ -193,37 +188,38 @@ window.updateToc = function () {
    }
 };
 
-//  TOGGLE SIDEBAR ON AND OFF __________________________________________________
+//  TOGGLE SIDEBAR ON AND OFF ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~
 window.toggleSidebar = function() 
 {
-	if ( window.showToc ) {
+	
+   if ( window.showToc ) {
 		$('#reader').css('width', '64%').css('padding-right', '2%');
 		$('#sidebar').css('display', 'inline-block');
 		$('.mono').css('white-space','pre').css('overflow','scroll');
 		$('#toc-btn').addClass('on');
-		$('#topbar').css('width', '68%');
-		$('.topbar-btn').css('width', '8%');
-		$('.topbar-btn-1-7').css('left', '4%');
-		$('.topbar-btn-2-7').css('left', '13%');
-		$('.topbar-btn-3-7').css('left', '22%');
-		$('.topbar-btn-4-7').css('left', '31%');
-		$('.topbar-btn-5-7').css('left', '40%');
-		$('.topbar-btn-6-7').css('left', '49%');
-		$('.topbar-btn-7-7').css('left', '58%');
 		
-	} else {
+      $('.topbar').addClass('topbar-toc').removeClass('topbar');
+      $('.LL-7').addClass('LL-7-toc').removeClass('LL-7');
+      $('.LR-7').addClass('LR-7-toc').removeClass('LR-7');
+      $('.CL-7').addClass('CL-7-toc').removeClass('CL-7');
+      $('.CC-7').addClass('CC-7-toc').removeClass('CC-7');
+      $('.CR-7').addClass('CR-7-toc').removeClass('CR-7');
+      $('.RL-7').addClass('RL-7-toc').removeClass('RL-7');
+      $('.RR-7').addClass('RR-7-toc').removeClass('RR-7');
+      
+   } else {
 		$('#reader').css('width', '96%');
 		$('#sidebar').css('display', 'none');
 		$('.mono').css('white-space','pre-wrap').css('overflow','initial');
 		$('#toc-btn').removeClass('on');
-		$('#topbar').css('width', '99%');
-		$('.topbar-btn').css('width', '12%');
-		$('.topbar-btn-1-7').css('left', '4%');
-		$('.topbar-btn-2-7').css('left', '17%');
-		$('.topbar-btn-3-7').css('left', '30%');
-		$('.topbar-btn-4-7').css('left', '43%');
-		$('.topbar-btn-5-7').css('left', '56%');
-		$('.topbar-btn-6-7').css('left', '69%');
-		$('.topbar-btn-7-7').css('left', '82%');
-	}
+		
+      $('.topbar-toc').addClass('topbar').removeClass('topbar-toc');
+      $('.LL-7-toc').addClass('LL-7').removeClass('LL-7-toc');
+      $('.LR-7-toc').addClass('LR-7').removeClass('LR-7-toc');
+      $('.CL-7-toc').addClass('CL-7').removeClass('CL-7-toc');
+      $('.CC-7-toc').addClass('CC-7').removeClass('CC-7-toc');
+      $('.CR-7-toc').addClass('CR-7').removeClass('CR-7-toc');
+      $('.RL-7-toc').addClass('RL-7').removeClass('RL-7-toc');
+      $('.RR-7-toc').addClass('RR-7').removeClass('RR-7-toc');
+   }
 }

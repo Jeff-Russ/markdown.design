@@ -1,3 +1,7 @@
+
+/* By Jeff Russ https://github.com/Jeff-Russ
+~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._*/
+
 //= require_tree .
 //= require_self
 @import "bootstrap-sprockets";
@@ -6,18 +10,32 @@
 @import "font-awesome";
 
 
-
-/////   GENERAL TARGETS   //////////////////////////////////////////////////////
+//~._.~   GENERAL TARGETS   ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~
 
 // TARGETING NATIVE HTML TAGS for general use 
 
 * { word-break: keep-all !important; } // global word-break setting
-@media print {                         // format page for printing	
+@media print {                         // format page for printing
+   #printhide { display :  none;}
+   .printhide { display :  none;}
    @page { margin: 0; }
-   body  { margin-left: 1.6cm;  margin-right: 1.6cm; margin-top: -0.5cm;
+   body  { margin-left: 1.6cm;  margin-right: 1.6cm; margin-top: -2cm;
       a[href]:after { content: none!important; }
       #footer       { display: none;           }
+      footer {page-break-after: always;}
    }
+}
+
+#banner { 
+    position: relative; border-style: outset;  border-radius: 10px; border-width: 2px; 
+    margin-bottom: 50px; height: 104px; 
+    border-color: #44c19b #45b0a1; color: #8FBC8F; background-color: #444!important;
+    &:hover { background-color: #444949!important; }
+    
+    img{margin-left: -30px;border-top-left-radius: 10px;border-bottom-left-radius:10px;} 
+    p  {margin-left: 25%; &:hover { color:#e6ffd6; }
+        font-size: 150%; font-weight: 900; text-align: center; line-height: 90%;
+    }
 }
 
 a:focus, a:active, a:link, // HTML anchors
@@ -44,8 +62,10 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
                 border-color:#94ba65!important;}
 .greenwell    { color: #94ba65!important; background-color:#3e423e!important; 
                 border-color:#94ba65 }
-.spacer       { margin-top: 40px; background-color: #404040; }
+.spacer       { margin-top: 4%;  }
 .hidden       { visibility: hidden; width: 12%!important;} 
+.fixed        { position: fixed;    }
+.absolute     { position: absolute; }
 .github-only  { display: none; }
 .center-text  { position:relative!important;  // both in modal 
                 text-align:center!important;} // and directory page
@@ -57,7 +77,7 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
 //  BOOTSTRAP CLASS OVERRIDES for general use
 
 .well { color: #ffffd0 !important; background-color: #444 !important; border-color:#94ba65; 
-   margin-left: auto ; margin-right: auto ; max-width: 60em; }
+   max-width: 60em; }
 .jumbotron        { color: #ffffd0 !important; background-color: #505F50 !important; }
 .alert-notice     { color: #8a6d3b;	background-color: #fcf8e3; border-color: #faebcc; }
 .form-control     { color: #ffe; background-color: #555; } // invert color for forms
@@ -75,83 +95,68 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
 
 
 
-////////////////////////////////////////////////////////////////////////////////
-/////  SPECIFIC TARGETS  ///////////////////////////////////////////////////////
+/*~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+~._.~  SPECIFIC TARGETS  ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._*/
 
-// DEBUG
+// DEBUG ._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.
 .debug { position: fixed; top: 0%; right: 0%; z-index: 9999;
          color: Chartreuse; background-color: #444;  }
 
-// TOPBAR
 
-.topbar { position:fixed; z-index: 400; 
-   color: #ffffd0!important;       background-color:#333333!important; 
-   border:1px solid#999!important; border-radius: 10px!important; 
-   border-color:#670!important;
+// TOPBAR._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.
+// base class only:
+.topbar-base { top: 0%; z-index: 400; 
+   color: #ffffd0!important;        background-color:#333333!important; 
+   border: 1px solid#999!important; border-radius: 10px!important; 
+   border-color:#670!important; 
 }
-#topbar { @extend.topbar;
-   height: 68px; padding: 0.1%; margin-left: 0.5%; margin-right: 1%; width: 67%;
-}
-#topbar-6 { @extend.topbar;
-   height: 58px; padding: 0.1%; margin-left: 1%; margin-right: 2%; width: 98%;
-}
-#topbar-9 { @extend.topbar;
-   height: 58px;  left: 0.5%; right: 0.5%; width: 99%;
-}
-
-// BUTTONS 
-
-.topbar-btn { position:fixed;  height: 50px; width: 8%; margin-top: 9px; 
-   text-align:center!important; font-size: 1.2vmax; z-index: 600;
-}
+// use this as default in html but js will quickly override parts of them:
+.topbar    { @extend.topbar-base;height: 8%; width: 99%; left: 0.5%;right: 0.5%;}
+.topbar-toc{ @extend.topbar-base;height: 8% ;width: 67.5%;left: 1.5%;right: 0.5%;}
 
 
-.topbtn-6-fix-desk{ position:fixed;  height: 40px; width: 10%; margin-top: 9px; 
-   text-align:center!important; font-size: 1.2vmax; z-index: 600;
-}
-.topbtn-6-L1-desk { @extend.topbtn-6-fix-desk; left: 3%;  }
-.topbtn-6-L2-desk { @extend.topbtn-6-fix-desk; left: 15%; }
-.topbtn-6-L3-desk { @extend.topbtn-6-fix-desk; left: 27%; }
-.topbtn-6-R1-desk { @extend.topbtn-6-fix-desk; left: 63%; }
-.topbtn-6-R2-desk { @extend.topbtn-6-fix-desk; left: 75%; }
-.topbtn-6-R3-desk { @extend.topbtn-6-fix-desk; left: 87%; }
+// BUTTONS ._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.
+// base class only:
+.topbtn-base { text-align:center!important; font-size: 1.2vmax; z-index: 600; }
 
-.topbtn-6-fix-mobl{ position:fixed;  height: 40px; width: 15%; margin-top: 9px; 
-   text-align:center!important; font-size: 1.2vmax; z-index: 600;
-}
-.topbtn-6-L1-mobl { @extend.topbtn-6-fix-mobl; left: 2.5%;  }
-.topbtn-6-L2-mobl { @extend.topbtn-6-fix-mobl; left: 18.5%; }
-.topbtn-6-L3-mobl { @extend.topbtn-6-fix-mobl; left: 34.5%; }
-.topbtn-6-R1-mobl { @extend.topbtn-6-fix-mobl; left: 50.5%; }
-.topbtn-6-R2-mobl { @extend.topbtn-6-fix-mobl; left: 66.5%; }
-.topbtn-6-R3-mobl { @extend.topbtn-6-fix-mobl; left: 82.5%; }
+// use this two as defaults in html but js will quickly override parts of them:
+.topbtn           { @extend.btn; @extend.topbtn-base;
+                    margin-top: 9px; height: 44px; }
+.topbtn-greenwell { @extend.btn-greenwell; @extend.topbtn-base; 
+                    top: 1%; height: 6%; }
 
+// topbtn's
+.LL-7-toc { width: 8%; left:  4%; }
+.LR-7-toc { width: 8%; left: 13%; }
+.CL-7-toc { width: 8%; left: 22%; }
+.CC-7-toc { width: 8%; left: 31%; }
+.CR-7-toc { width: 8%; left: 40%; }
+.RL-7-toc { width: 8%; left: 49%; }
+.RR-7-toc { width: 8%; left: 58%; }
 
+.LL-7 { width: 13%; left: 1.5%;  }
+.LR-7 { width: 13%; left: 15.5%; }
+.CL-7 { width: 13%; left: 29.5%; }
+.CC-7 { width: 13%; left: 43.5%; }
+.CR-7 { width: 13%; left: 57.5%; }
+.RL-7 { width: 13%; left: 71.5%; } 
+.RR-7 { width: 13%; left: 85.5%; }
 
-.topbtn-9-fix-desk{ position:fixed;  height: 40px; width: 8%; margin-top: 9px; 
-   text-align:center!important; font-size: 1.2vmax; z-index: 600;
-} 
-.topbtn-9-L1-desk { @extend.topbtn-9-fix-desk; left: 5%;  }
-.topbtn-9-L2-desk { @extend.topbtn-9-fix-desk; left: 15%; }
-.topbtn-9-C1-desk { @extend.topbtn-9-fix-desk; left: 35%; }
-.topbtn-9-C2-desk { @extend.topbtn-9-fix-desk; left: 45%; }
-.topbtn-9-C3-desk { @extend.topbtn-9-fix-desk; left: 55%; }
-.topbtn-9-R1-desk { @extend.topbtn-9-fix-desk; left: 75%; }
-.topbtn-9-R2-desk { @extend.topbtn-9-fix-desk; left: 85%; }
+.LL-9 { width: 8%;  left: 5%;  }
+.LC-9 { width: 8%;  left: 15%; }
+.LR-9 { width: 8%;  left: 25%; }
+.CL-9 { width: 8%;  left: 35%; }
+.CC-9 { width: 8%;  left: 45%; }
+.CR-9 { width: 8%;  left: 55%; }
+.RL-9 { width: 8%;  left: 65%; }
+.RC-9 { width: 8%;  left: 75%; } 
+.RR-9 { width: 8%;  left: 85%; }
 
-.topbtn-9-fix-mobl{ position:fixed;  height: 40px; width: 13%; margin-top: 9px; 
-   text-align:center!important; font-size: 1.2vmax; z-index: 600;
-}
-.topbtn-9-L1-mobl { @extend.topbtn-9-fix-mobl; left: 1.5%;  }
-.topbtn-9-L2-mobl { @extend.topbtn-9-fix-mobl; left: 15.5%; }
-.topbtn-9-C1-mobl { @extend.topbtn-9-fix-mobl; left: 29.5%; }
-.topbtn-9-C2-mobl { @extend.topbtn-9-fix-mobl; left: 43.5%; }
-.topbtn-9-C3-mobl { @extend.topbtn-9-fix-mobl; left: 57.5%; }
-.topbtn-9-R1-mobl { @extend.topbtn-9-fix-mobl; left: 71.5%; }
-.topbtn-9-R2-mobl { @extend.topbtn-9-fix-mobl; left: 85.5%; }
-
-
-.btn:focus, .btn:active, .topbar-btn:focus, .topbar-btn:active {  
+// .prev-btn-img, .next-btn-img { width:1em; margin:0px;}
+.scroll-btn-img-css, toc-btn-img-css { width:2.2em; margin:-3px;}
+.menubar-img-css { width:3.4em; margin:-3px; }
+.jr-img-css { width: 2.8em; }
+.btn:focus, .btn:active, .topbtn:focus, .topbtn:active {  
    outline:none!important; // get rid of the blue glow on previously clicked buttons
    color:#94ba65; }
 .text-overflow-center {
@@ -161,10 +166,10 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
 }
 
 
-.btn-greenwell       { color:#94ba65; background-color:#3e423e!important; border-color:#94ba65;
+.btn-greenwell       { @extend.btn; color:#94ba65; background-color:#3e423e!important; border-color:#94ba65;
    border:1px solid#999!important; border-radius: 8px!important; 
    border-color:#94ba65!important;}
-.btn-greenwell:hover { color:#94ca55; background-color:#444949!important; border-color:#94ca55; }
+.btn-greenwell:hover { @extend.btn; color:#94ca55; background-color:#444949!important; border-color:#94ca55; }
 
 .markdown    {font-size: 16px; }
 .markdown>h1 {font-size: 6vmin;font-weight: 900;color:#ffffd0;margin-left: 1%;}
@@ -259,7 +264,7 @@ ul>li>ul>li>ul>li>ul>>li>ul>li>a#toc-inactive { // h5 MMMAAAAJOR TYPO
 
 
 
-/////  PARENT CLASSES  /////////////////////////////////////////////////////////
+//~._.~  PARENT CLASSES  ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~
 
 .codeblock { @extend.mono; color:#7bb; background-color: #393b3a; white-space: pre; overflow: scroll; 
         font-size: 1.6vmin; tab-size: 3; display: inline-block; // for code boxes 
@@ -275,7 +280,7 @@ ul>li>ul>li>ul>li>ul>>li>ul>li>a#toc-inactive { // h5 MMMAAAAJOR TYPO
 
 
 
-// OF LITTLE CONCERN ///////////////////////////////////////////////////////////
+// OF LITTLE CONCERN ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.
 
 //  UNUSED CUSTOM CLASSES W/ POTENTIAL
 
@@ -299,15 +304,16 @@ hr.topic       { border-top: 20em; }
              font-size: 12px; line-height: normal; 
 }
 .btn-xlarge { @extend.trans-250ms; padding: 18px 28px; margin-bottom: 30px;
-             font-size: 14px; line-height: normal; 
+             font-size:1.8vw; height: 4.3em; line-height: 1.8em;
+             border-radius: 10px; width: 85%;
 }
 .btn-ghost { @extend.trans-250ms; 
              background: transparent!important; color: #ffffd0 !important; 
    &:hover { background-color: #444949 !important; } 
 }
 .btn-ghosty{ @extend.trans-250ms; 
-             background-color: #444 !important; color: #ffffd0!important; 
-   &:hover { background-color: #444949!important; } 
+             background-color: #414040 !important; color: #ffffd0!important; 
+   &:hover { background-color: #404040!important; } 
    
 }
 .trans-250ms { // CSS Transition (only used as parent class. see above)
@@ -320,8 +326,8 @@ hr.topic       { border-top: 20em; }
 
 
 
-/////  THE GRAVEYARD  //////////////////////////////////////////////////////////
-/*
+/*~._.~  THE GRAVEYARD  ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~
+
 
 //for syntax highlighter:
 require syntax-highlighter-rails/shCore

@@ -1,3 +1,4 @@
+
 /* By Jeff Russ https://github.com/Jeff-Russ
 ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._*/
 
@@ -14,13 +15,12 @@ INTER-FILE INTERDEPENDENCIES:
 */
 
 
-
-//  CLOSES ANY MODAL WINDOW. HANDY! ____________________________________________
+//  CLOSES ANY MODAL WINDOW. HANDY! ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~____
 window.close_modal = function () { 
 	$( "button[data-dismiss='modal']").trigger("click");
 };
 
-//  SET VARIABLES NEEDED BY TOPBAR _____________________________________________
+//  SET VARIABLES NEEDED BY TOPBAR ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~
 window.updateTopbar = function() {
    // set target for prev and next buttons on topbar
    $(".prev-btn").attr('href', window.prevHash);
@@ -43,7 +43,7 @@ window.updateTopbar = function() {
 };
 
 
-//  POPULATE PAGE SELECTION MODAL ______________________________________________
+//  POPULATE PAGE SELECTION MODAL ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~_
 window.populateModalMenus = function () {
 	
 	var $pages, $sections, numOfPages, numOfSections, pageMenuSrc, sectionMenuSrc,
@@ -91,10 +91,6 @@ window.populateModalMenus = function () {
 	}
 	else { makePageMenu = false; }
 	
-	// if ( makePageMenu && !makeSectionMenu) {
-	// 	$sections = $pages; sectionMenuSrc = pageMenuSrc;
-	// 	makePageMenu = false; makeSectionMenu = true; 
-	// }
    if (!makePageMenu)    { 
    	$('#page-button').addClass('hidden'); 
    }
@@ -102,12 +98,10 @@ window.populateModalMenus = function () {
 		$('#section-button').addClass('hidden');
 		$(".prev-btn").addClass('hidden'); $(".next-btn").addClass('hidden');
 	}
-
 	
 	var chunk1 = "<div class='col-xs-4 centered-div'> \
 			<a class='dismiss btn btn-xlarge btn-block btn-danger \
 			btn-ghost modal-link' href='";
-	
 	
 	if (makePageMenu)
 	{

@@ -5,8 +5,7 @@ Rails.application.routes.draw do
   get 'md/side'
   get 'md/toc'
   get 'md/top'
-
-
+  get '/LivePage.md/welcome', to: 'md#readme'
   
   # root 'outlined#show'
   

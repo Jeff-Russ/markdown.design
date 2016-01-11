@@ -1,11 +1,5 @@
-	<%= render partial: 'header' %>
-	<%= 
-	#yield(:head) 
-	%>
-	<% 
-	#javascript 'main', 'jquery_extent', 'toc_funcs', 'topbar_func' 
-	%>
-  <%= javascript_include_tag 'toc_main', 
+   <%= render partial: 'header' %>
+   <%= javascript_include_tag 'toc_main', 
                              'data-turbolinks-track' => true %>
 </head>
 
@@ -14,52 +8,44 @@
 <body class="jr-dark-body ">
 	<div class="debug"></div>
 	
-	<nav id='topbar' class=''>
+	<nav id='topbar' class='topbar-toc fixed'>
 	</nav>	
-		<button class="topbar-btn btn-greenwell topbar-btn-1-7" style="left:4%; ">
-			<a href='' class="home-url">
-				<img style="max-width:50px;" class='logo-url'src=""/>
-			</a>
-		</button>
-		
-		 <!--modal 1 - select a page (group of pages - controller )-->
-		<button  data-toggle='modal'  style="left: 13%;"  id='page-button'
-				class='btn topbar-btn btn-greenwell topbar-btn-2-7' data-target='#modal-page-menu'>
-			<p  style="margin:1px"id='page-btn' >page</p>
-		</button>
-			
-		<!-- < prevous section button-->
-		<a href='' class='prev-btn'>
-		<button  class="topbar-btn btn-greenwell topbar-btn-3-7" style="left: 22%; ">
-			<img style="margin: 0px" src="https://shared-img-res.s3.amazonaws.com/icons/left_icon_grn.png"/>
-		</button>
+	<button class="topbtn-greenwell LL-7-toc fixed">
+		<a href='' class="home-url">
+			<img style="width:2.8em;" class='logo-url'src=""/>
 		</a>
+	</button>
+	
+	 <!--modal 1 - select a page (group of pages - controller )-->
+	<button  data-toggle='modal'   id='page-button'
+			class='topbtn-greenwell LR-7-toc fixed' data-target='#modal-page-menu'>
+		<p  style="margin:1px"id='page-btn' >page</p>
+	</button>
 		
-		<!--modal 2 - select a topic (jump to id on page)-->
-		<button  data-toggle='modal' style="left: 31%;"  id='section-button'
-				class="topbar-btn btn-greenwell  topbar-btn-4-7" data-target='#modal-section-menu'>
-			<p style="margin:1px"id='section-btn' > section</p>
-		</button>
-		
-		<!-- > next section button-->
-		<a href='' class='next-btn'>	
-		<button  class="topbar-btn btn-greenwell topbar-btn-5-7" style="left: 40%; " >
-			<img style="margin:0px" src="https://shared-img-res.s3.amazonaws.com/icons/right_icon_grn.png"/>
-		</button>
-		</a>
-		
-		<button  id='toc-btn'  style="left: 49%; "
-				class='btn topbar-btn btn-greenwell  topbar-btn-6-7'>
-			<img id='toc-btn-img' style="margin:1px" 
-				src="https://shared-img-res.s3.amazonaws.com/livepage_heroku/toc_icon_h20.png">
-			</img>
-		</button>
-		
-		<button  class="topbar-btn btn-greenwell topbar-btn-7-7" id='toc-follow-btn' style="left: 58%; ">
-			<img id='toc-follow-img' style="height:25px; margin:-3px;"
-				src="https://shared-img-res.s3.amazonaws.com/livepage_heroku/auto-y_icon_33_grn.png">
-			</img>
-		</button>
+	<!-- < prevous section button-->
+	<a href='' class='prev-btn'>
+	<button  class="topbtn-greenwell CL-7-toc fixed prev-btn-img" >
+	</button>
+	</a>
+	
+	<!--modal 2 - select a topic (jump to id on page)-->
+	<button  data-toggle='modal'  id='section-button'
+			class="topbtn-greenwell CC-7-toc fixed" data-target='#modal-section-menu'>
+		<p style="margin:1px"id='section-btn' > section</p>
+	</button>
+	
+	<!-- > next section button-->
+	<a href='' class='next-btn'>	
+	<button  class="topbtn-greenwell CR-7-toc fixed next-btn-img" >
+	</button>
+	</a>
+	
+	<button  id='toc-btn' 
+			class='topbtn-greenwell RL-7-toc fixed toc-btn-img'>
+	</button>
+	
+	<button  class="topbtn-greenwell RR-7-toc fixed scroll-btn-img" id='toc-follow-btn'  >
+	</button>
 	
 	<!--END NAVBAR-->
 	
