@@ -1,14 +1,14 @@
 
-<div id="page"      style="display: none;"><!-- LivePage --></div>
-<div id='home-url'  style="display: none;"><!-- https://github.com/Jeff-Russ/LivePage-md --></div>
-<div id='logo-url'  style="display: none;"><!-- https://s3.amazonaws.com/shared-img-res/JR%20logo/JR_20px_wide.png --></div>
+<div id="page"      style="display: none;"><!--LivePage--></div>
+<div id='home-url'  style="display: none;"><!--http://www.jeffruss.com--></div>
+<div id='logo-url'  style="display: none;"><!--https://s3.amazonaws.com/shared-img-res/JR%20logo/JR_20px_wide.png--></div>
 
-<div class="page-menu" id='Boostrap' style="display: none;"><!--http://www.howto.jeffruss.com/?aws=jeffruss/bootstrap--></div>
-<div class="page-menu" id='Rails'    style="display: none;"><!--http://www.howto.jeffruss.com/?aws=jeffruss/rails--></div>
+<div class="page-menu" id='On Github'    style="display: none;"><!--https://github.com/Jeff-Russ/LivePage-md--></div>
+<div class="page-menu" id='Author'    style="display: none;"><!--http://www.jeffruss.com--></div>
+<div class="page-menu" id='Example 1' style="display: none;"><!--http://www.jeffruss.com/?docs=bootstrap--></div>
+<div class="page-menu" id='Example 2' style="display: none;"><!--http://www.jeffruss.com/?docs=rails--></div>
 
-<div class="section" id='Welcome'></div> 
-
-
+<div class="section" id='About'></div> 
 
 # LivePage-md
 
@@ -34,14 +34,16 @@ It's eeeeeeeeeeasy!
 <img class='github-only' 
 src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/LivePage-md_preview.png'>
 
-Interested? Here is it's [home](https://private-jeff-russ.c9users.io/?file=README) where you can
+Interested? Here is it's [home](http://livepage-md.herokuapp.com/?file=README) where you can
 view this very same README.md with it's rendering.
 
 LivePage-md is possible because of the RedCarpet Gem.
 
+<div class="section" id='Instructions'></div> 
+
 ### Instructions
 
-<br />
+<br /><div class="section" id="URL's"></div> 
 
 #### 1. The URL
 
@@ -80,6 +82,8 @@ These addresses are longer but they allow you to use hosting other than Amazon's
 
 <br />
 
+<div class="section" id='TOC'></div> 
+
 #### 2. The Table of Contents
 
 The table of content on the right sidbar is automatically generated from the 
@@ -92,6 +96,7 @@ elsewhere. These links are used to generate the transport controls which are the
 rightmost three items on the top navbar.
 
 <br />
+<div class="section" id='Menu Bar'></div> 
 
 #### 3. Section Menu
 
@@ -127,6 +132,7 @@ with id's reflecting the desired labels. Example:
     <div class="page-menu" id='Rails'    style="display: none;"><!--http://www.howto.jeffruss.com/md/show?aws=rails.md--></div>
 
 <br />
+<div class="section" id='Assets'></div> 
 
 #### 6. Other Assets
 
@@ -142,7 +148,7 @@ and on the page menu button. Notice that it's provided in the comment!
 It will be a link on the leftmost top navbar button as well as the first entry 
 of both the Page Menu and the Section Menu (added automatically). 
 
-<br />
+<br /><div class="section" id='The .md'></div> 
 
 #### 7. Markdown Hosting
 
@@ -174,22 +180,27 @@ Everytime I save in my editor I'll see the change within 15 seconds.
 
 When I am ready I'll copy all of the _file.md to file.md and save it. Done.
 
+<br /><div class="section" id='News'></div> 
+
 ### Known Issues & General Updates
 
-**Current Issues**  
+**Major Issues**
 
-1. strange grey bar in code blocks appears on Android  
-2. ~~modal will not automatically close when selection is made in "normal" md pages.~~
+1. Section menu no longer linking to sections properly!!!!!
+2. Greater height of menu bar on moble devices for toc docs gobbles top of content.
+3. Button in body (not menu bar) should be adapt to screen height, not just width.
 
-**Fixed/Added in this most recent commit** 
+**Minor Issues**
 
-1. modal now closes when selection is made.
+1. Strange grey bar in code blocks appears on mobile devices.
+2. Modal window buttons section not centered on mobile devices.
+3. Modal window exit button too small on mobile devices.
+4. Text not centered on menu bar buttons for toc based docs.
 
-**To Do**
+<!--**Fixed/Added in this most recent commit** -->
 
-1. remove grey bar in code blocks  
+<!--1. Better support for non-toc pages!-->
 
-** canceled plans **
+**canceled plans**
+
 1. add html and erb support  
-2. give topbar adaptive height depending on device.  
-3. give TOC adaptive top margin depending on height of contents. 
