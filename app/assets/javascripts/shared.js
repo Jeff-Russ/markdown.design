@@ -44,6 +44,13 @@ $( document ).ready( function()
       var url = $(this).attr('data-img');
       $(this).append("<img src='" + url + "'></img>");
    });
+
+   // FOR DEMO PURPOSES. DELETE LATER:
+   window.set_js_debug(true);
+   window.log("PEE");
+   window.update("PEE");
+   window.hr();
+   window.log('HAT');
    
    /*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
       GOOGLE ANALYTICS  */
@@ -55,7 +62,6 @@ $( document ).ready( function()
    ga('create', 'UA-71741017-1', 'auto');
    ga('send', 'pageview');
    // END google analytics
-
 
    $('#open-mailto').on('click', function(){
       var emailDest = $('#email-dest').val(); 
@@ -142,18 +148,37 @@ $.fn.scrollEnd = function(callback) {
    $this.data('scrollTimeout', setTimeout(callback,document.scrollTimeout));
   });
 };
-// TEST IT:
-// $(window).scrollEnd(function(){
-//     alert('stopped scrolling');
-   
-// });
 
+//========== DEBUGGING TOOLS ===================================================
 
-
-// function onReaderScroll() // UNUSED TIMEOUT FOR SCROLL LISTENER ________________
-// {
-//    clearTimeout($.data(this, 'scrollTimer'));
-//    $.data(this, 'scrollTimer', setTimeout( function() {
-//       findNewPosition();
-//    }, 500));
-// }
+window.set_js_debug = function(bool){
+   window.js_debug = bool;
+   if (window.js_debug) {
+      $('#js_debug').remove();
+      $("body").append("<p id='js_debug' style='position:fixed; z-index: 9999;\
+                     left:2px; top:-20px;color:#AFD; font-size:12px;\
+                     background-color: #444; opacity:0.5;'></p>");
+   }
+};
+window.log = function(string){
+   if (window.js_debug)
+   $('#js_debug').append("<br />js: " + string);
+};
+window.warn = function(string){
+   if (window.js_debug)
+      $('#js_debug').append("<br />js warning: " + string + "<br />");
+};
+window.err = function(string){
+   if (window.js_debug)
+      $('#js_debug').append("<br />js error: " + string + "<br />");
+};
+window.update = function(string){
+   if (window.js_debug)
+      $('#js_debug').append(" " + string);
+};
+window.hr = function(){
+   $('#js_debug').append("<br />________________________________________");}; 
+window.bar = function(){ 
+   $('#js_debug').append("<br /><br />========================================");};
+window.br  = function() { $('#js_debug').append("<br /><br />");  };
+window.br2 = function() { $('#js_debug').append("<br />"); };
