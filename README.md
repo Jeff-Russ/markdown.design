@@ -186,9 +186,9 @@ When I am ready I'll copy all of the _file.md to file.md and save it. Done.
 
 **Major Issues**
 
-1. Section menu no longer linking to sections properly!!!!!
+~~1. Section menu no longer linking to sections properly!!!!!~~
 2. Greater height of menu bar on moble devices for toc docs gobbles top of content.
-3. Button in body (not menu bar) should be adapt to screen height, not just width.
+~~3. Button in body (not menu bar) should be adapt to screen height, not just width.~~
 
 **Minor Issues**
 

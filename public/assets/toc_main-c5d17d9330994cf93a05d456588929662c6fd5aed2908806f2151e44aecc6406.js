@@ -13377,22 +13377,17 @@ $( document ).ready( function() ////////////////////////////////////////////////
    
    // These allow content author to omit adding and image tag. Simply adding these
    // to a tag will result in insertion of an image inside the tag with src set:
-   $('.prev-btn-img').append(`
-   <img src='https://shared-img-res.s3.amazonaws.com/icons/left_icon_grn.png'/>`);
+   $('.prev-btn-img').append("<img src='https://shared-img-res.s3.amazonaws.com/icons/left_icon_grn.png'/>");
    
-   $('.next-btn-img').append(`
-   <img src='https://shared-img-res.s3.amazonaws.com/icons/right_icon_grn.png'/>`);
+   $('.next-btn-img').append("<img src='https://shared-img-res.s3.amazonaws.com/icons/right_icon_grn.png'/>");
    
-   $('.menubar-img').append(`<img class='menubar-img-css'
-   src='https://s3.amazonaws.com/shared-img-res/livepage_heroku/menubar-icon.png'/>`);
-   $('.scroll-btn-img').append(`<img class='scroll-btn-img-css' id='toc-follow-img'
-   src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/auto-y_icon_33_grn.png'/>`);
+   $('.menubar-img').append("<img class='menubar-img-css' src='https://s3.amazonaws.com/shared-img-res/livepage_heroku/menubar-icon.png'/>");
    
-   $('.toc-btn-img').append(`<img class='toc-btn-img-css toc-btn-img' id='toc-btn-img'
-   src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/toc_icon_h20.png'/>`);
+   $('.scroll-btn-img').append("<img class='scroll-btn-img-css' id='toc-follow-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/auto-y_icon_33_grn.png'/>");
    
-   $('.jr-img').append(`<img class='jr-img-css' 
-   src='https://s3.amazonaws.com/shared-img-res/JR%20logo/JR_20px_wide.png'/>`);
+   $('.toc-btn-img').append("<img class='toc-btn-img-css toc-btn-img' id='toc-btn-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/toc_icon_h20.png'/>");
+   
+   $('.jr-img').append("<img class='jr-img-css' src='https://s3.amazonaws.com/shared-img-res/JR%20logo/JR_20px_wide.png'/>");
 
    // Similar to above, these let the content author add the custom attribute
    // data-link='http://www.whatever.com' to wrap the element in an <a>chor
@@ -13759,6 +13754,7 @@ window.toggleSidebar = function()
 
 
 
+
 window.showToc;
 window.hasToc = true;  // eventually we will want this off for some pages.
 window.$activeTocAnchor; // TOC anchor which this will have the id toc_active
@@ -13774,7 +13770,7 @@ window.addEventListener("hashchange", function() { scrollBy(0, -45) });
 
 $( document ).ready( function() 
 {
-   window.on_screen_console(true, true);
+   window.on_screen_console(false, false); //
 	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
        INITIALIZE GLOBAL VARIABLES */
    window.$tocAnchors   = $('#toc').find('a[href^="#"]'); // sidebar <a>-> headers
@@ -13853,7 +13849,7 @@ $( document ).ready( function()
        CONFIG TO DEVICE AND WINDOW SIZE*/   
 function onWindowResize()
 {
-	if (!window.isMobile && $(window).width() >= 630  && window.hasToc)
+	if (!window.isMobile && $(window).width() >= 800  && window.hasToc)
 	   window.showToc = true;
 	else
 	   window.showToc = false;

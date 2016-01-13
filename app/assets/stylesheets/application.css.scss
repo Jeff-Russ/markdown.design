@@ -96,6 +96,7 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
     -webkit-border-radius: 10px;
     border-radius: 10px; 
    border:2px solid#999!important;  border-color:#94ba65!important;
+
    // recolor the horizontal lines inside the modal window and more of background:
    .modal-footer, .modal-body, .modal-header { background-color: #404040; border-color:#94ba65!important;}
    .close       { margin-left:95%; color: #8FBC8F;  opacity: 1; }
@@ -144,7 +145,7 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
 
 // BUTTONS ._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.
 // base class only:
-%topbtn { text-align:center!important; font-size: 1.3vmax; z-index: 600; }
+%topbtn { text-align:center!important; font-size: 1.3vw; z-index: 600; }
 %topbtn:hover { font-size: 1.3vmax!important;  color:#94ca55!important;}
 
 // use this two as defaults in html but js will quickly override parts of them:
@@ -186,25 +187,47 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
 
 // SPECIAL CASE BUTTONS FOR HOME PAGE:
 
-.abso-w25 { position:absolute; width: 25%!important; }
+%abso-w25 { position:absolute; width: 28%!important; height: 15%!important; 
+float:left;
+}
 
-.tile9x9-row1 { @extend.abso-w25; top: 38%; }
-.tile9x9-row2 { @extend.abso-w25; top: 58%; }
-.tile9x9-row3 { @extend.abso-w25; top: 78%; }
+.tile9x9-row1 { @extend%tile9x9-btn; top: 38%; }
+.tile9x9-row2 { @extend%tile9x9-btn; top: 58%; }
+.tile9x9-row3 { @extend%tile9x9-btn; top: 78%; }
 
-.tile9x9-col1 { left: 5%; }
-.tile9x9-col2 { left: 37%; }
-.tile9x9-col3 { left: 68%; }
-
-.tile9x9-text { width: 80%!important; }
+.tile9x9-col1 { @extend%tile9x9-btn; left: 5%;  }
+.tile9x9-col2 { @extend%tile9x9-btn; left: 37%; }
+.tile9x9-col3 { @extend%tile9x9-btn; left: 68%; }
 
 %tile9x9-btn {
     @extend.btn; @extend.btn-xlarge; @extend.btn-block; @extend.btn-ghosty;
-    font-size:12px!important; padding:0!important;
+    margin:auto!important; @extend%abso-w25;
 }
-.tile9x9-btn_txt1 { @extend%tile9x9-btn; line-height:400%!important; }
-.tile9x9-btn_txt2 { @extend%tile9x9-btn; line-height:140%!important; padding-top:8px!important; }
-.tile9x9-btn_txt3 { @extend%tile9x9-btn; line-height:120%!important; padding-top:4px!important;}
+   //  padding-left:0!important; padding-right:0!important; 
+   //  padding-bottom:0!important;
+
+%btn-text { overflow: hidden; width: auto; font-size:1.4vmax!important; }
+
+.tile9x9-btn_txt1 {
+   @extend%btn-text;
+   line-height: 120%!important; 
+   padding-top: 6%!important;
+   padding-bottom: -8%!important;
+}
+.tile9x9-btn_txt2 { 
+   @extend%btn-text;
+   line-height:120%!important; 
+   padding-top: 1%!important; 
+   padding-bottom:0;
+   margin-bottom: -0.3%!important;
+}
+.tile9x9-btn_txt3 { 
+   @extend%btn-text;
+   line-height:100%!important; 
+   padding-top: 0.5%!important; 
+   padding-bottom:0;
+   margin-bottom: -6%!important;
+}
 
 
 // .prev-btn-img, .next-btn-img { width:1em; margin:0px;}

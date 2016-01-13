@@ -105,7 +105,7 @@ $( document ).ready( function()
        CONFIG TO DEVICE AND WINDOW SIZE*/   
 function onWindowResize()
 {
-	if (!window.isMobile && $(window).width() >= 630  && window.hasToc)
+	if (!window.isMobile && $(window).width() >= 800  && window.hasToc)
 	   window.showToc = true;
 	else
 	   window.showToc = false;
