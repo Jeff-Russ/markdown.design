@@ -9,6 +9,7 @@
 //= require shared
 //= require top_funcs
 // require top_topbar
+//= require oscon
 
 
 window.topbarFixed = true; // default setting

@@ -47,7 +47,11 @@ module Helpers
 #~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
    def ins_parent_dir path, ins
       return path.rpartition('/').first<< ins<< path.rpartition('/').last
-   end; module_function :str_to_bool
+   end; module_function :ins_parent_dir
+#~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+	def ins_after_domain_ext path, ins, domain_ext
+		return path.rpartition(domain_ext).first<< domain_ext<< ins<< path.rpartition(domain_ext).last
+	end; module_function :ins_after_domain_ext
 #~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
    def str_to_hash_between (begin_flag, end_flag, string)
       output_hash = {} # the hash that will store everything 
@@ -72,8 +76,14 @@ module Helpers
    module OpenUri
       include Helpers
 #~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-    def safe_open (str)
-      variations = [str, ins_parent_dir(str, '/jeffruss/'), rm_last_exten(str), str.downcase, 
+    def safe_open (str, view)
+      if (view == :gh) || (view == :ghrm)
+         fixpath = ins_parent_dir(str, '/master/')
+         fixpath = ins_after_domain_ext(fixpath, "Jeff-Russ/", '.com/')
+      else 
+         fixpath = ins_parent_dir(str, '/jeffruss/')
+      end
+      variations = [str, fixpath, rm_last_exten(str), str.downcase, 
                str.capitalize, URI.encode(str)]
       output = false
       variations.each do |vari|

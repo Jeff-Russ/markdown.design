@@ -1,68 +1,69 @@
 
 /* By Jeff Russ https://github.com/Jeff-Russ
 ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._*/
-
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
 
-
-// This jQuery plugin will gather the comments within
-// the current jQuery collection, returning all the
-// comments in a new jQuery collection.
-//
-// NOTE: Comments are wrapped in DIV tags.
+//= require oscon
 
 /*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
     CONFIG TO DEVICE  */    
 window.isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/);
 window.topOffsetInit = function() { window.topOffset = $('#topbar').height(); };
-window.debug = function(text){ $('.debug').append(text + ';' + '\u0020'); };
+// window.debug = function(text){ $('.debug').append(text + ';' + '\u0020'); };
 
 // call "callback" when scrolling has stopped for
 document.scrollTimeout = 500;
 // milliseconds. 
 
-$( document ).ready( function() 
+
+////////////////////////////////////////////////////////////////////////////////
+$( document ).ready( function() ////////////////////////////////////////////////
 {
+   
+   // These allow content author to omit adding and image tag. Simply adding these
+   // to a tag will result in insertion of an image inside the tag with src set:
    $('.prev-btn-img').append("<img src='https://shared-img-res.s3.amazonaws.com/icons/left_icon_grn.png'/>");
+   
    $('.next-btn-img').append("<img src='https://shared-img-res.s3.amazonaws.com/icons/right_icon_grn.png'/>");
-   $('.menubar-img').append("<img class='menubar-img-css'src='https://s3.amazonaws.com/shared-img-res/livepage_heroku/menubar-icon.png'/>");
+   
+   $('.menubar-img').append("<img class='menubar-img-css' src='https://s3.amazonaws.com/shared-img-res/livepage_heroku/menubar-icon.png'/>");
+   
    $('.scroll-btn-img').append("<img class='scroll-btn-img-css' id='toc-follow-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/auto-y_icon_33_grn.png'/>");
+   
    $('.toc-btn-img').append("<img class='toc-btn-img-css toc-btn-img' id='toc-btn-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/toc_icon_h20.png'/>");
+   
    $('.jr-img').append("<img class='jr-img-css' src='https://s3.amazonaws.com/shared-img-res/JR%20logo/JR_20px_wide.png'/>");
 
-
+   // Similar to above, these let the content author add the custom attribute
+   // data-link='http://www.whatever.com' to wrap the element in an <a>chor
    var $btnLinks = $('[data-link]');
    $btnLinks.each(function(){
       var url = $(this).attr('data-link');
       $(this).wrap("<a href='" + url + "'></a>");
    });
-
+   
+   // Similar to $btnLinks, these let the content author add the custom attribute
+   // data-img='http://whatever.com/img.jpg' to insert <img> within the element
    var $appendImg = $('[data-img]');
    $appendImg.each(function(){
       var url = $(this).attr('data-img');
       $(this).append("<img src='" + url + "'></img>");
    });
-
-   // FOR DEMO PURPOSES. DELETE LATER:
-   window.set_js_debug(true);
-   window.log("PEE");
-   window.update("PEE");
-   window.hr();
-   window.log('HAT');
    
-   /*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-      GOOGLE ANALYTICS  */
+   window.on_screen_console(false);
+   
+   // GOOGLE ANALYTICS 
    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m);
    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-   
    ga('create', 'UA-71741017-1', 'auto');
    ga('send', 'pageview');
-   // END google analytics
 
+   // fill out an email form and have it reopen in thier email client ~._.~~._.~
+   // see called function below
    $('#open-mailto').on('click', function(){
       var emailDest = $('#email-dest').val(); 
       var emailSubj = $("#email-subj").val();
@@ -70,8 +71,16 @@ $( document ).ready( function()
       window.buildMailTo(emailDest, emailSubj, emailBody);
    }); 
 
-});
+});// END DOC READY ////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
+
+// CLOSES ANY MODAL WINDOW. HANDY! ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~
+window.close_modal = function () { 
+   $( "button[data-dismiss='modal']").trigger("click");
+};
+
+// FILL OUT EMAIL FOR AND HAVE IT OPEN IN CLIENT ~._.~~._.~~._.~~._.~~._.~~._.~~
 window.buildMailTo = function (address, subject, body) {
    var strMail = 'mailto:' + encodeURIComponent(address)
                + '?subject=' + encodeURIComponent(subject)
@@ -79,7 +88,7 @@ window.buildMailTo = function (address, subject, body) {
    window.location.href = strMail;
 };
 
-
+// REMOVE FAT FROM LONG TITLE AND MAKE IT A FEW WORDS  ~._.~~._.~~._.~~._.~~._.~
 window.tersify = function(string) {
    string = string.replace(/^\d+\.\s*/, ''); // cut off "1. " or similar
    if (string.length > 20) {
@@ -89,6 +98,7 @@ window.tersify = function(string) {
    return string;
 };
 
+// GET A PAGE TITLE FROM THE LAST PART OF URL ( AFTER LAST / )  ~._.~~._.~~._.~~
 window.getDocName = function() {
    var url = window.location.href;   // get url
    var hash = window.location.hash;  // get hash
@@ -98,6 +108,13 @@ window.getDocName = function() {
    return docName;
 };
 
+// USE THE COMMENTS OF HIDDEN ELEMENTS AS DATA TO BE READ!  ~._.~~._.~~._.~~._.~
+// This one is not by me. Credit to Ben Nadel !!! 
+//
+// This jQuery plugin will gather the comments within the current jQuery 
+// collection, returning all the comments in a new jQuery collection.
+//
+// NOTE: Comments are wrapped in DIV tags.
 $.fn.comments = function( blnDeep ){
    var blnDeep = (blnDeep || false);
    var jComments = $( [] );
@@ -138,7 +155,8 @@ $.fn.comments = function( blnDeep ){
    return( jComments );
 };
 
-
+// CALL SOMETHING WHEN SCROLLING HAS STOPPED FOR SOME TIME~._.~~._.~~._.~~._.~~.
+// This one is not by me. Credit to Stephan Muller!!!
 $.fn.scrollEnd = function(callback) {          
   $(this).scroll(function(){
    var $this = $(this);
@@ -148,37 +166,3 @@ $.fn.scrollEnd = function(callback) {
    $this.data('scrollTimeout', setTimeout(callback,document.scrollTimeout));
   });
 };
-
-//========== DEBUGGING TOOLS ===================================================
-
-window.set_js_debug = function(bool){
-   window.js_debug = bool;
-   if (window.js_debug) {
-      $('#js_debug').remove();
-      $("body").append("<p id='js_debug' style='position:fixed; z-index: 9999;\
-                     left:2px; top:-20px;color:#AFD; font-size:12px;\
-                     background-color: #444; opacity:0.5;'></p>");
-   }
-};
-window.log = function(string){
-   if (window.js_debug)
-   $('#js_debug').append("<br />js: " + string);
-};
-window.warn = function(string){
-   if (window.js_debug)
-      $('#js_debug').append("<br />js warning: " + string + "<br />");
-};
-window.err = function(string){
-   if (window.js_debug)
-      $('#js_debug').append("<br />js error: " + string + "<br />");
-};
-window.update = function(string){
-   if (window.js_debug)
-      $('#js_debug').append(" " + string);
-};
-window.hr = function(){
-   $('#js_debug').append("<br />________________________________________");}; 
-window.bar = function(){ 
-   $('#js_debug').append("<br /><br />========================================");};
-window.br  = function() { $('#js_debug').append("<br /><br />");  };
-window.br2 = function() { $('#js_debug').append("<br />"); };

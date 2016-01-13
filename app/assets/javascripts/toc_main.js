@@ -9,6 +9,7 @@
 //= require shared
 //= require toc_funcs
 //= require toc_topbar
+//= require oscon
 
 window.showToc;
 window.hasToc = true;  // eventually we will want this off for some pages.
@@ -25,6 +26,7 @@ window.addEventListener("hashchange", function() { scrollBy(0, -45) });
 
 $( document ).ready( function() 
 {
+   window.on_screen_console(false, false); //
 	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
        INITIALIZE GLOBAL VARIABLES */
    window.$tocAnchors   = $('#toc').find('a[href^="#"]'); // sidebar <a>-> headers
@@ -47,13 +49,15 @@ $( document ).ready( function()
 	
     /*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
        FORMERLY "onPageLoad"  */
-   if(window.location.hash) {   // initial load from url hash
-      if (window.location.hash == "#undefined") {
+   if(window.location.hash)   // initial load from url hash
+   {
+      if (window.location.hash == "#undefined"){
          window.location.hash = '';
          location.reload();
-      }
-      else  window.$topViewElem = $(window.location.hash);
+      } else  
+         window.$topViewElem = $(window.location.hash);
    } else {                     // initial load without url hash
+   
       var $firstSection;
       if ($('.section').size() > 0) { 
          $firstSection = $('.section').first();
@@ -61,7 +65,7 @@ $( document ).ready( function()
       } else if ($('h2').size() > 0){
          $firstSection = $('h2').first();
          window.$topViewElem = $firstSection;
-      } // else? dunno? 
+      }
    }
 
    window.determineSection();
@@ -93,11 +97,14 @@ $( document ).ready( function()
        SET UP MODAL MENUS */
    window.populateModalMenus();
 
-}); 
+}); // END DOCUMENT READY
+
+
 
 /*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.
        CONFIG TO DEVICE AND WINDOW SIZE*/   
-function onWindowResize(){
+function onWindowResize()
+{
 	if (!window.isMobile && $(window).width() >= 630  && window.hasToc)
 	   window.showToc = true;
 	else
