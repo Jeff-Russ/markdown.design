@@ -48,26 +48,26 @@
 	</button>
 	
 	<!--END NAVBAR-->
-	
+</div>
 	<!-- BEGIN MODALS -->
 	
 	<!-- MODAL 1 - select a page -->
 	<div class="modal" id="modal-page-menu" tabindex='-1' role='dialog'>
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<div class="modal-header jr-dark-bg">
+				<div class="modal-header">
 					<button type="button" class="close" data-dismiss='modal'>
 						&times;
 					</button><br>
 				</div>
 				<div class="modal-body">
 					
-					<div class="jr-dark-bg">
+					<div>
 						<div class="row center-text">
 							<h3>Pick a Page</h3>
 						</div>
-						<div class="row spacer center-text">
-							<div id="page-menu">
+						<div class="row spacer center-text" >
+							<div id="page-menu" >
 								<!--inserted by js-->
 							</div>
 						</div>
@@ -82,17 +82,17 @@
 	<div class="modal" id="modal-section-menu" tabindex='-1' role='dialog'>
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<div class="modal-header jr-dark-bg">
-					<button type="button" class="close" data-dismiss='modal'>
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss='modal' 
+					style='font-size:3vmax!important; margin-top:-2% '>
 						&times;
-					</button><br>
+					</button>
+					<div class="center-text">
+						<h3>Pick a Section</h3>
+					</div>
 				</div>
 				<div class="modal-body">
-					
-					<div class="jr-dark-bg">
-						<div class="row center-text">
-							<h3>Pick a Section</h3>
-						</div>
+					<div style="background-color:333232!important;">
 						<div class="row spacer center-text">
 							<%= #render :file => 'layouts/home_menu' 
 							%>
@@ -107,7 +107,7 @@
 		</div>
 	</div>
 	<!-- END MODALS -->
-
+<div class="jr-dark-body ">
 	
 	<div id="sidebar">
 		<div class="toc" id="toc">	

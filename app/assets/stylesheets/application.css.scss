@@ -98,13 +98,15 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
    border:2px solid#999!important;  border-color:#94ba65!important;
 
    // recolor the horizontal lines inside the modal window and more of background:
-   .modal-footer, .modal-body, .modal-header { background-color: #404040; border-color:#94ba65!important;}
+   .modal-header { background-color: #404040; border-color:#94ba65!important;}
+   .modal-footer, .modal-body, .modal-open { background-color:#333232!important; }
    .close       { margin-left:95%; color: #8FBC8F;  opacity: 1; }
    .close:hover { margin-left:95%; color: #94fa55;  opacity: 1; }
 }
 
-// monkey patch for js generated modal menus:
-#section-menu, #page-menu { padding-left: 4%; }
+// monkey patches for js generated modal menus:
+#section-menu, #page-menu {  padding-left: 4%;  }
+.modal-link { width: 125px!important; }//font-size:16px; }
 
 // duplication for non-modal use (menu pages rather than menu modals)
 .subwindow { overflow:hidden; // because inner div had overflowing square corners
@@ -210,23 +212,18 @@ float:left;
 
 .tile9x9-btn_txt1 {
    @extend%btn-text;
-   line-height: 120%!important; 
-   padding-top: 6%!important;
-   padding-bottom: -8%!important;
+   line-height: 150%!important; 
+   margin: 4.5%!important;
 }
 .tile9x9-btn_txt2 { 
    @extend%btn-text;
-   line-height:120%!important; 
-   padding-top: 1%!important; 
-   padding-bottom:0;
-   margin-bottom: -0.3%!important;
+   line-height: 150%!important; 
+   margin: -2%!important; 
 }
 .tile9x9-btn_txt3 { 
    @extend%btn-text;
-   line-height:100%!important; 
-   padding-top: 0.5%!important; 
-   padding-bottom:0;
-   margin-bottom: -6%!important;
+   line-height: 130%!important;
+   margin: -6%!important; 
 }
 
 
@@ -389,8 +386,8 @@ hr.topic       { border-top: 20em; }
              font-size: 12px; line-height: normal; 
 }
 .btn-xlarge { @extend%trans-250ms; padding: 18px 28px; margin-bottom: 30px;
-             font-size:1.2vw; height: 4.3em; line-height: 1.8em;
-             border-radius: 10px; width: 65%; font-weight: 200!important ;
+             font-size: 15px; height: 4.3em; line-height: 1.8em;
+             border-radius: 10px; font-weight: 200!important ;
 }
 .btn-ghost { @extend%trans-250ms; 
              background: transparent!important; color: #ffffd0 !important; 

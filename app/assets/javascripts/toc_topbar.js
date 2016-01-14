@@ -59,9 +59,9 @@ window.populateModalMenus = function ()    // if .md has
       $(".prev-btn").addClass('hidden'); $(".next-btn").addClass('hidden');
    }
    
-   var chunk1 = "<div class='col-xs-4 centered-div'> \
-         <a class='dismiss btn btn-xlarge btn-block btn-danger \
-         btn-ghost modal-link' href='";
+   var chunk1 = "<div class='col-xs-4' style='background-color:inherit;'> \
+         <a class='dismiss btn btn-xlarge btn-danger \
+         btn-ghosty modal-link' href='";
    
    var numOfPages, numOfSections;
     
@@ -187,8 +187,8 @@ function findMenuSources() // determine if & how to populate Pages & Section men
 
 function populateWithBtns($source, $destination, menuSource) 
 {
-   var chunk1 = "<div class='col-xs-4 centered-div'><a class='dismiss btn btn-xlarge btn-block btn-";
-   var chunk2 = " btn-ghost modal-link' href='";
+   var chunk1 = "<div class='col-xs-4' style='background-color:inherit;'><a class='dismiss btn btn-xlarge btn-";
+   var chunk2 = " btn-ghosty modal-link' href='";
    var btnColors = ["info","success","warning","danger","primary"];
    
    var i = 0;

@@ -187,24 +187,20 @@ When I am ready I'll copy all of the _file.md to file.md and save it. Done.
 **Major Issues**
 
 1. Greater height of menu bar on moble devices for toc docs gobbles top of content.
-2. Modal windows just look bad on toc-based docs
+~~2. Modal windows just look bad on toc-based docs~~
 
 **Minor Issues**
 
 1. Strange grey bar in code blocks appears on mobile devices.
-2. Modal window exit button too small on mobile devices.
-3. With landscape aspect ratio + toc, topbar image overflow their buttons
-~~4. Modal window buttons section not centered on mobile devices.~~
-~~5. Text not centered on menu bar buttons for toc based docs.~~
+2. Text on topbar is too small
+3. With landscape aspect ratio + toc, topbar image sometimes overflow their buttons
+~~4. Modal window exit button too small on mobile devices.~~
 
 <!--**Fixed/Added in this most recent commit** -->
 
 <!--1. Better support for non-toc pages!-->
 
-**plans**
-
-1. On the topic of Major Issue #2; Copy the interface from non-toc tile buttons
-   and adapt js file to generate based on those CSS rules.
+<!--**plans**-->
 
 **canceled plans**
 
