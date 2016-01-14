@@ -24,9 +24,9 @@ $( document ).ready( function() ////////////////////////////////////////////////
    
    // These allow content author to omit adding and image tag. Simply adding these
    // to a tag will result in insertion of an image inside the tag with src set:
-   $('.prev-btn-img').append("<img src='https://shared-img-res.s3.amazonaws.com/icons/left_icon_grn.png'/>");
+   $('.prev-btn-img').append("<img class='prev-img-css' src='https://shared-img-res.s3.amazonaws.com/icons/left_icon_grn.png'/>");
    
-   $('.next-btn-img').append("<img src='https://shared-img-res.s3.amazonaws.com/icons/right_icon_grn.png'/>");
+   $('.next-btn-img').append("<img class='next-img-css' src='https://shared-img-res.s3.amazonaws.com/icons/right_icon_grn.png'/>");
    
    $('.menubar-img').append("<img class='menubar-img-css' src='https://s3.amazonaws.com/shared-img-res/livepage_heroku/menubar-icon.png'/>");
    

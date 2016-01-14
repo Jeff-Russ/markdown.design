@@ -190,8 +190,8 @@ When I am ready I'll copy all of the _file.md to file.md and save it. Done.
 
 **Minor Issues**
 
-1. Text on topbar is too small
-2. With landscape aspect ratio + toc, topbar image sometimes overflow their buttons
+~~1. Text on topbar is too small~~
+~~2. With landscape aspect ratio + toc, topbar image sometimes overflow their buttons~~
 3. Strange grey bar in code blocks appears on mobile devices.
 
 <!--**Fixed/Added in this most recent commit** -->

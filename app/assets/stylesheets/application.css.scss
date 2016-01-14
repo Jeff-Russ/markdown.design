@@ -147,8 +147,8 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
 
 // BUTTONS ._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.
 // base class only:
-%topbtn { text-align:center!important; font-size: 1.3vw; z-index: 600; }
-%topbtn:hover { font-size: 1.3vmax!important;  color:#94ca55!important;}
+%topbtn { text-align:center!important; padding-left:0; padding-right:0.2%; font-size: 1.6vmax; z-index: 600; }
+%topbtn:hover { font-size: 1.6vmax!important;  color:#94ca55!important;}
 
 // use this two as defaults in html but js will quickly override parts of them:
 .topbtn           { @extend.btn; @extend%topbtn;
@@ -227,10 +227,10 @@ float:left;
 }
 
 
-// .prev-btn-img, .next-btn-img { width:1em; margin:0px;}
-.scroll-btn-img-css, toc-btn-img-css { width: 2.1em; margin:-3px; }
+ .prev-img-css, .next-img-css { height: 3vh!important;}
+.scroll-btn-img-css, .toc-btn-img-css { height: 3vh!important; margin:-6px; margin-top:-12px!important; }
 .menubar-img-css { width:3.4em; margin:-3px; }
-.jr-img-css { width: 2.8em; }
+.jr-img-css, .logo-url { height: 3vh!important;  margin-top:-5px!important;}
 .btn:focus, .btn:active, .topbtn:focus, .topbtn:active { 
    outline:none!important; // get rid of the blue glow on previously clicked buttons
    color:#94ba65; }
@@ -249,7 +249,7 @@ float:left;
 
 
 .btn-greenwell       { @extend.btn; color:#94ba65; background-color:#3e423e!important; border-color:#94ba65;
-   border:1px solid#999!important; border-radius: 8px!important; 
+   border:1px solid#999!important; border-radius: 8px!important; padding:0; margin:0;
    border-color:#94ba65!important;}
 .btn-greenwell:hover { @extend.btn;  color:#94ca55; background-color:#444949!important; border-color:#94ca55; }
 
