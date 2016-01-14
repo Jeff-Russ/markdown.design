@@ -40,7 +40,7 @@
 
 a:focus, a:active, a:link, // HTML anchors
 a:visited { text-decoration: none;color:#b0cfaa!important; }
-a:hover   { text-decoration: none;color:#e6ffd6!important; }
+a:hover   { text-decoration: none;color:#e6ffd6!important; font-size:inherit;}
 
 li>p     {  margin-right:auto;text-align: justify; text-justify: auto;}
 li>pre   { margin-left: 5px;  background-color: grey; @extend.codeblock; @extend.greenbox2; }
@@ -148,7 +148,9 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
 // BUTTONS ._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.
 // base class only:
 %topbtn { text-align:center!important; padding-left:0; padding-right:0.2%; font-size: 1.6vmax; z-index: 600; }
-%topbtn:hover { font-size: 1.6vmax!important;  color:#94ca55!important;}
+%topbtn:hover { font-size: 1.6vmax!important;  
+   text-align:center!important; padding-left:0!important; padding-right:0.2%!important;
+color:#94ca55!important;}
 
 // use this two as defaults in html but js will quickly override parts of them:
 .topbtn           { @extend.btn; @extend%topbtn;
@@ -251,7 +253,7 @@ float:left;
 .btn-greenwell       { @extend.btn; color:#94ba65; background-color:#3e423e!important; border-color:#94ba65;
    border:1px solid#999!important; border-radius: 8px!important; padding:0; margin:0;
    border-color:#94ba65!important;}
-.btn-greenwell:hover { @extend.btn;  color:#94ca55; background-color:#444949!important; border-color:#94ca55; }
+.btn-greenwell:hover { @extend.btn; font-size:inherit; color:#94ca55; background-color:#444949!important; border-color:#94ca55; }
 
 .markdown    {font-size: 16px; }
 .markdown>h1 {font-size: 6vmin;font-weight: 900;color:#ffffd0;margin-left: 1%;}
