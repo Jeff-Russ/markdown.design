@@ -40,7 +40,7 @@
 
 a:focus, a:active, a:link, // HTML anchors
 a:visited { text-decoration: none;color:#b0cfaa!important; }
-a:hover   { text-decoration: none;color:#e6ffd6!important; font-size:inherit;}
+a:hover   { text-decoration: none;color:#e6ffd6!important; }
 
 li>p     {  margin-right:auto;text-align: justify; text-justify: auto;}
 li>pre   { margin-left: 5px;  background-color: grey; @extend.codeblock; @extend.greenbox2; }
@@ -147,8 +147,8 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
 
 // BUTTONS ._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.
 // base class only:
-%topbtn { text-align:center!important; padding-left:0; padding-right:0.2%; font-size: 1.6vmax; z-index: 600; }
-%topbtn:hover { font-size: 1.6vmax!important;  
+%topbtn { text-align:center!important; padding-left:0; padding-right:0.2%; font-size: 1.4vmax; z-index: 600; }
+%topbtn:hover { font-size: 1.4vmax!important;  
    text-align:center!important; padding-left:0!important; padding-right:0.2%!important;
 color:#94ca55!important;}
 

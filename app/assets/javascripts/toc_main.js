@@ -26,7 +26,11 @@ window.addEventListener("hashchange", function() { scrollBy(0, -45) });
 
 $( document ).ready( function() 
 {
-   window.on_screen_console(false, false); //
+   window.on_screen_console(true, false); 
+   
+   window.oscon_keys(function() { 
+      window.findNewPosition();
+   });
 	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
        INITIALIZE GLOBAL VARIABLES */
    window.$tocAnchors   = $('#toc').find('a[href^="#"]'); // sidebar <a>-> headers
@@ -83,7 +87,7 @@ $( document ).ready( function()
    // call once on load:
    onWindowResize();
    // and add handler for resizing of window:
-   $( window ).resize(onWindowResize());
+   $(window).resize(onWindowResize());
    
 	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
        ADD HANDLERS */

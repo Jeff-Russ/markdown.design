@@ -186,7 +186,8 @@ When I am ready I'll copy all of the _file.md to file.md and save it. Done.
 
 **Major Issues**
 
-1. Greater height of menu bar on moble devices for toc docs gobbles top of content.
+~~1. Greater height of menu bar on moble devices for toc docs gobbles top of content.~~
+2. Topbar prev, next and all section modal item do not update position completely
 
 **Minor Issues**
 
