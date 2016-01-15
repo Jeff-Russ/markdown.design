@@ -5,7 +5,7 @@
 //= require jquery
 //= require jquery_ujs
 
-var html = "<div id='on_screen_console'style='visibility:hidden;position:fixed;z-index:9999;font-size:15px;pointer-events:none;opacity:0.4;text-shadow: 2px 2px #ff0000;'><div id='left_console'style='position:fixed;left:0%;top:0%;width:85%;color:#AFD;'></div><div id='right_console_1'style='position:fixed;left:85%;top:0%;width:15%;height:25%;color:#ADF;'></div><div id='right_console_2'style='position:fixed;left:85%;top:25%;width:15%;height:25%;color:#CDF;'></div><div id='right_console_3'style='position:fixed;left:85%;top:50%;width:15%;height:25%;color:#FCE;'></div><div id='right_console_4'style='position:fixed;left:85%;top:75%;width:15%;height:25%;color:#CDF;'></div></div>";
+var html = "<div id='ocbg' style='background-color:black;visibility:hidden;position:fixed;z-index:9000;pointer-events:none;opacity:1;left:0%;top:0%;height:100%;width:100%;'></div><div id='on_screen_console'style='visibility:hidden;position:fixed;z-index:9999;text-shadow: 2px 2px black;color:#EEF;font-weight:100;font-family:Monaco,Courier New,monospace;font-size:12px;pointer-events:none;'><div id='left_console'style='position:fixed;left:0%;top:0%;width:65%;border:1px solid white;'></div><div id='right_console_1'style='position:fixed;left:75%;top:0%;width:25%;height:25%;border:1px solid white;'></div><div id='right_console_2'style='position:fixed;left:75%;top:25%;width:25%;height:25%;border:1px solid white;'></div><div id='right_console_3'style='position:fixed;left:75%;top:50%;width:25%;height:25%;border:1px solid white;'></div><div id='right_console_4'style='position:fixed;left:75%;top:75%;width:25%;height:25%;border:1px solid white;'></div></div>";
 var pnt_evts = false, on_screen_console_bool, show_on_screen_console_bool;
 //========== ON SCREEN CONSOLE TOGGLE ========================================
 
@@ -15,13 +15,15 @@ window.on_screen_console = function(run, show){
    on_screen_console_bool = run;
    if (on_screen_console_bool) {
       $('#on_screen_console').remove();
+      $('#ocbg').remove();
       $("body").append(html);
-      window.log("ON SCREEN CONSOLE: `d to disable, `e to enable,\
-               h to hide, `s to show, c to clear, f to call passed function");
+      window.log("ON SCREEN CONSOLE: `d to disable, `e to enable, s to show, \
+         h to hide, ` c to clear, f to call passed function");
       window.oscon_keys(true);
    }
    else {
       $('#on_screen_console').remove();
+      $('#ocbg').remove();
       // but don't disable ocs_keys in case user turns back on
    }
    if (arguments.length == 2)
@@ -148,10 +150,12 @@ window.oscon_keys = function(arg)
                if (map[77]) {
                   if (pnt_evts == false) {
                      $('#on_screen_console').attr('pointer-events', "auto");
+                     $('#ocbg').attr('pointer-events', "auto");
                      window.log("Mouse Enabled");
                      pnt_evts = true;
                   }else if (pnt_evts == true) {
                      $('#on_screen_console').attr('pointer-events', "none");
+                     $('#ocbg').attr('pointer-events', "auto");
                      window.log("Mouse Disabled");
                      pnt_evts = false;
                   }

@@ -115,9 +115,8 @@ window.findNewPosition = function()
    
    if (pos < 0)
       window.update(" | "+ pos +"% ")
-   else window.update("#")
-   
-   // window.update("  | "+ ($candidate.position().top - winTop))
+
+   window.update("  | "+ ($candidate.position().top - winTop))
    
    window.determineSection();
    window.updateTopbar();

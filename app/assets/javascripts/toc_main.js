@@ -28,9 +28,11 @@ $( document ).ready( function()
 {
    window.on_screen_console(false, false); 
    
-   window.oscon_keys(function() { 
-      window.findNewPosition();
-   });
+   // window.oscon_keys(function() { 
+   //    window.log1("window.tocFollow = " + window.tocFollow + "<br>window.topOffsetInit() = "+ window.topOffsetInit());
+   //    window.log2("window.location.hash = "+ window.location.hash);
+   //    window.log3("window.currHashName = "+window.currHashName+"<br>window.prevHash = "+window.prevHash+"<br>window.nextHash = "+window.nextHash);
+   // });
 	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
        INITIALIZE GLOBAL VARIABLES */
    window.$tocAnchors   = $('#toc').find('a[href^="#"]'); // sidebar <a>-> headers
