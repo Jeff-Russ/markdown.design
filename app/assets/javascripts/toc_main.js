@@ -26,7 +26,7 @@ window.addEventListener("hashchange", function() { scrollBy(0, -45) });
 
 $( document ).ready( function() 
 {
-   window.on_screen_console(true, false); 
+   window.on_screen_console(false, false); 
    
    window.oscon_keys(function() { 
       window.findNewPosition();
@@ -92,7 +92,7 @@ $( document ).ready( function()
 	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
        ADD HANDLERS */
    $(window).on("scroll", window.findNewPosition);   
-   $(window).scrollEnd(function(){ window.findNewPosition; });
+   // $(window).scrollEnd(function(){ window.findNewPosition; });
    window.$tocAnchors.on('click', window.onTocClick); 
    window.$tocFollowBtn.on('click', window.onTocFollowBtnClick);
 	if (window.hasToc) window.$tocBtn.on('click', window.onTocShowBtnClick); 

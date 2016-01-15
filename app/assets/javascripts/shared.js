@@ -10,8 +10,9 @@
 /*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
     CONFIG TO DEVICE  */    
 window.isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/);
+
+// offset scroll to compensate for topbar which takes 8%.
 window.topOffsetInit = function() { window.topOffset = $('#topbar').height(); };
-// window.debug = function(text){ $('.debug').append(text + ';' + '\u0020'); };
 
 // call "callback" when scrolling has stopped for
 document.scrollTimeout = 500;
@@ -52,8 +53,7 @@ $( document ).ready( function() ////////////////////////////////////////////////
       $(this).append("<img src='" + url + "'></img>");
    });
    
-   window.on_screen_console(false);
-   
+
    // GOOGLE ANALYTICS 
    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

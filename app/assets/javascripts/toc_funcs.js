@@ -79,40 +79,49 @@ function tocFollowBtnRestoreState()
 //  FIND NEW POSITION IN READER ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
 window.findNewPosition = function()
 {  
-   var scrollPos = $(document).scrollTop(); // distace from top
-   // $(window).height() = 
+   var calibrate = window.topOffset * -1;
    
-   var logger = "Nothing was found";
-   window.log('Searching. current pos=' + scrollPos)
+   var winHeight = $(window).height() - calibrate,
+   winTop = $(document).scrollTop() + calibrate, 
+   winBottom = winTop + winHeight,
+   $candidate, rerun = true;
    
    // Iterate all <a> descendant of <nav> (the links to locations)
-   window.$tocAnchors.each( function () 
+   window.$tocAnchors.each( function()
    { 
-      var $thisLink = $(this);                      // toc link item
-      var $thisRefElem = $($thisLink.attr("href")); // corresponding target
-      var thisRefElHeight = $thisRefElem.height();
-      var thisRefElPos =        // It's distance from the top minus topbar height
-            $thisRefElem.position().top - window.topOffset;
-      
-      // check position of element with id="#somthing" 
-      
-      if (thisRefElPos <= scrollPos && thisRefElPos + thisRefElHeight > scrollPos) 
-      { 	
-         var hash = $thisLink.attr('href');
+      if (rerun) 
+      {
+         var $thisLink = $(this);                        // toc link item
+         var $thisRefElem = $($thisLink.attr("href"));   // corresponding target
+         var thisRefElPos = $thisRefElem.position().top; // target of link
          
-         window.$topViewElem = $(hash);
-         
-         logger = "!!!!!" + window.$topViewElem.text()
-         
-         window.determineSection();
-         window.updateTopbar();
-         window.updateToc();
-      } else {
-         window.log("|"+$thisRefElem.attr('id')+'='+thisRefElPos+'FAIL' )
+         if (thisRefElPos < winTop) { 
+            $candidate = $thisRefElem;
+            
+         }else if (thisRefElPos < winBottom && thisRefElPos > winTop) { 
+            window.$topViewElem = $thisRefElem; 
+            rerun = false;
+            
+         }else {
+            window.$topViewElem = $candidate;
+            rerun = false;
+         }
       }
    });
-   window.log(logger);
-   window.update(" " + scrollPos)
+   
+   var pos = window.$topViewElem.position().top - winTop
+   pos = pos / winHeight * 100
+   pos = Math.round(pos)
+   
+   if (pos < 0)
+      window.update(" | "+ pos +"% ")
+   else window.update("#")
+   
+   // window.update("  | "+ ($candidate.position().top - winTop))
+   
+   window.determineSection();
+   window.updateTopbar();
+   window.updateToc();
 };
 
 //  DETERMINE SECTION ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
@@ -169,15 +178,18 @@ window.determineSection = function()
    window.$activeTocAnchor = $('a[href="'+activeAnchorHash+'"]', '#toc');
 };
 
+var currScroll;
+
 //  ACTIVE LINK AND AUTO SCROLL OF TOC ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~_
 window.updateToc = function ()
 {
+   window.log1(window.tocFollow)
    // needs window.$tocAnchors and $activeTocAnchor
    // and sets the following for use elsewhere:
    window.$tocAnchors.attr('id', 'toc-inactive');
    window.$activeTocAnchor.attr('id', 'toc-active');
    
-   window.currScroll; // global only to retain value between calls (only used here)
+   currScroll; // global only to retain value between calls (only used here)
 
    if (window.tocFollow)  
    {  
@@ -194,11 +206,16 @@ window.updateToc = function ()
       else                    { offset = offset;    }
       
       if ((activePos > sidebarHeight * .95) || 
-          (window.currScroll < activePos + sidebarUpper) )
+          (currScroll < activePos + sidebarUpper) )
       {
+         $('#sidebar').stop();
+         window.log2("scrolling toc...")
          $('#sidebar').animate( { scrollTop: offset}, 300);
-         window.currScroll = offset;
+         currScroll = offset;
       } 
+      else {
+         $('#sidebar').stop();
+      }
    }
 };
 

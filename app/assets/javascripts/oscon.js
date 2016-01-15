@@ -5,7 +5,8 @@
 //= require jquery
 //= require jquery_ujs
 
-
+var html = "<div id='on_screen_console'style='visibility:hidden;position:fixed;z-index:9999;font-size:15px;pointer-events:none;opacity:0.4;text-shadow: 2px 2px #ff0000;'><div id='left_console'style='position:fixed;left:0%;top:0%;width:85%;color:#AFD;'></div><div id='right_console_1'style='position:fixed;left:85%;top:0%;width:15%;height:25%;color:#ADF;'></div><div id='right_console_2'style='position:fixed;left:85%;top:25%;width:15%;height:25%;color:#CDF;'></div><div id='right_console_3'style='position:fixed;left:85%;top:50%;width:15%;height:25%;color:#FCE;'></div><div id='right_console_4'style='position:fixed;left:85%;top:75%;width:15%;height:25%;color:#CDF;'></div></div>";
+var pnt_evts = false, on_screen_console_bool, show_on_screen_console_bool;
 //========== ON SCREEN CONSOLE TOGGLE ========================================
 
 // Put this in document ready. window.on_screen_console(true, true); fully enables
@@ -14,11 +15,9 @@ window.on_screen_console = function(run, show){
    on_screen_console_bool = run;
    if (on_screen_console_bool) {
       $('#on_screen_console').remove();
-      $("body").append("<p id='on_screen_console' style='position:fixed; z-index: 9999;\
-                     left:2px; top:-20px;color:#AFD; font-size:12px;visiblity:hidden;\
-                     background-color: #444; opacity:0.5;pointer-events:none'></p>");
+      $("body").append(html);
       window.log("ON SCREEN CONSOLE: `d to disable, `e to enable,\
-               `h to hide, `s to show, `c to clear, `f to call passed function");
+               h to hide, `s to show, c to clear, f to call passed function");
       window.oscon_keys(true);
    }
    else {
@@ -35,48 +34,68 @@ window.on_screen_console = function(run, show){
 // log a newline followed by a non urgent message:
 window.log = function(string){
    if (on_screen_console_bool)
-   $('#on_screen_console').append("<br />js: " + string);
+   $('#left_console').append("<br />js: " + string);
+};
+// set (replace) text on right pane:
+window.log1 = function(string){
+   if (on_screen_console_bool)
+   $('#right_console_1').html("<br />" + string);
+};
+// set (replace) text on right pane:
+window.log2 = function(string){
+   if (on_screen_console_bool)
+   $('#right_console_2').html("<br />" + string);
+};
+// set (replace) text on right pane:
+window.log3 = function(string){
+   if (on_screen_console_bool)
+   $('#right_console_3').html("<br />" + string);
+};
+// set (replace) text on right pane:
+window.log4 = function(string){
+   if (on_screen_console_bool)
+   $('#right_console_4').html("<br />" + string);
 };
 // log a newline followed by a warning message:
 window.warn = function(string){
    if (on_screen_console_bool)
-      $('#on_screen_console').append("<br />js warning: " + string + "<br />");
+      $('#left_console').append("<br />js warning: " + string + "<br />");
 };
 // log a newline followed by a error message:
 window.err = function(string){
    if (on_screen_console_bool)
-      $('#on_screen_console').append("<br />js error: " + string + "<br />");
+      $('#left_console').append("<br />js error: " + string + "<br />");
 };
 // append a message without insertion of a newline. Prepended with a space:
 window.update = function(string){
    if (on_screen_console_bool)
-      $('#on_screen_console').append(" " + string);
+      $('#left_console').append(" " + string);
 };
 // append a message without insertion of a newline. Not repended with a space:
 window.type = function(string){
    if (on_screen_console_bool)
-      $('#on_screen_console').append(string);
+      $('#left_console').append(string);
 };
 // print a newline followed by a horiz. rule type thingo:
 window.hr = function(){
-   $('#on_screen_console').append("<br />________________________________________");
+   $('#left_console').append("<br />________________________________________");
 }; 
 // print a newline followed by a bar-looking thing:
 window.bar = function(){ 
-   $('#on_screen_console').append("<br /><br />========================================");
+   $('#left_console').append("<br /><br />========================================");
 };
 // print a line break:
 window.br  = function() { 
-   $('#on_screen_console').append("<br /><br />");  
+   $('#left_console').append("<br /><br />");  
 };
 // print two line breaks:
 window.br2 = function() { 
-   $('#on_screen_console').append("<br />"); 
+   $('#left_console').append("<br />"); 
 };
 
 // clear console:
 window.clear_on_screen_console = function(){
-   window.on_screen_console(true);
+   window.on_screen_console(true, show_on_screen_console_bool);
 };
 
 
@@ -98,30 +117,50 @@ window.oscon_keys = function(arg)
    
    
    if (bool){
+      $(document).unbind('keydown');
+      $(document).unbind('keyup');
+      
       $(document).keydown( function(e) {
          if (e.keyCode in map) 
          { 
             map[e.keyCode] = true;
             
-            if (map[192] && map[69])
-               window.on_screen_console(true);      // ( `e ) enable
-            if (map[192] && map[68])
-               window.on_screen_console(false);     // ( `d ) disable
-            if (map[192] && map[83])
+            if (map[192] && map[83]) {
                show_on_screen_console(true);        // ( `s ) show
-            if (map[192] && map[72])
-               show_on_screen_console(false);       // ( `h ) hide
-            if (map[192] && map[67])
-               window.clear_on_screen_console();    // ( `c ) clear
-            if (wehavefunc) {
-               if (map[192] && map[70]) {
-               func();                  // ( `f ) call passed function
+            }
+            if (map[192] && map[68]) {
+               window.on_screen_console(false);     // ( `d ) disable
+            }
+            if (map[192] && map[69]) {
+               window.on_screen_console(true);      // ( `e ) enable
+            } 
+            if (on_screen_console_bool && show_on_screen_console_bool)
+            {  
+               if (map[72]) {
+                  show_on_screen_console(false);   // h hide
+               }
+               if (map[67]) {
+                  window.clear_on_screen_console(); // c clear
+               }
+               if (wehavefunc && map[70]) {
+                  func();                           // f call function arg
+               }
+               if (map[77]) {
+                  if (pnt_evts == false) {
+                     $('#on_screen_console').attr('pointer-events', "auto");
+                     window.log("Mouse Enabled");
+                     pnt_evts = true;
+                  }else if (pnt_evts == true) {
+                     $('#on_screen_console').attr('pointer-events', "none");
+                     window.log("Mouse Disabled");
+                     pnt_evts = false;
+                  }
                }
             }
          }
       }).keyup(function(e) { 
          if (e.keyCode in map) { map[e.keyCode] = false;}
-         
+      // e.stop();
       });  
    }
    else{
@@ -168,8 +207,10 @@ var on_screen_console_bool;
 
 // make console messages visible:
 function show_on_screen_console(bool){ 
+   show_on_screen_console_bool = bool;
+   window.log(show_on_screen_console_bool)
    if (bool) { 
-      $('#on_screen_console').css('visibility','visible'); 
+      $('#on_screen_console').css('visibility','visible');
    } else { 
       $('#on_screen_console').css('visibility','hidden' ); 
    }
