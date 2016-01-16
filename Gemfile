@@ -69,6 +69,7 @@ gem 'redcarpet', '~> 2.1.1'
 gem 'coderay', '~> 1.0.7'
 #gem 'reverse_markdown'
 
+
 # equivalent for secrets.yml of that Figaro
 # gem 'heroku_secrets', github: 'alexpeattie/heroku_secrets'  # rake heroku:secrets RAILS_ENV=production
 

@@ -1,29 +1,29 @@
 
-<div id="page"      style="display: none;"><!--LivePage--></div>
-<div id='home-url'  style="display: none;"><!--http://www.jeffruss.com--></div>
+<div id="page"      style="display: none;"><!--md.design--></div>
+<div id='home-url'  style="display: none;"><!--http://www.markdown.design--></div>
 <div id='logo-url'  style="display: none;"><!--https://s3.amazonaws.com/shared-img-res/JR%20logo/JR_20px_wide.png--></div>
 
-<div class="page-menu" id='On Github'    style="display: none;"><!--https://github.com/Jeff-Russ/LivePage-md--></div>
-<div class="page-menu" id='Author'    style="display: none;"><!--http://www.jeffruss.com--></div>
-<div class="page-menu" id='Example 1' style="display: none;"><!--http://www.jeffruss.com/?docs=bootstrap--></div>
-<div class="page-menu" id='Example 2' style="display: none;"><!--http://www.jeffruss.com/?docs=rails--></div>
+<div class="page-menu" id='On Github'    style="display: none;"><!--https://github.com/Jeff-Russ/MarkdownDesign--></div>
+<div class="page-menu" id='Author'    style="display: none;"><!--http://www.markdown.design--></div>
+<div class="page-menu" id='Example 1' style="display: none;"><!--http://www.markdown.design/?docs=bootstrap--></div>
+<div class="page-menu" id='Example 2' style="display: none;"><!--http://www.markdown.design/?docs=rails--></div>
 
 <div class="section" id='About'></div> 
 
-# LivePage-md
+# MarkdownDesign
 
 a real-time web page generator assembled from simple markdown documents
 
 ### Description
 
-LivePage-md take pre-existing links to markdown documents and renders them into 
+MarkdownDesign take pre-existing links to markdown documents and renders them into 
 full attractive web pages, complete with a generated table of contents, a modal 
 window with links to important sections, and a second modal window with links to
 other documents. 
 
-LivePage-md is a single url that takes the url of a markdown document as a query 
+MarkdownDesign is a single url that takes the url of a markdown document as a query 
 string parameter. Therefore, url's to any permalink markdown document already 
-exist for LivePage-md without any setup. Since LivePage-md renders the page in 
+exist for MarkdownDesign without any setup. Since MarkdownDesign renders the page in 
 real-time, update to pages are done instantly when ever the original markdown 
 file is modified. This makes deployment and editing take zero effort.  
 
@@ -32,12 +32,12 @@ It's eeeeeeeeeeasy!
 <p class='github-only'> Here is a sample:</p>
 
 <img class='github-only' 
-src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/LivePage-md_preview.png'>
+src='https://s3.amazonaws.com/shared-img-res/livepage_heroku/LivePage-md_preview.png'>
 
-Interested? Here is it's [home](http://livepage-md.herokuapp.com/?file=README) where you can
+Interested? Here is it's [home](http://www.markdown.design/?file=README) where you can
 view this very same README.md with it's rendering.
 
-LivePage-md is possible because of the RedCarpet Gem.
+MarkdownDesign is possible because of the RedCarpet Gem.
 
 <div class="section" id='Instructions'></div> 
 
@@ -47,10 +47,10 @@ LivePage-md is possible because of the RedCarpet Gem.
 
 #### 1. The URL
 
-The base URL you will use for your pagest is http://livepage-md.herokuapp.com/.
+The base URL you will use for your pages is http://www.markdown.design/.
 Or you can feel free to re-deploy from the source to a new location. For instruction 
 on that, refer to my [Ruby on Rails How-To](http://www.howto.jeffruss.com/?aws=jeffruss/rails)
-, which is created using LivePage-md!
+, which is created using MarkdownDesign!
 
 For each page you will append a parameter to the URL in one of the formats:  
     
@@ -66,17 +66,17 @@ The `github` parameter prepends `https://raw.githubusercontent.com/`
 For example, if you have a bucket called `bucket` with a file in it called `sample.md` 
 your custome address for this is:  
   
-`http://livepage-md.herokuapp.com/bucket/sample.md`  
+`http://www.markdown.design/bucket/sample.md`  
 
 If you have the file in a folder within the bucket, your custom address would 
 reflect this.  
   
 Using the other formats would provide you with addresses like these:
 
-`http://livepage-md.herokuapp.com/?github=Jeff-Russ/LivePage-md/master/README.md`
-`http://livepage-md.herokuapp.com/?https=/www.example/sample.md`  
-`http://livepage-md.herokuapp.com/?http=/www.example/sample.md`  
-`http://livepage-md.herokuapp.com/?url=https://www.example/sample.md` 
+`http://www.markdown.design/?github=Jeff-Russ/MarkdownDesign/master/README.md`
+`http://www.markdown.design/?https=/www.example/sample.md`  
+`http://www.markdown.design/?http=/www.example/sample.md`  
+`http://www.markdown.design/?url=https://www.example/sample.md` 
 
 These addresses are longer but they allow you to use hosting other than Amazon's. 
 
@@ -138,8 +138,8 @@ with id's reflecting the desired labels. Example:
 
 Here is an example of what should go on the very top of your markdown file:
 
-    <div id="page"      style="display: none;"><!-- LivePage-md --></div>
-    <div id='home-url'  style="display: none;"><!-- https://github.com/Jeff-Russ/LivePage-md --></div>
+    <div id="page"      style="display: none;"><!-- MarkdownDesign --></div>
+    <div id='home-url'  style="display: none;"><!-- https://github.com/Jeff-Russ/MarkdownDesign --></div>
     <div id='logo-url'  style="display: none;"><!-- https://s3.amazonaws.com/shared-img-res/JR%20logo/JR_20px_wide.png --></div>
 
 The `<div id="page"` tag provides the name you want to appear on the browser tab 
@@ -161,7 +161,7 @@ Sublime Text to edit them. When I hit save, the live site is automatically updat
 
 ### Recomendations
 
-The way LivePage-md shares a common url makes it easy for the authors identities 
+The way MarkdownDesign shares a common url makes it easy for the authors identities 
 to get muddled up, which could be a good wiki-like quality or it could be a bad. 
 I recommend putting all of your md files in a folder/bucket with your name so it 
 appears in the web address. Another more obvious option is to place your name 
