@@ -99,9 +99,11 @@ class MdController < ApplicationController
 		
 		if text == '' # ( might be empty if we got if from internal file)
 			if (@lpmd[:path] == '') || (@lpmd[:path].ends_with? '/')
-				log "Insuffient path. Assuming jeffruss.com/ root"; bar;
-				@lpmd[:path] = s3 << "jeffruss/home.md"
-				@lpmd[:view] = 'top'
+				
+				log "Insuffient path indicate home page. Using home_page and home_view global variables"; bar;
+				@lpmd[:path] = Rails.application.config.home_page
+				@lpmd[:view] = Rails.application.config.home_view
+				
 				update "Fetching #{@lpmd[:path]}"; bar;
 				text = safe_open(@lpmd[:path], @lpmd[:domain]) # safe_open is from helper file
 			else
