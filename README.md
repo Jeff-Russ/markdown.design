@@ -3,27 +3,27 @@
 <div id='home-url'  style="display: none;"><!--http://www.markdown.design--></div>
 <div id='logo-url'  style="display: none;"><!--https://s3.amazonaws.com/shared-img-res/JR%20logo/JR_20px_wide.png--></div>
 
-<div class="page-menu" id='On Github'    style="display: none;"><!--https://github.com/Jeff-Russ/MarkdownDesign--></div>
+<div class="page-menu" id='On Github'    style="display: none;"><!--https://github.com/Jeff-Russ/markdown.design--></div>
 <div class="page-menu" id='Author'    style="display: none;"><!--http://www.markdown.design--></div>
 <div class="page-menu" id='Example 1' style="display: none;"><!--http://www.markdown.design/?docs=bootstrap--></div>
 <div class="page-menu" id='Example 2' style="display: none;"><!--http://www.markdown.design/?docs=rails--></div>
 
 <div class="section" id='About'></div> 
 
-# MarkdownDesign
+# Markdown.design
 
 a real-time web page generator assembled from simple markdown documents
 
 ### Description
 
-MarkdownDesign take pre-existing links to markdown documents and renders them into 
+Markdown.design take pre-existing links to markdown documents and renders them into 
 full attractive web pages, complete with a generated table of contents, a modal 
 window with links to important sections, and a second modal window with links to
 other documents. 
 
-MarkdownDesign is a single url that takes the url of a markdown document as a query 
+Markdown.design is a single url that takes the url of a markdown document as a query 
 string parameter. Therefore, url's to any permalink markdown document already 
-exist for MarkdownDesign without any setup. Since MarkdownDesign renders the page in 
+exist for markdown.design without any setup. Since markdown.design renders the page in 
 real-time, update to pages are done instantly when ever the original markdown 
 file is modified. This makes deployment and editing take zero effort.  
 
@@ -37,7 +37,7 @@ src='https://s3.amazonaws.com/shared-img-res/livepage_heroku/LivePage-md_preview
 Interested? Here is it's [home](http://www.markdown.design/?file=README) where you can
 view this very same README.md with it's rendering.
 
-MarkdownDesign is possible because of the RedCarpet Gem.
+Markdown.design is possible because of the RedCarpet Gem.
 
 <div class="section" id='Instructions'></div> 
 
@@ -50,7 +50,7 @@ MarkdownDesign is possible because of the RedCarpet Gem.
 The base URL you will use for your pages is http://www.markdown.design/.
 Or you can feel free to re-deploy from the source to a new location. For instruction 
 on that, refer to my [Ruby on Rails How-To](http://www.howto.jeffruss.com/?aws=jeffruss/rails)
-, which is created using MarkdownDesign!
+, which is created using markdown.design!
 
 For each page you will append a parameter to the URL in one of the formats:  
     
@@ -73,7 +73,7 @@ reflect this.
   
 Using the other formats would provide you with addresses like these:
 
-`http://www.markdown.design/?github=Jeff-Russ/MarkdownDesign/master/README.md`
+`http://www.markdown.design/?github=Jeff-Russ/markdown.design/master/README.md`
 `http://www.markdown.design/?https=/www.example/sample.md`  
 `http://www.markdown.design/?http=/www.example/sample.md`  
 `http://www.markdown.design/?url=https://www.example/sample.md` 
@@ -138,8 +138,8 @@ with id's reflecting the desired labels. Example:
 
 Here is an example of what should go on the very top of your markdown file:
 
-    <div id="page"      style="display: none;"><!-- MarkdownDesign --></div>
-    <div id='home-url'  style="display: none;"><!-- https://github.com/Jeff-Russ/MarkdownDesign --></div>
+    <div id="page"      style="display: none;"><!-- markdown.design --></div>
+    <div id='home-url'  style="display: none;"><!-- https://github.com/Jeff-Russ/markdown.design --></div>
     <div id='logo-url'  style="display: none;"><!-- https://s3.amazonaws.com/shared-img-res/JR%20logo/JR_20px_wide.png --></div>
 
 The `<div id="page"` tag provides the name you want to appear on the browser tab 
@@ -161,7 +161,7 @@ Sublime Text to edit them. When I hit save, the live site is automatically updat
 
 ### Recomendations
 
-The way MarkdownDesign shares a common url makes it easy for the authors identities 
+The way markdown.design shares a common url makes it easy for the authors identities 
 to get muddled up, which could be a good wiki-like quality or it could be a bad. 
 I recommend putting all of your md files in a folder/bucket with your name so it 
 appears in the web address. Another more obvious option is to place your name 
