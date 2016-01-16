@@ -1,8 +1,11 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   
-  config.home_page = ENV["HOME_PAGE"]
-  config.home_view = ENV["HOME_VIEW"]
+  # config.home_page = ENV["HOME_PAGE"]
+  # config.home_view = ENV["HOME_VIEW"]
+  
+  config.home_page = 'https://s3.amazonaws.com/jeffruss/home.md'
+  config.home_view = 'top'
   
   # Code is not reloaded between requests.
   config.cache_classes = true
