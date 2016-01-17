@@ -67,6 +67,18 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
 .hidden       { visibility: hidden; width: 12%!important;} 
 .fixed        { position: fixed;    }
 .absolute     { position: absolute; }
+
+// added for geturl.md:
+.danger-border { border-color:#CF4135; }
+.info-border   { border-color:#EBA304; }
+.success-border{ border-color:#57AE3A; }
+.info-border   { border-color:#50B7DD; }
+.abso        { position:absolute; }
+.padbtm-2pct { padding-bottom:2%; }
+.pad-3pct    { padding:3%         }
+.txt-L       { text-align:left;   }
+.txt-C       { text-align:center; }
+
 .github-only  { display: none; }
 .center-text  { position:relative!important;  // both in modal 
                 text-align:center!important;} // and directory page
