@@ -107,7 +107,7 @@ class MdController < ApplicationController
 				
 				log "Insuffient path indicate home page. Using home_page and home_view global variables"; bar;
 				
-				@lpmd[:path] = 'https://s3.amazonaws.com/jeffruss/geturl.md'
+				@lpmd[:path] = 'https://s3.amazonaws.com/markdown.design/geturl.md'
 				@lpmd[:view] = 'top'
 				
 				update "Fetching #{@lpmd[:path]}"; bar;
