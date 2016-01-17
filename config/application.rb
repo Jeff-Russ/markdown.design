@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module MarkdownDesign
   class Application < Rails::Application
     
-    config.home_page = 'https://s3.amazonaws.com/jeffruss/geturl.md'
+    config.home_page = 'https://s3.amazonaws.com/markdown.design/geturl.md'
     config.home_view = 'top'
     
     # config.home_page = 'https://s3.amazonaws.com/jeffruss/get_url.md'
