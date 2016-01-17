@@ -1,8 +1,8 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   
-  config.home_page = ENV["HOME_PAGE"]
-  config.home_view = ENV["HOME_VIEW"]
+  config.home_page = {:host => ENV['HOME_PAGE']}
+  config.home_view = {:host => ENV['HOME_VIEW']}
   
   # config.home_page = 'https://s3.amazonaws.com/jeffruss/home.md'
   # config.home_view = 'top'
