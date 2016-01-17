@@ -9,8 +9,11 @@ Bundler.require(*Rails.groups)
 module MarkdownDesign
   class Application < Rails::Application
     
-    config.home_page = 'https://s3.amazonaws.com/jeffruss/home.md'
+    config.home_page = 'https://s3.amazonaws.com/jeffruss/geturl.md'
     config.home_view = 'top'
+    
+    # config.home_page = 'https://s3.amazonaws.com/jeffruss/get_url.md'
+    # config.home_view = 'top'
   
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

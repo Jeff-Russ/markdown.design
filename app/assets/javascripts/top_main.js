@@ -10,6 +10,7 @@
 //= require top_funcs
 // require top_topbar
 //= require oscon
+//= geturl
 
 
 window.topbarFixed = true; // default setting

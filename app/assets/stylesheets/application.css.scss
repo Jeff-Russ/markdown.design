@@ -204,11 +204,26 @@ float:left;
 .tile9x9-col3 { @extend%tile9x9-btn; left: 68%; }
 
 %tile9x9-btn {
-    @extend.btn; @extend.btn-xlarge; @extend.btn-block; @extend.btn-ghosty;
-    margin:auto!important; @extend%abso-w25;
+    @extend.tile-btn; margin:auto!important; @extend%abso-w25;
 }
+.tile-btn { @extend.btn; @extend.btn-xlarge; @extend.btn-block; @extend.btn-ghosty;}
+
+.tile { @extend.btn-ghosty; border: 1px solid; border-radius: 10px;
+   padding:0; padding-left:5%; margin-bottom: 5%;
+   font-weight:150!important; color:#94ba65!important; 
+   display: flex; flex-direction: column; justify-content: center;
+   overflow:scroll;
+}
+.tile:hover {font-weight:150!important; color:#B2CFA6!important;}
    //  padding-left:0!important; padding-right:0!important; 
    //  padding-bottom:0!important;
+   
+// .tile > input { font-size: 2vmin; }
+   
+.radio > label { font-weight:100; // font-size: 2vmin; 
+   color:#B2CF9E!important; height:1%!important; }
+   
+.radio > label > input { background-color:green; height:1%!important;}
 
 %btn-text { overflow: hidden; width: auto; font-size:1.4vmax!important; }
 
@@ -253,7 +268,9 @@ float:left;
 .btn-greenwell       { @extend.btn; color:#94ba65; background-color:#3e423e!important; border-color:#94ba65;
    border:1px solid#999!important; border-radius: 8px!important; padding:0; margin:0;
    border-color:#94ba65!important;}
-.btn-greenwell:hover { @extend.btn; font-size:inherit; color:#94ca55; background-color:#444949!important; border-color:#94ca55; }
+.btn-greenwell:hover { @extend.btn; font-size:inherit; color:#94ca55;
+   padding:0; margin:0;
+   background-color:#444949!important; border-color:#94ca55; }
 
 .markdown    {font-size: 16px; }
 .markdown>h1 {font-size: 6vmin;font-weight: 900;color:#ffffd0;margin-left: 1%;}
@@ -396,7 +413,7 @@ hr.topic       { border-top: 20em; }
    &:hover { background-color: #444949 !important; } 
 }
 .btn-ghosty{ @extend%trans-250ms; 
-             color:#94ba65!important; background-color:#3e423e!important;
+             color:#94ba65; background-color:#3e423e!important;
    &:hover { background-color: #404040!important; } 
    
 }
