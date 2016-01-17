@@ -27,7 +27,7 @@ window.addEventListener("hashchange", function() { scrollBy(0, -45) });
 
 $( document ).ready( function() 
 {
-   window.on_screen_console(true, false); 
+   window.on_screen_console(false, false); 
    
    // window.oscon_keys(function() { 
    //    window.log1("window.tocFollow = " + window.tocFollow + "<br>window.topOffsetInit() = "+ window.topOffsetInit());

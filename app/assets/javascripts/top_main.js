@@ -27,7 +27,7 @@ function onWindowResize(){
 
 $( document ).ready( function() 
 {
-   window.on_screen_console(true, false);
+   window.on_screen_console(false, false);
 	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
        CONFIG TO DEVICE AND WINDOW */  
    // call once on load:
@@ -103,7 +103,7 @@ window.geturlInit = function(){
       }
       window.log(source+' '+view+' '+bucket+' '+s3path+' '+ghUser+' '+ghRepo);
       window.log(output);
-      $('#geturl-output').val(output);
-      
+      $('#geturl-output').attr('href', output);
+      $('#geturl-output').text(output);
    });
 }; 
