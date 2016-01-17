@@ -107,6 +107,12 @@
 	<!-- END MODALS -->
 <div class="jr-dark-body ">
 	
+	<% if @lpmd[:hide_toc] %>
+		<div style="display: none;" id="hide_toc" data-bool="true"></div>
+	<% else %>
+		<div style="display: none;" id="hide_toc" data-bool="false"></div>
+	<% end %>
+	
 	<div id="sidebar">
 		<div class="toc" id="toc">	
 			<%= @lpmd[:toc] %> 

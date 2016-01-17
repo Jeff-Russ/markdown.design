@@ -30,7 +30,7 @@ module Helpers
    def update string; if @@debug_on then print " #{string}" end
    end; module_function :update
    
-   def hr; puts; 40.times do print "_" end; puts; end; module_function :hr
+   def hr;  puts; 40.times do print "_" end; puts; end; module_function :hr
    def bar; puts; puts;  40.times do print "#" end; puts; end; module_function :bar
    def br;  puts       end; module_function :br
    def br2; puts; puts end; module_function :br2
@@ -79,7 +79,7 @@ module Helpers
     def safe_open (str, view)
       if (view == :gh) || (view == :ghrm)
          fixpath = ins_parent_dir(str, '/master/')
-         fixpath = ins_after_domain_ext(fixpath, "Jeff-Russ/", '.com/')
+         # fixpath = ins_after_domain_ext(fixpath, "Jeff-Russ/", '.com/')
       else 
          fixpath = ins_parent_dir(str, '/jeffruss/')
       end

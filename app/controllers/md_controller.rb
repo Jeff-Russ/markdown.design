@@ -22,10 +22,11 @@ class MdController < ApplicationController
 # The following query string params are used to set the file path and desired
 # view option. If their value is empty they merely indicated desired view.
 		@lpmd[:path] = ''  # this will hold complete path
+		@lpmd[:hide_toc] = nil;
 		
 		view_params = { 
 			pages: "top", top: "top",  
-			docs:   "toc", toc: "toc",  
+			docs:  "toc", toc: "toc",  doch: "toc",
 			full: "full", side: "side"
 		}
 		bar; log "Looking for views..."
@@ -46,6 +47,10 @@ class MdController < ApplicationController
 				update "Set to default view '#{@lpmd[:view]}'"
 			end
 		end
+		
+		# to hide toc 
+		if params.key? :doch then @lpmd[:hide_toc] = true end
+				
 		update "\n view = '#{@lpmd[:view]}'\n path = '#{@lpmd[:path]}'"
 		# strings for prepending to partial path:
 		s3    = 'https://s3.amazonaws.com/'          

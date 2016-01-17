@@ -12,6 +12,7 @@
 //= require oscon
 
 window.showToc;
+window.hide_toc;
 window.hasToc = true;  // eventually we will want this off for some pages.
 window.$activeTocAnchor; // TOC anchor which this will have the id toc_active
 window.$topViewElem;     // element in reader w/ id hash currently on top of view 
@@ -26,7 +27,7 @@ window.addEventListener("hashchange", function() { scrollBy(0, -45) });
 
 $( document ).ready( function() 
 {
-   window.on_screen_console(false, false); 
+   window.on_screen_console(true, false); 
    
    // window.oscon_keys(function() { 
    //    window.log1("window.tocFollow = " + window.tocFollow + "<br>window.topOffsetInit() = "+ window.topOffsetInit());
@@ -36,13 +37,26 @@ $( document ).ready( function()
 	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
        INITIALIZE GLOBAL VARIABLES */
    window.$tocAnchors   = $('#toc').find('a[href^="#"]'); // sidebar <a>-> headers
-   window.topOffset     = $('#topbar').height();    // height of topbar 
+   window.topOffset     = $('#topbar').height();    // height of topbar
    window.$tocFollowBtn = $('#toc-follow-btn');
-   window.tocFollow     = true;  window.$tocFollowBtn.addClass("on");
    window.$tocBtn       = $('#toc-btn');
-   window.showToc       = true;  window.$tocFollowBtn.addClass("on");
+   window.log("#hide_toc " + $('#hide_toc').attr('data-bool') );
+   if ( $('#hide_toc').attr('data-bool') == "true") {
+      window.hide_toc  = true;
+      window.tocFollow = true;  window.$tocFollowBtn.addClass("on");
+      window.showToc   = true;  window.$tocFollowBtn.addClass("on");
+   } else {
+      window.hide_toc  = false;
+      window.tocFollow = false;  window.$tocFollowBtn.removeClass("on");
+      window.showToc   = false;  window.$tocFollowBtn.removeClass("on");
+      window.onTocShowBtnClick();
+      window.tocFollowBtnState()
+   }
+   
 	window.topOffsetInit();
 	if (!window.HomeUrl) window.HomeUrl = "http://www.jeffruss.com/";
+	
+	
 	
 	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
        ADD HOME URL AND LOGO 	*/
@@ -112,7 +126,7 @@ $( document ).ready( function()
 function onWindowResize()
 {
 	if (!window.isMobile && $(window).width() >= 800  && window.hasToc)
-	   window.showToc = true;
+	   if (window.hide_toc == false) window.showToc = true;
 	else
 	   window.showToc = false;
 	   window.toggleSidebar();

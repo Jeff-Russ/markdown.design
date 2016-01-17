@@ -48,7 +48,7 @@ window.onTocShowBtnClick = function()
       window.showToc = true;
       $('#toc-btn-img').css('opacity','.9');
       window.toggleSidebar(); 
-        tocFollowBtnRestoreState();
+        window.tocFollowBtnState();
    } else { 
       window.showToc = false;
       $('#toc-btn-img').css('opacity','.4');
@@ -61,10 +61,10 @@ window.onTocShowBtnClick = function()
 //  TOC FOLLOW BUTTONS LISTENER  ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.
 window.onTocFollowBtnClick = function(){
    $(this).toggleClass('on');
-    tocFollowBtnRestoreState();
+    window.tocFollowBtnState();
 };
 
-function tocFollowBtnRestoreState()
+window.tocFollowBtnState = function()
 {
    if ( window.$tocFollowBtn.hasClass('on') ) {
       window.tocFollow = true;
@@ -182,7 +182,6 @@ var currScroll;
 //  ACTIVE LINK AND AUTO SCROLL OF TOC ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~_
 window.updateToc = function ()
 {
-   window.log1(window.tocFollow)
    // needs window.$tocAnchors and $activeTocAnchor
    // and sets the following for use elsewhere:
    window.$tocAnchors.attr('id', 'toc-inactive');
