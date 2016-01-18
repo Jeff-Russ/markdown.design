@@ -1,10 +1,7 @@
-
-/* By Jeff Russ https://github.com/Jeff-Russ
-~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._*/
-
-//= require jquery
-//= require jquery_ujs
-//= require bootstrap-sprockets
+ /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
+|        docview_funcs.js   part of markdown.design                             |
+|        By Jeff Russ       https://github.com/Jeff-Russ                        |
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
 
 /*
 INTER-FILE INTERDEPENDENCIES:

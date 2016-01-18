@@ -1,3 +1,9 @@
+ /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
+|        pageview_funcs.js  part of markdown.design                             |
+|        By Jeff Russ       https://github.com/Jeff-Russ                        |
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
+
+
 //  TOGGLE TOPBAR SPACING  ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~
 window.toggleTopbarSpacing = function() 
 {

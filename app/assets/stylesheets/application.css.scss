@@ -74,13 +74,9 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
 .info-border   { border-color:#61BBDD!important; }
 .modal-bg-grey { background-color: #333232;      }
 .abso          { position: absolute!important;   }
-// .L10-W80-abs   { left:10%;width:80%;position:absolute;}
-// .T34-W44-abs   { top:34%; width:44%;position:absolute;}
-// .margbtm-3pct  { margin-bottom:  3%!important; }
-// .padbtm-2pct   { padding-bottom: 2%!important; }
-// .pad-3pct      { padding: 3%!important;        }
 .pad-none      { padding: 0!important;         }
 .txt-L         { text-align: left!important;   }
+.txt-C         { text-align: center!important;   }
 
 .github-only  { display: none; }
 .center-text  { position:relative!important;  // both in modal 
@@ -168,15 +164,12 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
 color:#94ca55!important;}
 
 // use this two as defaults in html but js will quickly override parts of them:
-.topbtn           { @extend.btn; @extend%topbtn;
-                    margin-top: 9px; height: 44px; }
-.topbtn-greenwell { @extend.btn-greenwell; @extend%topbtn; 
-                    top: 1%; height: 6%; }
+.topbtn           { @extend.btn; @extend%topbtn; margin-top: 9px; height: 44px; }
+.topbtn-greenwell { @extend.btn-greenwell; @extend%topbtn; top: 1%; height: 6%; }
                     
                     
-.topbar-btn { display:table!important; padding:0;
-    @extend.topbtn-greenwell; position:fixed; 
-}
+.topbar-btn { display:table!important; padding:0; @extend.topbtn-greenwell; position:fixed; }
+
 // topbtn's
 .LL-7-toc { width: 8%; left:  4%; }
 .LR-7-toc { width: 8%; left: 13%; }
@@ -204,11 +197,10 @@ color:#94ca55!important;}
 .RC-9 { width: 8%;  left: 75%; } 
 .RR-9 { width: 8%;  left: 85%; }
 
-// SPECIAL CASE BUTTONS FOR HOME PAGE:
 
-%abso-w25 { position:absolute; width: 28%!important; height: 10%!important; 
-float:left;
-}
+// SPECIAL CASE BUTTONS FOR HOME PAGE:
+%abso-w25 { position:absolute; float:left; width: 28%!important; height: 10%!important; }
+%tile9x9-btn { @extend.tile-btn; margin:auto!important; @extend%abso-w25; }
 
 .tile9x9-row1 { @extend%tile9x9-btn; top: 38%; }
 .tile9x9-row2 { @extend%tile9x9-btn; top: 58%; }
@@ -218,10 +210,13 @@ float:left;
 .tile9x9-col2 { @extend%tile9x9-btn; left: 37%; }
 .tile9x9-col3 { @extend%tile9x9-btn; left: 68%; }
 
-%tile9x9-btn {
-    @extend.tile-btn; margin:auto!important; @extend%abso-w25;
+
+.tile-btn { 
+   @extend.btn; 
+   @extend.btn-xlarge; 
+   @extend.btn-block; 
+   @extend.btn-ghosty;
 }
-.tile-btn { @extend.btn; @extend.btn-xlarge; @extend.btn-block; @extend.btn-ghosty;}
 
 .tile { @extend.btn-ghosty; border: 1px solid; border-radius: 10px;
    padding:0; padding-left:5%; margin-bottom: 5%;
@@ -254,8 +249,8 @@ float:left;
 }
 .tile9x9-btn_txt3 { 
    @extend%btn-text;
-   line-height: 130%!important;
-   margin: -6%!important; 
+   line-height: 105%!important;
+   margin: -6%!important; padding-top:5px!important;
 }
 
 
@@ -293,9 +288,9 @@ float:left;
 .markdown>h3 {font-size: 5vmin;font-weight: 100;color:#cdb;   margin-left: 3%;}
 .markdown>h4 {font-size: 4vmin;font-weight: 100;color:#cdb;   margin-left: 4%;}
 .markdown>h5 {font-size: 3vmin;font-weight: 100;color:#cdb;   margin-left: 5%;}
-.markdown>p  {              margin-right: auto;color:#b0bfaa;margin-left: 5%;}
-.markdown>p>strong         {  font-weight: 900;color:#cdb;                   }
-.markdown>ol, .markdown>ul {                                 margin-left: 2%;}
+.markdown>p  {               margin-right: auto;color:#b0bfaa;margin-left: 5%;}
+.markdown>p>strong          {  font-weight: 900;color:#cdb;                   }
+.markdown>ol, .markdown>ul  {                                 margin-left: 2%;}
 
 // usually markdown
 #reader      { left: 2%; position:absolute; width: 64%; } // the left pane
@@ -419,8 +414,8 @@ hr.topic       { border-top: 20em; }
 .btn-large { @extend%trans-250ms; padding: 18px 28px; margin-bottom: 30px;
              font-size: 12px; line-height: normal; 
 }
-.btn-xlarge { @extend%trans-250ms; padding: 18px 28px; margin-bottom: 30px;
-             font-size: 15px; height: 4.3em; line-height: 1.8em;
+.btn-xlarge { @extend%trans-250ms; padding-top: 13px; padding-bottom:10px;// margin-bottom: 30px;
+             font-size: 15px; //line-height: 1.8em; //height: 4.3em;
              border-radius: 10px; font-weight: 200!important ;
 }
 .btn-ghost { @extend%trans-250ms; 

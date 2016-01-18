@@ -1,12 +1,8 @@
+ /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
+|        docview_topbar.js  part of markdown.design                             |
+|        By Jeff Russ       https://github.com/Jeff-Russ                        |
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
 
-/* By Jeff Russ https://github.com/Jeff-Russ
-~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._*/
-
-//= require jquery
-//= require jquery_ujs
-//= require bootstrap-sprockets
-
-//= require toc_main
 /*
 INTER-FILE INTERDEPENDENCIES:
    VARS READ:      window.currHashName    window.prevHash      window.nextHash

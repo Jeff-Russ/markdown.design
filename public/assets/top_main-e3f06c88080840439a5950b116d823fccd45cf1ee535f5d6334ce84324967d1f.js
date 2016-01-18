@@ -13918,9 +13918,10 @@ return jQuery;
 
 
 
-// oscon.js
-/* By Jeff Russ https://github.com/Jeff-Russ
-~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._*/
+ /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
+|        oscon.js           part of markdown.design                             |
+|        By Jeff Russ       https://github.com/Jeff-Russ                        |
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
 
 
 
@@ -14140,10 +14141,11 @@ function show_on_screen_console(bool){
    }
 }
 ;
-
-/* By Jeff Russ https://github.com/Jeff-Russ
-~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._*/
-
+ /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
+|        shared.js          part of markdown.design                             |
+|        By Jeff Russ       https://github.com/Jeff-Russ                        |
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
+ 
 
 
 
@@ -14169,15 +14171,10 @@ $( document ).ready( function() ////////////////////////////////////////////////
    // These allow content author to omit adding and image tag. Simply adding these
    // to a tag will result in insertion of an image inside the tag with src set:
    $('.prev-btn-img').append("<img class='prev-img-css' src='https://shared-img-res.s3.amazonaws.com/icons/left_icon_grn.png'/>");
-   
    $('.next-btn-img').append("<img class='next-img-css' src='https://shared-img-res.s3.amazonaws.com/icons/right_icon_grn.png'/>");
-   
    $('.menubar-img').append("<img class='menubar-img-css' src='https://s3.amazonaws.com/shared-img-res/livepage_heroku/menubar-icon.png'/>");
-   
    $('.scroll-btn-img').append("<img class='scroll-btn-img-css' id='toc-follow-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/auto-y_icon_33_grn.png'/>");
-   
    $('.toc-btn-img').append("<img class='toc-btn-img-css toc-btn-img' id='toc-btn-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/toc_icon_h20.png'/>");
-   
    $('.jr-img').append("<img class='jr-img-css' src='https://s3.amazonaws.com/shared-img-res/JR%20logo/JR_20px_wide.png'/>");
 
    // Similar to above, these let the content author add the custom attribute
@@ -14200,10 +14197,12 @@ $( document ).ready( function() ////////////////////////////////////////////////
    // GOOGLE ANALYTICS 
    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m);
+   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-   ga('create', 'UA-71741017-1', 'auto');
+   
+   ga('create', 'UA-71741017-2', 'auto');
    ga('send', 'pageview');
+
 
    // fill out an email form and have it reopen in thier email client ~._.~~._.~
    // see called function below
@@ -14309,6 +14308,12 @@ $.fn.scrollEnd = function(callback) {
    $this.data('scrollTimeout', setTimeout(callback,document.scrollTimeout));
   });
 };
+ /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
+|        top_funcs.js       part of markdown.design                             |
+|        By Jeff Russ       https://github.com/Jeff-Russ                        |
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
+
+
 //  TOGGLE TOPBAR SPACING  ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~
 window.toggleTopbarSpacing = function() 
 {
@@ -14352,54 +14357,13 @@ window.onToggleTopbarBtnClick = function()
       $("html, body").animate( { scrollTop: -window.topOffset }, 300);
    }
 };
-
-/* By Jeff Russ https://github.com/Jeff-Russ
-~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._*/
-
-
-
+ /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
+|        geturl.js          part of markdown.design                             |
+|        By Jeff Russ       https://github.com/Jeff-Russ                        |
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
 
 
 
-
-// require top_topbar
-
-//= geturl
-
-
-window.topbarFixed = true; // default setting
-window.desktopMode;
-	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-       CONFIG TO DEVICE AND WINDOW SIZE*/   
-function onWindowResize(){
-	if (!window.isMobile && $(window).width() >= 630)
-	   window.desktopMode = true;
-	else
-	   window.desktopMode = false;
-	window.toggleTopbarSpacing();
-}
-
-$( document ).ready( function() 
-{
-   window.on_screen_console(true, false);
-	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-       CONFIG TO DEVICE AND WINDOW */  
-   // call once on load:
-   onWindowResize();
-   
-	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-       ADD HANDLERS */
-   window.topOffsetInit();
-   $( window ).resize(onWindowResize()); // and add handler for resizing of window
-   $('#toggle-topbar-btn').on('click', window.onToggleTopbarBtnClick); 
-   window.geturlInit();
-   
-	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-       ADD HOME URL AND LOGO 	*/
-   window.HomeUrl = $('#home-url').comments().html();
-	$('.home-url').attr('href', window.HomeUrl);
-
-}); 
 
 
 
@@ -14416,7 +14380,6 @@ window.geturlInit = function(){
       view   = $('input[name=geturl-view-radio]:checked').val(),
       mdd = 'http://www.markdown.design/',
       output;
-      
       
       if (source == "amazon_s3"){
          var
@@ -14457,7 +14420,55 @@ window.geturlInit = function(){
       }
       window.log(source+' '+view+' '+bucket+' '+s3path+' '+ghUser+' '+ghRepo);
       window.log(output);
-      $('#geturl-output').val(output);
-      
+      $('#geturl-output').attr('href', output);
+      $('#geturl-output').text(output);
    });
 }; 
+ /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
+|        top_main.js        part of markdown.design                             |
+|        By Jeff Russ       https://github.com/Jeff-Russ                        |
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
+
+
+
+
+
+
+// require top_topbar
+
+
+
+
+window.topbarFixed = true; // default setting
+window.desktopMode;
+	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+       CONFIG TO DEVICE AND WINDOW SIZE*/   
+function onWindowResize(){
+	if (!window.isMobile && $(window).width() >= 630)
+	   window.desktopMode = true;
+	else
+	   window.desktopMode = false;
+	window.toggleTopbarSpacing();
+}
+
+$( document ).ready( function() 
+{
+   window.on_screen_console(false, false);
+	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+       CONFIG TO DEVICE AND WINDOW */  
+   // call once on load:
+   onWindowResize();
+   
+	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+       ADD HANDLERS */
+   window.topOffsetInit();
+   $( window ).resize(onWindowResize()); // and add handler for resizing of window
+   $('#toggle-topbar-btn').on('click', window.onToggleTopbarBtnClick); 
+   window.geturlInit();
+   
+	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+       ADD HOME URL AND LOGO 	*/
+   window.HomeUrl = $('#home-url').comments().html();
+	$('.home-url').attr('href', window.HomeUrl);
+
+}); 

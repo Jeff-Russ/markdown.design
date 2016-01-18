@@ -3,14 +3,8 @@
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
 
-Rails.application.config.assets.precompile += %w( toc_main.js )
-Rails.application.config.assets.precompile += %w( top_main.js )
-
-# Rails.application.config.assets.precompile += %w( main.js )
-# Rails.application.config.assets.precompile += %w( toc_funcs.js )
-# Rails.application.config.assets.precompile += %w( topbar_funcs.js )
-# Rails.application.config.assets.precompile += %w( jquery_extend.js )
-
+Rails.application.config.assets.precompile += %w( docview.main.js )
+Rails.application.config.assets.precompile += %w( pageview.main.js )
 
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path

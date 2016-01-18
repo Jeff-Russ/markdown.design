@@ -1,11 +1,8 @@
-
-/* By Jeff Russ https://github.com/Jeff-Russ
-~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._*/
-//= require jquery
-//= require jquery_ujs
-//= require bootstrap-sprockets
-
-//= require oscon
+ /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
+|        shared.js          part of markdown.design                             |
+|        By Jeff Russ       https://github.com/Jeff-Russ                        |
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
+ 
 
 /*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
     CONFIG TO DEVICE  */    
@@ -18,7 +15,6 @@ window.topOffsetInit = function() { window.topOffset = $('#topbar').height(); };
 document.scrollTimeout = 500;
 // milliseconds. 
 
-
 ////////////////////////////////////////////////////////////////////////////////
 $( document ).ready( function() ////////////////////////////////////////////////
 {
@@ -26,15 +22,10 @@ $( document ).ready( function() ////////////////////////////////////////////////
    // These allow content author to omit adding and image tag. Simply adding these
    // to a tag will result in insertion of an image inside the tag with src set:
    $('.prev-btn-img').append("<img class='prev-img-css' src='https://shared-img-res.s3.amazonaws.com/icons/left_icon_grn.png'/>");
-   
    $('.next-btn-img').append("<img class='next-img-css' src='https://shared-img-res.s3.amazonaws.com/icons/right_icon_grn.png'/>");
-   
    $('.menubar-img').append("<img class='menubar-img-css' src='https://s3.amazonaws.com/shared-img-res/livepage_heroku/menubar-icon.png'/>");
-   
    $('.scroll-btn-img').append("<img class='scroll-btn-img-css' id='toc-follow-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/auto-y_icon_33_grn.png'/>");
-   
    $('.toc-btn-img').append("<img class='toc-btn-img-css toc-btn-img' id='toc-btn-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/toc_icon_h20.png'/>");
-   
    $('.jr-img').append("<img class='jr-img-css' src='https://s3.amazonaws.com/shared-img-res/JR%20logo/JR_20px_wide.png'/>");
 
    // Similar to above, these let the content author add the custom attribute
@@ -57,10 +48,12 @@ $( document ).ready( function() ////////////////////////////////////////////////
    // GOOGLE ANALYTICS 
    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m);
+   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-   ga('create', 'UA-71741017-1', 'auto');
+   
+   ga('create', 'UA-71741017-2', 'auto');
    ga('send', 'pageview');
+
 
    // fill out an email form and have it reopen in thier email client ~._.~~._.~
    // see called function below
@@ -165,4 +158,8 @@ $.fn.scrollEnd = function(callback) {
    }
    $this.data('scrollTimeout', setTimeout(callback,document.scrollTimeout));
   });
+};
+
+window.removeExtension = function(string){
+   return string.substr(0, string.lastIndexOf('.')) || string;
 };

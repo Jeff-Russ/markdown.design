@@ -13918,236 +13918,11 @@ return jQuery;
 
 
 
-// oscon.js
-/* By Jeff Russ https://github.com/Jeff-Russ
-~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._*/
-
-
-
-
-var html = "<div id='ocbg' style='background-color:black;visibility:hidden;position:fixed;z-index:9000;pointer-events:none;opacity:1;left:0%;top:0%;height:100%;width:100%;'></div><div id='on_screen_console'style='visibility:hidden;position:fixed;z-index:9999;text-shadow: 2px 2px black;color:#EEF;font-weight:100;font-family:Monaco,Courier New,monospace;font-size:12px;pointer-events:none;'><div id='left_console'style='position:fixed;left:0%;top:0%;width:65%;border:1px solid white;'></div><div id='right_console_1'style='position:fixed;left:75%;top:0%;width:25%;height:25%;border:1px solid white;'></div><div id='right_console_2'style='position:fixed;left:75%;top:25%;width:25%;height:25%;border:1px solid white;'></div><div id='right_console_3'style='position:fixed;left:75%;top:50%;width:25%;height:25%;border:1px solid white;'></div><div id='right_console_4'style='position:fixed;left:75%;top:75%;width:25%;height:25%;border:1px solid white;'></div></div>";
-var pnt_evts = false, on_screen_console_bool, show_on_screen_console_bool;
-//========== ON SCREEN CONSOLE TOGGLE ========================================
-
-// Put this in document ready. window.on_screen_console(true, true); fully enables
-// window.on_screen_console(true, false); enables but hides.
-window.on_screen_console = function(run, show){
-   on_screen_console_bool = run;
-   if (on_screen_console_bool) {
-      $('#on_screen_console').remove();
-      $('#ocbg').remove();
-      $("body").append(html);
-      window.log("ON SCREEN CONSOLE: `d to disable, `e to enable, s to show, \
-         h to hide, ` c to clear, f to call passed function");
-      window.oscon_keys(true);
-   }
-   else {
-      $('#on_screen_console').remove();
-      $('#ocbg').remove();
-      // but don't disable ocs_keys in case user turns back on
-   }
-   if (arguments.length == 2)
-      show_on_screen_console(show);
-};
-
-
-//========== ON SCREEN CONSOLE TOOLS ===========================================
+ /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
+|        shared.js          part of markdown.design                             |
+|        By Jeff Russ       https://github.com/Jeff-Russ                        |
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
  
-// log a newline followed by a non urgent message:
-window.log = function(string){
-   if (on_screen_console_bool)
-   $('#left_console').append("<br />js: " + string);
-};
-// set (replace) text on right pane:
-window.log1 = function(string){
-   if (on_screen_console_bool)
-   $('#right_console_1').html("<br />" + string);
-};
-// set (replace) text on right pane:
-window.log2 = function(string){
-   if (on_screen_console_bool)
-   $('#right_console_2').html("<br />" + string);
-};
-// set (replace) text on right pane:
-window.log3 = function(string){
-   if (on_screen_console_bool)
-   $('#right_console_3').html("<br />" + string);
-};
-// set (replace) text on right pane:
-window.log4 = function(string){
-   if (on_screen_console_bool)
-   $('#right_console_4').html("<br />" + string);
-};
-// log a newline followed by a warning message:
-window.warn = function(string){
-   if (on_screen_console_bool)
-      $('#left_console').append("<br />js warning: " + string + "<br />");
-};
-// log a newline followed by a error message:
-window.err = function(string){
-   if (on_screen_console_bool)
-      $('#left_console').append("<br />js error: " + string + "<br />");
-};
-// append a message without insertion of a newline. Prepended with a space:
-window.update = function(string){
-   if (on_screen_console_bool)
-      $('#left_console').append(" " + string);
-};
-// append a message without insertion of a newline. Not repended with a space:
-window.type = function(string){
-   if (on_screen_console_bool)
-      $('#left_console').append(string);
-};
-// print a newline followed by a horiz. rule type thingo:
-window.hr = function(){
-   $('#left_console').append("<br />________________________________________");
-}; 
-// print a newline followed by a bar-looking thing:
-window.bar = function(){ 
-   $('#left_console').append("<br /><br />========================================");
-};
-// print a line break:
-window.br  = function() { 
-   $('#left_console').append("<br /><br />");  
-};
-// print two line breaks:
-window.br2 = function() { 
-   $('#left_console').append("<br />"); 
-};
-
-// clear console:
-window.clear_on_screen_console = function(){
-   window.on_screen_console(true, show_on_screen_console_bool);
-};
-
-
-
-//========== ON SCREEN CONSOLE KEY COMBOS =======================================
-
-
-// Key combinations: back-tick (`) and a letter
-// Call with true to enable key listening
-window.oscon_keys = function(arg)
-{
-   var bool, func, wehavefunc;
-   
-   if (typeof(arg) === "boolean")  
-      bool = arg;
-   else /*if (typeof v === "function")*/ { 
-      bool = wehavefunc = true; func = arg; 
-   } 
-   
-   
-   if (bool){
-      $(document).unbind('keydown');
-      $(document).unbind('keyup');
-      
-      $(document).keydown( function(e) {
-         if (e.keyCode in map) 
-         { 
-            map[e.keyCode] = true;
-            
-            if (map[192] && map[83]) {
-               show_on_screen_console(true);        // ( `s ) show
-            }
-            if (map[192] && map[68]) {
-               window.on_screen_console(false);     // ( `d ) disable
-            }
-            if (map[192] && map[69]) {
-               window.on_screen_console(true);      // ( `e ) enable
-            } 
-            if (on_screen_console_bool && show_on_screen_console_bool)
-            {  
-               if (map[72]) {
-                  show_on_screen_console(false);   // h hide
-               }
-               if (map[67]) {
-                  window.clear_on_screen_console(); // c clear
-               }
-               if (wehavefunc && map[70]) {
-                  func();                           // f call function arg
-               }
-               if (map[77]) {
-                  if (pnt_evts == false) {
-                     $('#on_screen_console').attr('pointer-events', "auto");
-                     $('#ocbg').attr('pointer-events', "auto");
-                     window.log("Mouse Enabled");
-                     pnt_evts = true;
-                  }else if (pnt_evts == true) {
-                     $('#on_screen_console').attr('pointer-events', "none");
-                     $('#ocbg').attr('pointer-events', "auto");
-                     window.log("Mouse Disabled");
-                     pnt_evts = false;
-                  }
-               }
-            }
-         }
-      }).keyup(function(e) { 
-         if (e.keyCode in map) { map[e.keyCode] = false;}
-      // e.stop();
-      });  
-   }
-   else{
-      $(document).unbind('keydown');
-      $(document).unbind('keyup');
-   }
-}
-
-// missing numbers: 10-12,14,15,21-26,28-31,41-44,49,58-64,
-//                  94,95,108,124-143,146-185,193-218
-var map = {
-   8:false/*backspace*/,9:false/*tab*/,13:false/*enter*/,16:false/*shift*/,
-   17:false/*ctrl*/,18:false/*alt*/,19:false/*pausebreak*/,20:false/*capslock*/,
-   27:false/*escape*/,32:false/*space*/,33:false/*pageup*/,34:false/*pagedown*/,
-   35:false/*end*/,36:false/*home*/,37:false/*left*/,38:false/*up*/,39:false/*right*/,
-   40:false/*donw*/,45:false/*ins*/,46:false/*del*/,48:false/*0*/,49:false/*1*/,
-   50:false/*2*/,51:false/*3*/,52:false/*4*/,53:false/*5*/,54:false/*6*/,
-   55:false/*7*/,56:false/*8*/,57:false/**/,65:false/*a*/,66:false/*b*/,
-   67:false/*c*/,68:false/*d*/,69:false/*e*/,70:false/*f*/,71:false/*h*/,
-   72:false/*g*/,73:false/*i*/,74:false/*j*/,75:false/*k*/,76:false/*l*/,
-   77:false/*m*/,78:false/*n*/,79:false/*o*/,80:false/*p*/,81:false/*q*/,
-   82:false/*r*/,83:false/*s*/,84:false/*t*/,85:false/*u*/,86:false/*v*/,
-   87:false/*w*/,88:false/*x*/,89:false/*y*/,90:false/*z*/,91:false/*left_window*/,
-   92:false/*right_window*/,93:false/*select*/,96:false/*pad#0*/,97:false/*pad#1*/,
-   98:false/*pad#2*/,99:false/*pad#3*/,100:false/*pad#4*/,101:false/*pad#5*/,
-   102:false/*pad#6*/,103:false/*pad#7*/,104:false/*pad#8*/,105:false/*pad#9*/,
-   106:false/*mult*/,107:false/*add*/,109:false/*subt*/,110:false/*dec_pnt*/,
-   111:false/*divide*/,112:false/*f1*/,113:false/*f2*/,114:false/*f3*/,
-   115:false/*f4*/,116:false/*f5*/,117:false/*f6*/,118:false/*f7*/,
-   119:false/*f8*/,120:false/*f9*/,121:false/*f10*/,122:false/*f11*/,
-   123:false/*f12*/,144:false/*numlock*/,145:false/*scrolllock*/,
-   186:false/*semicolon*/,187:false/*equalsign*/,188:false/*comma*/,
-   189:false/*dash*/,190:false/*period*/,191:false/*forwardslash*/,
-   192:false/*backtick*/,219:false/*openbracket*/,220:false/*backslash*/,
-   221:false/*closebraket*/,222:false/*singlequote*/,
-};
-
-//========== OTHER LOCALS  =====================================================
-
-var on_screen_console_bool;
-// Enables console with arg of true. Messages will not be visible from this call
-// but key mappings will. Press `s (backtick-s ) to make visible (show).
-// `h to hide, `d to disble, `e to enable, `c to clear. 
-
-// make console messages visible:
-function show_on_screen_console(bool){ 
-   show_on_screen_console_bool = bool;
-   window.log(show_on_screen_console_bool)
-   if (bool) { 
-      $('#on_screen_console').css('visibility','visible');
-   } else { 
-      $('#on_screen_console').css('visibility','hidden' ); 
-   }
-}
-;
-
-/* By Jeff Russ https://github.com/Jeff-Russ
-~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._*/
-
-
-
-
-
 
 /*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
     CONFIG TO DEVICE  */
@@ -14161,7 +13936,6 @@ window.topOffsetInit = function() { window.topOffset = $('#topbar').height(); };
 document.scrollTimeout = 500;
 // milliseconds. 
 
-
 ////////////////////////////////////////////////////////////////////////////////
 $( document ).ready( function() ////////////////////////////////////////////////
 {
@@ -14169,15 +13943,10 @@ $( document ).ready( function() ////////////////////////////////////////////////
    // These allow content author to omit adding and image tag. Simply adding these
    // to a tag will result in insertion of an image inside the tag with src set:
    $('.prev-btn-img').append("<img class='prev-img-css' src='https://shared-img-res.s3.amazonaws.com/icons/left_icon_grn.png'/>");
-   
    $('.next-btn-img').append("<img class='next-img-css' src='https://shared-img-res.s3.amazonaws.com/icons/right_icon_grn.png'/>");
-   
    $('.menubar-img').append("<img class='menubar-img-css' src='https://s3.amazonaws.com/shared-img-res/livepage_heroku/menubar-icon.png'/>");
-   
    $('.scroll-btn-img').append("<img class='scroll-btn-img-css' id='toc-follow-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/auto-y_icon_33_grn.png'/>");
-   
    $('.toc-btn-img').append("<img class='toc-btn-img-css toc-btn-img' id='toc-btn-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/toc_icon_h20.png'/>");
-   
    $('.jr-img').append("<img class='jr-img-css' src='https://s3.amazonaws.com/shared-img-res/JR%20logo/JR_20px_wide.png'/>");
 
    // Similar to above, these let the content author add the custom attribute
@@ -14200,10 +13969,12 @@ $( document ).ready( function() ////////////////////////////////////////////////
    // GOOGLE ANALYTICS 
    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m);
+   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-   ga('create', 'UA-71741017-1', 'auto');
+   
+   ga('create', 'UA-71741017-2', 'auto');
    ga('send', 'pageview');
+
 
    // fill out an email form and have it reopen in thier email client ~._.~~._.~
    // see called function below
@@ -14310,12 +14081,13 @@ $.fn.scrollEnd = function(callback) {
   });
 };
 
-/* By Jeff Russ https://github.com/Jeff-Russ
-~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._*/
-
-
-
-
+window.removeExtension = function(string){
+   return string.substr(0, string.lastIndexOf('.')) || string;
+};
+ /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
+|        docview_funcs.js   part of markdown.design                             |
+|        By Jeff Russ       https://github.com/Jeff-Russ                        |
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
 
 /*
 INTER-FILE INTERDEPENDENCIES:
@@ -14561,148 +14333,10 @@ window.toggleSidebar = function()
       $('.RR-7-toc').addClass('RR-7').removeClass('RR-7-toc');
    }
 };
-
-/* By Jeff Russ https://github.com/Jeff-Russ
-~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._*/
-
-
-
-
-
-
-
-
-
-
-window.showToc;
-window.hide_toc;
-window.hasToc = true;  // eventually we will want this off for some pages.
-window.$activeTocAnchor; // TOC anchor which this will have the id toc_active
-window.$topViewElem;     // element in reader w/ id hash currently on top of view 
-window.$tocBtn;
-window.tocFollowBtn;
-// window.root = location.protocol + '//' + location.host; // not used but maybe later
-
-// to fix navbar hiding to of content when linksing to spot in page:
-window.homeURl;
-window.addEventListener("hashchange", function() { scrollBy(0, -45) });
-
-
-$( document ).ready( function() 
-{
-   window.on_screen_console(true, false); 
-   
-   // window.oscon_keys(function() { 
-   //    window.log1("window.tocFollow = " + window.tocFollow + "<br>window.topOffsetInit() = "+ window.topOffsetInit());
-   //    window.log2("window.location.hash = "+ window.location.hash);
-   //    window.log3("window.currHashName = "+window.currHashName+"<br>window.prevHash = "+window.prevHash+"<br>window.nextHash = "+window.nextHash);
-   // });
-	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-       INITIALIZE GLOBAL VARIABLES */
-   window.$tocAnchors   = $('#toc').find('a[href^="#"]'); // sidebar <a>-> headers
-   window.topOffset     = $('#topbar').height();    // height of topbar
-   window.$tocFollowBtn = $('#toc-follow-btn');
-   window.$tocBtn       = $('#toc-btn');
-   window.log("#hide_toc " + $('#hide_toc').attr('data-bool') );
-   if ( $('#hide_toc').attr('data-bool') == "true") {
-      window.hide_toc  = true;
-      window.tocFollow = true;  window.$tocFollowBtn.addClass("on");
-      window.showToc   = true;  window.$tocFollowBtn.addClass("on");
-   } else {
-      window.hide_toc  = false;
-      window.tocFollow = false;  window.$tocFollowBtn.removeClass("on");
-      window.showToc   = false;  window.$tocFollowBtn.removeClass("on");
-      window.onTocShowBtnClick();
-      window.tocFollowBtnState()
-   }
-   
-	window.topOffsetInit();
-	if (!window.HomeUrl) window.HomeUrl = "http://www.jeffruss.com/";
-	
-	
-	
-	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-       ADD HOME URL AND LOGO 	*/
-   window.HomeUrl = $('#home-url').comments().html();
-	$('.home-url').attr('href', window.HomeUrl);
-	var logoUrl    = $('#logo-url').comments().html();
-	if (!logoUrl)
-	   logoUrl ="https://s3.amazonaws.com/shared-img-res/JR%20logo/JR_20px_wide.png";
-	$('.logo-url').attr('src', logoUrl);
-	
-    /*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-       FORMERLY "onPageLoad"  */
-   if(window.location.hash)   // initial load from url hash
-   {
-      if (window.location.hash == "#undefined"){
-         window.location.hash = '';
-         location.reload();
-      } else  
-         window.$topViewElem = $(window.location.hash);
-   } else {                     // initial load without url hash
-   
-      var $firstSection;
-      if ($('.section').size() > 0) { 
-         $firstSection = $('.section').first();
-         window.$topViewElem = $firstSection;
-      } else if ($('h2').size() > 0){
-         $firstSection = $('h2').first();
-         window.$topViewElem = $firstSection;
-      }
-   }
-
-   window.determineSection();
-   window.updateTopbar();
-   
-   if (true) { // true should be window.showToc
-      var tocFollowSetting = window.tocFollow; 
-      window.tocFollow = true; // temporarily make true
-      window.updateToc();
-      window.tocFollow = tocFollowSetting; // restore setting
-   } 
-
-	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-       CONFIG TO DEVICE AND WINDOW */  
-   // call once on load:
-   onWindowResize();
-   // and add handler for resizing of window:
-   $(window).resize(onWindowResize());
-   
-	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-       ADD HANDLERS */
-   $(window).on("scroll", window.findNewPosition);   
-   // $(window).scrollEnd(function(){ window.findNewPosition; });
-   window.$tocAnchors.on('click', window.onTocClick); 
-   window.$tocFollowBtn.on('click', window.onTocFollowBtnClick);
-	if (window.hasToc) window.$tocBtn.on('click', window.onTocShowBtnClick); 
-
-	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-       SET UP MODAL MENUS */
-   window.populateModalMenus();
-
-}); // END DOCUMENT READY
-
-
-
-/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.
-       CONFIG TO DEVICE AND WINDOW SIZE*/   
-function onWindowResize()
-{
-	if (!window.isMobile && $(window).width() >= 800  && window.hasToc)
-	   if (window.hide_toc == false) window.showToc = true;
-	else
-	   window.showToc = false;
-	   window.toggleSidebar();
-}
-;
-
-/* By Jeff Russ https://github.com/Jeff-Russ
-~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._*/
-
-
-
-
-
+ /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
+|        docview_topbar.js  part of markdown.design                             |
+|        By Jeff Russ       https://github.com/Jeff-Russ                        |
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
 
 /*
 INTER-FILE INTERDEPENDENCIES:
@@ -14917,4 +14551,359 @@ function populateWithBtns($source, $destination, menuSource)
       });
       break;
    }
+}
+;
+ /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
+|        oscon.js           part of markdown.design                             |
+|        By Jeff Russ       https://github.com/Jeff-Russ                        |
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
+
+
+var html = "<div id='ocbg' style='background-color:black;visibility:hidden;position:fixed;z-index:9000;pointer-events:none;opacity:1;left:0%;top:0%;height:100%;width:100%;'></div><div id='on_screen_console'style='visibility:hidden;position:fixed;z-index:9999;text-shadow: 2px 2px black;color:#EEF;font-weight:100;font-family:Monaco,Courier New,monospace;font-size:12px;pointer-events:none;'><div id='left_console'style='position:fixed;left:0%;top:0%;width:65%;border:1px solid white;'></div><div id='right_console_1'style='position:fixed;left:75%;top:0%;width:25%;height:25%;border:1px solid white;'></div><div id='right_console_2'style='position:fixed;left:75%;top:25%;width:25%;height:25%;border:1px solid white;'></div><div id='right_console_3'style='position:fixed;left:75%;top:50%;width:25%;height:25%;border:1px solid white;'></div><div id='right_console_4'style='position:fixed;left:75%;top:75%;width:25%;height:25%;border:1px solid white;'></div></div>";
+var pnt_evts = false, on_screen_console_bool, show_on_screen_console_bool;
+//========== ON SCREEN CONSOLE TOGGLE ========================================
+
+// Put this in document ready. window.on_screen_console(true, true); fully enables
+// window.on_screen_console(true, false); enables but hides.
+window.on_screen_console = function(run, show){
+   on_screen_console_bool = run;
+   if (on_screen_console_bool) {
+      $('#on_screen_console').remove();
+      $('#ocbg').remove();
+      $("body").append(html);
+      window.log("ON SCREEN CONSOLE: `d to disable, `e to enable, s to show, \
+         h to hide, ` c to clear, f to call passed function");
+      window.oscon_keys(true);
+   }
+   else {
+      $('#on_screen_console').remove();
+      $('#ocbg').remove();
+      // but don't disable ocs_keys in case user turns back on
+   }
+   if (arguments.length == 2)
+      show_on_screen_console(show);
+};
+
+
+//========== ON SCREEN CONSOLE TOOLS ===========================================
+ 
+// log a newline followed by a non urgent message:
+window.log = function(string){
+   if (on_screen_console_bool)
+   $('#left_console').append("<br />js: " + string);
+};
+// set (replace) text on right pane:
+window.log1 = function(string){
+   if (on_screen_console_bool)
+   $('#right_console_1').html("<br />" + string);
+};
+// set (replace) text on right pane:
+window.log2 = function(string){
+   if (on_screen_console_bool)
+   $('#right_console_2').html("<br />" + string);
+};
+// set (replace) text on right pane:
+window.log3 = function(string){
+   if (on_screen_console_bool)
+   $('#right_console_3').html("<br />" + string);
+};
+// set (replace) text on right pane:
+window.log4 = function(string){
+   if (on_screen_console_bool)
+   $('#right_console_4').html("<br />" + string);
+};
+// log a newline followed by a warning message:
+window.warn = function(string){
+   if (on_screen_console_bool)
+      $('#left_console').append("<br />js warning: " + string + "<br />");
+};
+// log a newline followed by a error message:
+window.err = function(string){
+   if (on_screen_console_bool)
+      $('#left_console').append("<br />js error: " + string + "<br />");
+};
+// append a message without insertion of a newline. Prepended with a space:
+window.update = function(string){
+   if (on_screen_console_bool)
+      $('#left_console').append(" " + string);
+};
+// append a message without insertion of a newline. Not repended with a space:
+window.type = function(string){
+   if (on_screen_console_bool)
+      $('#left_console').append(string);
+};
+// print a newline followed by a horiz. rule type thingo:
+window.hr = function(){
+   $('#left_console').append("<br />________________________________________");
+}; 
+// print a newline followed by a bar-looking thing:
+window.bar = function(){ 
+   $('#left_console').append("<br /><br />========================================");
+};
+// print a line break:
+window.br  = function() { 
+   $('#left_console').append("<br /><br />");  
+};
+// print two line breaks:
+window.br2 = function() { 
+   $('#left_console').append("<br />"); 
+};
+
+// clear console:
+window.clear_on_screen_console = function(){
+   window.on_screen_console(true, show_on_screen_console_bool);
+};
+
+
+
+//========== ON SCREEN CONSOLE KEY COMBOS =======================================
+
+
+// Key combinations: back-tick (`) and a letter
+// Call with true to enable key listening
+window.oscon_keys = function(arg)
+{
+   var bool, func, wehavefunc;
+   
+   if (typeof(arg) === "boolean")  
+      bool = arg;
+   else /*if (typeof v === "function")*/ { 
+      bool = wehavefunc = true; func = arg; 
+   } 
+   
+   
+   if (bool){
+      $(document).unbind('keydown');
+      $(document).unbind('keyup');
+      
+      $(document).keydown( function(e) {
+         if (e.keyCode in map) 
+         { 
+            map[e.keyCode] = true;
+            
+            if (map[192] && map[83]) {
+               show_on_screen_console(true);        // ( `s ) show
+            }
+            if (map[192] && map[68]) {
+               window.on_screen_console(false);     // ( `d ) disable
+            }
+            if (map[192] && map[69]) {
+               window.on_screen_console(true);      // ( `e ) enable
+            } 
+            if (on_screen_console_bool && show_on_screen_console_bool)
+            {  
+               if (map[72]) {
+                  show_on_screen_console(false);   // h hide
+               }
+               if (map[67]) {
+                  window.clear_on_screen_console(); // c clear
+               }
+               if (wehavefunc && map[70]) {
+                  func();                           // f call function arg
+               }
+               if (map[77]) {
+                  if (pnt_evts == false) {
+                     $('#on_screen_console').attr('pointer-events', "auto");
+                     $('#ocbg').attr('pointer-events', "auto");
+                     window.log("Mouse Enabled");
+                     pnt_evts = true;
+                  }else if (pnt_evts == true) {
+                     $('#on_screen_console').attr('pointer-events', "none");
+                     $('#ocbg').attr('pointer-events', "auto");
+                     window.log("Mouse Disabled");
+                     pnt_evts = false;
+                  }
+               }
+            }
+         }
+      }).keyup(function(e) { 
+         if (e.keyCode in map) { map[e.keyCode] = false;}
+      // e.stop();
+      });  
+   }
+   else{
+      $(document).unbind('keydown');
+      $(document).unbind('keyup');
+   }
+}
+
+// missing numbers: 10-12,14,15,21-26,28-31,41-44,49,58-64,
+//                  94,95,108,124-143,146-185,193-218
+var map = {
+   8:false/*backspace*/,9:false/*tab*/,13:false/*enter*/,16:false/*shift*/,
+   17:false/*ctrl*/,18:false/*alt*/,19:false/*pausebreak*/,20:false/*capslock*/,
+   27:false/*escape*/,32:false/*space*/,33:false/*pageup*/,34:false/*pagedown*/,
+   35:false/*end*/,36:false/*home*/,37:false/*left*/,38:false/*up*/,39:false/*right*/,
+   40:false/*donw*/,45:false/*ins*/,46:false/*del*/,48:false/*0*/,49:false/*1*/,
+   50:false/*2*/,51:false/*3*/,52:false/*4*/,53:false/*5*/,54:false/*6*/,
+   55:false/*7*/,56:false/*8*/,57:false/**/,65:false/*a*/,66:false/*b*/,
+   67:false/*c*/,68:false/*d*/,69:false/*e*/,70:false/*f*/,71:false/*h*/,
+   72:false/*g*/,73:false/*i*/,74:false/*j*/,75:false/*k*/,76:false/*l*/,
+   77:false/*m*/,78:false/*n*/,79:false/*o*/,80:false/*p*/,81:false/*q*/,
+   82:false/*r*/,83:false/*s*/,84:false/*t*/,85:false/*u*/,86:false/*v*/,
+   87:false/*w*/,88:false/*x*/,89:false/*y*/,90:false/*z*/,91:false/*left_window*/,
+   92:false/*right_window*/,93:false/*select*/,96:false/*pad#0*/,97:false/*pad#1*/,
+   98:false/*pad#2*/,99:false/*pad#3*/,100:false/*pad#4*/,101:false/*pad#5*/,
+   102:false/*pad#6*/,103:false/*pad#7*/,104:false/*pad#8*/,105:false/*pad#9*/,
+   106:false/*mult*/,107:false/*add*/,109:false/*subt*/,110:false/*dec_pnt*/,
+   111:false/*divide*/,112:false/*f1*/,113:false/*f2*/,114:false/*f3*/,
+   115:false/*f4*/,116:false/*f5*/,117:false/*f6*/,118:false/*f7*/,
+   119:false/*f8*/,120:false/*f9*/,121:false/*f10*/,122:false/*f11*/,
+   123:false/*f12*/,144:false/*numlock*/,145:false/*scrolllock*/,
+   186:false/*semicolon*/,187:false/*equalsign*/,188:false/*comma*/,
+   189:false/*dash*/,190:false/*period*/,191:false/*forwardslash*/,
+   192:false/*backtick*/,219:false/*openbracket*/,220:false/*backslash*/,
+   221:false/*closebraket*/,222:false/*singlequote*/,
+};
+
+//========== OTHER LOCALS  =====================================================
+
+var on_screen_console_bool;
+// Enables console with arg of true. Messages will not be visible from this call
+// but key mappings will. Press `s (backtick-s ) to make visible (show).
+// `h to hide, `d to disble, `e to enable, `c to clear. 
+
+// make console messages visible:
+function show_on_screen_console(bool){ 
+   show_on_screen_console_bool = bool;
+   window.log(show_on_screen_console_bool)
+   if (bool) { 
+      $('#on_screen_console').css('visibility','visible');
+   } else { 
+      $('#on_screen_console').css('visibility','hidden' ); 
+   }
+}
+;
+ /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
+|        docview.main.js    part of markdown.design                             |
+|        By Jeff Russ       https://github.com/Jeff-Russ                        |
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
+
+
+
+
+
+
+
+
+
+window.showToc;
+window.hide_toc;
+window.hasToc = true;  // eventually we will want this off for some pages.
+window.$activeTocAnchor; // TOC anchor which this will have the id toc_active
+window.$topViewElem;     // element in reader w/ id hash currently on top of view 
+window.$tocBtn;
+window.tocFollowBtn;
+// window.root = location.protocol + '//' + location.host; // not used but maybe later
+
+// to fix navbar hiding to of content when linksing to spot in page:
+window.homeURl;
+window.addEventListener("hashchange", function() { scrollBy(0, -45) });
+
+
+$( document ).ready( function() 
+{
+   window.on_screen_console(false, false); 
+   
+   // window.oscon_keys(function() { 
+   //    window.log1("window.tocFollow = " + window.tocFollow + "<br>window.topOffsetInit() = "+ window.topOffsetInit());
+   //    window.log2("window.location.hash = "+ window.location.hash);
+   //    window.log3("window.currHashName = "+window.currHashName+"<br>window.prevHash = "+window.prevHash+"<br>window.nextHash = "+window.nextHash);
+   // });
+	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+       INITIALIZE GLOBAL VARIABLES */
+   window.$tocAnchors   = $('#toc').find('a[href^="#"]'); // sidebar <a>-> headers
+   window.topOffset     = $('#topbar').height();    // height of topbar
+   window.$tocFollowBtn = $('#toc-follow-btn');
+   window.$tocBtn       = $('#toc-btn');
+   window.log("#hide_toc " + $('#hide_toc').attr('data-bool') );
+   if ( $('#hide_toc').attr('data-bool') == "true") {
+      window.hide_toc  = true;
+      window.tocFollow = true;  window.$tocFollowBtn.addClass("on");
+      window.showToc   = true;  window.$tocFollowBtn.addClass("on");
+   } else {
+      window.hide_toc  = false;
+      window.tocFollow = false;  window.$tocFollowBtn.removeClass("on");
+      window.showToc   = false;  window.$tocFollowBtn.removeClass("on");
+      window.onTocShowBtnClick();
+      window.tocFollowBtnState()
+   }
+   
+	window.topOffsetInit();
+	if (!window.HomeUrl) window.HomeUrl = "http://www.jeffruss.com/";
+	
+	
+	
+	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+       ADD HOME URL AND LOGO 	*/
+   window.HomeUrl = $('#home-url').comments().html();
+	$('.home-url').attr('href', window.HomeUrl);
+	var logoUrl    = $('#logo-url').comments().html();
+	if (!logoUrl)
+	   logoUrl ="https://s3.amazonaws.com/shared-img-res/JR%20logo/JR_20px_wide.png";
+	$('.logo-url').attr('src', logoUrl);
+	
+    /*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+       FORMERLY "onPageLoad"  */
+   if(window.location.hash)   // initial load from url hash
+   {
+      if (window.location.hash == "#undefined"){
+         window.location.hash = '';
+         location.reload();
+      } else  
+         window.$topViewElem = $(window.location.hash);
+   } else {                     // initial load without url hash
+   
+      var $firstSection;
+      if ($('.section').size() > 0) { 
+         $firstSection = $('.section').first();
+         window.$topViewElem = $firstSection;
+      } else if ($('h2').size() > 0){
+         $firstSection = $('h2').first();
+         window.$topViewElem = $firstSection;
+      }
+   }
+
+   window.determineSection();
+   window.updateTopbar();
+   
+   if (true) { // true should be window.showToc
+      var tocFollowSetting = window.tocFollow; 
+      window.tocFollow = true; // temporarily make true
+      window.updateToc();
+      window.tocFollow = tocFollowSetting; // restore setting
+   } 
+
+	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+       CONFIG TO DEVICE AND WINDOW */  
+   // call once on load:
+   onWindowResize();
+   // and add handler for resizing of window:
+   $(window).resize(onWindowResize());
+   
+	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+       ADD HANDLERS */
+   $(window).on("scroll", window.findNewPosition);   
+   // $(window).scrollEnd(function(){ window.findNewPosition; });
+   window.$tocAnchors.on('click', window.onTocClick); 
+   window.$tocFollowBtn.on('click', window.onTocFollowBtnClick);
+	if (window.hasToc) window.$tocBtn.on('click', window.onTocShowBtnClick); 
+
+	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+       SET UP MODAL MENUS */
+   window.populateModalMenus();
+
+}); // END DOCUMENT READY
+
+
+
+/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.
+       CONFIG TO DEVICE AND WINDOW SIZE*/   
+function onWindowResize()
+{
+	if (!window.isMobile && $(window).width() >= 800  && window.hasToc)
+	   if (window.hide_toc == false) window.showToc = true;
+	else
+	   window.showToc = false;
+	   window.toggleSidebar();
 }

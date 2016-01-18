@@ -1,14 +1,14 @@
-
-/* By Jeff Russ https://github.com/Jeff-Russ
-~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._*/
+ /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
+|        docview.main.js    part of markdown.design                             |
+|        By Jeff Russ       https://github.com/Jeff-Russ                        |
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
 
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
-
 //= require shared
-//= require toc_funcs
-//= require toc_topbar
+//= require docview_funcs
+//= require docview_topbar
 //= require oscon
 
 window.showToc;

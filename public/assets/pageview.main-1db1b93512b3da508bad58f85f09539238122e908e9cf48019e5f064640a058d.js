@@ -13918,11 +13918,285 @@ return jQuery;
 
 
 
-// oscon.js
-/* By Jeff Russ https://github.com/Jeff-Russ
-~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._*/
+ /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
+|        pageview_funcs.js  part of markdown.design                             |
+|        By Jeff Russ       https://github.com/Jeff-Russ                        |
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
 
 
+//  TOGGLE TOPBAR SPACING  ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~
+window.toggleTopbarSpacing = function() 
+{
+   if ( window.desktopMode ) {
+
+      $('.LL-7').addClass('LL-9').removeClass('LL-7');
+      $('.LR-7').addClass('LC-9').removeClass('LR-7');
+      $('.CL-7').addClass('CL-9').removeClass('CL-7');
+      $('.CC-7').addClass('CC-9').removeClass('CC-7');
+      $('.CR-7').addClass('CR-9').removeClass('CR-7');
+      $('.RL-7').addClass('RC-9').removeClass('RL-7');
+      $('.RR-7').addClass('RR-9').removeClass('RR-7');
+      
+   } else {
+
+      $('.LL-9').addClass('LL-7').removeClass('LL-9');
+      $('.LC-9').addClass('LR-7').removeClass('LC-9');
+      $('.CL-9').addClass('CL-7').removeClass('CL-9');
+      $('.CC-9').addClass('CC-7').removeClass('CC-9');
+      $('.CR-9').addClass('CR-7').removeClass('CR-9');
+      $('.RC-9').addClass('RL-7').removeClass('RC-9');
+      $('.RR-9').addClass('RR-7').removeClass('RR-9');
+   }
+};
+
+//  TOGGLE TOPBAR POSITION - FIXED / ABSOLUTE  ~._.~~._.~~._.~~._.~~._.~~._.~~._
+window.onToggleTopbarBtnClick = function() 
+{
+   window.debug(window.topbarFixed);
+   if (window.topbarFixed == true) {
+      $('#topbar').addClass('absolute').removeClass('fixed');
+      $('.topbtn-greenwell').addClass('absolute').removeClass('fixed');
+      $('#toggle-topbar-img').css('opacity','.4');
+      window.topbarFixed = false;
+      $("html, body").animate( { scrollTop: $(document).scrollTop() + window.topOffset }, 300);
+   }else{
+      $('#topbar').addClass('fixed').removeClass('absolute');
+      $('.topbtn-greenwell').addClass('fixed').removeClass('absolute');
+      $('#toggle-topbar-img').css('opacity','.9');
+      window.topbarFixed = true;
+      $("html, body").animate( { scrollTop: -window.topOffset }, 300);
+   }
+};
+ /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
+|        geturl.js          part of markdown.design                             |
+|        By Jeff Russ       https://github.com/Jeff-Russ                        |
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
+
+
+window.geturlInit = function(){
+   
+   window.log("URL GENERATE HANDLER ADDED")
+   
+   $('#geturl-submit-btn').on('click', function(){
+      
+      window.log("URL GENERATE BUTTON PRESSED")
+         
+      var 
+      source = $('input[name=geturl-source-radio]:checked').val(),
+      view   = $('input[name=geturl-view-radio]:checked').val(),
+      mdd = 'http://www.markdown.design/',
+      output;
+      
+      if (source == "amazon_s3"){
+         var
+         bucket = $('#geturl-bucket').val(),
+         s3path = $('#geturl-s3path').val();
+         
+         if (view == 'show_toc'){
+            output = mdd + '?docs=' + bucket +'/'+ s3path;
+            
+         }else if (view == 'hide_toc'){
+            output = mdd + '?doch=' + bucket +'/'+ s3path;
+            
+         }else if (view == 'top'){
+            output = mdd + '?pages=' + bucket +'/'+ s3path;
+            
+         }else if (view == 'full'){
+            output = mdd + "?full=" + bucket +'/'+ s3path;
+         }
+         output = output.substr(0, output.lastIndexOf('.')) || output;
+      }
+      else if (source == "github_readme"){
+         var
+         ghUser = $('#geturl-gh-user').val(),
+         ghRepo = $('#geturl-gh-repo').val();
+         
+         if (view == 'show_toc'){
+            output = mdd + '?ghrm=' + ghUser +'/'+ ghRepo;
+         
+         }else if (view == 'hide_toc'){
+            output = mdd + '?doch&ghrm=' + ghUser +'/'+ ghRepo;
+            
+         }else if (view == 'top'){
+            output = mdd + '?pages&ghrm=' + ghUser +'/'+ ghRepo;
+            
+         }else if (view == 'full'){
+            output = mdd + "?full&ghrm=" + ghUser +'/'+ ghRepo;
+         }
+      }
+      window.log(source+' '+view+' '+bucket+' '+s3path+' '+ghUser+' '+ghRepo)
+      window.log(output)
+      $('#geturl-output').attr('href', output);
+      $('#geturl-output').text(output);
+   });
+}; 
+ /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
+|        shared.js          part of markdown.design                             |
+|        By Jeff Russ       https://github.com/Jeff-Russ                        |
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
+ 
+
+/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+    CONFIG TO DEVICE  */
+    
+window.isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/);
+
+// offset scroll to compensate for topbar which takes 8%.
+window.topOffsetInit = function() { window.topOffset = $('#topbar').height(); };
+
+// call "callback" when scrolling has stopped for
+document.scrollTimeout = 500;
+// milliseconds. 
+
+
+////////////////////////////////////////////////////////////////////////////////
+$( document ).ready( function() ////////////////////////////////////////////////
+{
+   
+   // These allow content author to omit adding and image tag. Simply adding these
+   // to a tag will result in insertion of an image inside the tag with src set:
+   $('.prev-btn-img').append("<img class='prev-img-css' src='https://shared-img-res.s3.amazonaws.com/icons/left_icon_grn.png'/>");
+   $('.next-btn-img').append("<img class='next-img-css' src='https://shared-img-res.s3.amazonaws.com/icons/right_icon_grn.png'/>");
+   $('.menubar-img').append("<img class='menubar-img-css' src='https://s3.amazonaws.com/shared-img-res/livepage_heroku/menubar-icon.png'/>");
+   $('.scroll-btn-img').append("<img class='scroll-btn-img-css' id='toc-follow-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/auto-y_icon_33_grn.png'/>");
+   $('.toc-btn-img').append("<img class='toc-btn-img-css toc-btn-img' id='toc-btn-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/toc_icon_h20.png'/>");
+   $('.jr-img').append("<img class='jr-img-css' src='https://s3.amazonaws.com/shared-img-res/JR%20logo/JR_20px_wide.png'/>");
+
+   // Similar to above, these let the content author add the custom attribute
+   // data-link='http://www.whatever.com' to wrap the element in an <a>chor
+   var $btnLinks = $('[data-link]');
+   $btnLinks.each(function(){
+      var url = $(this).attr('data-link');
+      $(this).wrap("<a href='" + url + "'></a>");
+   });
+   
+   // Similar to $btnLinks, these let the content author add the custom attribute
+   // data-img='http://whatever.com/img.jpg' to insert <img> within the element
+   var $appendImg = $('[data-img]');
+   $appendImg.each(function(){
+      var url = $(this).attr('data-img');
+      $(this).append("<img src='" + url + "'></img>");
+   });
+   
+
+   // GOOGLE ANALYTICS 
+   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+   
+   ga('create', 'UA-71741017-2', 'auto');
+   ga('send', 'pageview');
+
+
+   // fill out an email form and have it reopen in thier email client ~._.~~._.~
+   // see called function below
+   $('#open-mailto').on('click', function(){
+      var emailDest = $('#email-dest').val(); 
+      var emailSubj = $("#email-subj").val();
+      var emailBody = $("#email-body").val(); 
+      window.buildMailTo(emailDest, emailSubj, emailBody);
+   }); 
+
+});// END DOC READY ////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+
+// CLOSES ANY MODAL WINDOW. HANDY! ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~
+window.close_modal = function () { 
+   $( "button[data-dismiss='modal']").trigger("click");
+};
+
+// FILL OUT EMAIL FOR AND HAVE IT OPEN IN CLIENT ~._.~~._.~~._.~~._.~~._.~~._.~~
+window.buildMailTo = function (address, subject, body) {
+   var strMail = 'mailto:' + encodeURIComponent(address)
+               + '?subject=' + encodeURIComponent(subject)
+               + '&body=' + encodeURIComponent(body);
+   window.location.href = strMail;
+};
+
+// REMOVE FAT FROM LONG TITLE AND MAKE IT A FEW WORDS  ~._.~~._.~~._.~~._.~~._.~
+window.tersify = function(string) {
+   string = string.replace(/^\d+\.\s*/, ''); // cut off "1. " or similar
+   if (string.length > 20) {
+      string = string.substr(0, 20); // trim at last space before 20th
+      string = string.substr(0, Math.min(string.length, string.lastIndexOf(" ")));
+   }
+   return string;
+};
+
+// GET A PAGE TITLE FROM THE LAST PART OF URL ( AFTER LAST / )  ~._.~~._.~~._.~~
+window.getDocName = function() {
+   var url = window.location.href;   // get url
+   var hash = window.location.hash;  // get hash
+      var index_of_hash = url.indexOf(hash) || url.length; // find loc of hash
+      var hashless_url = url.substr(0, index_of_hash);     // remove hash
+   var docName = hashless_url.match(/[^\/]*$/); // get last part of url.
+   return docName;
+};
+
+// USE THE COMMENTS OF HIDDEN ELEMENTS AS DATA TO BE READ!  ~._.~~._.~~._.~~._.~
+// This one is not by me. Credit to Ben Nadel !!! 
+//
+// This jQuery plugin will gather the comments within the current jQuery 
+// collection, returning all the comments in a new jQuery collection.
+//
+// NOTE: Comments are wrapped in DIV tags.
+$.fn.comments = function( blnDeep ){
+   var blnDeep = (blnDeep || false);
+   var jComments = $( [] );
+   // Loop over each node to search its children for
+   // comment nodes and element nodes (if deep search).
+   this.each(
+      function( intI, objNode ){
+         var objChildNode = objNode.firstChild;
+         var strParentID = $( this ).attr( "id" );
+         // Keep looping over the top-level children
+         // while we have a node to examine.
+         while (objChildNode){
+            // Check to see if this node is a comment.
+            if (objChildNode.nodeType === 8){
+               // We found a comment node. Add it to
+               // the nodes collection wrapped in a
+               // DIV (as we may have HTML).
+               jComments = jComments.add(
+                  "<div rel='" + strParentID + "'>" +
+                  objChildNode.nodeValue +
+                  "</div>"
+                  );
+            } else if (
+               blnDeep &&
+               (objChildNode.nodeType === 1)
+               ) {
+               // Traverse this node deeply.
+               jComments = jComments.add(
+                  $( objChildNode ).comments( true )
+                  );
+            }
+            // Move to the next sibling.
+            objChildNode = objChildNode.nextSibling;
+         }
+      }
+      );
+   // Return the jQuery comments collection.
+   return( jComments );
+};
+
+// CALL SOMETHING WHEN SCROLLING HAS STOPPED FOR SOME TIME~._.~~._.~~._.~~._.~~.
+// This one is not by me. Credit to Stephan Muller!!!
+$.fn.scrollEnd = function(callback) {          
+  $(this).scroll(function(){
+   var $this = $(this);
+   if ($this.data('scrollTimeout')) {
+     clearTimeout($this.data('scrollTimeout'));
+   }
+   $this.data('scrollTimeout', setTimeout(callback,document.scrollTimeout));
+  });
+};
+ /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
+|        oscon.js           part of markdown.design                             |
+|        By Jeff Russ       https://github.com/Jeff-Russ                        |
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
 
 
 var html = "<div id='ocbg' style='background-color:black;visibility:hidden;position:fixed;z-index:9000;pointer-events:none;opacity:1;left:0%;top:0%;height:100%;width:100%;'></div><div id='on_screen_console'style='visibility:hidden;position:fixed;z-index:9999;text-shadow: 2px 2px black;color:#EEF;font-weight:100;font-family:Monaco,Courier New,monospace;font-size:12px;pointer-events:none;'><div id='left_console'style='position:fixed;left:0%;top:0%;width:65%;border:1px solid white;'></div><div id='right_console_1'style='position:fixed;left:75%;top:0%;width:25%;height:25%;border:1px solid white;'></div><div id='right_console_2'style='position:fixed;left:75%;top:25%;width:25%;height:25%;border:1px solid white;'></div><div id='right_console_3'style='position:fixed;left:75%;top:50%;width:25%;height:25%;border:1px solid white;'></div><div id='right_console_4'style='position:fixed;left:75%;top:75%;width:25%;height:25%;border:1px solid white;'></div></div>";
@@ -14140,221 +14414,10 @@ function show_on_screen_console(bool){
    }
 }
 ;
-
-/* By Jeff Russ https://github.com/Jeff-Russ
-~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._*/
-
-
-
-
-
-
-/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-    CONFIG TO DEVICE  */
-    
-window.isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/);
-
-// offset scroll to compensate for topbar which takes 8%.
-window.topOffsetInit = function() { window.topOffset = $('#topbar').height(); };
-
-// call "callback" when scrolling has stopped for
-document.scrollTimeout = 500;
-// milliseconds. 
-
-
-////////////////////////////////////////////////////////////////////////////////
-$( document ).ready( function() ////////////////////////////////////////////////
-{
-   
-   // These allow content author to omit adding and image tag. Simply adding these
-   // to a tag will result in insertion of an image inside the tag with src set:
-   $('.prev-btn-img').append("<img class='prev-img-css' src='https://shared-img-res.s3.amazonaws.com/icons/left_icon_grn.png'/>");
-   
-   $('.next-btn-img').append("<img class='next-img-css' src='https://shared-img-res.s3.amazonaws.com/icons/right_icon_grn.png'/>");
-   
-   $('.menubar-img').append("<img class='menubar-img-css' src='https://s3.amazonaws.com/shared-img-res/livepage_heroku/menubar-icon.png'/>");
-   
-   $('.scroll-btn-img').append("<img class='scroll-btn-img-css' id='toc-follow-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/auto-y_icon_33_grn.png'/>");
-   
-   $('.toc-btn-img').append("<img class='toc-btn-img-css toc-btn-img' id='toc-btn-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/toc_icon_h20.png'/>");
-   
-   $('.jr-img').append("<img class='jr-img-css' src='https://s3.amazonaws.com/shared-img-res/JR%20logo/JR_20px_wide.png'/>");
-
-   // Similar to above, these let the content author add the custom attribute
-   // data-link='http://www.whatever.com' to wrap the element in an <a>chor
-   var $btnLinks = $('[data-link]');
-   $btnLinks.each(function(){
-      var url = $(this).attr('data-link');
-      $(this).wrap("<a href='" + url + "'></a>");
-   });
-   
-   // Similar to $btnLinks, these let the content author add the custom attribute
-   // data-img='http://whatever.com/img.jpg' to insert <img> within the element
-   var $appendImg = $('[data-img]');
-   $appendImg.each(function(){
-      var url = $(this).attr('data-img');
-      $(this).append("<img src='" + url + "'></img>");
-   });
-   
-
-   // GOOGLE ANALYTICS 
-   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m);
-   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-   ga('create', 'UA-71741017-1', 'auto');
-   ga('send', 'pageview');
-
-   // fill out an email form and have it reopen in thier email client ~._.~~._.~
-   // see called function below
-   $('#open-mailto').on('click', function(){
-      var emailDest = $('#email-dest').val(); 
-      var emailSubj = $("#email-subj").val();
-      var emailBody = $("#email-body").val(); 
-      window.buildMailTo(emailDest, emailSubj, emailBody);
-   }); 
-
-});// END DOC READY ////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-
-
-// CLOSES ANY MODAL WINDOW. HANDY! ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~
-window.close_modal = function () { 
-   $( "button[data-dismiss='modal']").trigger("click");
-};
-
-// FILL OUT EMAIL FOR AND HAVE IT OPEN IN CLIENT ~._.~~._.~~._.~~._.~~._.~~._.~~
-window.buildMailTo = function (address, subject, body) {
-   var strMail = 'mailto:' + encodeURIComponent(address)
-               + '?subject=' + encodeURIComponent(subject)
-               + '&body=' + encodeURIComponent(body);
-   window.location.href = strMail;
-};
-
-// REMOVE FAT FROM LONG TITLE AND MAKE IT A FEW WORDS  ~._.~~._.~~._.~~._.~~._.~
-window.tersify = function(string) {
-   string = string.replace(/^\d+\.\s*/, ''); // cut off "1. " or similar
-   if (string.length > 20) {
-      string = string.substr(0, 20); // trim at last space before 20th
-      string = string.substr(0, Math.min(string.length, string.lastIndexOf(" ")));
-   }
-   return string;
-};
-
-// GET A PAGE TITLE FROM THE LAST PART OF URL ( AFTER LAST / )  ~._.~~._.~~._.~~
-window.getDocName = function() {
-   var url = window.location.href;   // get url
-   var hash = window.location.hash;  // get hash
-      var index_of_hash = url.indexOf(hash) || url.length; // find loc of hash
-      var hashless_url = url.substr(0, index_of_hash);     // remove hash
-   var docName = hashless_url.match(/[^\/]*$/); // get last part of url.
-   return docName;
-};
-
-// USE THE COMMENTS OF HIDDEN ELEMENTS AS DATA TO BE READ!  ~._.~~._.~~._.~~._.~
-// This one is not by me. Credit to Ben Nadel !!! 
-//
-// This jQuery plugin will gather the comments within the current jQuery 
-// collection, returning all the comments in a new jQuery collection.
-//
-// NOTE: Comments are wrapped in DIV tags.
-$.fn.comments = function( blnDeep ){
-   var blnDeep = (blnDeep || false);
-   var jComments = $( [] );
-   // Loop over each node to search its children for
-   // comment nodes and element nodes (if deep search).
-   this.each(
-      function( intI, objNode ){
-         var objChildNode = objNode.firstChild;
-         var strParentID = $( this ).attr( "id" );
-         // Keep looping over the top-level children
-         // while we have a node to examine.
-         while (objChildNode){
-            // Check to see if this node is a comment.
-            if (objChildNode.nodeType === 8){
-               // We found a comment node. Add it to
-               // the nodes collection wrapped in a
-               // DIV (as we may have HTML).
-               jComments = jComments.add(
-                  "<div rel='" + strParentID + "'>" +
-                  objChildNode.nodeValue +
-                  "</div>"
-                  );
-            } else if (
-               blnDeep &&
-               (objChildNode.nodeType === 1)
-               ) {
-               // Traverse this node deeply.
-               jComments = jComments.add(
-                  $( objChildNode ).comments( true )
-                  );
-            }
-            // Move to the next sibling.
-            objChildNode = objChildNode.nextSibling;
-         }
-      }
-      );
-   // Return the jQuery comments collection.
-   return( jComments );
-};
-
-// CALL SOMETHING WHEN SCROLLING HAS STOPPED FOR SOME TIME~._.~~._.~~._.~~._.~~.
-// This one is not by me. Credit to Stephan Muller!!!
-$.fn.scrollEnd = function(callback) {          
-  $(this).scroll(function(){
-   var $this = $(this);
-   if ($this.data('scrollTimeout')) {
-     clearTimeout($this.data('scrollTimeout'));
-   }
-   $this.data('scrollTimeout', setTimeout(callback,document.scrollTimeout));
-  });
-};
-//  TOGGLE TOPBAR SPACING  ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~
-window.toggleTopbarSpacing = function() 
-{
-   if ( window.desktopMode ) {
-
-      $('.LL-7').addClass('LL-9').removeClass('LL-7');
-      $('.LR-7').addClass('LC-9').removeClass('LR-7');
-      $('.CL-7').addClass('CL-9').removeClass('CL-7');
-      $('.CC-7').addClass('CC-9').removeClass('CC-7');
-      $('.CR-7').addClass('CR-9').removeClass('CR-7');
-      $('.RL-7').addClass('RC-9').removeClass('RL-7');
-      $('.RR-7').addClass('RR-9').removeClass('RR-7');
-      
-   } else {
-
-      $('.LL-9').addClass('LL-7').removeClass('LL-9');
-      $('.LC-9').addClass('LR-7').removeClass('LC-9');
-      $('.CL-9').addClass('CL-7').removeClass('CL-9');
-      $('.CC-9').addClass('CC-7').removeClass('CC-9');
-      $('.CR-9').addClass('CR-7').removeClass('CR-9');
-      $('.RC-9').addClass('RL-7').removeClass('RC-9');
-      $('.RR-9').addClass('RR-7').removeClass('RR-9');
-   }
-};
-
-//  TOGGLE TOPBAR POSITION - FIXED / ABSOLUTE  ~._.~~._.~~._.~~._.~~._.~~._.~~._
-window.onToggleTopbarBtnClick = function() 
-{
-   window.debug(window.topbarFixed);
-   if (window.topbarFixed == true) {
-      $('#topbar').addClass('absolute').removeClass('fixed');
-      $('.topbtn-greenwell').addClass('absolute').removeClass('fixed');
-      $('#toggle-topbar-img').css('opacity','.4');
-      window.topbarFixed = false;
-      $("html, body").animate( { scrollTop: $(document).scrollTop() + window.topOffset }, 300);
-   }else{
-      $('#topbar').addClass('fixed').removeClass('absolute');
-      $('.topbtn-greenwell').addClass('fixed').removeClass('absolute');
-      $('#toggle-topbar-img').css('opacity','.9');
-      window.topbarFixed = true;
-      $("html, body").animate( { scrollTop: -window.topOffset }, 300);
-   }
-};
-
-/* By Jeff Russ https://github.com/Jeff-Russ
-~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._*/
+ /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
+|        pageview.main.js   part of markdown.design                             |
+|        By Jeff Russ       https://github.com/Jeff-Russ                        |
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
 
 
 
@@ -14362,9 +14425,6 @@ window.onToggleTopbarBtnClick = function()
 
 
 
-// require top_topbar
-
-//= geturl
 
 
 window.topbarFixed = true; // default setting
@@ -14400,64 +14460,3 @@ $( document ).ready( function()
 	$('.home-url').attr('href', window.HomeUrl);
 
 }); 
-
-
-
-window.geturlInit = function(){
-   
-   window.log("URL GENERATE HANDLER ADDED");
-   
-   $('#geturl-submit-btn').on('click', function(){
-      
-      window.log("URL GENERATE BUTTON PRESSED");
-         
-      var 
-      source = $('input[name=geturl-source-radio]:checked').val(),
-      view   = $('input[name=geturl-view-radio]:checked').val(),
-      mdd = 'http://www.markdown.design/',
-      output;
-      
-      
-      if (source == "amazon_s3"){
-         var
-         bucket = $('#geturl-bucket').val(),
-         s3path = $('#geturl-s3path').val();
-         
-         if (view == 'show_toc'){
-            output = mdd + '?docs=' + bucket +'/'+ s3path;
-            
-         }else if (view == 'hide_toc'){
-            output = mdd + '?doch=' + bucket +'/'+ s3path;
-            
-         }else if (view == 'top'){
-            output = mdd + '?pages=' + bucket +'/'+ s3path;
-            
-         }else if (view == 'full'){
-            output = mdd + "?full=" + bucket +'/'+ s3path;
-         }
-         output = output.substr(0, output.lastIndexOf('.')) || output;
-      }
-      else if (source == "github_readme"){
-         var
-         ghUser = $('#geturl-gh-user').val(),
-         ghRepo = $('#geturl-gh-repo').val();
-         
-         if (view == 'show_toc'){
-            output = mdd + '?ghrm=' + ghUser +'/'+ ghRepo;
-         
-         }else if (view == 'hide_toc'){
-            output = mdd + '?doch&ghrm=' + ghUser +'/'+ ghRepo;
-            
-         }else if (view == 'top'){
-            output = mdd + '?pages&ghrm=' + ghUser +'/'+ ghRepo;
-            
-         }else if (view == 'full'){
-            output = mdd + "?full&ghrm=" + ghUser +'/'+ ghRepo;
-         }
-      }
-      window.log(source+' '+view+' '+bucket+' '+s3path+' '+ghUser+' '+ghRepo);
-      window.log(output);
-      $('#geturl-output').attr('href', output);
-      $('#geturl-output').text(output);
-   });
-}; 
