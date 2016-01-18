@@ -108,13 +108,13 @@ class MdController < ApplicationController
             log "Insuffient path indicate home page. Using home_page and home_view global variables"; bar;
             
 #### MODIFY THIS TO PERSONALIZE HOME (WITHOUT QUERY STRING) PAGE ###############
-##                                                                            ##
-            @lpmd[:path] = 'https://s3.amazonaws.com/jeffruss/home.md'
+                                                                              ##
+            jrhome = 'https://s3.amazonaws.com/jeffruss/home.md'              ##
+            mdhome = 'https://s3.amazonaws.com/markdown.design/geturl.md'     ##
+                                                                              ##
+            @lpmd[:path] = mdhome                                             ##
             @lpmd[:view] = 'top'                                              ##
-##                                                                            ##
-##  for jeff            'https://s3.amazonaws.com/jeffruss/home.md'           ##
-##  for markdown.design 'https://s3.amazonaws.com/markdown.design/geturl.md'  ##
-##                                                                            ##
+                                                                              ##
 ################################################################################
             
             update "Fetching #{@lpmd[:path]}"; bar;
