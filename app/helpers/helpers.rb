@@ -76,7 +76,8 @@ module Helpers
    module OpenUri
       include Helpers
 #~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-    def safe_open (str, view)
+   def safe_open (str, view)
+       
       if (view == :gh) || (view == :ghrm)
          fixpath = ins_parent_dir(str, '/master/')
          # fixpath = ins_after_domain_ext(fixpath, "Jeff-Russ/", '.com/')

@@ -93,10 +93,11 @@ window.tersify = function(string) {
 
 // GET A PAGE TITLE FROM THE LAST PART OF URL ( AFTER LAST / )  ~._.~~._.~~._.~~
 window.getDocName = function() {
-   var url = window.location.href;   // get url
-   var hash = window.location.hash;  // get hash
-      var index_of_hash = url.indexOf(hash) || url.length; // find loc of hash
-      var hashless_url = url.substr(0, index_of_hash);     // remove hash
+   
+   var url = decodeURIComponent(window.location.href);
+   var hash = decodeURIComponent(window.location.hash);
+   var index_of_hash = url.indexOf(hash) || url.length; // find loc of hash
+   var hashless_url = url.substr(0, index_of_hash);     // remove hash
    var docName = hashless_url.match(/[^\/]*$/); // get last part of url.
    return docName;
 };
