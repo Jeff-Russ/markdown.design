@@ -102,12 +102,12 @@ module Helpers
        filter_html: false,   # do not allow any user-inputted HTML in the output.
        no_images: false,     # do not generate any <img> tags.
        no_links: false,      # do not generate any <a> tags.
-       no_styles: false,      # do not generate any <style> tags.
+       no_styles: false,     # do not generate any <style> tags.
        escape_html: false,   # any existing HTML tag will be escaped
        safe_links_only: true,# only generate links for protocols considered safe
        with_toc_data: true,  # add HTML anchors to each header in the output HTML
        hard_wrap: false,     # normally md ignores newlines. If true this adds <br>
-       xhtml: true,          # output XHTML-conformant tags.
+       xhtml: false,         # output XHTML-conformant tags.
        prettify: true,       # add prettyprint classes to <code> tags for google-code-prettify
        link_attributes: true # hash of extra attributes to add to links.
      }
@@ -132,48 +132,29 @@ module Helpers
      }
    
      # html (aka "content") rendering options from RedCarpet
-     def default_toc_r_opt; hash = @@r_opt_all 
+     def default_doc_r_opt; hash = @@r_opt_all 
      return hash end
        
-     def default_top_r_opt; hash = @@r_opt_all 
-       return hash end
-       
-     def default_full_r_opt; hash = @@r_opt_all 
-       return hash end
-       
-     def default_side_r_opt; hash = @@r_opt_all 
+     def default_page_r_opt; hash = @@r_opt_all 
        return hash end
    
      # markdown parser extensions from RedCarpet
-     def default_toc_p_ext; hash = @@p_ext_all
+     def default_doc_p_ext; hash = @@p_ext_all
        return hash end
        
-     def default_top_p_ext; hash = @@p_ext_all 
-       return hash end
-       
-     def default_full_p_ext; hash = @@p_ext_all 
-       return hash end
-       
-     def default_side_p_ext; hash = @@p_ext_all 
+     def default_page_p_ext; hash = @@p_ext_all 
        return hash end
      
      # other useful variables
-     def default_toc_vars; 
+     def default_doc_vars; 
        return hash end
        
-     def default_top_vars; 
+     def default_page_vars; 
        return hash end
        
-     def default_full_vars; 
-       return hash end
-       
-     def default_side_vars; 
-       return hash end
-       
-     module_function :default_toc_r_opt, :default_top_r_opt, :default_full_r_opt, 
-     :default_side_r_opt, :default_toc_p_ext, :default_top_p_ext, 
-     :default_full_p_ext, :default_side_p_ext, :default_toc_vars, :default_top_vars, 
-     :default_full_vars, :default_side_vars
+     module_function :default_doc_r_opt, :default_page_r_opt, 
+     :default_doc_p_ext, :default_page_p_ext, 
+     :default_doc_vars, :default_page_vars
    end
 ################################################################################
    def open_uri_attempt (location_str) # this method used by this doc only
