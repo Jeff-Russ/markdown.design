@@ -68,15 +68,19 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
 .absolute     { position: absolute; }
 
 // added for geturl.md:
-.danger-border { border-color:#CF4135; }
-.info-border   { border-color:#EBA304; }
-.success-border{ border-color:#57AE3A; }
-.info-border   { border-color:#50B7DD; }
-.abso        { position:absolute; }
-.padbtm-2pct { padding-bottom:2%; }
-.pad-3pct    { padding:3%         }
-.txt-L       { text-align:left;   }
-.txt-C       { text-align:center; }
+.danger-border { border-color:#CF4135!important; }
+.warning-border{ border-color:#BD8B2D!important; }
+.success-border{ border-color:#57AE3A!important; }
+.info-border   { border-color:#61BBDD!important; }
+.modal-bg-grey { background-color: #333232;      }
+.abso          { position: absolute!important;   }
+// .L10-W80-abs   { left:10%;width:80%;position:absolute;}
+// .T34-W44-abs   { top:34%; width:44%;position:absolute;}
+// .margbtm-3pct  { margin-bottom:  3%!important; }
+// .padbtm-2pct   { padding-bottom: 2%!important; }
+// .pad-3pct      { padding: 3%!important;        }
+.pad-none      { padding: 0!important;         }
+.txt-L         { text-align: left!important;   }
 
 .github-only  { display: none; }
 .center-text  { position:relative!important;  // both in modal 
