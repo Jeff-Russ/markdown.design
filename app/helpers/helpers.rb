@@ -102,7 +102,7 @@ module Helpers
        filter_html: false,   # do not allow any user-inputted HTML in the output.
        no_images: false,     # do not generate any <img> tags.
        no_links: false,      # do not generate any <a> tags.
-       no_styles: true,      # do not generate any <style> tags.
+       no_styles: false,      # do not generate any <style> tags.
        escape_html: false,   # any existing HTML tag will be escaped
        safe_links_only: true,# only generate links for protocols considered safe
        with_toc_data: true,  # add HTML anchors to each header in the output HTML
