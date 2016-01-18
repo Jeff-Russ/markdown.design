@@ -13919,118 +13919,6 @@ return jQuery;
 
 
  /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
-|        pageview_funcs.js  part of markdown.design                             |
-|        By Jeff Russ       https://github.com/Jeff-Russ                        |
- \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
-
-
-//  TOGGLE TOPBAR SPACING  ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~
-window.toggleTopbarSpacing = function() 
-{
-   if ( window.desktopMode ) {
-
-      $('.LL-7').addClass('LL-9').removeClass('LL-7');
-      $('.LR-7').addClass('LC-9').removeClass('LR-7');
-      $('.CL-7').addClass('CL-9').removeClass('CL-7');
-      $('.CC-7').addClass('CC-9').removeClass('CC-7');
-      $('.CR-7').addClass('CR-9').removeClass('CR-7');
-      $('.RL-7').addClass('RC-9').removeClass('RL-7');
-      $('.RR-7').addClass('RR-9').removeClass('RR-7');
-      
-   } else {
-
-      $('.LL-9').addClass('LL-7').removeClass('LL-9');
-      $('.LC-9').addClass('LR-7').removeClass('LC-9');
-      $('.CL-9').addClass('CL-7').removeClass('CL-9');
-      $('.CC-9').addClass('CC-7').removeClass('CC-9');
-      $('.CR-9').addClass('CR-7').removeClass('CR-9');
-      $('.RC-9').addClass('RL-7').removeClass('RC-9');
-      $('.RR-9').addClass('RR-7').removeClass('RR-9');
-   }
-};
-
-//  TOGGLE TOPBAR POSITION - FIXED / ABSOLUTE  ~._.~~._.~~._.~~._.~~._.~~._.~~._
-window.onToggleTopbarBtnClick = function() 
-{
-   window.debug(window.topbarFixed);
-   if (window.topbarFixed == true) {
-      $('#topbar').addClass('absolute').removeClass('fixed');
-      $('.topbtn-greenwell').addClass('absolute').removeClass('fixed');
-      $('#toggle-topbar-img').css('opacity','.4');
-      window.topbarFixed = false;
-      $("html, body").animate( { scrollTop: $(document).scrollTop() + window.topOffset }, 300);
-   }else{
-      $('#topbar').addClass('fixed').removeClass('absolute');
-      $('.topbtn-greenwell').addClass('fixed').removeClass('absolute');
-      $('#toggle-topbar-img').css('opacity','.9');
-      window.topbarFixed = true;
-      $("html, body").animate( { scrollTop: -window.topOffset }, 300);
-   }
-};
- /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
-|        geturl.js          part of markdown.design                             |
-|        By Jeff Russ       https://github.com/Jeff-Russ                        |
- \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
-
-
-window.geturlInit = function(){
-   
-   window.log("URL GENERATE HANDLER ADDED")
-   
-   $('#geturl-submit-btn').on('click', function(){
-      
-      window.log("URL GENERATE BUTTON PRESSED")
-         
-      var 
-      source = $('input[name=geturl-source-radio]:checked').val(),
-      view   = $('input[name=geturl-view-radio]:checked').val(),
-      mdd = 'http://www.markdown.design/',
-      output;
-      
-      if (source == "amazon_s3"){
-         var
-         bucket = $('#geturl-bucket').val(),
-         s3path = $('#geturl-s3path').val();
-         
-         if (view == 'show_toc'){
-            output = mdd + '?docs=' + bucket +'/'+ s3path;
-            
-         }else if (view == 'hide_toc'){
-            output = mdd + '?doch=' + bucket +'/'+ s3path;
-            
-         }else if (view == 'top'){
-            output = mdd + '?pages=' + bucket +'/'+ s3path;
-            
-         }else if (view == 'full'){
-            output = mdd + "?full=" + bucket +'/'+ s3path;
-         }
-         output = output.substr(0, output.lastIndexOf('.')) || output;
-      }
-      else if (source == "github_readme"){
-         var
-         ghUser = $('#geturl-gh-user').val(),
-         ghRepo = $('#geturl-gh-repo').val();
-         
-         if (view == 'show_toc'){
-            output = mdd + '?ghrm=' + ghUser +'/'+ ghRepo;
-         
-         }else if (view == 'hide_toc'){
-            output = mdd + '?doch&ghrm=' + ghUser +'/'+ ghRepo;
-            
-         }else if (view == 'top'){
-            output = mdd + '?pages&ghrm=' + ghUser +'/'+ ghRepo;
-            
-         }else if (view == 'full'){
-            output = mdd + "?full&ghrm=" + ghUser +'/'+ ghRepo;
-         }
-      }
-      window.log(source+' '+view+' '+bucket+' '+s3path+' '+ghUser+' '+ghRepo)
-      window.log(output)
-      $('#geturl-output').attr('href', output);
-      $('#geturl-output').text(output);
-   });
-}; 
- /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
 |        shared.js          part of markdown.design                             |
 |        By Jeff Russ       https://github.com/Jeff-Russ                        |
  \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
@@ -14047,7 +13935,6 @@ window.topOffsetInit = function() { window.topOffset = $('#topbar').height(); };
 // call "callback" when scrolling has stopped for
 document.scrollTimeout = 500;
 // milliseconds. 
-
 
 ////////////////////////////////////////////////////////////////////////////////
 $( document ).ready( function() ////////////////////////////////////////////////
@@ -14127,10 +14014,11 @@ window.tersify = function(string) {
 
 // GET A PAGE TITLE FROM THE LAST PART OF URL ( AFTER LAST / )  ~._.~~._.~~._.~~
 window.getDocName = function() {
-   var url = window.location.href;   // get url
-   var hash = window.location.hash;  // get hash
-      var index_of_hash = url.indexOf(hash) || url.length; // find loc of hash
-      var hashless_url = url.substr(0, index_of_hash);     // remove hash
+   
+   var url = decodeURIComponent(window.location.href);
+   var hash = decodeURIComponent(window.location.hash);
+   var index_of_hash = url.indexOf(hash) || url.length; // find loc of hash
+   var hashless_url = url.substr(0, index_of_hash);     // remove hash
    var docName = hashless_url.match(/[^\/]*$/); // get last part of url.
    return docName;
 };
@@ -14193,6 +14081,479 @@ $.fn.scrollEnd = function(callback) {
    $this.data('scrollTimeout', setTimeout(callback,document.scrollTimeout));
   });
 };
+
+window.removeExtension = function(string){
+   return string.substr(0, string.lastIndexOf('.')) || string;
+};
+ /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
+|        docview_funcs.js   part of markdown.design                             |
+|        By Jeff Russ       https://github.com/Jeff-Russ                        |
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
+
+/*
+INTER-FILE INTERDEPENDENCIES:
+    VARS SET:      window.$topViewElem      window.currHashName
+                   window.prevHash          window.nextHash
+    READ AND SET:  window.$activeTocAnchor
+    VARS READ:     window.tocFollow          window.$tocAnchors
+    
+    FUNCS CALLED:  window.determineSection() window.updateTopbar()
+                   window.updateToc()
+    FUNCS DEFINED: Just look down there
+*/
+
+//  CLICK LISTENER FOR TOC ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+window.onTocClick = function(e)
+{
+   // e == object that raised the event
+   e.preventDefault();       // bypass clicked <a>'s native bahavior 
+   $(document).off("scroll");// remove event handler on scroll
+   
+   var target = this.hash;
+   var $target = $(target);
+   $("html, body").stop().animate({
+      'scrollTop': $target.offset().top - window.topOffset 
+   }, 100, 'swing', function () {
+      window.location.hash = target;
+      // $(document).on("scroll", window.determineSection()); ADD BACK LATER????
+   });
+
+   window.$topViewElem = $target;
+   window.determineSection();
+   window.updateTopbar();
+   window.updateToc();
+};
+
+//  TOC SHOW/HIDE BUTTONS LISTENER  ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.
+window.onTocShowBtnClick = function()
+{
+   window.$tocBtn.toggleClass('on');
+   if (window.$tocBtn.hasClass('on')) { 
+      window.showToc = true;
+      $('#toc-btn-img').css('opacity','.9');
+      window.toggleSidebar(); 
+        window.tocFollowBtnState();
+   } else { 
+      window.showToc = false;
+      $('#toc-btn-img').css('opacity','.4');
+      window.toggleSidebar();
+      window.tocFollow = false;
+      $('#toc-follow-img').css('opacity','.4');
+   }
+};
+
+//  TOC FOLLOW BUTTONS LISTENER  ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.
+window.onTocFollowBtnClick = function(){
+   $(this).toggleClass('on');
+    window.tocFollowBtnState();
+};
+
+window.tocFollowBtnState = function()
+{
+   if ( window.$tocFollowBtn.hasClass('on') ) {
+      window.tocFollow = true;
+      $('#toc-follow-img').css('opacity','.9');
+      window.findNewPosition();
+   } else {
+      window.tocFollow = false;
+      $('#toc-follow-img').css('opacity','.4');
+   }
+}
+
+//  FIND NEW POSITION IN READER ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+window.findNewPosition = function()
+{  
+   var calibrate = window.topOffset * -1;
+   
+   var winHeight = $(window).height() - calibrate,
+   winTop = $(document).scrollTop() + calibrate, 
+   winBottom = winTop + winHeight,
+   $candidate, rerun = true;
+   
+   // Iterate all <a> descendant of <nav> (the links to locations)
+   window.$tocAnchors.each( function()
+   { 
+      if (rerun) 
+      {
+         var $thisLink = $(this);                        // toc link item
+         var $thisRefElem = $($thisLink.attr("href"));   // corresponding target
+         var thisRefElPos = $thisRefElem.position().top; // target of link
+         
+         if (thisRefElPos < winTop) { 
+            $candidate = $thisRefElem;
+            
+         }else if (thisRefElPos < winBottom && thisRefElPos > winTop) { 
+            window.$topViewElem = $thisRefElem; 
+            rerun = false;
+            
+         }else {
+            window.$topViewElem = $candidate;
+            rerun = false;
+         }
+      }
+   });
+   
+   var pos = window.$topViewElem.position().top - winTop
+   pos = pos / winHeight * 100
+   pos = Math.round(pos)
+   
+   if (pos < 0)
+      window.update(" | "+ pos +"% ")
+
+   window.update("  | "+ ($candidate.position().top - winTop))
+   
+   window.determineSection();
+   window.updateTopbar();
+   window.updateToc();
+};
+
+//  DETERMINE SECTION ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+window.determineSection = function()
+{
+   // needs window.$topViewElem
+   // and sets the following globals for use elsewhere:
+   window.currHashName;
+   window.prevHash; 
+   window.nextHash;
+
+   var $prevSection, $nextSection,
+   activeTocId,  // the id top viewed div in reader that starts with toc_
+   $firstSection = $('.section').first(),
+   $lastSection  = $('.section').last();
+
+   if ( window.$topViewElem.hasClass("section") ) 
+   {
+      window.currHashName = window.$topViewElem.attr('id');
+      
+      if ( window.$topViewElem == $firstSection ) {
+         $prevSection = window.$topViewElem;
+         $nextSection = window.$topViewElem.nextAll('.section');
+      } else if ( window.$topViewElem == $lastSection ){
+         $prevSection = window.$topViewElem.prevAll('.section');
+         $nextSection = window.$topViewElem;
+      } else {
+         $prevSection = window.$topViewElem.prevAll('.section');
+         $nextSection = window.$topViewElem.nextAll('.section');
+      }
+      activeTocId = window.$topViewElem.nextAll('[id^="toc_"]').attr('id');
+      
+   } else {
+      var $lastTocTarget= $('[id^="toc_"]').last();
+      
+      if ( window.$topViewElem == $lastTocTarget ) {
+         $nextSection = $firstSection;    // wrap around to top
+      } else {
+         $nextSection = window.$topViewElem.nextAll('.section');
+      }
+      $prevSection = window.$topViewElem.prevAll('.section');
+      window.currHashName = $prevSection.attr('id');
+      
+      activeTocId = window.$topViewElem.attr('id');
+   }
+   var prevSectionName = $prevSection.attr('id');
+   var nextSectionName = $nextSection.attr('id');
+
+
+   window.prevHash = '#' + prevSectionName;
+   window.nextHash = '#' + nextSectionName;
+   
+   var activeAnchorHash = '#' + activeTocId;
+   window.$activeTocAnchor = $('a[href="'+activeAnchorHash+'"]', '#toc');
+};
+
+var currScroll;
+
+//  ACTIVE LINK AND AUTO SCROLL OF TOC ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~_
+window.updateToc = function ()
+{
+   // needs window.$tocAnchors and $activeTocAnchor
+   // and sets the following for use elsewhere:
+   window.$tocAnchors.attr('id', 'toc-inactive');
+   window.$activeTocAnchor.attr('id', 'toc-active');
+   
+   currScroll; // global only to retain value between calls (only used here)
+
+   if (window.tocFollow)  
+   {  
+      var activeElement = document.getElementById("toc-active");
+      var activePos     = activeElement.offsetTop;
+      var sidebarHeight = document.getElementById('sidebar').offsetHeight;
+      var sidebarUpper  = sidebarHeight * 0.3;
+      var offset        = activePos - sidebarUpper;
+      var maxOffset     = tocHeight - sidebarHeight;
+      var tocElem       = document.getElementById("toc");
+      var tocHeight     = tocElem.height;
+
+      if (offset > maxOffset) { offset = maxOffset; }
+      else                    { offset = offset;    }
+      
+      if ((activePos > sidebarHeight * .95) || 
+          (currScroll < activePos + sidebarUpper) )
+      {
+         $('#sidebar').stop();
+         window.log2("scrolling toc...")
+         $('#sidebar').animate( { scrollTop: offset}, 300);
+         currScroll = offset;
+      } 
+      else {
+         $('#sidebar').stop();
+      }
+   }
+};
+
+//  TOGGLE SIDEBAR ON AND OFF ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~
+window.toggleSidebar = function() 
+{
+   if ( window.showToc ) {
+      $('#reader').css('width', '64%').css('padding-right', '2%');
+      $('#sidebar').css('display', 'inline-block');
+      $('.mono').css('white-space','pre').css('overflow','scroll');
+      $('#toc-btn').addClass('on');
+      
+      $('.topbar').addClass('topbar-toc').removeClass('topbar');
+      $('.LL-7').addClass('LL-7-toc').removeClass('LL-7');
+      $('.LR-7').addClass('LR-7-toc').removeClass('LR-7');
+      $('.CL-7').addClass('CL-7-toc').removeClass('CL-7');
+      $('.CC-7').addClass('CC-7-toc').removeClass('CC-7');
+      $('.CR-7').addClass('CR-7-toc').removeClass('CR-7');
+      $('.RL-7').addClass('RL-7-toc').removeClass('RL-7');
+      $('.RR-7').addClass('RR-7-toc').removeClass('RR-7');
+   } else {
+      $('#reader').css('width', '96%');
+      $('#sidebar').css('display', 'none');
+      $('.mono').css('white-space','pre-wrap').css('overflow','initial');
+      $('#toc-btn').removeClass('on');
+      
+      $('.topbar-toc').addClass('topbar').removeClass('topbar-toc');
+      $('.LL-7-toc').addClass('LL-7').removeClass('LL-7-toc');
+      $('.LR-7-toc').addClass('LR-7').removeClass('LR-7-toc');
+      $('.CL-7-toc').addClass('CL-7').removeClass('CL-7-toc');
+      $('.CC-7-toc').addClass('CC-7').removeClass('CC-7-toc');
+      $('.CR-7-toc').addClass('CR-7').removeClass('CR-7-toc');
+      $('.RL-7-toc').addClass('RL-7').removeClass('RL-7-toc');
+      $('.RR-7-toc').addClass('RR-7').removeClass('RR-7-toc');
+   }
+};
+ /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
+|        docview_topbar.js  part of markdown.design                             |
+|        By Jeff Russ       https://github.com/Jeff-Russ                        |
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
+
+/*
+INTER-FILE INTERDEPENDENCIES:
+   VARS READ:      window.currHashName    window.prevHash      window.nextHash
+
+   FUNCS DEFINED: Just look down there
+*/
+
+
+//  CLOSES ANY MODAL WINDOW. HANDY! ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~____
+window.close_modal = function () { 
+   $( "button[data-dismiss='modal']").trigger("click");
+};
+
+//  SET VARIABLES NEEDED BY TOPBAR ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~
+window.updateTopbar = function() {
+   // set target for prev and next buttons on topbar
+   $(".prev-btn").attr('href', window.prevHash);
+   $(".next-btn").attr('href', window.nextHash);
+   
+   var pageName = $("#page").comments().html(); // get page name from md comment
+   if (pageName == undefined) {
+      pageName = window.getDocName();
+   }   
+   $('#page-btn').text(pageName);               // set text on page btn 
+   
+   var sectionName;
+   if (window.currHashName == undefined) {
+      var currLocInToc = window.$activeTocAnchor.text();
+      sectionName = window.tersify(currLocInToc);
+   } else { sectionName = window.currHashName; }
+
+   $('#section-btn').text(window.currHashName); // set section btn text
+   document.title = pageName+' - '+sectionName; // set browser tab title
+};
+
+
+//  POPULATE PAGE SELECTION MODAL ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~_
+window.populateModalMenus = function ()    // if .md has 
+{
+
+   var arr = findMenuSources();
+   var makePageMenu    = arr[0], $pages    = arr[1], pageMenuSrc    = arr[2],
+       makeSectionMenu = arr[3], $sections = arr[4], sectionMenuSrc = arr[5];
+   
+   if (!makePageMenu)    { 
+      $('#page-button').addClass('hidden'); 
+   }
+   if (!makeSectionMenu) { 
+      $('#section-button').addClass('hidden');
+      $(".prev-btn").addClass('hidden'); $(".next-btn").addClass('hidden');
+   }
+   
+   var chunk1 = "<div class='col-xs-4' style='background-color:inherit;'> \
+         <a class='dismiss btn btn-xlarge btn-danger \
+         btn-ghosty modal-link' href='";
+   
+   var numOfPages, numOfSections;
+    
+   if (makePageMenu)
+   {
+      numOfPages = $pages.size();
+      if (numOfPages == 1 ) {
+         $pageMenu.prepend("<div class='col-xs-2'>");
+      }
+      var $pageMenu = $('#page-menu');
+      $pageMenu.append(chunk1 + window.HomeUrl + "'>" + 'Home' + "</a></div>");
+      populateWithBtns( $pages, $pageMenu, pageMenuSrc );
+   }
+   if (makeSectionMenu)
+   {  
+      numOfSections = $sections.size();
+      if (numOfSections == 1 ) {
+         $sectionMenu.prepend("<div class='col-xs-2'>");
+      }
+      var $sectionMenu = $('#section-menu');
+      $sectionMenu.append(chunk1 + window.HomeUrl + "'>" + 'Home' + "</a></div>");
+      populateWithBtns( $sections, $sectionMenu, sectionMenuSrc );
+   }
+   
+   // Notice the .dismiss class we added above. 
+   // Below makes them also close the modal:
+   $('.dismiss').on('click', function() { 
+      $( "button[data-dismiss='modal']").trigger("click"); 
+   });
+
+};
+
+
+////// FUNCTIONS USED ONLY IN THIS DOCUMENT /////////////////////////////////////
+
+function findMenuSources() // determine if & how to populate Pages & Section menus
+{
+   var makePageMenu    = true, $pages,    pageMenuSrc,
+       makeSectionMenu = true, $sections, sectionMenuSrc;
+   
+   if ( $('.page-menu').size() > 1)  // if .md has hidden tags with .page-menu
+   {	
+      // For populating the Page Menu (on left, right of leftmost button):
+      pageMenuSrc = 'comments'; $pages = $('.page-menu'); // use their comments
+      window.log("pageMenuSrc = 'comments'");
+      
+      // For populating the Section Menu (center button, between < and >):
+      if ( $('.section').size() > 1) { // if .md has hidden tags with .section
+         sectionMenuSrc = 'comments'; $sections = $('.section'); // use comments
+         window.log("sectionMenuSrc = 'comments'");
+         
+      }else if ( $('h1').size() > 1 && $('h1').size() < 12) {    // or h1's?
+         sectionMenuSrc = 'headers';  $sections = $('h1');       // yep. use them
+         window.update("sectionMenuSrc = 'headers' (<h1>)");
+         
+      }else if ( $('h2').size() > 1 && $('h2').size() < 12){     // maybe h2's?
+         sectionMenuSrc = 'headers';  $sections = $('h2');
+         window.update("sectionMenuSrc = 'headers' (<h2>)");
+      
+      }else {
+         makeSectionMenu = false;          // EVERTHING FALE'D. NO SECTION MENU!
+         window.update ("everything failed for section menu. not making it");
+      }
+   }
+   // Now we'll try the next levels up. before we tried .page-menu comments for
+   // the Page Menu but that failed so we will try h1's for the Page Menu and 
+   // h2's for the Section menu:
+   else if ( $('h1').size() > 1 && $('h1').size() < 12) 
+   {	
+      pageMenuSrc = 'headers'; $pages = $('h1');
+      window.log("pageMenuSrc = 'headers' (<h1>)");
+      
+      if ( $('.section').size() > 1) {
+         sectionMenuSrc = 'comments'; $sections = $('.section');	
+         window.log("sectionMenuSrc = 'comments'");
+         
+      }else if ( $('h2').size() > 1 && $('h2').size() < 12) {
+         sectionMenuSrc = 'headers';  $sections = $('h2');
+         window.update("sectionMenuSrc = 'headers' (<h2>)");
+         
+      }else if ( $('h3').size() > 1 && $('h3').size() < 12){
+         sectionMenuSrc = 'headers';  $sections = $('h3');
+         window.update("sectionMenuSrc = 'headers' (<h3>)");
+         
+      }else {
+         makeSectionMenu = false;    // EVERTHING FALE'D. NO SECTION MENU!
+         window.update ("everything failed for section menu. not making it");
+      }
+   } 
+   // One more levels up. H1's failed for the Page Menu so we'll try h1's, 
+   // with h3's as the Section Menu:
+   else if ( $('h2').size() > 1 && $('h2').size() < 12) 
+   {
+      pageMenuSrc = 'headers'; $pages = $('h2');
+      window.log("pageMenuSrc = 'headers' (<h2>)");
+      
+      if ( $('.section').size() > 1) {
+         sectionMenuSrc = 'comments'; $sections = $('.section');
+         window.log("sectionMenuSrc = 'comments'");
+         
+      }else if ( $('h3').size() > 1 && $('h3').size() < 12) {
+         sectionMenuSrc = 'headers';  $sections = $('h3'); 
+         window.update("sectionMenuSrc = 'headers' (<h3>)");
+         
+      }else if ( $('h4').size() > 1 && $('h4').size() < 12){
+         sectionMenuSrc = 'headers';  $sections = $('h4');
+         window.update("sectionMenuSrc = 'headers' (<h4>)");
+         
+      }else { 
+         makeSectionMenu = false; // EVERTHING FALE'D. NO SECTION MENU!
+         window.update ("everything failed for section menu. not making it");
+      }  
+   } 
+   else { 
+      makePageMenu = false; // EVERTHING FALE'D. NO PAGE MENU!
+      window.update ("everything failed for page menu. not making it");
+   }
+   
+   return [ makePageMenu,    $pages,    pageMenuSrc, 
+            makeSectionMenu, $sections, sectionMenuSrc ];
+}
+
+
+function populateWithBtns($source, $destination, menuSource) 
+{
+   var chunk1 = "<div class='col-xs-4' style='background-color:inherit;'><a class='dismiss btn btn-xlarge btn-";
+   var chunk2 = " btn-ghosty modal-link' href='";
+   var btnColors = ["info","success","warning","danger","primary"];
+   
+   var i = 0;
+   
+   window.log ("About to populate " + $destination.attr("id"));
+   
+   switch (menuSource) 
+   { 
+     case 'comments':
+      window.update ("Populating from comments:<br />");
+      $source.each( function() { 
+         var str = $(this).attr('id');
+         str = window.tersify(str);
+         window.update(" --- '"+str+"' with href='"+$(this).comments().html()+"'");
+         $destination.append( chunk1 + btnColors[i] + chunk2 + 
+            $(this).comments().html() + "'>" + str + "</a></div>");
+         i = ++i % 5;
+      });
+      break;
+     case 'headers':
+      window.update ("Populating from headers");
+      $source.each( function() { 
+         var str = $(this).text();
+         str = window.tersify(str);
+         
+         $destination.append( chunk1 + btnColors[i] + chunk2 + 
+             $(this).attr('id') + "'>" + str +"</a></div>");
+         i = ++i % 5;
+      });
+      break;
+   }
+}
+;
  /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
 |        oscon.js           part of markdown.design                             |
 |        By Jeff Russ       https://github.com/Jeff-Russ                        |
@@ -14415,7 +14776,7 @@ function show_on_screen_console(bool){
 }
 ;
  /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
-|        pageview.main.js   part of markdown.design                             |
+|        docview.main.js    part of markdown.design                             |
 |        By Jeff Russ       https://github.com/Jeff-Russ                        |
  \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
 
@@ -14427,36 +14788,118 @@ function show_on_screen_console(bool){
 
 
 
-window.topbarFixed = true; // default setting
-window.desktopMode;
-	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-       CONFIG TO DEVICE AND WINDOW SIZE*/   
-function onWindowResize(){
-	if (!window.isMobile && $(window).width() >= 630)
-	   window.desktopMode = true;
-	else
-	   window.desktopMode = false;
-	window.toggleTopbarSpacing();
-}
+window.showToc;
+window.hide_toc;
+window.hasToc = true;  // eventually we will want this off for some pages.
+window.$activeTocAnchor; // TOC anchor which this will have the id toc_active
+window.$topViewElem;     // element in reader w/ id hash currently on top of view 
+window.$tocBtn;
+window.tocFollowBtn;
+// window.root = location.protocol + '//' + location.host; // not used but maybe later
+
+// to fix navbar hiding to of content when linksing to spot in page:
+window.homeURl;
+window.addEventListener("hashchange", function() { scrollBy(0, -45) });
+
 
 $( document ).ready( function() 
 {
-   window.on_screen_console(false, false);
-	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-       CONFIG TO DEVICE AND WINDOW */  
-   // call once on load:
-   onWindowResize();
+   window.on_screen_console(false, false); 
    
 	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-       ADD HANDLERS */
-   window.topOffsetInit();
-   $( window ).resize(onWindowResize()); // and add handler for resizing of window
-   $('#toggle-topbar-btn').on('click', window.onToggleTopbarBtnClick); 
-   window.geturlInit();
+       INITIALIZE GLOBAL VARIABLES */
+   window.$tocAnchors   = $('#toc').find('a[href^="#"]'); // sidebar <a>-> headers
+   window.topOffset     = $('#topbar').height();    // height of topbar
+   window.$tocFollowBtn = $('#toc-follow-btn');
+   window.$tocBtn       = $('#toc-btn');
+   window.log("#hide_toc " + $('#hide_toc').attr('data-bool') );
+   if ( $('#hide_toc').attr('data-bool') == "true") {
+      window.hide_toc  = true;
+      window.tocFollow = true;  window.$tocFollowBtn.addClass("on");
+      window.showToc   = true;  window.$tocFollowBtn.addClass("on");
+   } else {
+      window.hide_toc  = false;
+      window.tocFollow = false;  window.$tocFollowBtn.removeClass("on");
+      window.showToc   = false;  window.$tocFollowBtn.removeClass("on");
+      window.onTocShowBtnClick();
+      window.tocFollowBtnState()
+   }
    
+	window.topOffsetInit();
+	if (!window.HomeUrl) window.HomeUrl = "http://www.jeffruss.com/";
+	
+	
+	
 	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
        ADD HOME URL AND LOGO 	*/
    window.HomeUrl = $('#home-url').comments().html();
 	$('.home-url').attr('href', window.HomeUrl);
+	var logoUrl    = $('#logo-url').comments().html();
+	if (!logoUrl)
+	   logoUrl ="https://s3.amazonaws.com/shared-img-res/JR%20logo/JR_20px_wide.png";
+	$('.logo-url').attr('src', logoUrl);
+	
+    /*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+       FORMERLY "onPageLoad"  */
+   if(window.location.hash)   // initial load from url hash
+   {
+      if (window.location.hash == "#undefined"){
+         window.location.hash = '';
+         location.reload();
+      } else  
+         window.$topViewElem = $(decodeURIComponent(window.location.hash));
+   } else {                     // initial load without url hash
+   
+      var $firstSection;
+      if ($('.section').size() > 0) { 
+         $firstSection = $('.section').first();
+         window.$topViewElem = $firstSection;
+      } else if ($('h2').size() > 0){
+         $firstSection = $('h2').first();
+         window.$topViewElem = $firstSection;
+      }
+   }
 
-}); 
+   window.determineSection();
+   window.updateTopbar();
+   
+   if (true) { // true should be window.showToc
+      var tocFollowSetting = window.tocFollow; 
+      window.tocFollow = true; // temporarily make true
+      window.updateToc();
+      window.tocFollow = tocFollowSetting; // restore setting
+   } 
+
+	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+       CONFIG TO DEVICE AND WINDOW */  
+   // call once on load:
+   onWindowResize();
+   // and add handler for resizing of window:
+   $(window).resize(onWindowResize());
+   
+	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+       ADD HANDLERS */
+   $(window).on("scroll", window.findNewPosition);   
+   // $(window).scrollEnd(function(){ window.findNewPosition; });
+   window.$tocAnchors.on('click', window.onTocClick); 
+   window.$tocFollowBtn.on('click', window.onTocFollowBtnClick);
+	if (window.hasToc) window.$tocBtn.on('click', window.onTocShowBtnClick); 
+
+	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+       SET UP MODAL MENUS */
+   window.populateModalMenus();
+
+}); // END DOCUMENT READY
+
+
+
+/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.
+       CONFIG TO DEVICE AND WINDOW SIZE*/   
+function onWindowResize()
+{
+	if (!window.isMobile && $(window).width() >= 800  && window.hasToc)
+	   if (window.hide_toc == false) window.showToc = true;
+	else
+	   window.showToc = false;
+	   window.toggleSidebar();
+}
