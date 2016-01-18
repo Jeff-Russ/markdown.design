@@ -186,7 +186,7 @@ When I am ready I'll copy all of the _file.md to file.md and save it. Done.
 
 **Major Issues**
 
-~~1. Topbar prev, next and section modal items do not update position completely~~
+1. Modal menus auto-populated from headers don't point to valid destinations.
 
 **Minor Issues**
 
@@ -196,8 +196,10 @@ When I am ready I'll copy all of the _file.md to file.md and save it. Done.
 
 <!--1. Better support for non-toc pages!-->
 
-<!--**plans**-->
+**plans**
+
+1. Add support for Dropbox
 
 **canceled plans**
 
-1. add html and erb support  
+1. Add html and erb support  
