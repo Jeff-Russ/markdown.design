@@ -20,10 +20,18 @@ class MdController < ApplicationController
       @all = {}                  # hash that'll store everything 
       text = ''                  # will hold raw content as string
       host = request.host 
-      if    host == 'jeffruss.herokuapp.com'         then @all[:host] = 'jr'
-      elsif host == 'jmarkdown-design.herokuapp.com' then @all[:host] = 'md'
-      elsif host == 'private-jeff-russ.c9users.io'   then @all[:host] = 'md'
-      else @all[:host] = 'md'
+      if     host == 'jeffruss.herokuapp.com'        then @all[:host] = 'jr'
+       elsif host == 'www.jeffruss.com'              then @all[:host] = 'jr'
+       elsif host == 'jeffruss.com'                  then @all[:host] = 'jr'
+      
+       elsif host == 'markdown-design.herokuapp.com' then @all[:host] = 'md'
+       elsif host == 'www.markdown.design'           then @all[:host] = 'md'
+       elsif host == 'markdown.design'               then @all[:host] = 'md'
+      
+       elsif host == 'private-jeff-russ.c9users.io'  then @all[:host] = 'md'
+      
+       else @all[:host] = 'md'
+         
       end
       
 ####_____ GET FILE PATH ____________________________________________________####
