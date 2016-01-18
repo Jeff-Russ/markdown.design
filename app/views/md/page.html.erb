@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-   <head>
+   <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
       
       <%= favicon_link_tag 'favicon.ico' %>
       <title class='title'></title>
@@ -8,6 +8,12 @@
                                     media: 'all','data-turbolinks-track'=>true %>
       <%= csrf_meta_tags %>
       <%= javascript_include_tag 'pageview.main','data-turbolinks-track'=>true %>
+      
+      <% if @all[:host] == 'jr' %>
+         <%= render partial: 'og_jr' %>
+      <% elsif @all[:host] == 'md' %>
+         <%= render partial: 'og_md' %>
+      <% end %>
       
    </head>
    <body class="jr-darker-body">
