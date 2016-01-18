@@ -13,33 +13,21 @@
 
 window.topbarFixed = true; // default setting
 window.desktopMode;
-	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-       CONFIG TO DEVICE AND WINDOW SIZE*/   
-function onWindowResize(){
-	if (!window.isMobile && $(window).width() >= 630)
-	   window.desktopMode = true;
-	else
-	   window.desktopMode = false;
-	window.toggleTopbarSpacing();
-}
 
 $( document ).ready( function() 
 {
    window.on_screen_console(true, false);
-	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-       CONFIG TO DEVICE AND WINDOW */  
-   // call once on load:
-   onWindowResize();
    
-	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-       ADD HANDLERS */
+   // CONFIG TO DEVICE AND WINDOW
+   window.onResize(); // call once on load
+   
+   // ADD HANDLERS
    window.topOffsetInit();
-   $( window ).resize(onWindowResize()); // and add handler for resizing of window
+   $( window ).resize(window.onResize()); // and add handler for resizing of window
    $('#toggle-topbar-btn').on('click', window.onToggleTopbarBtnClick); 
    window.geturlInit();
    
-	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-       ADD HOME URL AND LOGO 	*/
+   // ADD HOME URL AND LOGO
    window.HomeUrl = $('#home-url').comments().html();
 	$('.home-url').attr('href', window.HomeUrl);
 

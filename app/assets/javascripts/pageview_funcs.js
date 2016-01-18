@@ -47,3 +47,14 @@ window.onToggleTopbarBtnClick = function()
       $("html, body").animate( { scrollTop: -window.topOffset }, 300);
    }
 };
+
+
+/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.
+       CONFIG TO DEVICE AND WINDOW SIZE*/   
+window.onResize = function(){
+	if (!window.isMobile && $(window).width() >= 630)
+	   window.desktopMode = true;
+	else
+	   window.desktopMode = false;
+	window.toggleTopbarSpacing();
+};

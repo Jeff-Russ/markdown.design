@@ -414,8 +414,9 @@ hr.topic       { border-top: 20em; }
 .btn-large { @extend%trans-250ms; padding: 18px 28px; margin-bottom: 30px;
              font-size: 12px; line-height: normal; 
 }
-.btn-xlarge { @extend%trans-250ms; padding-top: 13px; padding-bottom:10px;// margin-bottom: 30px;
-             font-size: 15px; //line-height: 1.8em; //height: 4.3em;
+.btn-xlarge { @extend%trans-250ms; padding-top: 13px; padding-bottom:10px; 
+            margin-bottom: 30px; font-size: 15px; 
+             //line-height: 1.8em; //height: 4.3em;
              border-radius: 10px; font-weight: 200!important ;
 }
 .btn-ghost { @extend%trans-250ms; 
