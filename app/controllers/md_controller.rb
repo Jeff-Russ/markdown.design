@@ -15,7 +15,7 @@ class MdController < ApplicationController
    def route
       
       log "&#*(Y@H(H*(H@*(H#(*@"
-      log request.host
+      log request.host # jeffruss.herokuapp.com
       
       @all= {}                             # hash that'll store everything 
       text = ''                            # will hold raw content as string
