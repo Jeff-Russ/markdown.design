@@ -14,11 +14,17 @@ class MdController < ApplicationController
 ################################################################################
    def route
       
-      log "&#*(Y@H(H*(H@*(H#(*@"
+      log "@@@@@ request.host @@@@@"
       log request.host # jeffruss.herokuapp.com
       
-      @all= {}                             # hash that'll store everything 
-      text = ''                            # will hold raw content as string
+      @all = {}                  # hash that'll store everything 
+      text = ''                  # will hold raw content as string
+      host = request.host 
+      if    host == 'jeffruss.herokuapp.com'         then @all[:host] = 'jr'
+      elsif host == 'jmarkdown-design.herokuapp.com' then @all[:host] = 'md'
+      elsif host == 'private-jeff-russ.c9users.io'   then @all[:host] = 'md'
+      else @all[:host] = 'md'
+      end
       
 ####_____ GET FILE PATH ____________________________________________________####
 
@@ -110,13 +116,15 @@ class MdController < ApplicationController
             log "Insuffient path indicate home page. Using home_page and home_view global variables"; bar;
             
 #### MODIFY THIS TO PERSONALIZE HOME (WITHOUT QUERY STRING) PAGE ###############
-                                                                              ##
-            jrhome = 'https://s3.amazonaws.com/jeffruss/home.md'              ##
-            mdhome = 'https://s3.amazonaws.com/markdown.design/geturl.md'     ##
-                                                                              ##
-            @all[:path] = jrhome                                              ##
-            @all[:view] = 'page'                                              ##
-                                                                              ##
+            
+            if    @all[:host] == 'jr'
+                  @all[:path] = 'https://s3.amazonaws.com/jeffruss/home.md'
+                  @all[:view] = "page"
+            elsif @all[:host] == 'md'
+                  @all[:path] = 'https://s3.amazonaws.com/markdown.design/geturl.md'
+                  @all[:view] = "page"
+            end
+            
 ################################################################################
             
             update "Fetching #{@all[:path]}"; bar;

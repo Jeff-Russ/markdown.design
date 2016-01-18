@@ -11,8 +11,14 @@
       
    </head>
    <body class="jr-darker-body">
-
+      
+      <% if @all[:host] == 'jr' %>
+         <%= render partial: 'gtm_jr' %>
+      <% elsif @all[:host] == 'md' %>
+         <%= render partial: 'gtm_md' %>
+      <% end %>
+      
       <%= @all[:content] %> 
-
+      
    </body>
 </html>
