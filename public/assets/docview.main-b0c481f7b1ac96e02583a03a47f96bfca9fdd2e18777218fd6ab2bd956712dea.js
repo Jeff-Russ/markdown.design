@@ -13936,26 +13936,25 @@ window.topOffsetInit = function() { window.topOffset = $('#topbar').height(); };
 document.scrollTimeout = 500;
 // milliseconds. 
 
-
 ////////////////////////////////////////////////////////////////////////////////
 $( document ).ready( function() ////////////////////////////////////////////////
 {
    
    // These allow content author to omit adding and image tag. Simply adding these
    // to a tag will result in insertion of an image inside the tag with src set:
-   $('.prev-btn-img').append("<img class='prev-img-css' src='https://shared-img-res.s3.amazonaws.com/icons/left_icon_grn.png'/>");
-   $('.next-btn-img').append("<img class='next-img-css' src='https://shared-img-res.s3.amazonaws.com/icons/right_icon_grn.png'/>");
-   $('.menubar-img').append("<img class='menubar-img-css' src='https://s3.amazonaws.com/markdown.design/menubar-icon.png'/>");
-   $('.scroll-btn-img').append("<img class='scroll-btn-img-css' id='toc-follow-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/auto-y_icon_33_grn.png'/>");
-   $('.toc-btn-img').append("<img class='toc-btn-img-css toc-btn-img' id='toc-btn-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/toc_icon_h20.png'/>");
-   $('.jr-img').append("<img class='jr-img-css' src='https://s3.amazonaws.com/jeffruss/img/JR_20px_wide.png'/>");
+   $('.prev-btn-img').append("<img class='prev-img-css printhide' src='https://shared-img-res.s3.amazonaws.com/icons/left_icon_grn.png'/>");
+   $('.next-btn-img').append("<img class='next-img-css printhide' src='https://shared-img-res.s3.amazonaws.com/icons/right_icon_grn.png'/>");
+   $('.menubar-img').append("<img class='menubar-img-css printhide' src='https://s3.amazonaws.com/markdown.design/menubar-icon.png'/>");
+   $('.scroll-btn-img').append("<img class='scroll-btn-img-css printhide' id='toc-follow-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/auto-y_icon_33_grn.png'/>");
+   $('.toc-btn-img').append("<img class='toc-btn-img-css toc-btn-img printhide' id='toc-btn-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/toc_icon_h20.png'/>");
+   $('.jr-img').append("<img class='jr-img-css printhide' src='https://s3.amazonaws.com/jeffruss/img/JR_20px_wide.png'/>");
 
    // Similar to above, these let the content author add the custom attribute
    // data-link='http://www.whatever.com' to wrap the element in an <a>chor
    var $btnLinks = $('[data-link]');
    $btnLinks.each(function(){
       var url = $(this).attr('data-link');
-      $(this).wrap("<a href='" + url + "'></a>");
+      $(this).wrap("<a class='printhide' href='" + url + "'></a>");
    });
    
    // Similar to $btnLinks, these let the content author add the custom attribute
@@ -13963,7 +13962,7 @@ $( document ).ready( function() ////////////////////////////////////////////////
    var $appendImg = $('[data-img]');
    $appendImg.each(function(){
       var url = $(this).attr('data-img');
-      $(this).append("<img src='" + url + "'></img>");
+      $(this).append("<img class='printhide' src='" + url + "'></img>");
    });
    
 
@@ -14015,10 +14014,11 @@ window.tersify = function(string) {
 
 // GET A PAGE TITLE FROM THE LAST PART OF URL ( AFTER LAST / )  ~._.~~._.~~._.~~
 window.getDocName = function() {
-   var url = window.location.href;   // get url
-   var hash = window.location.hash;  // get hash
-      var index_of_hash = url.indexOf(hash) || url.length; // find loc of hash
-      var hashless_url = url.substr(0, index_of_hash);     // remove hash
+   
+   var url = decodeURIComponent(window.location.href);
+   var hash = decodeURIComponent(window.location.hash);
+   var index_of_hash = url.indexOf(hash) || url.length; // find loc of hash
+   var hashless_url = url.substr(0, index_of_hash);     // remove hash
    var docName = hashless_url.match(/[^\/]*$/); // get last part of url.
    return docName;
 };
@@ -14080,6 +14080,10 @@ $.fn.scrollEnd = function(callback) {
    }
    $this.data('scrollTimeout', setTimeout(callback,document.scrollTimeout));
   });
+};
+
+window.removeExtension = function(string){
+   return string.substr(0, string.lastIndexOf('.')) || string;
 };
  /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
 |        docview_funcs.js   part of markdown.design                             |
@@ -14802,11 +14806,6 @@ $( document ).ready( function()
 {
    window.on_screen_console(false, false); 
    
-   // window.oscon_keys(function() { 
-   //    window.log1("window.tocFollow = " + window.tocFollow + "<br>window.topOffsetInit() = "+ window.topOffsetInit());
-   //    window.log2("window.location.hash = "+ window.location.hash);
-   //    window.log3("window.currHashName = "+window.currHashName+"<br>window.prevHash = "+window.prevHash+"<br>window.nextHash = "+window.nextHash);
-   // });
 	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
        INITIALIZE GLOBAL VARIABLES */
    window.$tocAnchors   = $('#toc').find('a[href^="#"]'); // sidebar <a>-> headers
@@ -14848,7 +14847,7 @@ $( document ).ready( function()
          window.location.hash = '';
          location.reload();
       } else  
-         window.$topViewElem = $(window.location.hash);
+         window.$topViewElem = $(decodeURIComponent(window.location.hash));
    } else {                     // initial load without url hash
    
       var $firstSection;
