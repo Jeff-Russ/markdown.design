@@ -21,19 +21,19 @@ $( document ).ready( function() ////////////////////////////////////////////////
    
    // These allow content author to omit adding and image tag. Simply adding these
    // to a tag will result in insertion of an image inside the tag with src set:
-   $('.prev-btn-img').append("<img class='prev-img-css' src='https://shared-img-res.s3.amazonaws.com/icons/left_icon_grn.png'/>");
-   $('.next-btn-img').append("<img class='next-img-css' src='https://shared-img-res.s3.amazonaws.com/icons/right_icon_grn.png'/>");
-   $('.menubar-img').append("<img class='menubar-img-css' src='https://s3.amazonaws.com/shared-img-res/livepage_heroku/menubar-icon.png'/>");
-   $('.scroll-btn-img').append("<img class='scroll-btn-img-css' id='toc-follow-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/auto-y_icon_33_grn.png'/>");
-   $('.toc-btn-img').append("<img class='toc-btn-img-css toc-btn-img' id='toc-btn-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/toc_icon_h20.png'/>");
-   $('.jr-img').append("<img class='jr-img-css' src='https://s3.amazonaws.com/shared-img-res/JR%20logo/JR_20px_wide.png'/>");
+   $('.prev-btn-img').append("<img class='prev-img-css printhide' src='https://shared-img-res.s3.amazonaws.com/icons/left_icon_grn.png'/>");
+   $('.next-btn-img').append("<img class='next-img-css printhide' src='https://shared-img-res.s3.amazonaws.com/icons/right_icon_grn.png'/>");
+   $('.menubar-img').append("<img class='menubar-img-css printhide' src='https://s3.amazonaws.com/markdown.design/menubar-icon.png'/>");
+   $('.scroll-btn-img').append("<img class='scroll-btn-img-css printhide' id='toc-follow-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/auto-y_icon_33_grn.png'/>");
+   $('.toc-btn-img').append("<img class='toc-btn-img-css toc-btn-img printhide' id='toc-btn-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/toc_icon_h20.png'/>");
+   $('.jr-img').append("<img class='jr-img-css printhide' src='https://s3.amazonaws.com/jeffruss/img/JR_20px_wide.png'/>");
 
    // Similar to above, these let the content author add the custom attribute
    // data-link='http://www.whatever.com' to wrap the element in an <a>chor
    var $btnLinks = $('[data-link]');
    $btnLinks.each(function(){
       var url = $(this).attr('data-link');
-      $(this).wrap("<a href='" + url + "'></a>");
+      $(this).wrap("<a class='printhide' href='" + url + "'></a>");
    });
    
    // Similar to $btnLinks, these let the content author add the custom attribute
@@ -41,7 +41,7 @@ $( document ).ready( function() ////////////////////////////////////////////////
    var $appendImg = $('[data-img]');
    $appendImg.each(function(){
       var url = $(this).attr('data-img');
-      $(this).append("<img src='" + url + "'></img>");
+      $(this).append("<img class='printhide' src='" + url + "'></img>");
    });
    
 

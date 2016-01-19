@@ -1,7 +1,7 @@
 
 <div id="page"      style="display: none;"><!--md.design--></div>
 <div id='home-url'  style="display: none;"><!--http://www.markdown.design--></div>
-<div id='logo-url'  style="display: none;"><!--https://s3.amazonaws.com/shared-img-res/JR%20logo/JR_20px_wide.png--></div>
+<div id='logo-url'  style="display: none;"><!--https://s3.amazonaws.com/jeffruss/img/JR_20px_wide.png--></div>
 
 <div class="page-menu" id='On Github'    style="display: none;"><!--https://github.com/Jeff-Russ/markdown.design--></div>
 <div class="page-menu" id='Author'    style="display: none;"><!--http://www.markdown.design--></div>
@@ -32,7 +32,7 @@ It's eeeeeeeeeeasy!
 <p class='github-only'> Here is a sample:</p>
 
 <img class='github-only' 
-src='https://s3.amazonaws.com/shared-img-res/livepage_heroku/LivePage-md_preview.png'>
+src='https://s3.amazonaws.com/markdown.design/mddesign_preview.png'>
 
 Interested? Here is it's [home](http://www.markdown.design/?file=README) where you can
 view this very same README.md with it's rendering.
@@ -47,33 +47,41 @@ Markdown.design is possible because of the RedCarpet Gem.
 
 #### 1. The URL
 
+**BEWARE** This app is constantly changing. For the authority on url's, have one 
+generated [here](http://markdown.design/)
+
 The base URL you will use for your pages is http://www.markdown.design/.
 Or you can feel free to re-deploy from the source to a new location. For instruction 
-on that, refer to my [Ruby on Rails How-To](http://www.howto.jeffruss.com/?aws=jeffruss/rails)
+on that, refer to my [Ruby on Rails How-To](http://www.jeffruss.com/?docs=rails)
 , which is created using markdown.design!
 
 For each page you will append a parameter to the URL in one of the formats:  
     
-`?aws=AMAZONAWS-BUCKET-NAME.FILENAME`  
-`?github=USERNAME/PROJECTNAME/BRANCH/FILENAME`  
+`?docs=AMAZONAWS-BUCKET-NAME.FILENAME` 
+`?doch=AMAZONAWS-BUCKET-NAME.FILENAME` 
+`?gh=USERNAME/PROJECTNAME/BRANCH/FILENAME`  
+`?ghrm=USERNAME/PROJECTNAME` 
 `?https=ADDRESS-EXCLUDING-HTTPS://`  
 `?http=ADDRESS-EXCLUDING-HTTP://`  
 `?url=FULL-ADDRESS`  
 
-The `aws` parameter prepends `https://s3.amazonaws.com/`  
-The `github` parameter prepends `https://raw.githubusercontent.com/`
+The `docs`, `doch` and `pages` parameters prepends `https://s3.amazonaws.com/` and appends `.md`
+The `gh` parameter prepends `https://raw.githubusercontent.com/` and appends `.md`
+The `ghrm` parameter prepends the same and appends `/master/README.md` and appends `.md`
 
 For example, if you have a bucket called `bucket` with a file in it called `sample.md` 
 your custome address for this is:  
   
-`http://www.markdown.design/bucket/sample.md`  
+`http://www.markdown.design/?docs=bucket/sample`  # with table of contents
+`http://www.markdown.design/?doch=bucket/sample`  # with table of contents but hidden
+`http://www.markdown.design/?pages=bucket/sample` # without table of contents
 
 If you have the file in a folder within the bucket, your custom address would 
 reflect this.  
   
-Using the other formats would provide you with addresses like these:
+Using other formats would provide you with addresses like these:
 
-`http://www.markdown.design/?github=Jeff-Russ/markdown.design/master/README.md`
+`http://www.markdown.design/?ghrm=Jeff-Russ/markdown.design/`
 `http://www.markdown.design/?https=/www.example/sample.md`  
 `http://www.markdown.design/?http=/www.example/sample.md`  
 `http://www.markdown.design/?url=https://www.example/sample.md` 
@@ -128,8 +136,8 @@ You can populate the page menu with links to anywhere by adding to a header in y
 markdown file. The entries will be invisible divs with the class `page-menu` and 
 with id's reflecting the desired labels. Example:
 
-    <div class="page-menu" id='Boostrap' style="display: none;"><!--http://www.howto.jeffruss.com/md/show?aws=bootstrap.md--></div>
-    <div class="page-menu" id='Rails'    style="display: none;"><!--http://www.howto.jeffruss.com/md/show?aws=rails.md--></div>
+    <div class="page-menu" id='Boostrap' style="display: none;"><!--http://www.jeffruss.com/?docs=bootstrap.md--></div>
+    <div class="page-menu" id='Rails'    style="display: none;"><!--http://www.jeffruss.com/?docs=rails.md--></div>
 
 <br />
 <div class="section" id='Assets'></div> 
@@ -140,7 +148,7 @@ Here is an example of what should go on the very top of your markdown file:
 
     <div id="page"      style="display: none;"><!-- markdown.design --></div>
     <div id='home-url'  style="display: none;"><!-- https://github.com/Jeff-Russ/markdown.design --></div>
-    <div id='logo-url'  style="display: none;"><!-- https://s3.amazonaws.com/shared-img-res/JR%20logo/JR_20px_wide.png --></div>
+    <div id='logo-url'  style="display: none;"><!-- https://s3.amazonaws.com/jeffruss/img/JR_20px_wide.png --></div>
 
 The `<div id="page"` tag provides the name you want to appear on the browser tab 
 and on the page menu button. Notice that it's provided in the comment! 

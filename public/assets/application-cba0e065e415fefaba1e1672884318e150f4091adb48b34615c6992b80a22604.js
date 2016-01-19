@@ -13337,7 +13337,7 @@ $( document ).ready( function()
 	$('.home-url').attr('href', window.HomeUrl);
 	var logoUrl    = $('#logo-url').comments().html();
 	if (!logoUrl)
-	   logoUrl ="https://s3.amazonaws.com/shared-img-res/JR%20logo/JR_20px_wide.png";
+	   logoUrl ="https://s3.amazonaws.com/jeffruss/img/JR_20px_wide.png";
 	$('.logo-url').attr('src', logoUrl);
 	
 	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~_~._.~~._.~~._.~~._
