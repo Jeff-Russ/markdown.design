@@ -16,7 +16,7 @@ window.desktopMode;
 
 $( document ).ready( function() 
 {
-   window.on_screen_console(true, false);
+   window.on_screen_console(false, false);
    
    // CONFIG TO DEVICE AND WINDOW
    window.onResize(); // call once on load
