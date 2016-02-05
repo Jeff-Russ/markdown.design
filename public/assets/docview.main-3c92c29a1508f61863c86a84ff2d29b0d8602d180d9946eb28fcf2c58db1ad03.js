@@ -13921,168 +13921,172 @@ return jQuery;
  /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
 |        shared.js          part of markdown.design                             |
 |        By Jeff Russ       https://github.com/Jeff-Russ                        |
- \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
- 
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.~/
+
+LINT VALIDATOR SETTINGS:
+    TOLERATE: multi vars, this
+    FUDGE... first line number is 1
+    Global variables...   $, window, document, location, scrollBy, navigator,
+                            clearTimeout, setTimeout   */
+
+
+"use strict";
 
 /*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-    CONFIG TO DEVICE  */
-    
+     CONFIG TO DEVICE  */
 window.isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/);
 
 // offset scroll to compensate for topbar which takes 8%.
-window.topOffsetInit = function() { window.topOffset = $('#topbar').height(); };
+window.topOffsetInit = function () {
+    window.topOffset = $('#topbar').height();
+};
 
 // call "callback" when scrolling has stopped for
 document.scrollTimeout = 500;
-// milliseconds. 
+// milliseconds.
 
 ////////////////////////////////////////////////////////////////////////////////
-$( document ).ready( function() ////////////////////////////////////////////////
-{
-   
-   // These allow content author to omit adding and image tag. Simply adding these
-   // to a tag will result in insertion of an image inside the tag with src set:
-   $('.prev-btn-img').append("<img class='prev-img-css' src='https://shared-img-res.s3.amazonaws.com/icons/left_icon_grn.png'/>");
-   $('.next-btn-img').append("<img class='next-img-css' src='https://shared-img-res.s3.amazonaws.com/icons/right_icon_grn.png'/>");
-   $('.menubar-img').append("<img class='menubar-img-css' src='https://s3.amazonaws.com/markdown.design/menubar-icon.png'/>");
-   $('.scroll-btn-img').append("<img class='scroll-btn-img-css' id='toc-follow-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/auto-y_icon_33_grn.png'/>");
-   $('.toc-btn-img').append("<img class='toc-btn-img-css toc-btn-img' id='toc-btn-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/toc_icon_h20.png'/>");
-   $('.jr-img').append("<img class='jr-img-css' src='https://s3.amazonaws.com/jeffruss/img/JR_20px_wide.png'/>");
+$(document).ready(function () {
 
-   // Similar to above, these let the content author add the custom attribute
-   // data-link='http://www.whatever.com' to wrap the element in an <a>chor
-   var $btnLinks = $('[data-link]');
-   $btnLinks.each(function(){
-      var url = $(this).attr('data-link');
-      $(this).wrap("<a href='" + url + "'></a>");
-   });
-   
-   // Similar to $btnLinks, these let the content author add the custom attribute
-   // data-img='http://whatever.com/img.jpg' to insert <img> within the element
-   var $appendImg = $('[data-img]');
-   $appendImg.each(function(){
-      var url = $(this).attr('data-img');
-      $(this).append("<img src='" + url + "'></img>");
-   });
-   
+    // These allow content author to omit adding and image tag. Simply adding these
+    // to a tag will result in insertion of an image inside the tag with src set:
+    $('.prev-btn-img').append("<img class='prev-img-css printhide' src='https://shared-img-res.s3.amazonaws.com/icons/left_icon_grn.png'/>");
+    $('.next-btn-img').append("<img class='next-img-css printhide' src='https://shared-img-res.s3.amazonaws.com/icons/right_icon_grn.png'/>");
+    $('.menubar-img').append("<img class='menubar-img-css printhide' src='https://s3.amazonaws.com/markdown.design/menubar-icon.png'/>");
+    $('.scroll-btn-img').append("<img class='scroll-btn-img-css printhide' id='toc-follow-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/auto-y_icon_33_grn.png'/>");
+    $('.toc-btn-img').append("<img class='toc-btn-img-css toc-btn-img printhide' id='toc-btn-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/toc_icon_h20.png'/>");
+    $('.jr-img').append("<img class='jr-img-css printhide' src='https://s3.amazonaws.com/jeffruss/img/JR_20px_wide.png'/>");
 
-   // GOOGLE ANALYTICS 
-   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-   
-   ga('create', 'UA-71741017-2', 'auto');
-   ga('send', 'pageview');
+    // Similar to above, these let the content author add the custom attribute
+    // data-link='http://www.whatever.com' to wrap the element in an <a>chor
+    var $btnLinks = $('[data-link]');
+    $btnLinks.each(function () {
+        var url = $(this).attr('data-link');
+        $(this).wrap("<a class='printhide' href='" + url + "'></a>");
+    });
+
+    // Similar to $btnLinks, these let the content author add the custom attribute
+    // data-img='http://whatever.com/img.jpg' to insert <img> within the element
+    var $appendImg = $('[data-img]');
+    $appendImg.each(function () {
+        var url = $(this).attr('data-img');
+        $(this).append("<img class='printhide' src='" + url + "'></img>");
+    });
 
 
-   // fill out an email form and have it reopen in thier email client ~._.~~._.~
-   // see called function below
-   $('#open-mailto').on('click', function(){
-      var emailDest = $('#email-dest').val(); 
-      var emailSubj = $("#email-subj").val();
-      var emailBody = $("#email-body").val(); 
-      window.buildMailTo(emailDest, emailSubj, emailBody);
-   }); 
+    // GOOGLE ANALYTICS
+    (function (i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function () {
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-71741017-2', 'auto');
+    ga('send', 'pageview');
+
+
+    // fill out an email form and have it reopen in thier email client ~._.~~._.~
+    // see called function below
+    $('#open-mailto').on('click', function () {
+        var emailDest = $('#email-dest').val();
+        var emailSubj = $("#email-subj").val();
+        var emailBody = $("#email-body").val();
+        window.buildMailTo(emailDest, emailSubj, emailBody);
+    });
 
 });// END DOC READY ////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
 
 // CLOSES ANY MODAL WINDOW. HANDY! ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~
-window.close_modal = function () { 
-   $( "button[data-dismiss='modal']").trigger("click");
+window.close_modal = function () {
+    $("button[data-dismiss='modal']").trigger("click");
 };
 
 // FILL OUT EMAIL FOR AND HAVE IT OPEN IN CLIENT ~._.~~._.~~._.~~._.~~._.~~._.~~
 window.buildMailTo = function (address, subject, body) {
-   var strMail = 'mailto:' + encodeURIComponent(address)
-               + '?subject=' + encodeURIComponent(subject)
-               + '&body=' + encodeURIComponent(body);
-   window.location.href = strMail;
+    var strMail = 'mailto:' + encodeURIComponent(address)
+            + '?subject=' + encodeURIComponent(subject)
+            + '&body=' + encodeURIComponent(body);
+    window.location.href = strMail;
 };
 
 // REMOVE FAT FROM LONG TITLE AND MAKE IT A FEW WORDS  ~._.~~._.~~._.~~._.~~._.~
-window.tersify = function(string) {
-   string = string.replace(/^\d+\.\s*/, ''); // cut off "1. " or similar
-   if (string.length > 20) {
-      string = string.substr(0, 20); // trim at last space before 20th
-      string = string.substr(0, Math.min(string.length, string.lastIndexOf(" ")));
-   }
-   return string;
+window.tersify = function (string) {
+    string = string.replace(/^\d+\.\s*/, ''); // cut off "1. " or similar
+    if (string.length > 20) {
+        string = string.substr(0, 20); // trim at last space before 20th
+        string = string.substr(0, Math.min(string.length, string.lastIndexOf(" ")));
+    }
+    return string;
 };
 
-// GET A PAGE TITLE FROM THE LAST PART OF URL ( AFTER LAST / )  ~._.~~._.~~._.~~
-window.getDocName = function() {
-   var url = window.location.href;   // get url
-   var hash = window.location.hash;  // get hash
-      var index_of_hash = url.indexOf(hash) || url.length; // find loc of hash
-      var hashless_url = url.substr(0, index_of_hash);     // remove hash
-   var docName = hashless_url.match(/[^\/]*$/); // get last part of url.
-   return docName;
+// GET A PAGE TITLE FROM THE LAST PART OF URL (AFTER LAST /)  ~._.~~._.~~._.~~
+window.getDocName = function () {
+
+    var url = decodeURIComponent(window.location.href);
+    var hash = decodeURIComponent(window.location.hash);
+    var index_of_hash = url.indexOf(hash) || url.length; // find loc of hash
+    var hashless_url = url.substr(0, index_of_hash);     // remove hash
+    var docName = hashless_url.match(/[^\/]*$/); // get last part of url.
+    return docName;
 };
 
 // USE THE COMMENTS OF HIDDEN ELEMENTS AS DATA TO BE READ!  ~._.~~._.~~._.~~._.~
-// This one is not by me. Credit to Ben Nadel !!! 
+// This one is not by me. Credit to Ben Nadel !!!
 //
-// This jQuery plugin will gather the comments within the current jQuery 
+// This jQuery plugin will gather the comments within the current jQuery
 // collection, returning all the comments in a new jQuery collection.
 //
 // NOTE: Comments are wrapped in DIV tags.
-$.fn.comments = function( blnDeep ){
-   var blnDeep = (blnDeep || false);
-   var jComments = $( [] );
-   // Loop over each node to search its children for
-   // comment nodes and element nodes (if deep search).
-   this.each(
-      function( intI, objNode ){
-         var objChildNode = objNode.firstChild;
-         var strParentID = $( this ).attr( "id" );
-         // Keep looping over the top-level children
-         // while we have a node to examine.
-         while (objChildNode){
-            // Check to see if this node is a comment.
-            if (objChildNode.nodeType === 8){
-               // We found a comment node. Add it to
-               // the nodes collection wrapped in a
-               // DIV (as we may have HTML).
-               jComments = jComments.add(
-                  "<div rel='" + strParentID + "'>" +
-                  objChildNode.nodeValue +
-                  "</div>"
-                  );
-            } else if (
-               blnDeep &&
-               (objChildNode.nodeType === 1)
-               ) {
-               // Traverse this node deeply.
-               jComments = jComments.add(
-                  $( objChildNode ).comments( true )
-                  );
+$.fn.comments = function (blnDeep) {
+    var blnDeep = (blnDeep || false); // Redefinition of 'blnDeep' === not my fault
+    var jComments = $([]);
+    // Loop over each node to search its children for
+    // comment nodes and element nodes (if deep search).
+    this.each(
+        function (intI, objNode) { // Unused 'intI' === not my fault
+            var objChildNode = objNode.firstChild;
+            var strParentID = $(this).attr("id");
+            // Keep looping over the top-level children
+            // while we have a node to examine.
+            while (objChildNode) {
+                // Check to see if this node is a comment.
+                if (objChildNode.nodeType === 8) {
+                    // We found a comment node. Add it to
+                    // the nodes collection wrapped in a
+                    // DIV (as we may have HTML).
+                    jComments = jComments.add(
+                        "<div rel='" + strParentID + "'>" +
+                        objChildNode.nodeValue +
+                        "</div>"
+                    );
+                } else if (blnDeep && (objChildNode.nodeType === 1)) {
+                    // Traverse this node deeply.
+                    jComments = jComments.add($(objChildNode).comments(true));
+                }
+                // Move to the next sibling.
+                objChildNode = objChildNode.nextSibling;
             }
-            // Move to the next sibling.
-            objChildNode = objChildNode.nextSibling;
-         }
-      }
-      );
-   // Return the jQuery comments collection.
-   return( jComments );
+        }
+    );
+    // Return the jQuery comments collection.
+    return (jComments);
 };
 
 // CALL SOMETHING WHEN SCROLLING HAS STOPPED FOR SOME TIME~._.~~._.~~._.~~._.~~.
 // This one is not by me. Credit to Stephan Muller!!!
-$.fn.scrollEnd = function(callback) {          
-  $(this).scroll(function(){
-   var $this = $(this);
-   if ($this.data('scrollTimeout')) {
-     clearTimeout($this.data('scrollTimeout'));
-   }
-   $this.data('scrollTimeout', setTimeout(callback,document.scrollTimeout));
-  });
+$.fn.scrollEnd = function (callback) {
+    $(this).scroll(function () {
+        var $this = $(this);
+        if ($this.data('scrollTimeout')) {
+            clearTimeout($this.data('scrollTimeout'));
+        }
+        $this.data('scrollTimeout', setTimeout(callback, document.scrollTimeout));
+    });
 };
 
-window.removeExtension = function(string){
-   return string.substr(0, string.lastIndexOf('.')) || string;
+window.removeExtension = function (string) {
+    return string.substr(0, string.lastIndexOf('.')) || string;
 };
  /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
 |        docview_funcs.js   part of markdown.design                             |
@@ -14091,693 +14095,775 @@ window.removeExtension = function(string){
 
 /*
 INTER-FILE INTERDEPENDENCIES:
-    VARS SET:      window.$topViewElem      window.currHashName
-                   window.prevHash          window.nextHash
-    READ AND SET:  window.$activeTocAnchor
-    VARS READ:     window.tocFollow          window.$tocAnchors
-    
-    FUNCS CALLED:  window.determineSection() window.updateTopbar()
-                   window.updateToc()
-    FUNCS DEFINED: Just look down there
-*/
+     VARS SET:      window.jQtopViewElem      window.currHashName
+                         window.prevHash          window.nextHash
+     READ AND SET:  window.jQactiveTocAnchor
+     VARS READ:     window.tocFollow          window.jQtocAnchors
+
+     FUNCS CALLED:  window.determineSection() window.updateTopbar()
+                         window.updateToc()
+     FUNCS DEFINED: Just look down there
+
+LINT VALIDATOR SETTINGS:
+    TOLERATE: multi vars, this
+    FUDGE... first line number is 1
+    Global variables...   $, window, document, location, scrollBy   */
+
+
+"use strict";
 
 //  CLICK LISTENER FOR TOC ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-window.onTocClick = function(e)
-{
-   // e == object that raised the event
-   e.preventDefault();       // bypass clicked <a>'s native bahavior 
-   $(document).off("scroll");// remove event handler on scroll
-   
-   var target = this.hash;
-   var $target = $(target);
-   $("html, body").stop().animate({
-      'scrollTop': $target.offset().top - window.topOffset 
-   }, 100, 'swing', function () {
-      window.location.hash = target;
-      // $(document).on("scroll", window.determineSection()); ADD BACK LATER????
-   });
+window.onTocClick = function (e) {
+    // e == object that raised the event
+    e.preventDefault();       // bypass clicked <a>'s native bahavior
+    $(document).off("scroll");// remove event handler on scroll
 
-   window.$topViewElem = $target;
-   window.determineSection();
-   window.updateTopbar();
-   window.updateToc();
+    var target = this.hash;
+    var $target = $(target);
+    $("html, body").stop().animate({
+        'scrollTop': $target.offset().top - window.topOffset
+    }, 100, 'swing', function () {
+        window.location.hash = target;
+    });
+
+    window.jQtopViewElem = $target;
+    window.determineSection();
+    window.updateTopbar();
+    window.updateToc();
 };
 
 //  TOC SHOW/HIDE BUTTONS LISTENER  ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.
-window.onTocShowBtnClick = function()
-{
-   window.$tocBtn.toggleClass('on');
-   if (window.$tocBtn.hasClass('on')) { 
-      window.showToc = true;
-      $('#toc-btn-img').css('opacity','.9');
-      window.toggleSidebar(); 
+window.onTocShowBtnClick = function () {
+    window.jQtocBtn.toggleClass('on');
+    if (window.jQtocBtn.hasClass('on')) {
+        window.showToc = true;
+        $('#toc-btn-img').css('opacity', '0.9');
+        window.toggleSidebar();
         window.tocFollowBtnState();
-   } else { 
-      window.showToc = false;
-      $('#toc-btn-img').css('opacity','.4');
-      window.toggleSidebar();
-      window.tocFollow = false;
-      $('#toc-follow-img').css('opacity','.4');
-   }
+    } else {
+        window.showToc = false;
+        $('#toc-btn-img').css('opacity', '0.4');
+        window.toggleSidebar();
+        window.tocFollow = false;
+        $('#toc-follow-img').css('opacity', '0.4');
+    }
 };
 
 //  TOC FOLLOW BUTTONS LISTENER  ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.
-window.onTocFollowBtnClick = function(){
-   $(this).toggleClass('on');
+window.onTocFollowBtnClick = function () {
+    $(this).toggleClass('on');
     window.tocFollowBtnState();
 };
 
-window.tocFollowBtnState = function()
-{
-   if ( window.$tocFollowBtn.hasClass('on') ) {
-      window.tocFollow = true;
-      $('#toc-follow-img').css('opacity','.9');
-      window.findNewPosition();
-   } else {
-      window.tocFollow = false;
-      $('#toc-follow-img').css('opacity','.4');
-   }
-}
+window.tocFollowBtnState = function () {
+    if (window.jQtocFollowBtn.hasClass('on')) {
+        window.tocFollow = true;
+        $('#toc-follow-img').css('opacity', '.9');
+        window.findNewPosition();
+    } else {
+        window.tocFollow = false;
+        $('#toc-follow-img').css('opacity', '.4');
+    }
+};
 
 //  FIND NEW POSITION IN READER ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-window.findNewPosition = function()
-{  
-   var calibrate = window.topOffset * -1;
-   
-   var winHeight = $(window).height() - calibrate,
-   winTop = $(document).scrollTop() + calibrate, 
-   winBottom = winTop + winHeight,
-   $candidate, rerun = true;
-   
-   // Iterate all <a> descendant of <nav> (the links to locations)
-   window.$tocAnchors.each( function()
-   { 
-      if (rerun) 
-      {
-         var $thisLink = $(this);                        // toc link item
-         var $thisRefElem = $($thisLink.attr("href"));   // corresponding target
-         var thisRefElPos = $thisRefElem.position().top; // target of link
-         
-         if (thisRefElPos < winTop) { 
-            $candidate = $thisRefElem;
-            
-         }else if (thisRefElPos < winBottom && thisRefElPos > winTop) { 
-            window.$topViewElem = $thisRefElem; 
-            rerun = false;
-            
-         }else {
-            window.$topViewElem = $candidate;
-            rerun = false;
-         }
-      }
-   });
-   
-   var pos = window.$topViewElem.position().top - winTop
-   pos = pos / winHeight * 100
-   pos = Math.round(pos)
-   
-   if (pos < 0)
-      window.update(" | "+ pos +"% ")
+window.findNewPosition = function () {
+    var calibrate = window.topOffset * -1,
+        winHeight = $(window).height() - calibrate,
+        winTop = $(document).scrollTop() + calibrate,
+        winBottom = winTop + winHeight,
+        $candidate,
+        rerun = true;
 
-   window.update("  | "+ ($candidate.position().top - winTop))
-   
-   window.determineSection();
-   window.updateTopbar();
-   window.updateToc();
+    // Iterate all <a> descendant of <nav> (the links to locations)
+    window.jQtocAnchors.each(function () {
+        if (rerun) {
+            var $thisLink = $(this);                        // toc link item
+            var $thisRefElem = $($thisLink.attr("href"));   // corresponding target
+            var thisRefElPos = $thisRefElem.position().top; // target of link
+
+            if (thisRefElPos < winTop) {
+                $candidate = $thisRefElem;
+            } else if (thisRefElPos < winBottom && thisRefElPos > winTop) {
+                window.jQtopViewElem = $thisRefElem;
+                rerun = false;
+            } else {
+                window.jQtopViewElem = $candidate;
+                rerun = false;
+            }
+        }
+    });
+
+    var pos = window.jQtopViewElem.position().top - winTop;
+    pos = pos / winHeight * 100;
+    pos = Math.round(pos);
+
+    if (pos < 0) {
+        window.update(" | " + pos + "% ");
+    }
+    window.update("  | " + ($candidate.position().top - winTop));
+    window.determineSection();
+    window.updateTopbar();
+    window.updateToc();
 };
 
 //  DETERMINE SECTION ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-window.determineSection = function()
-{
-   // needs window.$topViewElem
-   // and sets the following globals for use elsewhere:
-   window.currHashName;
-   window.prevHash; 
-   window.nextHash;
+window.determineSection = function () {
+    /* needs window.jQtopViewElem and sets the following globals for use elsewhere:
+    window.currHashName; window.prevHash; window.nextHash; */
 
-   var $prevSection, $nextSection,
-   activeTocId,  // the id top viewed div in reader that starts with toc_
-   $firstSection = $('.section').first(),
-   $lastSection  = $('.section').last();
+    var $prevSection, $nextSection,
+            activeTocId,  // the id top viewed div in reader that starts with toc_
+            $firstSection = $('.section').first(),
+            $lastSection = $('.section').last();
 
-   if ( window.$topViewElem.hasClass("section") ) 
-   {
-      window.currHashName = window.$topViewElem.attr('id');
-      
-      if ( window.$topViewElem == $firstSection ) {
-         $prevSection = window.$topViewElem;
-         $nextSection = window.$topViewElem.nextAll('.section');
-      } else if ( window.$topViewElem == $lastSection ){
-         $prevSection = window.$topViewElem.prevAll('.section');
-         $nextSection = window.$topViewElem;
-      } else {
-         $prevSection = window.$topViewElem.prevAll('.section');
-         $nextSection = window.$topViewElem.nextAll('.section');
-      }
-      activeTocId = window.$topViewElem.nextAll('[id^="toc_"]').attr('id');
-      
-   } else {
-      var $lastTocTarget= $('[id^="toc_"]').last();
-      
-      if ( window.$topViewElem == $lastTocTarget ) {
-         $nextSection = $firstSection;    // wrap around to top
-      } else {
-         $nextSection = window.$topViewElem.nextAll('.section');
-      }
-      $prevSection = window.$topViewElem.prevAll('.section');
-      window.currHashName = $prevSection.attr('id');
-      
-      activeTocId = window.$topViewElem.attr('id');
-   }
-   var prevSectionName = $prevSection.attr('id');
-   var nextSectionName = $nextSection.attr('id');
+    if (window.jQtopViewElem.hasClass("section")) {
+        window.currHashName = window.jQtopViewElem.attr('id');
+        if (window.jQtopViewElem === $firstSection) {
+            $prevSection = window.jQtopViewElem;
+            $nextSection = window.jQtopViewElem.nextAll('.section');
+        } else if (window.jQtopViewElem === $lastSection) {
+            $prevSection = window.jQtopViewElem.prevAll('.section');
+            $nextSection = window.jQtopViewElem;
+        } else {
+            $prevSection = window.jQtopViewElem.prevAll('.section');
+            $nextSection = window.jQtopViewElem.nextAll('.section');
+        }
+        activeTocId = window.jQtopViewElem.nextAll('[id^="toc_"]').attr('id');
 
+    } else {
+        var $lastTocTarget = $('[id^="toc_"]').last();
+        if (window.jQtopViewElem === $lastTocTarget) {
+            $nextSection = $firstSection;    // wrap around to top
+        } else {
+            $nextSection = window.jQtopViewElem.nextAll('.section');
+        }
+        $prevSection = window.jQtopViewElem.prevAll('.section');
+        window.currHashName = $prevSection.attr('id');
 
-   window.prevHash = '#' + prevSectionName;
-   window.nextHash = '#' + nextSectionName;
-   
-   var activeAnchorHash = '#' + activeTocId;
-   window.$activeTocAnchor = $('a[href="'+activeAnchorHash+'"]', '#toc');
+        activeTocId = window.jQtopViewElem.attr('id');
+    }
+    var prevSectionName = $prevSection.attr('id');
+    var nextSectionName = $nextSection.attr('id');
+
+    window.prevHash = '#' + prevSectionName;
+    window.nextHash = '#' + nextSectionName;
+
+    var activeAnchorHash = '#' + activeTocId;
+    window.jQactiveTocAnchor = $('a[href="' + activeAnchorHash + '"]', '#toc');
 };
 
-var currScroll;
+var currScroll; // global only to retain value between calls (only used here)
 
 //  ACTIVE LINK AND AUTO SCROLL OF TOC ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~_
-window.updateToc = function ()
-{
-   // needs window.$tocAnchors and $activeTocAnchor
-   // and sets the following for use elsewhere:
-   window.$tocAnchors.attr('id', 'toc-inactive');
-   window.$activeTocAnchor.attr('id', 'toc-active');
-   
-   currScroll; // global only to retain value between calls (only used here)
+window.updateToc = function () {
+    // needs window.jQtocAnchors and $activeTocAnchor
+    // and sets the following for use elsewhere:
+    window.jQtocAnchors.attr('id', 'toc-inactive');
+    window.jQactiveTocAnchor.attr('id', 'toc-active');
 
-   if (window.tocFollow)  
-   {  
-      var activeElement = document.getElementById("toc-active");
-      var activePos     = activeElement.offsetTop;
-      var sidebarHeight = document.getElementById('sidebar').offsetHeight;
-      var sidebarUpper  = sidebarHeight * 0.3;
-      var offset        = activePos - sidebarUpper;
-      var maxOffset     = tocHeight - sidebarHeight;
-      var tocElem       = document.getElementById("toc");
-      var tocHeight     = tocElem.height;
+    if (window.tocFollow) {
+        var activeElement = document.getElementById("toc-active");
+        var activePos = activeElement.offsetTop;
+        var sidebarHeight = document.getElementById('sidebar').offsetHeight;
+        var sidebarUpper = sidebarHeight * 0.3;
+        var offset = activePos - sidebarUpper;
+        var tocElem = document.getElementById("toc");
+        var tocHeight = tocElem.height;
+        var maxOffset = tocHeight - sidebarHeight;
 
-      if (offset > maxOffset) { offset = maxOffset; }
-      else                    { offset = offset;    }
-      
-      if ((activePos > sidebarHeight * .95) || 
-          (currScroll < activePos + sidebarUpper) )
-      {
-         $('#sidebar').stop();
-         window.log2("scrolling toc...")
-         $('#sidebar').animate( { scrollTop: offset}, 300);
-         currScroll = offset;
-      } 
-      else {
-         $('#sidebar').stop();
-      }
-   }
+        if (offset > maxOffset) {
+            offset = maxOffset;
+        } else {
+            offset = offset;
+        }
+
+        if ((activePos > sidebarHeight * 0.95) ||
+                (currScroll < activePos + sidebarUpper)) {
+            $('#sidebar').stop();
+            $('#sidebar').animate({scrollTop: offset}, 300);
+            currScroll = offset;
+        } else {
+            $('#sidebar').stop();
+        }
+    }
 };
 
 //  TOGGLE SIDEBAR ON AND OFF ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~
-window.toggleSidebar = function() 
-{
-   if ( window.showToc ) {
-      $('#reader').css('width', '64%').css('padding-right', '2%');
-      $('#sidebar').css('display', 'inline-block');
-      $('.mono').css('white-space','pre').css('overflow','scroll');
-      $('#toc-btn').addClass('on');
-      
-      $('.topbar').addClass('topbar-toc').removeClass('topbar');
-      $('.LL-7').addClass('LL-7-toc').removeClass('LL-7');
-      $('.LR-7').addClass('LR-7-toc').removeClass('LR-7');
-      $('.CL-7').addClass('CL-7-toc').removeClass('CL-7');
-      $('.CC-7').addClass('CC-7-toc').removeClass('CC-7');
-      $('.CR-7').addClass('CR-7-toc').removeClass('CR-7');
-      $('.RL-7').addClass('RL-7-toc').removeClass('RL-7');
-      $('.RR-7').addClass('RR-7-toc').removeClass('RR-7');
-   } else {
-      $('#reader').css('width', '96%');
-      $('#sidebar').css('display', 'none');
-      $('.mono').css('white-space','pre-wrap').css('overflow','initial');
-      $('#toc-btn').removeClass('on');
-      
-      $('.topbar-toc').addClass('topbar').removeClass('topbar-toc');
-      $('.LL-7-toc').addClass('LL-7').removeClass('LL-7-toc');
-      $('.LR-7-toc').addClass('LR-7').removeClass('LR-7-toc');
-      $('.CL-7-toc').addClass('CL-7').removeClass('CL-7-toc');
-      $('.CC-7-toc').addClass('CC-7').removeClass('CC-7-toc');
-      $('.CR-7-toc').addClass('CR-7').removeClass('CR-7-toc');
-      $('.RL-7-toc').addClass('RL-7').removeClass('RL-7-toc');
-      $('.RR-7-toc').addClass('RR-7').removeClass('RR-7-toc');
-   }
+window.toggleSidebar = function () {
+    if (window.showToc) {
+        $('#reader').css('width', '64%').css('padding-right', '2%');
+        $('#sidebar').css('display', 'inline-block');
+        $('.mono').css('white-space', 'pre').css('overflow', 'scroll');
+        $('#toc-btn').addClass('on');
+
+        $('.topbar').addClass('topbar-toc').removeClass('topbar');
+        $('.LL-7').addClass('LL-7-toc').removeClass('LL-7');
+        $('.LR-7').addClass('LR-7-toc').removeClass('LR-7');
+        $('.CL-7').addClass('CL-7-toc').removeClass('CL-7');
+        $('.CC-7').addClass('CC-7-toc').removeClass('CC-7');
+        $('.CR-7').addClass('CR-7-toc').removeClass('CR-7');
+        $('.RL-7').addClass('RL-7-toc').removeClass('RL-7');
+        $('.RR-7').addClass('RR-7-toc').removeClass('RR-7');
+    } else {
+        $('#reader').css('width', '96%');
+        $('#sidebar').css('display', 'none');
+        $('.mono').css('white-space', 'pre-wrap').css('overflow', 'initial');
+        $('#toc-btn').removeClass('on');
+
+        $('.topbar-toc').addClass('topbar').removeClass('topbar-toc');
+        $('.LL-7-toc').addClass('LL-7').removeClass('LL-7-toc');
+        $('.LR-7-toc').addClass('LR-7').removeClass('LR-7-toc');
+        $('.CL-7-toc').addClass('CL-7').removeClass('CL-7-toc');
+        $('.CC-7-toc').addClass('CC-7').removeClass('CC-7-toc');
+        $('.CR-7-toc').addClass('CR-7').removeClass('CR-7-toc');
+        $('.RL-7-toc').addClass('RL-7').removeClass('RL-7-toc');
+        $('.RR-7-toc').addClass('RR-7').removeClass('RR-7-toc');
+    }
 };
  /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
 |        docview_topbar.js  part of markdown.design                             |
 |        By Jeff Russ       https://github.com/Jeff-Russ                        |
- \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~./
 
-/*
 INTER-FILE INTERDEPENDENCIES:
-   VARS READ:      window.currHashName    window.prevHash      window.nextHash
+    VARS READ:      window.currHashName    window.prevHash      window.nextHash
+    FUNCS DEFINED: Just look down there
 
-   FUNCS DEFINED: Just look down there
-*/
+LINT VALIDATOR SETTINGS:
+    TOLERATE: multi vars, this
+    FUDGE... first line number is 1
+    Global variables...   $, window, document, location, scrollBy   */
 
+
+"use strict";
+
+////// FUNCTIONS USED ONLY IN THIS DOCUMENT /////////////////////////////////////
+
+// determine if & how to populate Pages & Section menus
+function findMenuSources() {
+
+    var makePageMenu = true, $pages, pageMenuSrc,
+            makeSectionMenu = true, $sections, sectionMenuSrc,
+            sectionSize = $('.section').size(),
+            h1Size = $('h1').size(), h2Size = $('h2').size(),
+            h3Size = $('h3').size(), h4Size = $('h4').size();
+
+    // if .md has hidden tags with .page-menu
+    if ($('.page-menu').size() > 1) {
+        // For populating the Page Menu (on left, right of leftmost button):
+        pageMenuSrc = 'comments';
+        $pages = $('.page-menu');
+        // For populating the Section Menu (center button, between < and >):
+        if (sectionSize > 1) { // if .md has hidden tags with .section
+            sectionMenuSrc = 'comments';
+            $sections = $('.section');
+        } else if (h1Size > 1 && h1Size < 12) {    // or h1's?
+            sectionMenuSrc = 'headers';
+            $sections = $('h1');
+        } else if (h2Size > 1 && h2Size < 12) {     // maybe h2's?
+            sectionMenuSrc = 'headers';
+            $sections = $('h2');
+        } else {
+            makeSectionMenu = false;
+         // EVERTHING FALE'D. NO SECTION MENU!
+        }
+    // Now we'll try the next levels up. before we tried .page-menu comments for
+    // the Page Menu but that failed so we will try h1's for the Page Menu and
+    // h2's for the Section menu:
+    } else if (h1Size > 1 && h1Size < 12) {
+        pageMenuSrc = 'headers';
+        $pages = $('h1');
+
+        if (sectionSize > 1) {
+            sectionMenuSrc = 'comments';
+            $sections = $('.section');
+        } else if (h2Size > 1 && h2Size < 12) {
+            sectionMenuSrc = 'headers';
+            $sections = $('h2');
+        } else if (h3Size > 1 && h3Size < 12) {
+            sectionMenuSrc = 'headers';
+            $sections = $('h3');
+        } else {
+            makeSectionMenu = false;
+   // EVERTHING FALE'D. NO SECTION MENU!
+        }
+    // One more levels up. H1's failed for the Page Menu so we'll try h1's,
+    // with h3's as the Section Menu:
+    } else if (h2Size > 1 && h2Size < 12) {
+        pageMenuSrc = 'headers';
+        $pages = $('h2');
+
+        if (sectionSize > 1) {
+            sectionMenuSrc = 'comments';
+            $sections = $('.section');
+        } else if (h3Size > 1 && h3Size < 12) {
+            sectionMenuSrc = 'headers';
+            $sections = $('h3');
+        } else if (h4Size > 1 && h4Size < 12) {
+            sectionMenuSrc = 'headers';
+            $sections = $('h4');
+        } else {
+            makeSectionMenu = false;
+// EVERTHING FALE'D. NO SECTION MENU!
+        }
+    } else {
+        makePageMenu = false; // EVERTHING FALE'D. NO PAGE MENU!
+    }
+
+    return [makePageMenu, $pages, pageMenuSrc,
+            makeSectionMenu, $sections, sectionMenuSrc];
+}
+
+function populateWithBtns($source, $destination, menuSource) {
+    var chunk1 = "<div class='col-xs-4' style='background-color:inherit;'><a class='dismiss btn btn-xlarge btn-";
+    var chunk2 = " btn-ghosty modal-link' href='";
+    var btnColors = ["info", "success", "warning", "danger", "primary"];
+
+    var i = 0;
+
+    switch (menuSource) {
+    case 'comments':
+        window.update("Populating from comments:<br />");
+        $source.each(function () {
+            var str = $(this).attr('id');
+            str = window.tersify(str);
+            $destination.append(chunk1 + btnColors[i] + chunk2 +
+                    $(this).comments().html() + "'>" + str + "</a></div>");
+            i = (i + 1) % 5;
+        });
+        break;
+    case 'headers':
+        $source.each(function () {
+            var str = $(this).text();
+            str = window.tersify(str);
+            $destination.append(chunk1 + btnColors[i] + chunk2 +
+                    $(this).attr('id') + "'>" + str + "</a></div>");
+            i = (i + 1) % 5;
+        });
+        break;
+    }
+}
 
 //  CLOSES ANY MODAL WINDOW. HANDY! ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~____
-window.close_modal = function () { 
-   $( "button[data-dismiss='modal']").trigger("click");
+window.close_modal = function () {
+    $("button[data-dismiss='modal']").trigger("click");
 };
 
 //  SET VARIABLES NEEDED BY TOPBAR ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~
-window.updateTopbar = function() {
-   // set target for prev and next buttons on topbar
-   $(".prev-btn").attr('href', window.prevHash);
-   $(".next-btn").attr('href', window.nextHash);
-   
-   var pageName = $("#page").comments().html(); // get page name from md comment
-   if (pageName == undefined) {
-      pageName = window.getDocName();
-   }   
-   $('#page-btn').text(pageName);               // set text on page btn 
-   
-   var sectionName;
-   if (window.currHashName == undefined) {
-      var currLocInToc = window.$activeTocAnchor.text();
-      sectionName = window.tersify(currLocInToc);
-   } else { sectionName = window.currHashName; }
+window.updateTopbar = function () {
+    // set target for prev and next buttons on topbar
+    $(".prev-btn").attr('href', window.prevHash);
+    $(".next-btn").attr('href', window.nextHash);
 
-   $('#section-btn').text(window.currHashName); // set section btn text
-   document.title = pageName+' - '+sectionName; // set browser tab title
+    var pageName = $("#page").comments().html(); // get page name from md comment
+    if (pageName === undefined) {
+        pageName = window.getDocName();
+    }
+    $('#page-btn').text(pageName); // set text on page btn
+
+    var sectionName;
+    if (window.currHashName === undefined) {
+        var currLocInToc = window.jQactiveTocAnchor.text();
+        sectionName = window.tersify(currLocInToc);
+    } else {
+        sectionName = window.currHashName;
+    }
+
+    $('#section-btn').text(window.currHashName); // set section btn text
+    document.title = pageName + ' - ' + sectionName; // set browser tab title
 };
 
 
 //  POPULATE PAGE SELECTION MODAL ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~_
-window.populateModalMenus = function ()    // if .md has 
-{
+window.populateModalMenus = function () {
+    var arr = findMenuSources();
+    var makePageMenu = arr[0], $pages = arr[1], pageMenuSrc = arr[2],
+            makeSectionMenu = arr[3], $sections = arr[4], sectionMenuSrc = arr[5];
 
-   var arr = findMenuSources();
-   var makePageMenu    = arr[0], $pages    = arr[1], pageMenuSrc    = arr[2],
-       makeSectionMenu = arr[3], $sections = arr[4], sectionMenuSrc = arr[5];
-   
-   if (!makePageMenu)    { 
-      $('#page-button').addClass('hidden'); 
-   }
-   if (!makeSectionMenu) { 
-      $('#section-button').addClass('hidden');
-      $(".prev-btn").addClass('hidden'); $(".next-btn").addClass('hidden');
-   }
-   
-   var chunk1 = "<div class='col-xs-4' style='background-color:inherit;'> \
-         <a class='dismiss btn btn-xlarge btn-danger \
-         btn-ghosty modal-link' href='";
-   
-   var numOfPages, numOfSections;
-    
-   if (makePageMenu)
-   {
-      numOfPages = $pages.size();
-      if (numOfPages == 1 ) {
-         $pageMenu.prepend("<div class='col-xs-2'>");
-      }
-      var $pageMenu = $('#page-menu');
-      $pageMenu.append(chunk1 + window.HomeUrl + "'>" + 'Home' + "</a></div>");
-      populateWithBtns( $pages, $pageMenu, pageMenuSrc );
-   }
-   if (makeSectionMenu)
-   {  
-      numOfSections = $sections.size();
-      if (numOfSections == 1 ) {
-         $sectionMenu.prepend("<div class='col-xs-2'>");
-      }
-      var $sectionMenu = $('#section-menu');
-      $sectionMenu.append(chunk1 + window.HomeUrl + "'>" + 'Home' + "</a></div>");
-      populateWithBtns( $sections, $sectionMenu, sectionMenuSrc );
-   }
-   
-   // Notice the .dismiss class we added above. 
-   // Below makes them also close the modal:
-   $('.dismiss').on('click', function() { 
-      $( "button[data-dismiss='modal']").trigger("click"); 
-   });
+    if (!makePageMenu) {
+        $('#page-button').addClass('hidden');
+    }
+    if (!makeSectionMenu) {
+        $('#section-button').addClass('hidden');
+        $(".prev-btn").addClass('hidden');
+        $(".next-btn").addClass('hidden');
+    }
+    var chunk1 = "<div class='col-xs-4' style='background-color:inherit;'>"
+                + "<a class='dismiss btn btn-xlarge btn-danger "
+                + "btn-ghosty modal-link' href='",
+        numOfPages,
+        numOfSections;
+    if (makePageMenu) {
+        numOfPages = $pages.size();
+        if (numOfPages === 1) {
+            $('#page-menu').prepend("<div class='col-xs-2'>");
+        }
+        $('#page-menu').append(chunk1 + window.HomeUrl + "'>" + 'Home' + "</a></div>");
+        populateWithBtns($pages, $('#page-menu'), pageMenuSrc);
+    }
+    if (makeSectionMenu) {
+        numOfSections = $sections.size();
+        if (numOfSections === 1) {
+            $('#section-menu').prepend("<div class='col-xs-2'>");
+        }
+        $('#section-menu').append(chunk1 + window.HomeUrl + "'>" + 'Home' + "</a></div>");
+        populateWithBtns($sections, $('#section-menu'), sectionMenuSrc);
+    }
+    // Notice the .dismiss class we added above.
+    // Below makes them also close the modal:
+    $('.dismiss').on('click', function () {
+        $("button[data-dismiss='modal']").trigger("click");
+    });
 
 };
-
-
-////// FUNCTIONS USED ONLY IN THIS DOCUMENT /////////////////////////////////////
-
-function findMenuSources() // determine if & how to populate Pages & Section menus
-{
-   var makePageMenu    = true, $pages,    pageMenuSrc,
-       makeSectionMenu = true, $sections, sectionMenuSrc;
-   
-   if ( $('.page-menu').size() > 1)  // if .md has hidden tags with .page-menu
-   {	
-      // For populating the Page Menu (on left, right of leftmost button):
-      pageMenuSrc = 'comments'; $pages = $('.page-menu'); // use their comments
-      window.log("pageMenuSrc = 'comments'");
-      
-      // For populating the Section Menu (center button, between < and >):
-      if ( $('.section').size() > 1) { // if .md has hidden tags with .section
-         sectionMenuSrc = 'comments'; $sections = $('.section'); // use comments
-         window.log("sectionMenuSrc = 'comments'");
-         
-      }else if ( $('h1').size() > 1 && $('h1').size() < 12) {    // or h1's?
-         sectionMenuSrc = 'headers';  $sections = $('h1');       // yep. use them
-         window.update("sectionMenuSrc = 'headers' (<h1>)");
-         
-      }else if ( $('h2').size() > 1 && $('h2').size() < 12){     // maybe h2's?
-         sectionMenuSrc = 'headers';  $sections = $('h2');
-         window.update("sectionMenuSrc = 'headers' (<h2>)");
-      
-      }else {
-         makeSectionMenu = false;          // EVERTHING FALE'D. NO SECTION MENU!
-         window.update ("everything failed for section menu. not making it");
-      }
-   }
-   // Now we'll try the next levels up. before we tried .page-menu comments for
-   // the Page Menu but that failed so we will try h1's for the Page Menu and 
-   // h2's for the Section menu:
-   else if ( $('h1').size() > 1 && $('h1').size() < 12) 
-   {	
-      pageMenuSrc = 'headers'; $pages = $('h1');
-      window.log("pageMenuSrc = 'headers' (<h1>)");
-      
-      if ( $('.section').size() > 1) {
-         sectionMenuSrc = 'comments'; $sections = $('.section');	
-         window.log("sectionMenuSrc = 'comments'");
-         
-      }else if ( $('h2').size() > 1 && $('h2').size() < 12) {
-         sectionMenuSrc = 'headers';  $sections = $('h2');
-         window.update("sectionMenuSrc = 'headers' (<h2>)");
-         
-      }else if ( $('h3').size() > 1 && $('h3').size() < 12){
-         sectionMenuSrc = 'headers';  $sections = $('h3');
-         window.update("sectionMenuSrc = 'headers' (<h3>)");
-         
-      }else {
-         makeSectionMenu = false;    // EVERTHING FALE'D. NO SECTION MENU!
-         window.update ("everything failed for section menu. not making it");
-      }
-   } 
-   // One more levels up. H1's failed for the Page Menu so we'll try h1's, 
-   // with h3's as the Section Menu:
-   else if ( $('h2').size() > 1 && $('h2').size() < 12) 
-   {
-      pageMenuSrc = 'headers'; $pages = $('h2');
-      window.log("pageMenuSrc = 'headers' (<h2>)");
-      
-      if ( $('.section').size() > 1) {
-         sectionMenuSrc = 'comments'; $sections = $('.section');
-         window.log("sectionMenuSrc = 'comments'");
-         
-      }else if ( $('h3').size() > 1 && $('h3').size() < 12) {
-         sectionMenuSrc = 'headers';  $sections = $('h3'); 
-         window.update("sectionMenuSrc = 'headers' (<h3>)");
-         
-      }else if ( $('h4').size() > 1 && $('h4').size() < 12){
-         sectionMenuSrc = 'headers';  $sections = $('h4');
-         window.update("sectionMenuSrc = 'headers' (<h4>)");
-         
-      }else { 
-         makeSectionMenu = false; // EVERTHING FALE'D. NO SECTION MENU!
-         window.update ("everything failed for section menu. not making it");
-      }  
-   } 
-   else { 
-      makePageMenu = false; // EVERTHING FALE'D. NO PAGE MENU!
-      window.update ("everything failed for page menu. not making it");
-   }
-   
-   return [ makePageMenu,    $pages,    pageMenuSrc, 
-            makeSectionMenu, $sections, sectionMenuSrc ];
-}
-
-
-function populateWithBtns($source, $destination, menuSource) 
-{
-   var chunk1 = "<div class='col-xs-4' style='background-color:inherit;'><a class='dismiss btn btn-xlarge btn-";
-   var chunk2 = " btn-ghosty modal-link' href='";
-   var btnColors = ["info","success","warning","danger","primary"];
-   
-   var i = 0;
-   
-   window.log ("About to populate " + $destination.attr("id"));
-   
-   switch (menuSource) 
-   { 
-     case 'comments':
-      window.update ("Populating from comments:<br />");
-      $source.each( function() { 
-         var str = $(this).attr('id');
-         str = window.tersify(str);
-         window.update(" --- '"+str+"' with href='"+$(this).comments().html()+"'");
-         $destination.append( chunk1 + btnColors[i] + chunk2 + 
-            $(this).comments().html() + "'>" + str + "</a></div>");
-         i = ++i % 5;
-      });
-      break;
-     case 'headers':
-      window.update ("Populating from headers");
-      $source.each( function() { 
-         var str = $(this).text();
-         str = window.tersify(str);
-         
-         $destination.append( chunk1 + btnColors[i] + chunk2 + 
-             $(this).attr('id') + "'>" + str +"</a></div>");
-         i = ++i % 5;
-      });
-      break;
-   }
-}
-;
  /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
 |        oscon.js           part of markdown.design                             |
 |        By Jeff Russ       https://github.com/Jeff-Russ                        |
- \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.~~/
+
+LINT VALIDATOR SETTINGS:
+    TOLERATE: multi vars, this
+    FUDGE... first line number is 1
+    Global variables...   $, window, document, location, scrollBy   */
 
 
-var html = "<div id='ocbg' style='background-color:black;visibility:hidden;position:fixed;z-index:9000;pointer-events:none;opacity:1;left:0%;top:0%;height:100%;width:100%;'></div><div id='on_screen_console'style='visibility:hidden;position:fixed;z-index:9999;text-shadow: 2px 2px black;color:#EEF;font-weight:100;font-family:Monaco,Courier New,monospace;font-size:12px;pointer-events:none;'><div id='left_console'style='position:fixed;left:0%;top:0%;width:65%;border:1px solid white;'></div><div id='right_console_1'style='position:fixed;left:75%;top:0%;width:25%;height:25%;border:1px solid white;'></div><div id='right_console_2'style='position:fixed;left:75%;top:25%;width:25%;height:25%;border:1px solid white;'></div><div id='right_console_3'style='position:fixed;left:75%;top:50%;width:25%;height:25%;border:1px solid white;'></div><div id='right_console_4'style='position:fixed;left:75%;top:75%;width:25%;height:25%;border:1px solid white;'></div></div>";
+"use strict";
+
+var html = "<style>"
+        + "  .#ocbg { background-color:black; width:100%; }"
+        + "  .fixupl{ position:fixed; left:0%; top:0%; height:100%;"
+        + "           z-index:9999; }"
+        + "  .l-con { width:65%; border:1px solid white; }"
+        + "  .r-cons{ position:fixed; left:75%;width:25%; height:25%;"
+        + "           border:1px solid white; }"
+        + "</style>"
+        + "<div id='ocbg' class='fixupl'style='visibility:hidden; "
+        + "                      pointer-events:none; opacity:1;'>"
+        + "</div>"
+        + "<div id='on_screen_console' style='pointer-events:none;"
+        + "     visibility: hidden; position: fixed; z-index: 9999; "
+        + "     text-shadow: 2px 2px black; color:#EEF; font-weight:100;"
+        + "     font-family: Monaco, Courier New, monospace; font-size: 12px;'>"
+        + "  <div id='left_console' class='l-con fixupl'</div>"
+        + "  <div id='right_console_1' class='r-cons' style='top:0%;'></div>"
+        + "  <div id='right_console_2' class='r-cons' style='top:25%;'></div>"
+        + "  <div id='right_console_3' class='r-cons' style='top:50%;'></div>"
+        + "  <div id='right_console_4' class='r-cons' style='top:75%;'></div>"
+        + "</div>";
 var pnt_evts = false, on_screen_console_bool, show_on_screen_console_bool;
+
+//========== FUNCTION NEEDED LOCALLY  ==========================================
+
+// NEEDED: var on_screen_console_bool;
+// Enables console with arg of true. Messages will not be visible from this call
+// but key mappings will. Press `s (backtick-s) to make visible (show).
+// `h to hide, `d to disble, `e to enable, `c to clear.
+
+// make console messages visible:
+function show_on_screen_console(bool) {
+    show_on_screen_console_bool = bool;
+    window.log(show_on_screen_console_bool);
+    if (bool) {
+        $('#on_screen_console').css('visibility', 'visible');
+    } else {
+        $('#on_screen_console').css('visibility', 'hidden');
+    }
+}
+
 //========== ON SCREEN CONSOLE TOGGLE ========================================
 
 // Put this in document ready. window.on_screen_console(true, true); fully enables
 // window.on_screen_console(true, false); enables but hides.
-window.on_screen_console = function(run, show){
-   on_screen_console_bool = run;
-   if (on_screen_console_bool) {
-      $('#on_screen_console').remove();
-      $('#ocbg').remove();
-      $("body").append(html);
-      window.log("ON SCREEN CONSOLE: `d to disable, `e to enable, s to show, \
-         h to hide, ` c to clear, f to call passed function");
-      window.oscon_keys(true);
-   }
-   else {
-      $('#on_screen_console').remove();
-      $('#ocbg').remove();
-      // but don't disable ocs_keys in case user turns back on
-   }
-   if (arguments.length == 2)
-      show_on_screen_console(show);
+window.on_screen_console = function (run, show) {
+    on_screen_console_bool = run;
+    if (on_screen_console_bool) {
+        $('#on_screen_console').remove();
+        $('#ocbg').remove();
+        $("body").append(html);
+        var greet = "ON SCREEN CONSOLE: `d to disable, `e to enable, s to show, "
+                + "h to hide, ` c to clear, f to call passed function";
+        window.log(greet);
+        window.oscon_keys(true);
+    } else {
+        $('#on_screen_console').remove();
+        $('#ocbg').remove();
+        // but don't disable ocs_keys in case user turns back on
+    }
+    if (arguments.length === 2) {
+        show_on_screen_console(show);
+    }
 };
 
 
 //========== ON SCREEN CONSOLE TOOLS ===========================================
- 
+
 // log a newline followed by a non urgent message:
-window.log = function(string){
-   if (on_screen_console_bool)
-   $('#left_console').append("<br />js: " + string);
+window.log = function (string) {
+    if (on_screen_console_bool) {
+        $('#left_console').append("<br />js: " + string);
+    }
 };
 // set (replace) text on right pane:
-window.log1 = function(string){
-   if (on_screen_console_bool)
-   $('#right_console_1').html("<br />" + string);
+window.log1 = function (string) {
+    if (on_screen_console_bool) {
+        $('#right_console_1').html("<br />" + string);
+    }
 };
 // set (replace) text on right pane:
-window.log2 = function(string){
-   if (on_screen_console_bool)
-   $('#right_console_2').html("<br />" + string);
+window.log2 = function (string) {
+    if (on_screen_console_bool) {
+        $('#right_console_2').html("<br />" + string);
+    }
 };
 // set (replace) text on right pane:
-window.log3 = function(string){
-   if (on_screen_console_bool)
-   $('#right_console_3').html("<br />" + string);
+window.log3 = function (string) {
+    if (on_screen_console_bool) {
+        $('#right_console_3').html("<br />" + string);
+    }
 };
 // set (replace) text on right pane:
-window.log4 = function(string){
-   if (on_screen_console_bool)
-   $('#right_console_4').html("<br />" + string);
+window.log4 = function (string) {
+    if (on_screen_console_bool) {
+        $('#right_console_4').html("<br />" + string);
+    }
 };
 // log a newline followed by a warning message:
-window.warn = function(string){
-   if (on_screen_console_bool)
-      $('#left_console').append("<br />js warning: " + string + "<br />");
+window.warn = function (string) {
+    if (on_screen_console_bool) {
+        $('#left_console').append("<br />js warning: " + string + "<br />");
+    }
 };
 // log a newline followed by a error message:
-window.err = function(string){
-   if (on_screen_console_bool)
-      $('#left_console').append("<br />js error: " + string + "<br />");
+window.err = function (string) {
+    if (on_screen_console_bool) {
+        $('#left_console').append("<br />js error: " + string + "<br />");
+    }
 };
 // append a message without insertion of a newline. Prepended with a space:
-window.update = function(string){
-   if (on_screen_console_bool)
-      $('#left_console').append(" " + string);
+window.update = function (string) {
+    if (on_screen_console_bool) {
+        $('#left_console').append(" " + string);
+    }
 };
 // append a message without insertion of a newline. Not repended with a space:
-window.type = function(string){
-   if (on_screen_console_bool)
-      $('#left_console').append(string);
+window.type = function (string) {
+    if (on_screen_console_bool) {
+        $('#left_console').append(string);
+    }
 };
 // print a newline followed by a horiz. rule type thingo:
-window.hr = function(){
-   $('#left_console').append("<br />________________________________________");
-}; 
+window.hr = function () {
+    $('#left_console').append("<br />________________________________________");
+};
 // print a newline followed by a bar-looking thing:
-window.bar = function(){ 
-   $('#left_console').append("<br /><br />========================================");
+window.bar = function () {
+    $('#left_console').append("<br /><br />========================================");
 };
 // print a line break:
-window.br  = function() { 
-   $('#left_console').append("<br /><br />");  
+window.br = function () {
+    $('#left_console').append("<br /><br />");
 };
 // print two line breaks:
-window.br2 = function() { 
-   $('#left_console').append("<br />"); 
+window.br2 = function () {
+    $('#left_console').append("<br />");
 };
 
 // clear console:
-window.clear_on_screen_console = function(){
-   window.on_screen_console(true, show_on_screen_console_bool);
+window.clear_on_screen_console = function () {
+    window.on_screen_console(true, show_on_screen_console_bool);
 };
 
 
 
 //========== ON SCREEN CONSOLE KEY COMBOS =======================================
 
-
-// Key combinations: back-tick (`) and a letter
-// Call with true to enable key listening
-window.oscon_keys = function(arg)
-{
-   var bool, func, wehavefunc;
-   
-   if (typeof(arg) === "boolean")  
-      bool = arg;
-   else /*if (typeof v === "function")*/ { 
-      bool = wehavefunc = true; func = arg; 
-   } 
-   
-   
-   if (bool){
-      $(document).unbind('keydown');
-      $(document).unbind('keyup');
-      
-      $(document).keydown( function(e) {
-         if (e.keyCode in map) 
-         { 
-            map[e.keyCode] = true;
-            
-            if (map[192] && map[83]) {
-               show_on_screen_console(true);        // ( `s ) show
-            }
-            if (map[192] && map[68]) {
-               window.on_screen_console(false);     // ( `d ) disable
-            }
-            if (map[192] && map[69]) {
-               window.on_screen_console(true);      // ( `e ) enable
-            } 
-            if (on_screen_console_bool && show_on_screen_console_bool)
-            {  
-               if (map[72]) {
-                  show_on_screen_console(false);   // h hide
-               }
-               if (map[67]) {
-                  window.clear_on_screen_console(); // c clear
-               }
-               if (wehavefunc && map[70]) {
-                  func();                           // f call function arg
-               }
-               if (map[77]) {
-                  if (pnt_evts == false) {
-                     $('#on_screen_console').attr('pointer-events', "auto");
-                     $('#ocbg').attr('pointer-events', "auto");
-                     window.log("Mouse Enabled");
-                     pnt_evts = true;
-                  }else if (pnt_evts == true) {
-                     $('#on_screen_console').attr('pointer-events', "none");
-                     $('#ocbg').attr('pointer-events', "auto");
-                     window.log("Mouse Disabled");
-                     pnt_evts = false;
-                  }
-               }
-            }
-         }
-      }).keyup(function(e) { 
-         if (e.keyCode in map) { map[e.keyCode] = false;}
-      // e.stop();
-      });  
-   }
-   else{
-      $(document).unbind('keydown');
-      $(document).unbind('keyup');
-   }
-}
-
 // missing numbers: 10-12,14,15,21-26,28-31,41-44,49,58-64,
 //                  94,95,108,124-143,146-185,193-218
 var map = {
-   8:false/*backspace*/,9:false/*tab*/,13:false/*enter*/,16:false/*shift*/,
-   17:false/*ctrl*/,18:false/*alt*/,19:false/*pausebreak*/,20:false/*capslock*/,
-   27:false/*escape*/,32:false/*space*/,33:false/*pageup*/,34:false/*pagedown*/,
-   35:false/*end*/,36:false/*home*/,37:false/*left*/,38:false/*up*/,39:false/*right*/,
-   40:false/*donw*/,45:false/*ins*/,46:false/*del*/,48:false/*0*/,49:false/*1*/,
-   50:false/*2*/,51:false/*3*/,52:false/*4*/,53:false/*5*/,54:false/*6*/,
-   55:false/*7*/,56:false/*8*/,57:false/**/,65:false/*a*/,66:false/*b*/,
-   67:false/*c*/,68:false/*d*/,69:false/*e*/,70:false/*f*/,71:false/*h*/,
-   72:false/*g*/,73:false/*i*/,74:false/*j*/,75:false/*k*/,76:false/*l*/,
-   77:false/*m*/,78:false/*n*/,79:false/*o*/,80:false/*p*/,81:false/*q*/,
-   82:false/*r*/,83:false/*s*/,84:false/*t*/,85:false/*u*/,86:false/*v*/,
-   87:false/*w*/,88:false/*x*/,89:false/*y*/,90:false/*z*/,91:false/*left_window*/,
-   92:false/*right_window*/,93:false/*select*/,96:false/*pad#0*/,97:false/*pad#1*/,
-   98:false/*pad#2*/,99:false/*pad#3*/,100:false/*pad#4*/,101:false/*pad#5*/,
-   102:false/*pad#6*/,103:false/*pad#7*/,104:false/*pad#8*/,105:false/*pad#9*/,
-   106:false/*mult*/,107:false/*add*/,109:false/*subt*/,110:false/*dec_pnt*/,
-   111:false/*divide*/,112:false/*f1*/,113:false/*f2*/,114:false/*f3*/,
-   115:false/*f4*/,116:false/*f5*/,117:false/*f6*/,118:false/*f7*/,
-   119:false/*f8*/,120:false/*f9*/,121:false/*f10*/,122:false/*f11*/,
-   123:false/*f12*/,144:false/*numlock*/,145:false/*scrolllock*/,
-   186:false/*semicolon*/,187:false/*equalsign*/,188:false/*comma*/,
-   189:false/*dash*/,190:false/*period*/,191:false/*forwardslash*/,
-   192:false/*backtick*/,219:false/*openbracket*/,220:false/*backslash*/,
-   221:false/*closebraket*/,222:false/*singlequote*/,
+    "8": false, // backspace
+    "9": false, // tab
+    "13": false, // enter
+    "16": false, // shift
+    "17": false, // ctrl
+    "18": false, // alt
+    "19": false, // pausebreak
+    "20": false, // capslock
+    "27": false, // escape
+    "32": false, // space
+    "33": false, // pageup
+    "34": false, // pagedown
+    "35": false, // end
+    "36": false, // home
+    "37": false, // left
+    "38": false, // up
+    "39": false, // right
+    "40": false, // donw
+    "45": false, // ins
+    "46": false, // del
+    "48": false, // 0
+    "49": false, // 1
+    "50": false, // 2
+    "51": false, // 3
+    "52": false, // 4
+    "53": false, // 5
+    "54": false, // 6
+    "55": false, // 7
+    "56": false, // 8
+    "57": false, // 9
+    "65": false, // a
+    "66": false, // b
+    "67": false, // c
+    "68": false, // d
+    "69": false, // e
+    "70": false, // f
+    "71": false, // h
+    "72": false, // g
+    "73": false, // i
+    "74": false, // j
+    "75": false, // k
+    "76": false, // l
+    "77": false, // m
+    "78": false, // n
+    "79": false, // o
+    "80": false, // p
+    "81": false, // q
+    "82": false, // r
+    "83": false, // s
+    "84": false, // t
+    "85": false, // u
+    "86": false, // v
+    "87": false, // w
+    "88": false, // x
+    "89": false, // y
+    "90": false, // z
+    "91": false, // left_window
+    "92": false, // right_window
+    "93": false, // select
+    "96": false, // #pad 0
+    "97": false, // #pad 1
+    "98": false, // #pad 2
+    "99": false, // #pad 3
+    "100": false, // #pad 4
+    "101": false, // #pad 5
+    "102": false, // #pad 6
+    "103": false, // #pad 7
+    "104": false, // #pad 8
+    "105": false, // #pad 9
+    "106": false, // mult
+    "107": false, // add
+    "109": false, // subt
+    "110": false, // dec_pnt
+    "111": false, // divide
+    "112": false, // f1
+    "113": false, // f2
+    "114": false, // f3
+    "115": false, // f4
+    "116": false, // f5
+    "117": false, // f6
+    "118": false, // f7
+    "119": false, // f8
+    "120": false, // f9
+    "121": false, // f10
+    "122": false, // f11
+    "123": false, // f12
+    "144": false, // numlock
+    "145": false, // scrolllock
+    "186": false, // semicolon
+    "187": false, // equalsign
+    "188": false, // comma
+    "189": false, // dash
+    "190": false, // period
+    "191": false, // forwardslash
+    "192": false, // backtick
+    "219": false, // openbracket
+    "220": false, // backslash
+    "221": false, // closebraket
+    "222": false  // singlequote
 };
 
-//========== OTHER LOCALS  =====================================================
+// Key combinations: back-tick (`) and a letter
+// Call with true to enable key listening
+window.oscon_keys = function (arg) {
 
-var on_screen_console_bool;
-// Enables console with arg of true. Messages will not be visible from this call
-// but key mappings will. Press `s (backtick-s ) to make visible (show).
-// `h to hide, `d to disble, `e to enable, `c to clear. 
+    var bool, func, wehavefunc;
 
-// make console messages visible:
-function show_on_screen_console(bool){ 
-   show_on_screen_console_bool = bool;
-   window.log(show_on_screen_console_bool)
-   if (bool) { 
-      $('#on_screen_console').css('visibility','visible');
-   } else { 
-      $('#on_screen_console').css('visibility','hidden' ); 
-   }
-}
-;
+    if (typeof(arg) === "boolean") {
+        bool = arg;
+    } else {
+        // if (typeof v === "function")
+        bool = true;
+        wehavefunc = true;
+        func = arg;
+    }
+
+    if (bool) {
+        $(document).unbind('keydown');
+        $(document).unbind('keyup');
+
+        $(document).keydown(function (e) {
+            var keyCode = e.keyCode.toString();
+
+            if (map.hasOwnProperty(keyCode)) {
+
+                map[keyCode] = true;
+
+                if (map["192"] && map["83"]) {
+                    show_on_screen_console(true);        // ( `s ) show
+                }
+                if (map["192"] && map["68"]) {
+                    window.on_screen_console(false);     // ( `d ) disable
+                }
+                if (map["192"] && map["69"]) {
+                    window.on_screen_console(true);      // ( `e ) enable
+                }
+                if (on_screen_console_bool && show_on_screen_console_bool) {
+
+                    if (map["72"]) {
+                        show_on_screen_console(false);   // h hide
+                    }
+                    if (map["67"]) {
+                        window.clear_on_screen_console(); // c clear
+                    }
+                    if (wehavefunc && map["70"]) {
+                        func();                           // f call function arg
+                    }
+                    if (map["77"]) {
+                        if (pnt_evts === false) {
+                            $('#on_screen_console').attr('pointer-events', "auto");
+                            $('#ocbg').attr('pointer-events', "auto");
+                            window.log("Mouse Enabled");
+                            pnt_evts = true;
+                        } else if (pnt_evts === true) {
+                            $('#on_screen_console').attr('pointer-events', "none");
+                            $('#ocbg').attr('pointer-events', "auto");
+                            window.log("Mouse Disabled");
+                            pnt_evts = false;
+                        }
+                    }
+                }
+            }
+        }).keyup(function (e) {
+            var keyCode = e.keyCode.toString();
+            if (map.hasOwnProperty(keyCode)) {
+                map[keyCode] = false;
+            }
+        // e.stop();
+        });
+    } else {
+        $(document).unbind('keydown');
+        $(document).unbind('keyup');
+    }
+};
  /*~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~._.~~._.~~._.~~._.~~._.~~._~~._.~~*\
 |        docview.main.js    part of markdown.design                             |
 |        By Jeff Russ       https://github.com/Jeff-Russ                        |
- \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.*/
+ \._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.~/
+
+ LINT VALIDATOR SETTINGS:
+    TOLERATE: multi vars, this
+    FUDGE... first line number is 1
+    Global variables...   $, window, document, location, scrollBy   */
 
 
 
@@ -14787,123 +14873,117 @@ function show_on_screen_console(bool){
 
 
 
-window.showToc;
-window.hide_toc;
-window.hasToc = true;  // eventually we will want this off for some pages.
-window.$activeTocAnchor; // TOC anchor which this will have the id toc_active
-window.$topViewElem;     // element in reader w/ id hash currently on top of view 
-window.$tocBtn;
-window.tocFollowBtn;
-// window.root = location.protocol + '//' + location.host; // not used but maybe later
+"use strict";
 
-// to fix navbar hiding to of content when linksing to spot in page:
-window.homeURl;
-window.addEventListener("hashchange", function() { scrollBy(0, -45) });
+// to fix navbar hiding of content when linking to spot in page:
+window.addEventListener("hashchange", function () {
+    scrollBy(0, -45);
+});
 
+$(document).ready(function () {
 
-$( document ).ready( function() 
-{
-   window.on_screen_console(false, false); 
-   
-   // window.oscon_keys(function() { 
-   //    window.log1("window.tocFollow = " + window.tocFollow + "<br>window.topOffsetInit() = "+ window.topOffsetInit());
-   //    window.log2("window.location.hash = "+ window.location.hash);
-   //    window.log3("window.currHashName = "+window.currHashName+"<br>window.prevHash = "+window.prevHash+"<br>window.nextHash = "+window.nextHash);
-   // });
-	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-       INITIALIZE GLOBAL VARIABLES */
-   window.$tocAnchors   = $('#toc').find('a[href^="#"]'); // sidebar <a>-> headers
-   window.topOffset     = $('#topbar').height();    // height of topbar
-   window.$tocFollowBtn = $('#toc-follow-btn');
-   window.$tocBtn       = $('#toc-btn');
-   window.log("#hide_toc " + $('#hide_toc').attr('data-bool') );
-   if ( $('#hide_toc').attr('data-bool') == "true") {
-      window.hide_toc  = true;
-      window.tocFollow = true;  window.$tocFollowBtn.addClass("on");
-      window.showToc   = true;  window.$tocFollowBtn.addClass("on");
-   } else {
-      window.hide_toc  = false;
-      window.tocFollow = false;  window.$tocFollowBtn.removeClass("on");
-      window.showToc   = false;  window.$tocFollowBtn.removeClass("on");
-      window.onTocShowBtnClick();
-      window.tocFollowBtnState()
-   }
-   
-	window.topOffsetInit();
-	if (!window.HomeUrl) window.HomeUrl = "http://www.jeffruss.com/";
-	
-	
-	
-	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-       ADD HOME URL AND LOGO 	*/
-   window.HomeUrl = $('#home-url').comments().html();
-	$('.home-url').attr('href', window.HomeUrl);
-	var logoUrl    = $('#logo-url').comments().html();
-	if (!logoUrl)
-	   logoUrl ="https://s3.amazonaws.com/jeffruss/img/JR_20px_wide.png";
-	$('.logo-url').attr('src', logoUrl);
-	
+    window.on_screen_console(false, false); // here you can toggle osc settings.
+
     /*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-       FORMERLY "onPageLoad"  */
-   if(window.location.hash)   // initial load from url hash
-   {
-      if (window.location.hash == "#undefined"){
-         window.location.hash = '';
-         location.reload();
-      } else  
-         window.$topViewElem = $(window.location.hash);
-   } else {                     // initial load without url hash
-   
-      var $firstSection;
-      if ($('.section').size() > 0) { 
-         $firstSection = $('.section').first();
-         window.$topViewElem = $firstSection;
-      } else if ($('h2').size() > 0){
-         $firstSection = $('h2').first();
-         window.$topViewElem = $firstSection;
-      }
-   }
+         INITIALIZE GLOBAL VARIABLES */
+    window.hasToc = true;  // eventually we will want this off for some pages.
+    window.jQtocAnchors = $('#toc').find('a[href^="#"]'); // sidebar <a>-> headers
+    window.topOffset = $('#topbar').height();          // height of topbar
+    window.jQtocFollowBtn = $('#toc-follow-btn');
+    window.jQtocBtn = $('#toc-btn');
+    if ($('#hide_toc').attr('data-bool') === "true") {
+        window.hide_toc = true;
+        window.tocFollow = true;
+        window.jQtocFollowBtn.addClass("on");
+        window.showToc = true;
+        window.jQtocFollowBtn.addClass("on");
+    } else {
+        window.hide_toc = false;
+        window.tocFollow = false;
+        window.jQtocFollowBtn.removeClass("on");
+        window.showToc = false;
+        window.jQtocFollowBtn.removeClass("on");
+        window.onTocShowBtnClick();
+        window.tocFollowBtnState();
+    }
 
-   window.determineSection();
-   window.updateTopbar();
-   
-   if (true) { // true should be window.showToc
-      var tocFollowSetting = window.tocFollow; 
-      window.tocFollow = true; // temporarily make true
-      window.updateToc();
-      window.tocFollow = tocFollowSetting; // restore setting
-   } 
+    window.topOffsetInit();
+    if (!window.HomeUrl) {
+        window.HomeUrl = "http://www.jeffruss.com/";
+    }
 
-	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-       CONFIG TO DEVICE AND WINDOW */  
-   // call once on load:
-   onWindowResize();
-   // and add handler for resizing of window:
-   $(window).resize(onWindowResize());
-   
-	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-       ADD HANDLERS */
-   $(window).on("scroll", window.findNewPosition);   
-   // $(window).scrollEnd(function(){ window.findNewPosition; });
-   window.$tocAnchors.on('click', window.onTocClick); 
-   window.$tocFollowBtn.on('click', window.onTocFollowBtnClick);
-	if (window.hasToc) window.$tocBtn.on('click', window.onTocShowBtnClick); 
+    /*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+         ADD HOME URL AND LOGO */
+    window.HomeUrl = $('#home-url').comments().html();
+    $('.home-url').attr('href', window.HomeUrl);
+    var logoUrl = $('#logo-url').comments().html();
+    if (!logoUrl) {
+        logoUrl = "https://s3.amazonaws.com/jeffruss/img/JR_20px_wide.png";
+    }
+    $('.logo-url').attr('src', logoUrl);
 
-	/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
-       SET UP MODAL MENUS */
-   window.populateModalMenus();
+     /*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+         FORMERLY "onPageLoad"  */
+    // initial load from url hash
+    if (window.location.hash) {
+        if (window.location.hash === "#undefined") {
+            window.location.hash = '';
+            location.reload();
+        } else {
+            window.jQtopViewElem = $(decodeURIComponent(window.location.hash));
+        }
+    } else {
+        // initial load without url hash
+        var $firstSection;
+        if ($('.section').size() > 0) {
+            $firstSection = $('.section').first();
+            window.jQtopViewElem = $firstSection;
+        } else if ($('h2').size() > 0) {
+            $firstSection = $('h2').first();
+            window.jQtopViewElem = $firstSection;
+        }
+    }
+
+    window.determineSection();
+    window.updateTopbar();
+
+    // true should be window.showToc
+    if (true) {
+        var tocFollowSetting = window.tocFollow;
+        window.tocFollow = true; // temporarily make true
+        window.updateToc();
+        window.tocFollow = tocFollowSetting; // restore setting
+    }
+
+/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.
+         CONFIG TO DEVICE AND WINDOW SIZE*/
+    function onWindowResize() {
+        if (!window.isMobile && $(window).width() >= 800 && window.hasToc) {
+            if (window.hide_toc === false) {
+                window.showToc = true;
+            }
+        } else {
+            window.showToc = false;
+            window.toggleSidebar();
+        }
+    }
+
+    /*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+         CONFIG TO DEVICE AND WINDOW */
+    onWindowResize(); // call once on load
+    $(window).resize(onWindowResize()); // and add handler for resizing of window
+
+    /*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+         ADD HANDLERS */
+    $(window).on("scroll", window.findNewPosition);
+    window.jQtocAnchors.on('click', window.onTocClick);
+    window.jQtocFollowBtn.on('click', window.onTocFollowBtnClick);
+    if (window.hasToc) {
+        window.jQtocBtn.on('click', window.onTocShowBtnClick);
+    }
+    /*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
+         SET UP MODAL MENUS */
+    window.populateModalMenus();
 
 }); // END DOCUMENT READY
 
-
-
-/*_~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.
-       CONFIG TO DEVICE AND WINDOW SIZE*/   
-function onWindowResize()
-{
-	if (!window.isMobile && $(window).width() >= 800  && window.hasToc)
-	   if (window.hide_toc == false) window.showToc = true;
-	else
-	   window.showToc = false;
-	   window.toggleSidebar();
-}
