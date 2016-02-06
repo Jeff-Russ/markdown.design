@@ -3,7 +3,7 @@
    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
       
       <%= favicon_link_tag 'favicon.ico' %>
-      <title class='title'></title>
+      <title class='title'>md.d</title>
       <%= stylesheet_link_tag    'application', media: 'all', 
                                  'data-turbolinks-track' => true %>
       <%= csrf_meta_tags %>
@@ -17,7 +17,7 @@
       <% end %>
       
    </head>
-   <body class="jr-dark-body ">
+   <body class="jr-dark-body">
       
       <% if @all[:host] == 'jr' %>
          <%= render partial: 'gtm_jr' %>
@@ -29,12 +29,12 @@
       
       <!--site logo button-->
       <button class="topbtn-greenwell LL-7-toc fixed">
-         <a href='' class="home-url"><img class='logo-url'src=""/></a>
+         <a href='#' class="home-url"><img class='logo-url' src="#"/></a>
       </button>
        <!--modal 1 - select a page (group of pages - controller )-->
       <button data-toggle='modal' id='page-button'
            class='topbtn-greenwell LR-7-toc fixed' data-target='#modal-page-menu'>
-         <p style="margin:1px"id='page-btn'>page</p>
+         <p style="margin:1px" id='page-btn'>page</p>
       </button>
       <!-- prevous section button-->
       <a href='' class='prev-btn'>
@@ -43,7 +43,7 @@
       <!--modal 2 - select a topic (jump to id on page)-->
       <button data-toggle='modal' id='section-button'
            class="topbtn-greenwell CC-7-toc fixed" data-target='#modal-section-menu'>
-         <p style="margin:1px"id='section-btn'>section</p>
+         <p style="margin:1px" id='section-btn'>section</p>
       </button>
       <!-- next section button-->
       <a href='' class='next-btn'>	
@@ -59,7 +59,7 @@
          class="scroll-btn-img topbtn-greenwell RR-7-toc fixed">
       </button>
       
-   </div><!--END NAVBAR-->
+   <!--END NAVBAR-->
    <!-- BEGIN MODALS -->
       
       <!-- MODAL 1 - select a page -->

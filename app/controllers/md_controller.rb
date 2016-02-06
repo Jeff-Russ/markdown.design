@@ -4,6 +4,7 @@
 
 require 'open-uri'
 require 'uri'
+require 'cgi'
 
 class MdController < ApplicationController
    include Helpers
@@ -188,7 +189,20 @@ class MdController < ApplicationController
       log "Rendering HTML from markdown"
       html = markdown.render(text)
       html.gsub!("&#39;", "'") # temp fix for bad ' render
-      @all[:content] = html.html_safe
+      # html = html.html_safe
+      html.sub!(/^<p>/, '')         # because redcarpet wraps doc in <p></p>
+      html.sub!(/<\/p>$/, '')       # because redcarpet wraps doc in <p></p>
+      html = html.html_safe
+      log "### iterate blocks ###"
+
+      html.gsub!(/<xmp>(.*?)<\/xmp>/m) { |block|
+         block = CGI::escapeHTML(block)
+      }
+      html.gsub! '&lt;xmp&gt;', '<p class="code-block">'
+      html.gsub! '&lt;/xmp&gt;', '</p>'
+      
+      html = html.html_safe
+      @all[:content] = html
       
       unless @all[:view] == 'page'
          log "Rendering table of contents"

@@ -306,10 +306,9 @@ color:#94ca55!important;}
 
 // usually markdown
 #reader      { left: 2%; position:absolute; width: 64%; } // the left pane
-xmp { @extend.codeblock; @extend.greenbox;
+.code-block { @extend.codeblock; @extend.greenbox;
    text-align: left; border-radius:7px; max-width: 60em; margin-right: auto ;}
-
-
+xmp { @extend.code-block; }
 
 //  SIDEBAR (container for #toc
 

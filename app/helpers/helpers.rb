@@ -73,7 +73,7 @@ module Helpers
    end; module_function :str_to_hash_between
    
 ################################################################################
-   module OpenUri
+module OpenUri
       include Helpers
 #~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._
    def safe_open (str, view)
@@ -94,8 +94,8 @@ module Helpers
       end
       log "\nREQUESTED FILE FOUND. Saved as raw string."
       return output
-    end; module_function :open
-   end
+   end; module_function :open
+end
 ################################################################################
    module ConfHelper
      
