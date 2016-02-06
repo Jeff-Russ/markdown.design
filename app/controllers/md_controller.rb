@@ -183,26 +183,27 @@ class MdController < ApplicationController
 ####_____ GET RENDERED CONTENT _____________________________________________####
       
       hr; log "creating rendering objects."
-      renderer = Redcarpet::Render::HTML.new(           @all[:r_opt] )
-      markdown = Redcarpet::Markdown.new(     renderer, @all[:p_ext] )
+      renderer = Redcarpet::Render::HTML.new(       @all[:r_opt] )
+      markdown = Redcarpet::Markdown.new( renderer, @all[:p_ext] )
       
       log "Rendering HTML from markdown"
       html = markdown.render(text)
       html.gsub!("&#39;", "'") # temp fix for bad ' render
-      # html = html.html_safe
-      html.sub!(/^<p>/, '')         # because redcarpet wraps doc in <p></p>
-      html.sub!(/<\/p>$/, '')       # because redcarpet wraps doc in <p></p>
-      html = html.html_safe
-      log "### iterate blocks ###"
 
       html.gsub!(/<xmp>(.*?)<\/xmp>/m) { |block|
-         block = CGI::escapeHTML(block)
+         block = CGI::escapeHTML(block)   # escape html in each xmp block
       }
+      
+      # replace xmp with p, with class for styling
       html.gsub! '&lt;xmp&gt;', '<p class="code-block">'
       html.gsub! '&lt;/xmp&gt;', '</p>'
       
       html = html.html_safe
-      @all[:content] = html
+      
+      html.sub! '<p>', ''   # because redcarpet wraps doc in <p></p>
+      html = html.reverse.sub('>p/<', '').reverse
+
+      @all[:content] = html.html_safe
       
       unless @all[:view] == 'page'
          log "Rendering table of contents"

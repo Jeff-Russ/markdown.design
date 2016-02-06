@@ -104,8 +104,7 @@
             </div>
          </div>
       </div><!-- END MODALS -->
-   <div class="jr-dark-body ">
-      
+
       <% if @all[:hide_toc] %>
          <div style="display: none;" id="hide_toc" data-bool="true"></div>
       <% else %>
@@ -114,17 +113,17 @@
       
       <div id="sidebar">
          <div class="toc" id="toc">
-            
+            <!--BEGIN auto-generated TOC-->
             <%= @all[:toc] %> 
-            
+            <!--END auto-generated TOC-->
          </div>
       </div>
       <div class="container-small nav-spacer ">
          <div id='reader' style="">
             <div class="markdown" id='content'>
-               
+               <!-- BEGIN rendered markdown document insert -->
                <%= @all[:content] %> 
-               
+               <!-- END rendered markdown document insert -->
             </div>
          </div>
       </div>

@@ -11,6 +11,8 @@
       <% elsif @all[:host] == 'md' %>
          <%= render partial: 'og_md' %>
       <% end %>
+      <!-- BEGIN rendered markdown document insert -->
       <%= @all[:content] %>
+      <!-- END rendered markdown document insert -->
    </body>
 </html>
