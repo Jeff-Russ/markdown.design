@@ -105,7 +105,7 @@ end
        no_links: false,      # do not generate any <a> tags.
        no_styles: false,     # do not generate any <style> tags.
        escape_html: false,   # any existing HTML tag will be escaped
-       safe_links_only: true,# only generate links for protocols considered safe
+       safe_links_only: false,# only generate links for protocols considered safe
        with_toc_data: true,  # add HTML anchors to each header in the output HTML
        hard_wrap: false,     # normally md ignores newlines. If true this adds <br>
        xhtml: false,         # output XHTML-conformant tags.
@@ -125,7 +125,7 @@ end
        underline: true,     # this is _underlined_ butthis is still *italic*
        highlight: true,     # this is ==highlighted== like: <mark>highlighted</mark>
        quote: true,         # This is a "quote". It looks like this: <q>quote</q>
-       autolink: true,      # Email and http links, even starting with www are handled.
+       autolink: false,      # Email and http links, even starting with www are handled.
        footnotes: true,     # parse footnotes, PHP-Markdown style. A footnote works 
              # very much like a reference-style link: it consists of a marker next to 
              # the text (e.g. This is a sentence.[^1]) and a footnote definition on its 
