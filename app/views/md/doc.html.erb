@@ -16,7 +16,7 @@
          <%= render partial: 'og_md' %>
       <% end %>
       
-   </head>
+</head>
    <body class="jr-dark-body">
       
       <% if @all[:host] == 'jr' %>
@@ -28,27 +28,24 @@
       <nav id='topbar' class='topbar-toc fixed'></nav>
       
       <!--site logo button-->
-      <button class="topbtn-greenwell LL-7-toc fixed">
-         <a href='#' class="home-url"><img class='logo-url' src="#"/></a>
-      </button>
+      <a href='#' class="topbtn-greenwell LL-7-toc fixed home-url">
+         <img class='logo-url' src="#" alt="home"/>
+      </a>
        <!--modal 1 - select a page (group of pages - controller )-->
-      <button data-toggle='modal' id='page-button'
+      <button data-toggle='modal' id='page-button' style="margin:1px"
            class='topbtn-greenwell LR-7-toc fixed' data-target='#modal-page-menu'>
-         <p style="margin:1px" id='page-btn'>page</p>
+         page
       </button>
       <!-- prevous section button-->
-      <a href='' class='prev-btn'>
-         <button class="topbtn-greenwell CL-7-toc fixed prev-btn-img"></button>
+      <a href='#' class='prev-btn topbtn-greenwell CL-7-toc fixed prev-btn-img'>
       </a>
       <!--modal 2 - select a topic (jump to id on page)-->
-      <button data-toggle='modal' id='section-button'
+      <button data-toggle='modal' id='section-button' style="margin:1px"
            class="topbtn-greenwell CC-7-toc fixed" data-target='#modal-section-menu'>
-         <p style="margin:1px" id='section-btn'>section</p>
+         section
       </button>
       <!-- next section button-->
-      <a href='' class='next-btn'>	
-         <button class="next-btn-img topbtn-greenwell CR-7-toc fixed">
-         </button>
+      <a href='#' class='next-btn next-btn-img topbtn-greenwell CR-7-toc fixed'>
       </a>
       <!--show toc button-->
       <button id='toc-btn' 
@@ -113,9 +110,7 @@
       
       <div id="sidebar">
          <div class="toc" id="toc">
-            <!--BEGIN auto-generated TOC-->
             <%= @all[:toc] %> 
-            <!--END auto-generated TOC-->
          </div>
       </div>
       <div class="container-small nav-spacer ">

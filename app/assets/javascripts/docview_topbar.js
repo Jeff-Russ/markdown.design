@@ -136,7 +136,7 @@ window.updateTopbar = function () {
     if (pageName === undefined) {
         pageName = window.getDocName();
     }
-    $('#page-btn').text(pageName); // set text on page btn
+    $('#page-button').text(pageName); // set text on page btn
 
     var sectionName;
     if (window.currHashName === undefined) {
@@ -146,7 +146,7 @@ window.updateTopbar = function () {
         sectionName = window.currHashName;
     }
 
-    $('#section-btn').text(window.currHashName); // set section btn text
+    $('#section-button').text(window.currHashName); // set section btn text
     document.title = pageName + ' - ' + sectionName; // set browser tab title
 };
 

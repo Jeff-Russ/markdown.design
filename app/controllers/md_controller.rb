@@ -198,17 +198,20 @@ class MdController < ApplicationController
       html.gsub! '&lt;xmp&gt;', '<p class="code-block">'
       html.gsub! '&lt;/xmp&gt;', '</p>'
       
-      html = html.html_safe
       
-      html.sub! '<p>', ''   # because redcarpet wraps doc in <p></p>
-      html = html.reverse.sub('>p/<', '').reverse
+      if @all[:view] == "page"
+         html = html.html_safe
+         html.sub! '<p>', ''   # because redcarpet wraps doc in <p></p>
+         html = html.reverse.sub('>p/<', '').reverse
+      end
 
       @all[:content] = html.html_safe
       
       unless @all[:view] == 'page'
          log "Rendering table of contents"
          html_toc = Redcarpet::Markdown.new(Redcarpet::Render::HTML_TOC)
-         @all[:toc] = html_toc.render(text).html_safe
+         toc = html_toc.render(text)
+         @all[:toc] = toc.html_safe
       end
       log "Calling #{@all[:view]}.html.erb"; bar;
       render @all[:view]

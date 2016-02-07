@@ -266,10 +266,11 @@ color:#94ca55!important;}
 }
 
 
- .prev-img-css, .next-img-css { height: 3vh!important;}
 .scroll-btn-img-css, .toc-btn-img-css { height: 3vh!important; margin:-6px; margin-top:-12px!important; }
 .menubar-img-css { width:3.4em; margin:-3px; }
-.jr-img-css, .logo-url { height: 3vh!important;  margin-top:-5px!important;}
+.prev-img-css, .next-img-css, .jr-img-css, .logo-url { line-height: 200%;
+     height: 3vh!important; margin-bottom: .1vh; margin-top: 1.2vh;
+ }
 .btn:focus, .btn:active, .topbtn:focus, .topbtn:active { 
    outline:none!important; // get rid of the blue glow on previously clicked buttons
    color:#94ba65; }
