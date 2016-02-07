@@ -16,12 +16,11 @@
 * { word-break: keep-all !important; } // global word-break setting
 @media print {                         // format page for printing
    .printhide { display: none!important;}
-   .printfmt  { border:  none !important; zoom: 1 }
-   .printfmt2 { border:  none !important; zoom: 1 }
-   a:inactive { color:black!important;  }
+   .printfmt  { border:  none!important; }
+   .printfmt2 { border:  none!important; }
+   a { color:black!important;  }
    a[href]:after { 
-      content: " (" attr(href) ")";
-      content: none !important;
+      content: none!important;
   }
    @page { margin: 0; }
    
@@ -55,7 +54,7 @@ a:hover   { text-decoration: none;color:#e6ffd6!important; }
 
 li>p     {  margin-right:auto;text-align: justify; text-justify: auto;}
 li>pre   { margin-left: 5px;  background-color: grey; @extend.codeblock; @extend.greenbox2; }
-pre>code {                     color-background:#fff; @extend.codeblock; } // COLOR-BACKGROUND???
+pre>code {                     background-color:#fff; @extend.codeblock; } // COLOR-BACKGROUND???
 
 [class*="span"] { float: left; margin-left: 20px;} // used in _footer and home_layout
 
@@ -235,11 +234,11 @@ color:#94ca55!important;}
 
 .tile { @extend.btn-ghosty; border: 1px solid; border-radius: 10px;
    padding:0; padding-left:5%; margin-bottom: 5%;
-   font-weight:150!important; color:#94ba65!important; 
+   font-weight:200!important; color:#94ba65!important; 
    display: flex; flex-direction: column; justify-content: center;
    overflow:scroll;
 }
-.tile:hover {font-weight:150!important; color:#B2CFA6!important;}
+.tile:hover {font-weight:100!important; color:#B2CFA6!important;}
    //  padding-left:0!important; padding-right:0!important; 
    //  padding-bottom:0!important;
    
@@ -301,9 +300,9 @@ color:#94ca55!important;}
 .markdown    {font-size: 16px; }
 .markdown>h1 {font-size: 6vmin;font-weight: 900;color:#ffffd0;margin-left: 1%;}
 .markdown>h2 {font-size: 6vmin;font-weight: 300;color:#cdb;   margin-left: 2%;}
-.markdown>h3 {font-size: 5vmin;font-weight: 100;color:#cdb;   margin-left: 3%;}
-.markdown>h4 {font-size: 4vmin;font-weight: 100;color:#cdb;   margin-left: 4%;}
-.markdown>h5 {font-size: 3vmin;font-weight: 100;color:#cdb;   margin-left: 5%;}
+.markdown>h3 {font-size: 5vmin;font-weight: 200;color:#cdb;   margin-left: 3%;}
+.markdown>h4 {font-size: 4vmin;font-weight: 200;color:#cdb;   margin-left: 4%;}
+.markdown>h5 {font-size: 3vmin;font-weight: 200;color:#cdb;   margin-left: 5%;}
 .markdown>p  {               margin-right: auto;color:#b0bfaa;margin-left: 5%;}
 .markdown>p>strong          {  font-weight: 900;color:#cdb;                   }
 .markdown>ol, .markdown>ul  {                                 margin-left: 2%;}
@@ -369,25 +368,23 @@ a#toc-inactive:hover {
 // A better solution might be to assign classes via js and apply style that way.
 #toc>ul { margin-left: 0.1%;}                  // everything below is in this ul
 #toc>ul>li>a#toc-inactive {                        // h1
-   color:#dfdfb0 !important; font-size: 1.9vmin; font-weight: 200; line-height: 190%;
+   color:#dfdfb0 !important; font-size: 2.2vmin; font-weight: 600; line-height: 190%;
 }
 #toc>li>a#toc-inactive {                      // h1
-   color:#dfdfb0 !important; font-size: 1.8vmin; font-weight: 190; line-height: 180%;
+   color:#dfdfb0 !important; font-size: 2.15vmin; font-weight: 500; line-height: 180%;
 }
 ul>li>ul>li>a#toc-inactive {                  // h2 
-   color:#a0ac8a !important; font-size: 1.7vmin; font-weight: 160; line-height: 170%;
+   color:#a0ac8a !important; font-size: 2.1vmin; font-weight: 400; line-height: 170%;
 }
 ul>li>ul>li>ul>li>a#toc-inactive {            // h3
-   color:#909c8a !important; font-size: 1.6vmin; font-weight: 145; line-height: 160%;
+   color:#909c8a !important; font-size: 2.05vmin; font-weight: 300; line-height: 160%;
 }
 ul>li>ul>li>ul>li>ul>li>a#toc-inactive {       // h4 MMMAAAAJOR TYPO
-   color:#909c8a !important; font-size: 1.55vmin; font-weight: 130;line-height: 150%;
+   color:#909c8a !important; font-size: 2.0vmin; font-weight: 200;line-height: 150%;
 }
-ul>li>ul>li>ul>li>ul>>li>ul>li>a#toc-inactive { // h5 MMMAAAAJOR TYPO
-   color:#909c8a !important; font-size: 1.5vmin; font-weight: 115; line-height: 140%;
+ul>li>ul>li>ul>li>ul>li>ul>li>a#toc-inactive { // h5 MMMAAAAJOR TYPO
+   color:#909c8a !important; font-size: 1.95vmin; font-weight: 200; line-height: 140%;
 }
-
-
 
 
 //~._.~  PARENT CLASSES  ~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~
@@ -444,9 +441,9 @@ hr.topic       { border-top: 20em; }
    
 }
 %trans-250ms { // CSS Transition (only used as parent class. see above)
-   -webkit-transition: background .25 ease-in-out, border .25 ease-in-out;
-      -moz-transition: background .25 ease-in-out, border .25 ease-in-out;
-       -ms-transition: background .25 ease-in-out, border .25 ease-in-out;
-        -o-transition: background .25 ease-in-out, border .25 ease-in-out;
-           transition: background .25 ease-in-out, border .25 ease-in-out;
+   -webkit-transition: background 0.25s ease-in-out, border 0.25s ease-in-out;
+      -moz-transition: background 0.25s ease-in-out, border 0.25s ease-in-out;
+       -ms-transition: background 0.25s ease-in-out, border 0.25s ease-in-out;
+        -o-transition: background 0.25s ease-in-out, border 0.25s ease-in-out;
+           transition: background 0.25s ease-in-out, border 0.25s ease-in-out;
 }
