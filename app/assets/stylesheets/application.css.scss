@@ -176,11 +176,14 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
 color:#94ca55!important;}
 
 // use this two as defaults in html but js will quickly override parts of them:
-.topbtn           { @extend.btn; @extend%topbtn; margin-top: 9px; height: 44px; }
+.topbtn           { @extend.btn; @extend%topbtn; height: 44px;  margin-top: 9px;}
 .topbtn-greenwell { @extend.btn-greenwell; @extend%topbtn; top: 1%; height: 6%; }
                     
                     
-.topbar-btn { display:table!important; padding:0; @extend.topbtn-greenwell; position:fixed; }
+.topbar-btn {  @extend.topbtn-greenwell; position:fixed; 
+                display:table!important; padding:0;}
+.topbar-btn-w-text { @extend.topbtn-greenwell; position:fixed; 
+         padding-bottom: 0.1vh!important; padding-top: 1.2vh!important; }
 
 // topbtn's
 .LL-7-toc { width: 8%; left:  4%; }

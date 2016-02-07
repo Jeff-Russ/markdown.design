@@ -61,6 +61,7 @@ $(document).ready(function () {
 
     // Similar to above, these let the content author add the custom attribute
     // data-link='http://www.whatever.com' to wrap the element in an <a>chor
+    // DATA-LINK IS DEPRECATED!!
     var $btnLinks = $('[data-link]');
     $btnLinks.each(function () {
         var url = $(this).attr('data-link');
