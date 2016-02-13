@@ -41,6 +41,8 @@ Markdown.design is possible because of the RedCarpet Gem.
 
 <div class="section" id='News'></div> 
 
+### News
+
 Markdown.design now has a DIY quiz-maker!!! Thanks to the 
 [Mother Jones newsquiz depo](https://github.com/motherjones/newsquiz) you can 
 make a quiz with a Google Spreadsheet and open it as a quiz in this web app. 
