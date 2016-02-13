@@ -13094,7 +13094,8 @@ pre {
 
 /* line 166, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .topbar {
-  height: 8%;
+  height: 5.9vmax !important;
+  min-height: 28px;
   width: 99%;
   left: 0.5%;
   right: 0.5%;
@@ -13102,7 +13103,8 @@ pre {
 
 /* line 167, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .topbar-toc {
-  height: 8%;
+  height: 5.9vmax !important;
+  min-height: 28px;
   width: 67.5%;
   left: 1.5%;
   right: 0.5%;
@@ -13110,16 +13112,17 @@ pre {
 
 /* line 172, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .topbtn, .topbtn-greenwell, .topbar-btn, .topbar-btn-w-text {
+  height: 3.8vmax !important;
   text-align: center !important;
   padding-left: 0;
   padding-right: 0.2%;
-  font-size: 1.4vmax;
+  font-size: 1.6vmax;
   z-index: 600;
 }
 
 /* line 173, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .topbtn:hover, .topbtn-greenwell:hover, .topbar-btn:hover, .topbar-btn-w-text:hover {
-  font-size: 1.4vmax !important;
+  font-size: 1.6vmax !important;
   text-align: center !important;
   padding-left: 0 !important;
   padding-right: 0.2% !important;
@@ -13128,14 +13131,13 @@ pre {
 
 /* line 178, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .topbtn {
-  height: 44px;
+  height: 2.3vmax !important;
   margin-top: 9px;
 }
 
 /* line 179, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .topbtn-greenwell, .topbar-btn, .topbar-btn-w-text {
-  top: 1%;
-  height: 6%;
+  top: 1.4vh;
 }
 
 /* line 182, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
@@ -13148,8 +13150,8 @@ pre {
 /* line 184, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .topbar-btn-w-text {
   position: fixed;
-  padding-bottom: 0.1vh !important;
-  padding-top: 1.2vh !important;
+  padding-bottom: 0.8vh !important;
+  padding-top: 1.5vh !important;
 }
 
 /* line 188, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
@@ -13396,39 +13398,41 @@ pre {
 
 /* line 271, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .scroll-btn-img-css, .toc-btn-img-css {
-  height: 3vh !important;
-  margin: -6px;
-  margin-top: -12px !important;
+  height: 1.6vmax !important;
+  margin-bottom: 0.8vh;
+  margin-top: 0.6vh;
 }
 
-/* line 272, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 275, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .menubar-img-css {
   width: 3.4em;
   margin: -3px;
 }
 
-/* line 273, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
-.prev-img-css, .next-img-css, .jr-img-css, .logo-url {
+/* line 277, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+.prev-img-css, .next-img-css, .jr-img-css, .logo-url, .md-img-css {
   line-height: 200%;
-  height: 3vh !important;
-  margin-bottom: .1vh;
-  margin-top: 1.2vh;
+  padding: 0px !important;
+  height: 2.3vmax !important;
+  margin-bottom: 0.8vh;
+  margin-top: 1vh !important;
+  font-size: 2.2vh !important;
 }
 
-/* line 276, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 281, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .btn:focus, .topbtn:focus, .tile-btn:focus, .tile9x9-row1:focus, .tile9x9-row2:focus, .tile9x9-row3:focus, .tile9x9-col1:focus, .tile9x9-col2:focus, .tile9x9-col3:focus, .btn-greenwell:focus, .topbtn-greenwell:focus, .topbar-btn:focus, .topbar-btn-w-text:focus, .btn:active, .topbtn:active, .tile-btn:active, .tile9x9-row1:active, .tile9x9-row2:active, .tile9x9-row3:active, .tile9x9-col1:active, .tile9x9-col2:active, .tile9x9-col3:active, .btn-greenwell:active, .topbtn-greenwell:active, .topbar-btn:active, .topbar-btn-w-text:active, .topbtn:focus, .topbtn:active {
   outline: none !important;
   color: #94ba65;
 }
 
-/* line 279, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 284, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .text-overflow-center {
   margin-left: -100%;
   margin-right: -100%;
   text-align: center;
 }
 
-/* line 285, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 290, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .round-img {
   border: 1px solid #888;
   -webkit-border-radius: 20px;
@@ -13436,7 +13440,7 @@ pre {
   border-radius: 20px;
 }
 
-/* line 293, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 298, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .btn-greenwell, .topbtn-greenwell, .topbar-btn, .topbar-btn-w-text {
   color: #94ba65;
   background-color: #3e423e !important;
@@ -13448,7 +13452,7 @@ pre {
   border-color: #94ba65 !important;
 }
 
-/* line 296, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 301, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .btn-greenwell:hover, .topbtn-greenwell:hover, .topbar-btn:hover, .topbar-btn-w-text:hover {
   font-size: inherit;
   color: #94ca55;
@@ -13458,12 +13462,12 @@ pre {
   border-color: #94ca55;
 }
 
-/* line 300, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 305, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .markdown {
   font-size: 16px;
 }
 
-/* line 301, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 306, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .markdown > h1 {
   font-size: 6vmin;
   font-weight: 900;
@@ -13471,7 +13475,7 @@ pre {
   margin-left: 1%;
 }
 
-/* line 302, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 307, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .markdown > h2 {
   font-size: 6vmin;
   font-weight: 300;
@@ -13479,7 +13483,7 @@ pre {
   margin-left: 2%;
 }
 
-/* line 303, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 308, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .markdown > h3 {
   font-size: 5vmin;
   font-weight: 200;
@@ -13487,7 +13491,7 @@ pre {
   margin-left: 3%;
 }
 
-/* line 304, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 309, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .markdown > h4 {
   font-size: 4vmin;
   font-weight: 200;
@@ -13495,7 +13499,7 @@ pre {
   margin-left: 4%;
 }
 
-/* line 305, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 310, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .markdown > h5 {
   font-size: 3vmin;
   font-weight: 200;
@@ -13503,32 +13507,32 @@ pre {
   margin-left: 5%;
 }
 
-/* line 306, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 311, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .markdown > p {
   margin-right: auto;
   color: #b0bfaa;
   margin-left: 5%;
 }
 
-/* line 307, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 312, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .markdown > p > strong {
   font-weight: 900;
   color: #cdb;
 }
 
-/* line 308, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 313, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .markdown > ol, .markdown > ul {
   margin-left: 2%;
 }
 
-/* line 311, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 316, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 #reader {
   left: 2%;
   position: absolute;
   width: 64%;
 }
 
-/* line 312, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 317, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .code-block, xmp {
   text-align: left;
   border-radius: 7px;
@@ -13536,7 +13540,7 @@ pre {
   margin-right: auto;
 }
 
-/* line 318, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 323, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 #sidebar {
   position: fixed;
   overflow: scroll;
@@ -13551,12 +13555,12 @@ pre {
   background-color: #3a3c3a !important;
 }
 
-/* line 328, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 333, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 div.toc {
   margin-top: 15%;
 }
 
-/* line 329, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 334, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .toc * {
   padding-left: 0.5em;
   counter-reset: item;
@@ -13564,7 +13568,7 @@ div.toc {
   font-weight: 400;
 }
 
-/* line 335, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 340, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 #toc {
   left: 3%;
   height: 600px;
@@ -13573,7 +13577,7 @@ div.toc {
   font-size: 85%;
 }
 
-/* line 342, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 347, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 #toc-buffer {
   left: 3%;
   position: relative;
@@ -13581,7 +13585,7 @@ div.toc {
   font-size: 85%;
 }
 
-/* line 350, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 355, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 #toc > u * {
   padding-left: 0.5em;
   counter-reset: item;
@@ -13590,7 +13594,7 @@ div.toc {
   max-height: 600px;
 }
 
-/* line 359, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 364, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 a#toc-active {
   border: 1px solid #999;
   border-color: #670;
@@ -13601,17 +13605,17 @@ a#toc-active {
   color: #7bb !important;
 }
 
-/* line 364, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 369, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 a#toc-inactive:hover {
   color: #fff !important;
 }
 
-/* line 369, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 374, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 #toc > ul {
   margin-left: 0.1%;
 }
 
-/* line 370, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 375, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 #toc > ul > li > a#toc-inactive {
   color: #dfdfb0 !important;
   font-size: 2.2vmin;
@@ -13619,7 +13623,7 @@ a#toc-inactive:hover {
   line-height: 190%;
 }
 
-/* line 373, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 378, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 #toc > li > a#toc-inactive {
   color: #dfdfb0 !important;
   font-size: 2.15vmin;
@@ -13627,7 +13631,7 @@ a#toc-inactive:hover {
   line-height: 180%;
 }
 
-/* line 376, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 381, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 ul > li > ul > li > a#toc-inactive {
   color: #a0ac8a !important;
   font-size: 2.1vmin;
@@ -13635,7 +13639,7 @@ ul > li > ul > li > a#toc-inactive {
   line-height: 170%;
 }
 
-/* line 379, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 384, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 ul > li > ul > li > ul > li > a#toc-inactive {
   color: #909c8a !important;
   font-size: 2.05vmin;
@@ -13643,7 +13647,7 @@ ul > li > ul > li > ul > li > a#toc-inactive {
   line-height: 160%;
 }
 
-/* line 382, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 387, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 ul > li > ul > li > ul > li > ul > li > a#toc-inactive {
   color: #909c8a !important;
   font-size: 2.0vmin;
@@ -13651,7 +13655,7 @@ ul > li > ul > li > ul > li > ul > li > a#toc-inactive {
   line-height: 150%;
 }
 
-/* line 385, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 390, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 ul > li > ul > li > ul > li > ul > li > ul > li > a#toc-inactive {
   color: #909c8a !important;
   font-size: 1.95vmin;
@@ -13659,7 +13663,7 @@ ul > li > ul > li > ul > li > ul > li > ul > li > a#toc-inactive {
   line-height: 140%;
 }
 
-/* line 392, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 397, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .codeblock, li > pre, pre > code, pre, .code-block, xmp {
   color: #7bb;
   background-color: #393b3a;
@@ -13670,19 +13674,19 @@ ul > li > ul > li > ul > li > ul > li > ul > li > a#toc-inactive {
   display: inline-block;
 }
 
-/* line 395, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 400, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .in-p-code, p > code, li > code {
   color: #7bb;
   background-color: #333333;
   tab-size: 3;
 }
 
-/* line 398, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 403, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .mono, .codeblock, li > pre, pre > code, pre, .code-block, xmp, .in-p-code, p > code, li > code {
   font-family: Monaco, Courier New, monospace;
 }
 
-/* line 400, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 405, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .greenbox, .code-block, xmp {
   border: 1px solid #999;
   border-color: #94ba65;
@@ -13690,7 +13694,7 @@ ul > li > ul > li > ul > li > ul > li > ul > li > a#toc-inactive {
   overflow: scroll;
 }
 
-/* line 401, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 406, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .greenbox2, li > pre, pre {
   border: 1px solid #999;
   border-color: #670;
@@ -13698,42 +13702,42 @@ ul > li > ul > li > ul > li > ul > li > ul > li > a#toc-inactive {
   overflow: scroll;
 }
 
-/* line 410, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 415, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .jr-green-bg {
   background-color: #606F60;
 }
 
-/* line 411, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 416, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .dark-bg-g {
   background-color: #404347;
 }
 
-/* line 413, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 418, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 hr.topic {
   border-top: 20em;
 }
 
-/* line 416, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 421, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .thin-text {
   font-weight: 200 !important;
 }
 
-/* line 417, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 422, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .border-orange {
   outline: 1px solid orange;
 }
 
-/* line 418, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 423, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .border-red {
   outline: 1px solid red;
 }
 
-/* line 419, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 424, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .border-green {
   outline: 1px solid #20f030;
 }
 
-/* line 426, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 431, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .btn-large {
   padding: 18px 28px;
   margin-bottom: 30px;
@@ -13741,7 +13745,7 @@ hr.topic {
   line-height: normal;
 }
 
-/* line 429, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 434, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .btn-xlarge, .tile-btn, .tile9x9-row1, .tile9x9-row2, .tile9x9-row3, .tile9x9-col1, .tile9x9-col2, .tile9x9-col3 {
   padding-top: 13px;
   padding-bottom: 10px;
@@ -13751,27 +13755,27 @@ hr.topic {
   font-weight: 200 !important;
 }
 
-/* line 434, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 439, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .btn-ghost {
   background: transparent !important;
   color: #ffffd0 !important;
 }
-/* line 436, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 441, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .btn-ghost:hover {
   background-color: #444949 !important;
 }
 
-/* line 438, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 443, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .btn-ghosty, .tile-btn, .tile9x9-row1, .tile9x9-row2, .tile9x9-row3, .tile9x9-col1, .tile9x9-col2, .tile9x9-col3, .tile {
   color: #94ba65;
   background-color: #3e423e !important;
 }
-/* line 440, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 445, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .btn-ghosty:hover, .tile-btn:hover, .tile9x9-row1:hover, .tile9x9-row2:hover, .tile9x9-row3:hover, .tile9x9-col1:hover, .tile9x9-col2:hover, .tile9x9-col3:hover, .tile:hover {
   background-color: #404040 !important;
 }
 
-/* line 443, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
+/* line 448, /home/ubuntu/workspace/markdown.design/app/assets/stylesheets/application.css.scss */
 .btn-large, .btn-xlarge, .tile-btn, .tile9x9-row1, .tile9x9-row2, .tile9x9-row3, .tile9x9-col1, .tile9x9-col2, .tile9x9-col3, .btn-ghost, .btn-ghosty, .tile {
   -webkit-transition: background 0.25s ease-in-out, border 0.25s ease-in-out;
   -moz-transition: background 0.25s ease-in-out, border 0.25s ease-in-out;

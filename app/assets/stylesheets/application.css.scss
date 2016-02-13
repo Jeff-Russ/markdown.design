@@ -163,26 +163,26 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
    border-color:#670!important; 
 }
 // use this as default in html but js will quickly override parts of them:
-.topbar    { @extend%topbar; height: 8%; width: 99%;  left: 0.5%; right: 0.5%; }
-.topbar-toc{ @extend%topbar; height: 8%; width: 67.5%;left: 1.5%; right: 0.5%; }
+.topbar    { @extend%topbar; height: 5.9vmax!important; min-height: 28px; width: 99%;  left: 0.5%; right: 0.5%; }
+.topbar-toc{ @extend%topbar; height: 5.9vmax!important; min-height: 28px; width: 67.5%;left: 1.5%; right: 0.5%; }
 
 
 // BUTTONS ._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.
 // base class only:
-%topbtn { text-align:center!important; padding-left:0; padding-right:0.2%; font-size: 1.4vmax; z-index: 600; }
-%topbtn:hover { font-size: 1.4vmax!important;  
+%topbtn {height: 3.8vmax!important; text-align:center!important; padding-left:0; padding-right:0.2%; font-size: 1.6vmax; z-index: 600; }
+%topbtn:hover { font-size: 1.6vmax!important;  
    text-align:center!important; padding-left:0!important; padding-right:0.2%!important;
 color:#94ca55!important;}
 
 // use this two as defaults in html but js will quickly override parts of them:
-.topbtn           { @extend.btn; @extend%topbtn; height: 44px;  margin-top: 9px;}
-.topbtn-greenwell { @extend.btn-greenwell; @extend%topbtn; top: 1%; height: 6%; }
+.topbtn           { @extend.btn; @extend%topbtn;  height: 2.3vmax!important;  margin-top: 9px;}
+.topbtn-greenwell { @extend.btn-greenwell; @extend%topbtn; top: 1.4vh; } //height: 4vh; }
                     
                     
 .topbar-btn {  @extend.topbtn-greenwell; position:fixed; 
                 display:table!important; padding:0;}
-.topbar-btn-w-text { @extend.topbtn-greenwell; position:fixed; 
-         padding-bottom: 0.1vh!important; padding-top: 1.2vh!important; }
+.topbar-btn-w-text { @extend.topbtn-greenwell; position:fixed;
+         padding-bottom: 0.8vh!important; padding-top: 1.5vh!important; }
 
 // topbtn's
 .LL-7-toc { width: 8%; left:  4%; }
@@ -268,11 +268,16 @@ color:#94ca55!important;}
 }
 
 
-.scroll-btn-img-css, .toc-btn-img-css { height: 3vh!important; margin:-6px; margin-top:-12px!important; }
-.menubar-img-css { width:3.4em; margin:-3px; }
-.prev-img-css, .next-img-css, .jr-img-css, .logo-url { line-height: 200%;
-     height: 3vh!important; margin-bottom: .1vh; margin-top: 1.2vh;
+.scroll-btn-img-css, .toc-btn-img-css { 
+   height: 1.6vmax!important; margin-bottom: 0.8vh; margin-top: 0.6vh; 
+   
+}
+.menubar-img-css { 
+   width:3.4em; margin:-3px; }
+.prev-img-css, .next-img-css, .jr-img-css, .logo-url, .md-img-css { line-height: 200%; padding:0px!important;
+   height: 2.3vmax!important; margin-bottom: 0.8vh; margin-top: 1.0vh!important; font-size: 2.2vh!important; 
  }
+ 
 .btn:focus, .btn:active, .topbtn:focus, .topbtn:active { 
    outline:none!important; // get rid of the blue glow on previously clicked buttons
    color:#94ba65; }

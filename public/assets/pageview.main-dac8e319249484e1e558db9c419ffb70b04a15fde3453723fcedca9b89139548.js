@@ -14121,9 +14121,11 @@ $(document).ready(function () {
     $('.scroll-btn-img').append("<img class='scroll-btn-img-css printhide' id='toc-follow-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/auto-y_icon_33_grn.png'/>");
     $('.toc-btn-img').append("<img class='toc-btn-img-css toc-btn-img printhide' id='toc-btn-img' src='https://shared-img-res.s3.amazonaws.com/livepage_heroku/toc_icon_h20.png'/>");
     $('.jr-img').append("<img class='jr-img-css printhide' src='https://s3.amazonaws.com/jeffruss/img/JR_20px_wide.png'/>");
+    $('.md-img').append("<img class='md-img-css printhide' src='https://s3.amazonaws.com/markdown.design/mdd_20px_wide.png'/>");
 
     // Similar to above, these let the content author add the custom attribute
     // data-link='http://www.whatever.com' to wrap the element in an <a>chor
+    // DATA-LINK IS DEPRECATED!!
     var $btnLinks = $('[data-link]');
     $btnLinks.each(function () {
         var url = $(this).attr('data-link');
