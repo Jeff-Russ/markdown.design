@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+   <%= favicon_link_tag 'favicon.ico' %>
+   <%= stylesheet_link_tag    'application',
+                                 media: 'all','data-turbolinks-track'=>true %>
+   <%= csrf_meta_tags %>
+   <%= javascript_include_tag 'quizview.main','data-turbolinks-track'=>true %>
+   <% if @all[:host] == 'jr' %>
+      <%= render partial: 'og_jr' %>
+      <title class='title'>Jeff Russ | Quiz</title>
+   <% elsif @all[:host] == 'md' %>
+      <%= render partial: 'og_md' %>
+      <title class='title'>M&darr;D | Quiz</title>
+   <% end %>
+   <link href="https://s3.amazonaws.com/quiz.jeffruss.com/css/style.css" rel="stylesheet" media="screen" type="text/css">
+</head>
+<body class="jr-darker-body">
+   <nav id='topbar' class='topbar fixed printhide'></nav>
+   <a class="topbar-btn LL-9 jr-img printhide" href='/?pages=home'></a>
+   <a class="topbar-btn-w-text RC-9 printhide" href='/?pages=contact'>Contact</a>
+   <a class='topbar-btn-w-text RR-9 printhide' href='/?pages=about'>About</a>
+   <div class="modal-dialog" style="position: relative;  margin: 6em 10em 2em 10em; width:80%;">
+   	<div class="modal-header" style="height: 8em; padding:0!important; background-color: #666!important; color: #b0cfaa !important">
+   		<p style="line-height:100%; font-size: 3vmax; text-align: center; ">
+   		   <br>
+            <% if @all[:host] == 'jr' %>
+               Jeff Russ - Quiz
+            <% elsif @all[:host] == 'md' %>
+               M&darr;D - Quiz
+            <% end %>
+   		</p>
+   	</div>
+   	<div class="container-fluid">
+   		<div id="quiz" style="position:relative;"></div>
+   	</div>
+   </div>
+   <script type="text/javascript">
+      var gss_key = '<%= @all[:gss_key].to_s %>';
+      console.log("(H*)#(*H*()H#@($" + gss_key)
+   	var quiz = jQuery('#quiz').quiz(gss_key); //your published spreadsheet key or URL goes here
+   </script>
+   <% if @all[:host] == 'jr' %>
+      <!-- add = <% render partial: 'gtm_jr' %>-->
+   <% elsif @all[:host] == 'md' %>
+      <!-- add = <% render partial: 'gtm_md' %>-->
+   <% end %>
+</body>
+</html>

@@ -5,6 +5,7 @@ Rails.application.config.assets.version = '1.0'
 
 Rails.application.config.assets.precompile += %w( docview.main.js )
 Rails.application.config.assets.precompile += %w( pageview.main.js )
+Rails.application.config.assets.precompile += %w( quizview.main.js )
 
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path

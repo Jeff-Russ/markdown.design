@@ -35,6 +35,15 @@ class MdController < ApplicationController
          
       end
       
+####________ IF QUIZ _______________________________________________________####
+
+      if params.key? "quiz"
+         @all[:gss_key] = params[:quiz]
+         bar; log "We have a quiz here..."
+         log @all[:gss_key].is_a?(String);
+         render "quiz" and return
+      end
+   
 ####_____ GET FILE PATH ____________________________________________________####
 
 # The following query string params are used to set the file path and desired
@@ -236,5 +245,7 @@ class MdController < ApplicationController
       
       render "doc"
    end
-   
+
 end
+
+

@@ -39,6 +39,20 @@ view this very same README.md with it's rendering.
 
 Markdown.design is possible because of the RedCarpet Gem.
 
+<div class="section" id='News'></div> 
+
+Markdown.design now has a DIY quiz-maker!!! Thanks to the 
+[Mother Jones newsquiz depo](https://github.com/motherjones/newsquiz) you can 
+make a quiz with a Google Spreadsheet and open it as a quiz in this web app. 
+[Here](https://github.com/motherjones/newsquiz#set-up-a-google-spreadsheet) is 
+how to set up the spreadsheet. Once you have that you simply go to 
+`http://www.markdown.design/` or where ever this app is deployed and add the key 
+seen on Google Docs to the end of the URL in a paramter called `quiz`. For 
+example, if your key is `0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc` the 
+address of your quiz already exists at 
+`http://www.markdown.design/?quiz=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc`. 
+It's a bit long this is free for you so deal with it.;p 
+
 <div class="section" id='Instructions'></div> 
 
 ### Instructions

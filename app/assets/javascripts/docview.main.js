@@ -11,10 +11,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
-//= require shared
-//= require docview_funcs
-//= require docview_topbar
-//= require oscon
+//= require etc/shared
+//= require doc/docview_funcs
+//= require doc/docview_topbar
+//= require etc/oscon
 
 "use strict";
 

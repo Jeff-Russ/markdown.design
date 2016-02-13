@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
 
   root 'md#route'  
-  get 'md/full'
-  get 'md/side'
-  get 'md/toc'
-  get 'md/top'
-  get '/LivePage.md/welcome', to: 'md#readme'
+  
+  # get 'md/full'
+  # get 'md/side'
+  # get 'md/toc'
+  # get 'md/top'
+  # get '/LivePage.md/welcome', to: 'md#readme'
   
   # root 'outlined#show'
   

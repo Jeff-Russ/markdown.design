@@ -11,10 +11,10 @@ LINT VALIDATOR SETTINGS:
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
-//= require pageview_funcs
-//= require geturl
-//= require shared
-//= require oscon
+//= require page/pageview_funcs
+//= require etc/geturl
+//= require etc/shared
+//= require etc/oscon
 
 "use strict";
 
