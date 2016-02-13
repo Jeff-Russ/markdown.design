@@ -20,7 +20,7 @@
 
 // to fix navbar hiding of content when linking to spot in page:
 window.addEventListener("hashchange", function () {
-    scrollBy(0, -61);
+    scrollBy(0, -60);
 });
 
 $(document).ready(function () {

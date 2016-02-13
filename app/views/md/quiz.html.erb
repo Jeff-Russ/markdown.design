@@ -6,13 +6,15 @@
                                  media: 'all','data-turbolinks-track'=>true %>
    <%= csrf_meta_tags %>
    <%= javascript_include_tag 'quizview.main','data-turbolinks-track'=>true %>
-   <% if @all[:host] == 'jr' %>
-      <%= render partial: 'og_jr' %>
-      <title class='title'>Jeff Russ | Quiz</title>
-   <% elsif @all[:host] == 'md' %>
-      <%= render partial: 'og_md' %>
-      <title class='title'>M&darr;D | Quiz</title>
-   <% end %>
+   <!-- OpenGraph Rails Insert -->
+   <meta property="og:title" content="M&darr;D - Quiz"/>
+   <meta property="fb:app_id" content="302184056577324" /> 
+   <meta property="og:url" content="http://www.markdown.design/"/>
+   <meta property="og:image" content="https://s3.amazonaws.com/markdown.design/quiz.ogimage.png"/>
+   <meta property="og:site_name" content="M&darr;D | Quiz"/>
+   <meta property="og:type" content="website"/>
+   <meta property="og:description" content="DIY QUIZMAKER" />
+   <title class='title'>M&darr;D | Quiz</title>
    <link href="https://s3.amazonaws.com/quiz.jeffruss.com/css/style.css" rel="stylesheet" media="screen" type="text/css">
 </head>
 <body class="jr-darker-body">
