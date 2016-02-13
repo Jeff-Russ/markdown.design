@@ -41,7 +41,7 @@ Markdown.design is possible because of the RedCarpet Gem.
 
 <div class="section" id='News'></div> 
 
-### News
+### News - NEW QUIZMAKER!
 
 Markdown.design now has a DIY quiz-maker!!! Thanks to the 
 [Mother Jones newsquiz depo](https://github.com/motherjones/newsquiz) you can 
