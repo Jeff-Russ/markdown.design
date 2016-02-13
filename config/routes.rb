@@ -1,14 +1,13 @@
 Rails.application.routes.draw do
   
-  root 'md#route' 
-  get '/readme', to: 'md#readme'
-  get '/quiz', to: 'md#quiz'
+  root 'view#route' 
+  get '/readme', to: 'view#readme'
+  get '/quiz', to: 'view#quiz'
   
   # get 'md/full'
   # get 'md/side'
   # get 'md/toc'
   # get 'md/top'
-  
   
   # root 'outlined#show'
   
