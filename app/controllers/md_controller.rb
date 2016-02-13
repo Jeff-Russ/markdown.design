@@ -40,7 +40,6 @@ class MdController < ApplicationController
       if params.key? "quiz"
          @all[:gss_key] = params[:quiz]
          bar; log "We have a quiz here..."
-         log @all[:gss_key].is_a?(String);
          render "quiz" and return
       end
    
@@ -245,7 +244,35 @@ class MdController < ApplicationController
       
       render "doc"
    end
-
+   
+################################################################################
+   def quiz
+      
+      log "@@@@@ request.host @@@@@"
+      log request.host # jeffruss.herokuapp.com
+      
+      @all = {}                  # hash that'll store everything 
+      host = request.host 
+      if     host == 'jeffruss.herokuapp.com'        then @all[:host] = 'jr'
+       elsif host == 'www.jeffruss.com'              then @all[:host] = 'jr'
+       elsif host == 'jeffruss.com'                  then @all[:host] = 'jr'
+      
+       elsif host == 'markdown-design.herokuapp.com' then @all[:host] = 'md'
+       elsif host == 'www.markdown.design'           then @all[:host] = 'md'
+       elsif host == 'markdown.design'               then @all[:host] = 'md'
+      
+       elsif host == 'private-jeff-russ.c9users.io'  then @all[:host] = 'md'
+      
+       else @all[:host] = 'md'
+         
+      end
+      
+      if params.key? "quiz"
+         @all[:gss_key] = params[:quiz]
+      else
+         @all[:gss_key] = '0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc'
+      end
+      render "quiz" and return
+      
+   end
 end
-
-
