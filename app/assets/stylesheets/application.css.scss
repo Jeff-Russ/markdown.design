@@ -163,14 +163,15 @@ pre {  @extend.codeblock; @extend.greenbox2; margin-left: 7%; max-width: 97%; ma
    border-color:#670!important; 
 }
 // use this as default in html but js will quickly override parts of them:
-.topbar    { @extend%topbar; height: 5.9vmax!important; min-height: 28px; width: 99%;  left: 0.5%; right: 0.5%; }
-.topbar-toc{ @extend%topbar; height: 5.9vmax!important; min-height: 28px; width: 67.5%;left: 1.5%; right: 0.5%; }
+.topbar    { @extend%topbar; height: 5.9vmax!important; min-height: 31px; width: 99%;  left: 0.5%; right: 0.5%; }
+.topbar-toc{ @extend%topbar; height: 5.9vmax!important; min-height: 31px; width: 67.5%;left: 1.5%; right: 0.5%; }
 
 
 // BUTTONS ._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~._.~~.
 // base class only:
-%topbtn {height: 3.8vmax!important; text-align:center!important; padding-left:0; padding-right:0.2%; font-size: 1.6vmax; z-index: 600; }
-%topbtn:hover { font-size: 1.6vmax!important;  
+%topbtn {height: 3.8vmax!important; text-align:center!important; padding-left:0; padding-right:0.2%; 
+      font-size: 1.3vmax;  z-index: 600; line-height: 1.6em;}
+%topbtn:hover { font-size: 1.3vmax!important;  line-height: 1.6vh;
    text-align:center!important; padding-left:0!important; padding-right:0.2%!important;
 color:#94ca55!important;}
 

@@ -3,7 +3,7 @@
 <div id='home-url'  style="display: none;"><!--http://www.markdown.design--></div>
 <div id='logo-url'  style="display: none;"><!--https://s3.amazonaws.com/jeffruss/img/JR_20px_wide.png--></div>
 
-<div class="page-menu" id='On Github'    style="display: none;"><!--https://github.com/Jeff-Russ/markdown.design--></div>
+<div class="page-menu" id='On Github' style="display: none;"><!--https://github.com/Jeff-Russ/markdown.design--></div>
 <div class="page-menu" id='Author'    style="display: none;"><!--http://www.markdown.design--></div>
 <div class="page-menu" id='Example 1' style="display: none;"><!--http://www.markdown.design/?docs=bootstrap--></div>
 <div class="page-menu" id='Example 2' style="display: none;"><!--http://www.markdown.design/?docs=rails--></div>
@@ -221,19 +221,47 @@ When I am ready I'll copy all of the _file.md to file.md and save it. Done.
 **Major Issues**
 
 1. Modal menus auto-populated from headers don't point to valid destinations.
+2. actually, Modal menus are always pointing incorrectly
+3. prev button not workin
 
 **Minor Issues**
 
 1. Strange grey bar in code blocks appears on mobile devices.
 
-<!--**Fixed/Added in this most recent commit** -->
+**Fixed/Added in this most recent commit** 
+
+1. Now using Puma server
+2. modularized controller/helper code
 
 <!--1. Better support for non-toc pages!-->
 
 **plans**
 
 1. Add support for Dropbox
+2. Add support for Amazon Cloudfront
+3. Add support for html in addition to markdown
+4. Add FORMail
+5. Replace reading of comments via jquery with serverside parsing of custom
+   commands between some sort of flag delimiters. For example:
+
+        <|  menu1-btn-text menu1-btn-link-or-hash newtab |>
+        <|| menu2-btn-text menu2-btn-link-or-hash newtab ||>
+        
+    each of the above has non-render-in-place versions
+        
+        <|- |>   <||- ||> 
+        
+        
+        <|LL left-topbar-btn-txt-or-image-url http://link.com newtab LL|>
+        
+    also:
+        
+        <|LC LC|>
+        <|LR LR|>
+        <|RL RL|>
+        <|RC RC|>
+        <|RR RR|>
 
 **canceled plans**
 
-1. Add html and erb support  
+1. Add erb support  
