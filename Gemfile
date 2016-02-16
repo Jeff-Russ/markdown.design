@@ -11,10 +11,13 @@ gem 'sqlite3', group: [:development, :test]
 group :production do
     gem 'pg'
     gem 'rails_12factor'
-    # gem 'unicorn'
-    gem 'rack-timeout'
-    gem 'puma'
 end
+
+
+# the server
+gem 'rack-timeout'
+gem 'puma'
+# gem 'unicorn'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
