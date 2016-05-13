@@ -1,0 +1,2 @@
+module ShareLinksHelper
+end

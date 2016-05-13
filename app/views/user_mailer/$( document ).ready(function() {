@@ -1,0 +1,35 @@
+$( document ).ready(function() {
+                var userInput = [];
+                var correctSequence = [1, 2, 2];
+                var gotIn = true;
+                $( ".number" ).on('click', function() {
+                    //1. make a variable named num and set it equal to the value of the data-num attribute of the button you clicked on
+                    var num = $(this).attr('data-num');
+//                    console.log(num);
+                    num = parseInt(num);
+                    //2. push num into userInput
+                    userInput.push(num);
+                    //3. run a for loop, looping over userInput 
+                    for(i=0;i<userInput.length;i++){
+
+                        if(userInput[i]===correctSequence[i]){
+                            gotIn=true;
+                        }else{
+                            gotIn=false;
+                        }
+                        console.log(gotIn);
+
+                    }
+
+
+                        if(userInput.length===correctSequence.length){
+                            if(gotIn===true){
+                                alert('You got in!');
+                            }else{
+                                alert('You did not get in!');
+                            }
+                        }
+
+                    
+                });
+            });

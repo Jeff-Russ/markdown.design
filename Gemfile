@@ -4,7 +4,6 @@ ruby '2.2.4'
 
 gem 'rails' ,"4.2.5"  # Bundle edge Rails instead: gem 'rails'
 
-, group: [:development, :test]
 # Use postgresql as the database for production
 group :production do
   gem 'pg'
@@ -27,6 +26,13 @@ group :development, :test do
   # gem 'capistrano-rails'
 end
 
+# App specific gems for boxroom
+gem 'dynamic_form'
+gem 'acts_as_tree'
+gem 'paperclip'
+gem 'jquery-fileupload-rails'
+
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
@@ -45,7 +51,6 @@ gem 'jbuilder', '~> 2.0'   # Build JSON APIs with ease
 # gem 'figaro'               # Use figaro to hide secret keys
 # gem 'sprockets-rails', '2.3.3'
 
-gem 'paperclip'  # Use paperclip for image uploads
 gem 'aws-sdk-v1' # For AWS S3 service If paperclip <= v4.3.1
 gem 'redcarpet', '~> 2.1.1' # for markdown support, not 'reverse_markdown'
 gem 'coderay', '~> 1.0.7'   # for markdown support

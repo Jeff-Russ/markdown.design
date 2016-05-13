@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  folder_id: 
+  group_id: 
+  can_create: false
+  can_read: false
+  can_update: false
+  can_delete: false
+
+two:
+  folder_id: 
+  group_id: 
+  can_create: false
+  can_read: false
+  can_update: false
+  can_delete: false

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  email: MyString
+  link_token: MyString
+  link_expires_at: 2016-05-13 03:52:03
+  user_file: 
+  message: MyText
+  user_id: 1
+
+two:
+  email: MyString
+  link_token: MyString
+  link_expires_at: 2016-05-13 03:52:03
+  user_file: 
+  message: MyText
+  user_id: 1

@@ -11,58 +11,45 @@ Rails.application.routes.draw do
   
   # root 'outlined#show'
   
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  get '/file_exists', :to => 'files#exists'
+  get '/signin', :to => 'sessions#new', :as => 'signin'
+  delete '/signout', :to => 'sessions#destroy'
+
+  # Resources
+  resources :admins, :only => [:new, :create]
+  resources :sessions, :only => [:new, :create, :destroy]
+  resources :reset_password, :except => [:index, :show, :destroy]
+  resources :signup, :only => [:edit, :update]
+  resources :groups, :except => :show
+  resources :files, :except => [:index, :new, :create]
+  resources :share_links, :only => [:index, :show, :destroy]
+
+  resources :users, :except => :show do
+    put :extend, :on => :member
+  end
+
+  resources :clipboard, :only => [:create, :destroy] do
+    post :copy, :on => :member
+    post :move, :on => :member
+    put :reset, :on => :member
+  end
+
+  # Update a collection of permissions
+  resources :permissions, :only => :update_multiple do
+    put :update_multiple, :on => :collection
+  end
+
+  # Nested resources
+  resources :folders, :shallow => true, :except => [:new, :create] do
+    resources :folders, :only => [:new, :create]
+    resources :files, :only => [:new, :create]
+  end
+
+  resources :files, :shallow => :true, :only => :show do
+    resources :share_links, :only => [:new, :create]
+  end
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+  # just remember to delete public/index.html.
+  get '/boxroom', :to => "folders#index"
 end
